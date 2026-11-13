@@ -17,6 +17,9 @@ header p{color:#d8e4ec;margin:0;max-width:760px}
 .exam-strip{display:flex;gap:8px;flex-wrap:wrap;margin-top:20px}.exam-pill{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.18);padding:8px 11px;border-radius:12px;font-size:.82rem}
 nav{position:sticky;top:0;z-index:10;background:#fff;border-bottom:1px solid var(--line);box-shadow:0 5px 18px rgba(16,40,63,.05)}
 .navinner{max-width:1120px;margin:auto;padding:9px 16px;display:flex;gap:7px;overflow-x:auto}
+.navquick{max-width:1120px;margin:auto;padding:10px 16px 0;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.navquick label{font-size:.9rem;font-weight:750;color:var(--navy)}
+.navquick select{width:min(100%,340px);max-width:340px;padding:8px 10px;background:#f3f8fc;color:var(--navy);border:1px solid var(--line)}
 .navbtn{border:0;background:transparent;color:var(--muted);padding:10px 13px;border-radius:10px;font-weight:750;white-space:nowrap;cursor:pointer}
 .navbtn.active{background:var(--navy);color:#fff}
 main{max-width:1120px;margin:22px auto 60px;padding:0 16px}.view{display:none}.view.active{display:block}
@@ -85,7 +88,7 @@ footer{background:var(--navy);color:#cbd9e3;padding:24px 16px;text-align:center;
     <span class="exam-pill">18/11 · Geografia + Ed. Física teórica</span><span class="exam-pill">19/11 · História + Inglês</span><span class="exam-pill">23/11 · Ciências + Arte</span>
   </div>
 </div></header>
-<nav><div class="navinner">
+<nav><div class="navquick"><label for="nexoNavJump">🧭 Acesso rápido</label><select id="nexoNavJump" aria-label="Escolher uma área do NEXO 803"></select></div><div class="navinner">
   <button class="navbtn active" data-view="inicio">🏁 Painel</button>
   <button class="navbtn" data-view="metas803">📈 Minhas metas</button>
   <button class="navbtn" data-view="trilha">✅ Minha trilha</button>
@@ -530,8 +533,19 @@ function updateDashboard(){
  const bars=subjects.map(s=>{let total=s.topics.reduce((a,g)=>a+g[1].length,0),done=s.topics.reduce((a,g)=>a+g[1].filter(t=>state.done.includes(s.name+"|"+t)).length,0);return `<div style="margin:12px 0"><div class="between"><b>${s.icon} ${s.name}</b><span class="small muted">${done}/${total}</span></div><div class="progress"><i style="width:${100*done/total}%"></i></div></div>`}).join("");
  $("subjectProgress").innerHTML=bars;
 }
-function showView(id){document.querySelectorAll(".view").forEach(v=>v.classList.toggle("active",v.id===id));document.querySelectorAll(".navbtn").forEach(b=>b.classList.toggle("active",b.dataset.view===id));if(id==="desempenho")renderNexoPerformance();window.scrollTo({top:0,behavior:"smooth"})}
+function showView(id){
+ if(!document.getElementById(id)?.classList.contains("view"))return;
+ document.querySelectorAll(".view").forEach(v=>v.classList.toggle("active",v.id===id));
+ document.querySelectorAll(".navbtn").forEach(b=>b.classList.toggle("active",b.dataset.view===id));
+ const quick=document.getElementById("nexoNavJump");if(quick)quick.value=id;
+ if(id==="desempenho")renderNexoPerformance();
+ window.scrollTo({top:0,behavior:"smooth"});
+}
 document.querySelectorAll(".navbtn").forEach(b=>b.addEventListener("click",()=>showView(b.dataset.view)));
+const nexoNavJump=document.getElementById("nexoNavJump");
+document.querySelectorAll(".navbtn").forEach(b=>{const op=document.createElement("option");op.value=b.dataset.view;op.textContent=b.textContent.trim();nexoNavJump.append(op)});
+nexoNavJump.value="inicio";
+nexoNavJump.addEventListener("change",()=>showView(nexoNavJump.value));
 function renderTopics(){
  const filter=$("subjectFilter").value;let list=subjects.filter(s=>filter==="Todas"||s.name===filter);
  $("topicArea").innerHTML=list.map(s=>{let count=s.topics.reduce((a,g)=>a+g[1].filter(t=>state.done.includes(s.name+"|"+t)).length,0),total=s.topics.reduce((a,g)=>a+g[1].length,0);
