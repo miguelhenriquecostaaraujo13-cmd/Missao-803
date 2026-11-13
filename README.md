@@ -15,6 +15,10 @@ Plataforma independente e gratuita de estudos para a turma 803.
 - Biblioteca colaborativa, espaço informativo para professores e modo offline básico
 - **Acesso rápido**: seletor no topo para navegar pelas áreas sem precisar arrastar o menu
 
+## Estúdio do Criador
+
+A aba **Estúdio do Criador** permite preparar rascunhos de avisos e alterações de provas, e exportá-los em JSON para revisão e publicação manual no GitHub. **Não é uma área administrativa autenticada**: os dados ficam apenas no navegador de quem usa, não alteram o site de outros alunos e não concedem privilégios de publicação. Não use senhas embutidas em HTML como proteção de administrador.
+
 ## Publicação
 
 Publicação atual pelo GitHub Pages: https://miguelhenriquecostaaraujo13-cmd.github.io/Missao-803/
