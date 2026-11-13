@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#10283f">
-<title>Missão 803 | Plataforma Inteligente de Estudos</title>
+<title>NEXO 803 | Missões e progresso de estudos</title>
 <style>
 :root{--navy:#10283f;--navy2:#173d5c;--orange:#ff9b37;--teal:#36a6a0;--paper:#f4f7fa;--ink:#172b3c;--muted:#637487;--line:#dce5ec;--white:#fff;--green:#18845d;--red:#b84642;--shadow:0 14px 34px rgba(16,40,63,.10)}
 *{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,Arial,sans-serif;line-height:1.5}
@@ -78,8 +78,8 @@ footer{background:var(--navy);color:#cbd9e3;padding:24px 16px;text-align:center;
 <body>
 <header><div class="wrap">
   <div class="topline"><span class="logo">803</span> Instituto Educacional Missão Paz <span>•</span> Central de Estudos</div>
-  <h1>MISSÃO 803<br><span style="color:#ffb45f">Operação Nota Máxima</span></h1>
-  <p>Uma central interativa para estudar, praticar, acompanhar seu progresso e chegar às avaliações com confiança. Aprender junto faz a diferença!</p>
+  <h1>NEXO 803<br><span style="color:#ffb45f">Conecte seu conhecimento</span></h1>
+  <p>Evolua a cada missão! Uma plataforma gratuita de estudos, metas, desafios e conquistas da turma 803.</p>
   <div class="exam-strip">
     <span class="exam-pill">16/11 · Matemática</span><span class="exam-pill">17/11 · Português</span>
     <span class="exam-pill">18/11 · Geografia + Ed. Física teórica</span><span class="exam-pill">19/11 · História + Inglês</span><span class="exam-pill">23/11 · Ciências + Arte</span>
@@ -87,6 +87,7 @@ footer{background:var(--navy);color:#cbd9e3;padding:24px 16px;text-align:center;
 </div></header>
 <nav><div class="navinner">
   <button class="navbtn active" data-view="inicio">🏁 Painel</button>
+  <button class="navbtn" data-view="metas803">📈 Minhas metas</button>
   <button class="navbtn" data-view="trilha">✅ Minha trilha</button>
   <button class="navbtn" data-view="quiz">🧠 Simulados</button>
   <button class="navbtn" data-view="cartoes">🗂️ Memorização</button>
@@ -291,8 +292,13 @@ footer{background:var(--navy);color:#cbd9e3;padding:24px 16px;text-align:center;
 <section id="calendario" class="view"><h2>📅 Calendário de estudos</h2><p class="sub">Organize suas tarefas e acompanhe as provas. Datas do roteiro original de novembro de 2026: confirme com o professor caso o calendário mude.</p><div class="grid"><div class="card span-6"><h3>Meu compromisso</h3><label for="calendarDate">Data</label><input id="calendarDate" class="study-field" type="date"><label for="calendarTask">O que vou estudar?</label><input id="calendarTask" class="study-field" maxlength="140" placeholder="Ex.: revisar porcentagem"><button class="btn orange" onclick="addCalendarTask()">Adicionar lembrete</button><p class="small muted">Os lembretes ficam neste navegador e não enviam notificações automáticas.</p></div><div class="card span-6"><h3>Próximas tarefas</h3><div id="calendarItems"></div></div><div class="card span-12"><h3>Semana de provas</h3><p>📚 Período previsto no roteiro: <b>16 a 23 de novembro de 2026</b>. Consulte o cronograma oficial da turma para saber qual prova acontece em cada dia.</p><p class="small muted" id="calendarCountdown"></p></div></div></section>
 <section id="professor" class="view"><h2>👩‍🏫 Espaço do professor</h2><p class="sub">Materiais e instruções para docentes e responsáveis, sem expor dados dos estudantes.</p><div class="grid"><div class="card span-6"><h3>Como aprovar materiais da biblioteca</h3><p>As publicações enviadas pelos alunos ficam pendentes até revisão no painel administrativo do Supabase. Somente responsáveis autorizados devem ter acesso ao painel.</p><p class="small muted">Esta página é informativa; não concede permissões de administrador. A aprovação precisa ser feita com acesso administrativo separado.</p></div><div class="card span-6"><h3>Atividade sugerida</h3><p>Peça que os alunos criem um resumo com suas palavras, respondam uma questão e comparem a explicação com o material da aula. Incentive a checagem de fontes.</p><button class="btn light" onclick="showView('biblioteca')">Abrir biblioteca</button></div></div></section>
 <section id="offline" class="view"><h2>📶 Estudo sem internet</h2><p class="sub">O tutor local, os exercícios já incluídos e o caderno funcionam sem API paga. O painel coletivo e a biblioteca precisam de internet.</p><div class="grid"><div class="card span-6"><h3>Instalar para acesso rápido</h3><p>Depois de publicar o site com HTTPS, o navegador poderá armazenar os arquivos principais para estudo offline.</p><button class="btn orange" onclick="registerOffline()">Preparar modo offline</button><p class="small muted" id="offlineStatus" role="status">Para ativar, acesse a versão publicada por HTTPS.</p></div><div class="card span-6"><h3>Backup do caderno</h3><p>Suas anotações são guardadas no navegador. Antes de trocar de celular ou limpar os dados, exporte um backup.</p><button class="btn light" onclick="showView('caderno')">Abrir meu caderno</button></div></div></section>
+
+<section id="metas803" class="view"><h2>📈 Minhas metas — NEXO 803</h2><p class="sub">Um espaço pessoal para definir objetivos e acompanhar sua evolução. Tudo é salvo apenas neste navegador.</p>
+<div class="grid"><div class="card span-6"><h3>Minha meta da semana</h3><label for="nexoGoal">Quantas sessões de estudo você quer concluir?</label><select class="study-field" id="nexoGoal"><option value="2">2 sessões</option><option value="3">3 sessões</option><option value="5">5 sessões</option><option value="7">7 sessões</option></select><button class="btn orange" onclick="saveNexoGoal()">Salvar meta</button><p class="small muted">Uma sessão pode ser uma revisão curta, uma atividade ou um simulado. Escolha uma meta confortável.</p></div>
+<div class="card span-6"><h3>Progresso semanal</h3><div class="metric" id="nexoSessions">0 / 3</div><div class="progress"><i id="nexoBar"></i></div><p class="small muted" id="nexoStatus">Comece quando quiser.</p><button class="btn orange" onclick="completeNexoSession()">✓ Concluí uma sessão</button><button class="btn light" onclick="undoNexoSession()">Desfazer última</button></div>
+<div class="card span-6"><h3>🏅 Conquistas pessoais</h3><div id="nexoBadges" class="mission"></div></div><div class="card span-6"><h3>💡 Próximo passo</h3><p id="nexoTip">Escolha uma matéria e faça um pequeno exercício.</p><button class="btn light" onclick="showView('arena')">Jogar Arena 803</button><button class="btn light" onclick="showView('assistente')">Abrir tutor grátis</button></div></div></section>
 </main>
-<footer><b>MISSÃO 803 · Instituto Educacional Missão Paz</b><br>Organização, respeito, colaboração e aprendizagem. Um passo de cada vez!<br><span class="small">Material de apoio elaborado a partir do roteiro de estudos enviado pela turma. O mural coletivo depende de configuração do banco online pelo responsável.</span></footer>
+<footer><b>NEXO 803 · Plataforma gratuita da turma 803</b><br>Organização, respeito, colaboração e aprendizagem. Um passo de cada vez!<br><span class="small">Material de apoio elaborado a partir do roteiro de estudos enviado pela turma. O mural coletivo depende de configuração do banco online pelo responsável.</span></footer>
 
 <script>
 
@@ -809,7 +815,19 @@ function renderCalendar(){const root=document.getElementById('calendarItems');ro
 async function registerOffline(){const el=document.getElementById('offlineStatus');if(!('serviceWorker'in navigator)){el.textContent='Seu navegador não oferece suporte a esse recurso.';return}if(location.protocol!=='https:'&&location.hostname!=='localhost'){el.textContent='Abra o site publicado em HTTPS para preparar o modo offline.';return}try{await navigator.serviceWorker.register('./sw.js');el.textContent='Modo offline preparado. Visite as páginas enquanto estiver conectado para armazenar o conteúdo.'}catch{el.textContent='Não foi possível instalar o modo offline neste navegador.'}}
 function initExtra803(){for(const s of subjects){const opt=document.createElement('option');opt.value=s.name;opt.textContent=s.name;document.getElementById('arenaSubject').append(opt)}document.getElementById('calendarDate').value=new Date().toLocaleDateString('en-CA');renderCalendar()}
 
-init();
+
+// NEXO 803: metas pessoais locais; nenhuma conta, ranking ou API paga.
+const nexoKey='nexo803-goals-v1';
+function nexoWeek(){const d=new Date(),day=(d.getDay()+6)%7;d.setDate(d.getDate()-day);return [d.getFullYear(),String(d.getMonth()+1).padStart(2,'0'),String(d.getDate()).padStart(2,'0')].join('-')}
+function nexoRead(){try{const x=JSON.parse(localStorage.getItem(nexoKey)||'{}');return x&&typeof x==='object'?x:{}}catch{return {}}}
+function nexoWrite(x){try{localStorage.setItem(nexoKey,JSON.stringify(x))}catch{}}
+function nexoData(){const x=nexoRead(),week=nexoWeek();if(x.week!==week)return {week,goal:[2,3,5,7].includes(x.goal)?x.goal:3,count:0};return {week,goal:[2,3,5,7].includes(x.goal)?x.goal:3,count:Math.min(99,Math.max(0,Number(x.count)||0))}}
+function renderNexo(){const x=nexoData();document.getElementById('nexoGoal').value=String(x.goal);document.getElementById('nexoSessions').textContent=x.count+' / '+x.goal;document.getElementById('nexoBar').style.width=Math.min(100,Math.round(x.count/x.goal*100))+'%';document.getElementById('nexoStatus').textContent=x.count>=x.goal?'Meta da semana alcançada! Continue no seu ritmo.':'Cada sessão conta. Você está construindo seu hábito!';const badges=[];if(x.count>=1)badges.push('🌱 Primeiro passo');if(x.count>=3)badges.push('📚 Explorador do conhecimento');if(x.count>=x.goal)badges.push('🏆 Meta conquistada');document.getElementById('nexoBadges').textContent=badges.length?badges.join(' · '):'Complete uma sessão para ganhar sua primeira conquista.';document.getElementById('nexoTip').textContent=x.count>=x.goal?'Experimente revisar uma matéria diferente na Arena 803.':'Sugestão: estude um tópico e pratique com três questões do simulado.'}
+function saveNexoGoal(){const x=nexoData();x.goal=Number(document.getElementById('nexoGoal').value);nexoWrite(x);renderNexo()}
+function completeNexoSession(){const x=nexoData();x.count=Math.min(99,x.count+1);nexoWrite(x);renderNexo()}
+function undoNexoSession(){const x=nexoData();x.count=Math.max(0,x.count-1);nexoWrite(x);renderNexo()}
+
+init();renderNexo();
 </script>
 </body>
 </html>
