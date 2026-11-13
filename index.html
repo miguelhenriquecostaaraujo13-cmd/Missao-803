@@ -530,7 +530,7 @@ function updateDashboard(){
  const bars=subjects.map(s=>{let total=s.topics.reduce((a,g)=>a+g[1].length,0),done=s.topics.reduce((a,g)=>a+g[1].filter(t=>state.done.includes(s.name+"|"+t)).length,0);return `<div style="margin:12px 0"><div class="between"><b>${s.icon} ${s.name}</b><span class="small muted">${done}/${total}</span></div><div class="progress"><i style="width:${100*done/total}%"></i></div></div>`}).join("");
  $("subjectProgress").innerHTML=bars;
 }
-function showView(id){document.querySelectorAll(".view").forEach(v=>v.classList.toggle("active",v.id===id));document.querySelectorAll(".navbtn").forEach(b=>b.classList.toggle("active",b.dataset.view===id));window.scrollTo({top:0,behavior:"smooth"})}
+function showView(id){document.querySelectorAll(".view").forEach(v=>v.classList.toggle("active",v.id===id));document.querySelectorAll(".navbtn").forEach(b=>b.classList.toggle("active",b.dataset.view===id));if(id==="desempenho")renderNexoPerformance();window.scrollTo({top:0,behavior:"smooth"})}
 document.querySelectorAll(".navbtn").forEach(b=>b.addEventListener("click",()=>showView(b.dataset.view)));
 function renderTopics(){
  const filter=$("subjectFilter").value;let list=subjects.filter(s=>filter==="Todas"||s.name===filter);
