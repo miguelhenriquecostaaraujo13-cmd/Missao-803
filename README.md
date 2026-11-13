@@ -1,16 +1,33 @@
-# Missão 803 🎓
+# NEXO 803 🎓⚡
 
-Plataforma gratuita de estudos: tutor local, simulados, flashcards, Arena 803, calendário, caderno pessoal, biblioteca colaborativa e modo offline básico.
+**Conecte seu conhecimento. Evolua a cada missão!**
 
-## Publicação no GitHub Pages
+Plataforma independente e gratuita de estudos para a turma 803.
 
-Abra **Settings → Pages → Build and deployment** e escolha **Deploy from a branch**, **main** e **/(root)**. Depois da publicação, o endereço esperado é https://miguelhenriquecostaaraujo13-cmd.github.io/Missao-803/.
+## Funcionalidades
 
-## Segurança e privacidade
+- Painel, metas semanais, conquistas e trilha de conteúdos
+- Simulados com correção, rodada concluída e painel de desempenho por matéria
+- Gerador de questões a partir de banco de perguntas e regras matemáticas
+- Laboratório de questões a partir de textos colados pelo aluno, com lacunas e alternativas
+- Flashcards, Pomodoro, métodos de estudo e missões de revisão
+- Arena 803, calendário, videoaulas, caderno e tutor local
+- Biblioteca colaborativa, espaço informativo para professores e modo offline básico
+- **Acesso rápido**: seletor no topo para navegar pelas áreas sem precisar arrastar o menu
 
-- O tutor local não usa API paga nem envia perguntas à OpenAI.
-- A biblioteca usa o plano gratuito do Supabase e precisa de internet; configure autenticação anônima e moderação antes de liberar à turma.
-- Não publique nomes de estudantes, senhas, chaves secretas nem anotações pessoais.
-- O modo offline armazena a interface, mas recursos coletivos precisam de internet.
+## Publicação
 
-Projeto independente, não oficial da escola.
+GitHub Pages: https://miguelhenriquecostaaraujo13-cmd.github.io/Missao-803/
+
+O repositório permanece com o nome `Missao-803`, mas o nome público da plataforma é **NEXO 803**.
+
+## Gratuidade e limitações
+
+- Não usa OpenAI nem outra API generativa paga; o tutor usa respostas locais e as questões por texto são criadas por regras, não por uma IA generativa.
+- As metas, simulados, progresso e anotações pessoais ficam salvos principalmente **no navegador e dispositivo de cada aluno**. Limpar os dados do navegador pode apagar registros locais. Quando disponível, use a exportação de progresso/caderno.
+- A biblioteca colaborativa usa Supabase e precisa de internet, conexão de usuário, permissões adequadas e **aprovação dos materiais por um responsável** antes de ser liberada para a turma.
+- O espaço do professor é informativo e **não** concede acesso administrativo nem aprovação direta pelo site.
+- O modo offline faz cache de arquivos principais após ativação, mas deve ser testado no navegador e **não** permite acesso aos recursos colaborativos sem internet.
+- Evite incluir dados pessoais, senhas, contatos, fotos de colegas ou informações privadas em publicações.
+
+**Projeto independente, não oficial da escola.**
