@@ -15,9 +15,27 @@ Plataforma independente e gratuita de estudos para a turma 803.
 - Biblioteca colaborativa, espaço informativo para professores e modo offline básico
 - **Acesso rápido**: seletor no topo para navegar pelas áreas sem precisar arrastar o menu
 
-## Estúdio do Criador
+## Modo Proprietário — acesso seguro
 
-A aba **Estúdio do Criador** permite preparar rascunhos de avisos e alterações de provas, e exportá-los em JSON para revisão e publicação manual no GitHub. **Não é uma área administrativa autenticada**: os dados ficam apenas no navegador de quem usa, não alteram o site de outros alunos e não concedem privilégios de publicação. Não use senhas embutidas em HTML como proteção de administrador.
+A aba **🔒 Modo Proprietário** agora usa **Supabase Auth** para login por e-mail e senha. A autorização real é verificada no **PostgreSQL por RLS**, não por uma senha escrita no HTML.
+
+- Usuários comuns e sessões anônimas não podem publicar, alterar ou excluir avisos/provas oficiais.
+- O administrador pode criar ou excluir anúncios e provas; o mural da página inicial mostra as publicações para todos.
+- As três tabelas são `public.portal803_admins`, `public.portal803_announcements` e `public.portal803_exams`.
+- A tabela de proprietários começa **vazia**; ninguém vira dono apenas por se cadastrar.
+- Para habilitar o proprietário, a pessoa cria uma conta (e confirma o e-mail, se necessário), entra no site e copia o UUID exibido. O administrador do projeto pode então autorizar o UUID com:
+
+```sql
+insert into public.portal803_admins (user_id)
+values ('UUID-COPIADO-DO-PORTAL')
+on conflict (user_id) do nothing;
+```
+
+Execute o comando **somente no SQL Editor autenticado do projeto Supabase**, depois de verificar a titularidade da conta. Nunca cole senha, token nem chave secreta no HTML ou no chat. A conta precisa estar confirmada e não pode ser anônima.
+
+**Configuração de confirmação do e-mail:** em Supabase → Authentication → URL Configuration, adicione `https://miguelhenriquecostaaraujo13-cmd.github.io/Missao-803/` à lista de URLs de redirecionamento. O formulário também orienta o usuário quando a verificação de e-mail é necessária.
+
+O login do proprietário é independente do editor de rascunhos antigo, que foi substituído. Os avisos/provas são publicados no Supabase sem modificar os arquivos do GitHub. Alterações no código continuam pelo GitHub. As datas existentes no HTML são referências iniciais; novas informações oficiais aparecem no mural de atualizações.
 
 ## Publicação
 
