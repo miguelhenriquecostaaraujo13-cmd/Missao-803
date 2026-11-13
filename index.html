@@ -174,6 +174,27 @@ button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-vis
 .reminder-banner{margin:0 0 15px;padding:13px 16px;border:1px solid var(--line);border-left:4px solid var(--teal);border-radius:14px;background:var(--white);box-shadow:var(--shadow);color:var(--ink)}
 .reminder-banner b{display:block;margin-bottom:4px}
 .reminder-banner .btn{margin-top:8px}
+
+/* Menu organizado por categorias; cores herdadas dos temas Aurora, Noite e Papel. */
+.navinner{gap:8px}
+.navgroup{border:1px solid #ffffff17;border-radius:13px;overflow:hidden;background:#ffffff08}
+.navgroup>summary{cursor:pointer;list-style:none;display:flex;align-items:center;justify-content:space-between;gap:8px;padding:12px 12px;color:var(--portal-side-text);font-weight:800;font-size:.87rem;user-select:none}
+.navgroup>summary::-webkit-details-marker{display:none}
+.navgroup>summary:after{content:"⌄";color:#b8cbea;font-size:1.1rem;transition:transform .2s;margin-left:4px}
+.navgroup[open]>summary:after{transform:rotate(180deg)}
+.navgroup>summary:focus-visible,.navbtn:focus-visible{outline:2px solid var(--orange);outline-offset:-2px}
+.navcount{font-weight:650;font-size:.72rem;color:#c4d2e8;padding:2px 6px;background:#ffffff15;border-radius:8px;margin-left:auto}
+.navgroup[open]{background:#ffffff10;border-color:#ffffff28}
+.navgroup-items{padding:0 5px 6px;display:flex;flex-direction:column;gap:2px}
+.navgroup-items .navbtn{font-size:.83rem;padding:10px 10px 10px 15px}
+.navhint{padding:10px 6px 0;margin:0;color:#c1d0e6;font-size:.75rem;line-height:1.5}
+@media(max-width:790px){
+ nav{padding:7px 10px}
+ .navinner,.navhint{display:none}
+ .navquick{padding:5px 0}
+ .navquick label{font-size:.78rem;color:#f0f5ff}
+ .navquick select{min-width:0;flex:1;max-width:100%;font-size:.88rem}
+}
 </style>
  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.105.0"></script>
 </head>
@@ -188,31 +209,7 @@ button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-vis
     <span class="exam-pill">18/11 · Geografia + Ed. Física teórica</span><span class="exam-pill">19/11 · História + Inglês</span><span class="exam-pill">23/11 · Ciências + Arte</span>
   </div>
 </div></header>
-<nav><div class="navquick"><label for="nexoNavJump">🧭 Acesso rápido</label><select id="nexoNavJump" aria-label="Escolher uma área do Portal 803"></select></div><div class="navinner">
-  <button class="navbtn active" data-view="inicio">🏁 Painel</button>
-  <button class="navbtn" data-view="metas803">📈 Minhas metas</button>
-  <button class="navbtn" data-view="trilha">✅ Minha trilha</button>
-  <button class="navbtn" data-view="quiz">🧠 Simulados</button>
-  <button class="navbtn" data-view="gerador">⚡ Gerador de questões</button>
-  <button class="navbtn" data-view="laboratorio">🧪 Laboratório</button>
-  <button class="navbtn" data-view="desempenho">📊 Desempenho</button>
-  <button class="navbtn" data-view="cartoes">🗂️ Memorização</button>
-  <button class="navbtn" data-view="foco">⏱️ Foco</button>
-  <button class="navbtn" data-view="metodos">📚 Métodos</button>
-  <button class="navbtn" data-view="turma">🌐 Turma 803</button>
-  <button class="navbtn" data-view="videoaulas">🎬 Videoaulas</button>
-  <button class="navbtn" data-view="caderno">📝 Meu caderno</button>
-  <button class="navbtn" data-view="biblioteca">🤝 Biblioteca 803</button>
-  <button class="navbtn" data-view="assistente">✨ Tutor grátis</button>
-  <button class="navbtn" data-view="revisoes">🎯 Missões e revisões</button>
-  <button class="navbtn" data-view="arena">🎮 Arena 803</button>
-  <button class="navbtn" data-view="calendario">📅 Calendário</button>
-  <button class="navbtn" data-view="lembretes">🔔 Lembretes</button>
-  <button class="navbtn" data-view="professor">👩‍🏫 Professor</button>
-  <button class="navbtn" data-view="criador">🔒 Modo Proprietário</button>
-  <button class="navbtn" data-view="offline">📶 Offline</button>
-
-</div></nav>
+<nav aria-label="Navegação principal do Portal 803"><div class="navquick"><label for="nexoNavJump">🧭 Ir para ferramenta</label><select id="nexoNavJump" aria-label="Escolher uma ferramenta por categoria"></select></div><div class="navinner"><details class="navgroup" data-category="inicio" open><summary>🏠 Início<span class="navcount">1</span></summary><div class="navgroup-items"><button type="button" class="navbtn active" data-view="inicio" aria-current="page">🏁 Meu painel</button></div></details><details class="navgroup" data-category="aprender"><summary>📚 Aprender<span class="navcount">6</span></summary><div class="navgroup-items"><button type="button" class="navbtn" data-view="trilha">✅ Minha trilha</button><button type="button" class="navbtn" data-view="videoaulas">🎬 Videoaulas</button><button type="button" class="navbtn" data-view="cartoes">🗂️ Memorização</button><button type="button" class="navbtn" data-view="metodos">📚 Métodos de estudo</button><button type="button" class="navbtn" data-view="assistente">✨ Tutor grátis</button><button type="button" class="navbtn" data-view="revisoes">🎯 Missões e revisões</button></div></details><details class="navgroup" data-category="praticar"><summary>🧠 Praticar<span class="navcount">5</span></summary><div class="navgroup-items"><button type="button" class="navbtn" data-view="quiz">🧠 Simulados</button><button type="button" class="navbtn" data-view="gerador">⚡ Gerador de questões</button><button type="button" class="navbtn" data-view="laboratorio">🧪 Laboratório</button><button type="button" class="navbtn" data-view="arena">🎮 Arena 803</button><button type="button" class="navbtn" data-view="desempenho">📊 Desempenho</button></div></details><details class="navgroup" data-category="organizar"><summary>🗓️ Organizar<span class="navcount">5</span></summary><div class="navgroup-items"><button type="button" class="navbtn" data-view="metas803">📈 Minhas metas</button><button type="button" class="navbtn" data-view="calendario">📅 Calendário</button><button type="button" class="navbtn" data-view="foco">⏱️ Foco</button><button type="button" class="navbtn" data-view="caderno">📝 Meu caderno</button><button type="button" class="navbtn" data-view="lembretes">🔔 Lembretes</button></div></details><details class="navgroup" data-category="turma"><summary>🤝 Turma<span class="navcount">2</span></summary><div class="navgroup-items"><button type="button" class="navbtn" data-view="turma">🌐 Painel da turma</button><button type="button" class="navbtn" data-view="biblioteca">🤝 Biblioteca 803</button></div></details><details class="navgroup" data-category="administracao"><summary>⚙️ Administração e ajuda<span class="navcount">3</span></summary><div class="navgroup-items"><button type="button" class="navbtn" data-view="professor">👩‍🏫 Professor</button><button type="button" class="navbtn" data-view="criador">🔒 Modo Proprietário</button><button type="button" class="navbtn" data-view="offline">📶 Modo offline</button></div></details></div><p class="navhint">Escolha uma categoria para encontrar a ferramenta que precisa.</p></nav>
 <main>
 <section id="inicio" class="view active"><div id="reminderHomeBanner" aria-live="polite"></div><div class="card" style="margin-bottom:16px" id="portalPublicBulletin"><h3>📢 Avisos e provas atualizados</h3><p class="small muted">Publicações oficiais cadastradas pelo proprietário do Portal 803.</p><div id="portalPublicItems"><p class="small muted">Carregando avisos...</p></div></div>
   <h2>Seu painel de missão</h2><p class="sub">Seu progresso é salvo neste navegador. Marque os tópicos na trilha e veja os indicadores se atualizarem.</p>
@@ -712,16 +709,32 @@ function updateDashboard(){
  $("subjectProgress").innerHTML=bars;
 }
 function showView(id){
- if(!document.getElementById(id)?.classList.contains("view"))return;
+ const target=document.getElementById(id);
+ if(!target?.classList.contains("view"))return;
  document.querySelectorAll(".view").forEach(v=>v.classList.toggle("active",v.id===id));
- document.querySelectorAll(".navbtn").forEach(b=>b.classList.toggle("active",b.dataset.view===id));
+ document.querySelectorAll(".navbtn").forEach(b=>{
+  const active=b.dataset.view===id;
+  b.classList.toggle("active",active);
+  if(active)b.setAttribute("aria-current","page");else b.removeAttribute("aria-current");
+ });
+ const parent=document.querySelector('.navbtn[data-view="'+id+'"]')?.closest(".navgroup");
+ if(parent){document.querySelectorAll(".navgroup").forEach(g=>{g.open=g===parent})}
  const quick=document.getElementById("nexoNavJump");if(quick)quick.value=id;
  if(id==="desempenho")renderNexoPerformance();
  window.scrollTo({top:0,behavior:"smooth"});
 }
 document.querySelectorAll(".navbtn").forEach(b=>b.addEventListener("click",()=>showView(b.dataset.view)));
 const nexoNavJump=document.getElementById("nexoNavJump");
-document.querySelectorAll(".navbtn").forEach(b=>{const op=document.createElement("option");op.value=b.dataset.view;op.textContent=b.textContent.trim();nexoNavJump.append(op)});
+document.querySelectorAll(".navgroup").forEach(group=>{
+ const summary=group.querySelector("summary");
+ const section=document.createElement("optgroup");
+ section.label=summary.childNodes[0]?.textContent?.trim()||"Ferramentas";
+ group.querySelectorAll(".navbtn").forEach(b=>{
+  const option=document.createElement("option");
+  option.value=b.dataset.view;option.textContent=b.textContent.trim();section.append(option);
+ });
+ nexoNavJump.append(section);
+});
 nexoNavJump.value="inicio";
 nexoNavJump.addEventListener("change",()=>showView(nexoNavJump.value));
 function renderTopics(){
