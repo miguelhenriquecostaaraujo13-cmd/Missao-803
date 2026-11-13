@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#10283f">
-<title>NEXO 803 | Missões e progresso de estudos</title>
+<title>Portal 803 | Missões e progresso de estudos</title>
 <style>
 :root{--navy:#10283f;--navy2:#173d5c;--orange:#ff9b37;--teal:#36a6a0;--paper:#f4f7fa;--ink:#172b3c;--muted:#637487;--line:#dce5ec;--white:#fff;--green:#18845d;--red:#b84642;--shadow:0 14px 34px rgba(16,40,63,.10)}
 *{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,Arial,sans-serif;line-height:1.5}
@@ -81,14 +81,14 @@ footer{background:var(--navy);color:#cbd9e3;padding:24px 16px;text-align:center;
 <body>
 <header><div class="wrap">
   <div class="topline"><span class="logo">803</span> Instituto Educacional Missão Paz <span>•</span> Central de Estudos</div>
-  <h1>NEXO 803<br><span style="color:#ffb45f">Conecte seu conhecimento</span></h1>
+  <h1>Portal 803<br><span style="color:#ffb45f">Conecte seu conhecimento</span></h1>
   <p>Evolua a cada missão! Uma plataforma gratuita de estudos, metas, desafios e conquistas da turma 803.</p>
   <div class="exam-strip">
     <span class="exam-pill">16/11 · Matemática</span><span class="exam-pill">17/11 · Português</span>
     <span class="exam-pill">18/11 · Geografia + Ed. Física teórica</span><span class="exam-pill">19/11 · História + Inglês</span><span class="exam-pill">23/11 · Ciências + Arte</span>
   </div>
 </div></header>
-<nav><div class="navquick"><label for="nexoNavJump">🧭 Acesso rápido</label><select id="nexoNavJump" aria-label="Escolher uma área do NEXO 803"></select></div><div class="navinner">
+<nav><div class="navquick"><label for="nexoNavJump">🧭 Acesso rápido</label><select id="nexoNavJump" aria-label="Escolher uma área do Portal 803"></select></div><div class="navinner">
   <button class="navbtn active" data-view="inicio">🏁 Painel</button>
   <button class="navbtn" data-view="metas803">📈 Minhas metas</button>
   <button class="navbtn" data-view="trilha">✅ Minha trilha</button>
@@ -251,7 +251,7 @@ footer{background:var(--navy);color:#cbd9e3;padding:24px 16px;text-align:center;
 
 
 <section id="assistente" class="view">
- <h2>🧠 Tutor gratuito da Missão 803</h2>
+ <h2>🧠 Tutor gratuito do Portal 803</h2>
  <p class="sub">Tire dúvidas usando os resumos, tópicos e cartões da turma. Funciona no navegador, sem API paga e sem limite de perguntas.</p>
  <div class="callout small" style="margin-bottom:15px"><b>100% gratuito:</b> suas perguntas não são enviadas à OpenAI nem ao Supabase. O tutor local pesquisa conteúdos previamente preparados, por isso não é uma IA generativa e pode não encontrar todas as respostas. Não informe dados pessoais; confira explicações com o professor.</div>
  <div class="grid"><div class="card span-8">
@@ -294,7 +294,7 @@ footer{background:var(--navy);color:#cbd9e3;padding:24px 16px;text-align:center;
 </section>
 
 
-<section id="gerador" class="view"><h2>⚡ Gerador de questões NEXO</h2><p class="sub">Crie desafios gratuitos a partir do banco de questões e de exercícios matemáticos gerados por regras. Não utiliza IA generativa nem API paga.</p><div class="grid"><div class="card span-5"><h3>Monte seu desafio</h3><label for="genSubject">Matéria</label><select id="genSubject" class="study-field"></select><label for="genTopic">Assunto ou palavra-chave (opcional)</label><input id="genTopic" class="study-field" maxlength="80" placeholder="Ex.: porcentagem, crase, Brasil"><label for="genLevel">Dificuldade</label><select id="genLevel" class="study-field"><option value="facil">Fácil</option><option value="medio" selected>Médio</option><option value="dificil">Difícil</option></select><label for="genAmount">Quantidade</label><select id="genAmount" class="study-field"><option>3</option><option selected>5</option><option>10</option></select><button class="btn orange" onclick="generateNexoQuestions()">⚡ Gerar desafio</button><p class="small muted" id="genNotice">As questões são educativas e podem se repetir em novos desafios.</p></div><div class="card span-7"><h3 id="genHeading">Seu desafio aparecerá aqui</h3><div id="genQuestion"></div><div id="genAnswers"></div><p id="genFeedback" role="status"></p><button class="btn light" id="genNext" onclick="nextNexoQuestion()" hidden>Próxima questão →</button><p id="genScore" class="small muted"></p></div></div></section>
+<section id="gerador" class="view"><h2>⚡ Gerador de questões Portal</h2><p class="sub">Crie desafios gratuitos a partir do banco de questões e de exercícios matemáticos gerados por regras. Não utiliza IA generativa nem API paga.</p><div class="grid"><div class="card span-5"><h3>Monte seu desafio</h3><label for="genSubject">Matéria</label><select id="genSubject" class="study-field"></select><label for="genTopic">Assunto ou palavra-chave (opcional)</label><input id="genTopic" class="study-field" maxlength="80" placeholder="Ex.: porcentagem, crase, Brasil"><label for="genLevel">Dificuldade</label><select id="genLevel" class="study-field"><option value="facil">Fácil</option><option value="medio" selected>Médio</option><option value="dificil">Difícil</option></select><label for="genAmount">Quantidade</label><select id="genAmount" class="study-field"><option>3</option><option selected>5</option><option>10</option></select><button class="btn orange" onclick="generateNexoQuestions()">⚡ Gerar desafio</button><p class="small muted" id="genNotice">As questões são educativas e podem se repetir em novos desafios.</p></div><div class="card span-7"><h3 id="genHeading">Seu desafio aparecerá aqui</h3><div id="genQuestion"></div><div id="genAnswers"></div><p id="genFeedback" role="status"></p><button class="btn light" id="genNext" onclick="nextNexoQuestion()" hidden>Próxima questão →</button><p id="genScore" class="small muted"></p></div></div></section>
 <section id="laboratorio" class="view"><h2>🧪 Laboratório de Questões</h2><p class="sub">Cole um resumo ou texto de estudo e pratique com perguntas de completar lacunas. Tudo acontece no seu navegador: sem IA paga e sem enviar o texto para servidores.</p><div class="grid"><div class="card span-6"><label for="labText"><b>Meu texto de estudo</b></label><textarea id="labText" class="study-field" rows="10" maxlength="12000" placeholder="Exemplo: A fotossíntese é o processo pelo qual as plantas produzem seu alimento usando luz solar."></textarea><p class="small muted">Use frases explicativas com pelo menos algumas palavras. Evite colar informações pessoais.</p><label for="labCount">Quantidade de questões</label><select id="labCount" class="study-field"><option>3</option><option selected>5</option><option>10</option></select><button class="btn orange" onclick="labGenerate()">⚡ Criar questões</button><button class="btn light" onclick="labClear()">Limpar texto</button><p id="labStatus" class="small muted" role="status">Nenhum texto enviado.</p></div><div class="card span-6"><h3 id="labHeading">Questões geradas</h3><p id="labQuestion">As perguntas aparecerão aqui depois que você colar seu texto no campo da esquerda e clicar em “Criar questões”.</p><div id="labOptions"></div><p id="labFeedback" role="status"></p><button id="labNext" class="btn orange" onclick="labNextQuestion()" hidden>Próxima →</button><p id="labProgress" class="small muted"></p></div></div></section>
 <section id="desempenho" class="view"><h2>📊 Meu desempenho por matéria</h2><p class="sub">Veja seus resultados nos simulados e descubra onde revisar. Os dados ficam salvos neste navegador.</p><div class="card"><button class="btn orange" onclick="renderNexoPerformance()">↻ Atualizar resultados</button><div id="nexoPerformance" style="margin-top:16px"></div><p class="small muted">Os resultados mostram apenas as questões respondidas nos simulados. Eles não são notas escolares.</p></div></section>
 <section id="arena" class="view"><h2>🎮 Arena 803 — Desafio do conhecimento</h2><p class="sub">Jogue para aprender, sem ranking entre colegas. As perguntas são selecionadas dos simulados existentes.</p><div class="grid"><div class="card span-7"><h3 id="arenaTitle">Prepare-se para o desafio</h3><p id="arenaQuestion">Escolha uma matéria e comece uma rodada de cinco perguntas.</p><div id="arenaOptions" class="mission"></div><div class="row"><button class="btn orange" onclick="startArena()">▶ Nova rodada</button><button class="btn light" onclick="showView('quiz')">Abrir simulados</button></div><p class="small muted" id="arenaFeedback" role="status"></p></div><div class="card span-5"><h3>Minha rodada</h3><div class="metric" id="arenaScore">0 / 5</div><p class="small muted" id="arenaProgress">Nenhuma rodada iniciada.</p><label for="arenaSubject"><b>Matéria</b></label><select id="arenaSubject" class="study-field"><option value="Todas">Todas</option></select><p class="small muted">Sem competição pública, notas individuais ou pressão. O objetivo é praticar.</p></div></div></section>
@@ -302,12 +302,12 @@ footer{background:var(--navy);color:#cbd9e3;padding:24px 16px;text-align:center;
 <section id="professor" class="view"><h2>👩‍🏫 Espaço do professor</h2><p class="sub">Materiais e instruções para docentes e responsáveis, sem expor dados dos estudantes.</p><div class="grid"><div class="card span-6"><h3>Como aprovar materiais da biblioteca</h3><p>As publicações enviadas pelos alunos ficam pendentes até revisão no painel administrativo do Supabase. Somente responsáveis autorizados devem ter acesso ao painel.</p><p class="small muted">Esta página é informativa; não concede permissões de administrador. A aprovação precisa ser feita com acesso administrativo separado.</p></div><div class="card span-6"><h3>Atividade sugerida</h3><p>Peça que os alunos criem um resumo com suas palavras, respondam uma questão e comparem a explicação com o material da aula. Incentive a checagem de fontes.</p><button class="btn light" onclick="showView('biblioteca')">Abrir biblioteca</button></div></div></section>
 <section id="offline" class="view"><h2>📶 Estudo sem internet</h2><p class="sub">O tutor local, os exercícios já incluídos e o caderno funcionam sem API paga. O painel coletivo e a biblioteca precisam de internet.</p><div class="grid"><div class="card span-6"><h3>Instalar para acesso rápido</h3><p>Depois de publicar o site com HTTPS, o navegador poderá armazenar os arquivos principais para estudo offline.</p><button class="btn orange" onclick="registerOffline()">Preparar modo offline</button><p class="small muted" id="offlineStatus" role="status">Para ativar, acesse a versão publicada por HTTPS.</p></div><div class="card span-6"><h3>Backup do caderno</h3><p>Suas anotações são guardadas no navegador. Antes de trocar de celular ou limpar os dados, exporte um backup.</p><button class="btn light" onclick="showView('caderno')">Abrir meu caderno</button></div></div></section>
 
-<section id="metas803" class="view"><h2>📈 Minhas metas — NEXO 803</h2><p class="sub">Um espaço pessoal para definir objetivos e acompanhar sua evolução. Tudo é salvo apenas neste navegador.</p>
+<section id="metas803" class="view"><h2>📈 Minhas metas — Portal 803</h2><p class="sub">Um espaço pessoal para definir objetivos e acompanhar sua evolução. Tudo é salvo apenas neste navegador.</p>
 <div class="grid"><div class="card span-6"><h3>Minha meta da semana</h3><label for="nexoGoal">Quantas sessões de estudo você quer concluir?</label><select class="study-field" id="nexoGoal"><option value="2">2 sessões</option><option value="3">3 sessões</option><option value="5">5 sessões</option><option value="7">7 sessões</option></select><button class="btn orange" onclick="saveNexoGoal()">Salvar meta</button><p class="small muted">Uma sessão pode ser uma revisão curta, uma atividade ou um simulado. Escolha uma meta confortável.</p></div>
 <div class="card span-6"><h3>Progresso semanal</h3><div class="metric" id="nexoSessions">0 / 3</div><div class="progress"><i id="nexoBar"></i></div><p class="small muted" id="nexoStatus">Comece quando quiser.</p><button class="btn orange" onclick="completeNexoSession()">✓ Concluí uma sessão</button><button class="btn light" onclick="undoNexoSession()">Desfazer última</button></div>
 <div class="card span-6"><h3>🏅 Conquistas pessoais</h3><div id="nexoBadges" class="mission"></div></div><div class="card span-6"><h3>💡 Próximo passo</h3><p id="nexoTip">Escolha uma matéria e faça um pequeno exercício.</p><button class="btn light" onclick="showView('arena')">Jogar Arena 803</button><button class="btn light" onclick="showView('assistente')">Abrir tutor grátis</button></div></div></section>
 </main>
-<footer><b>NEXO 803 · Plataforma gratuita da turma 803</b><br>Organização, respeito, colaboração e aprendizagem. Um passo de cada vez!<br><span class="small">Material de apoio elaborado a partir do roteiro de estudos enviado pela turma. O mural coletivo depende de configuração do banco online pelo responsável.</span></footer>
+<footer><b>Portal 803 · Plataforma gratuita da turma 803</b><br>Organização, respeito, colaboração e aprendizagem. Um passo de cada vez!<br><span class="small">Material de apoio elaborado a partir do roteiro de estudos enviado pela turma. O mural coletivo depende de configuração do banco online pelo responsável.</span></footer>
 
 <script>
 
@@ -833,7 +833,7 @@ function renderMissions(){const date=missionDate(),done=smartState.missions[date
 function toggleMission(key){const date=missionDate();const list=smartState.missions[date]||[];smartState.missions[date]=list.includes(key)?list.filter(x=>x!==key):[...list,key];saveSmart();renderMissions()}
 function scheduleReview(){const subject=$("reviewSubject").value;if(!subject)return;const prev=smartState.reviews[subject]||{step:-1};const step=Math.min(3,prev.step+1);const days=[1,3,7,14][step];const due=new Date();due.setHours(12,0,0,0);due.setDate(due.getDate()+days);smartState.reviews[subject]={step,due:due.toISOString(),last:new Date().toISOString()};saveSmart();renderReviewList()}
 function renderReviewList(){const root=$("reviewList");root.replaceChildren();const items=Object.entries(smartState.reviews).sort((a,b)=>a[1].due.localeCompare(b[1].due));if(!items.length){root.textContent="Nenhuma revisão agendada. Escolha uma matéria acima.";return}for(const [subject,info] of items){const p=document.createElement("div");p.className="mission";const date=new Date(info.due);const due=date.getTime()<=Date.now();p.textContent=`${due?"🔔 Revisão pendente":"📅"} ${subject} — ${date.toLocaleDateString("pt-BR")}`;root.append(p)}}
-function initSmart(){for(const s of subjects){for(const id of ["assistantSubject","reviewSubject"]){const op=document.createElement("option");op.value=s.name;op.textContent=s.name;$(id).append(op)}}tutorMessage("Olá! Sou o tutor gratuito da Missão 803. Faço buscas nos conteúdos da turma, sem API paga. Escolha uma matéria e pergunte algo, ou use os botões de exemplos. Não compartilhe dados pessoais.");renderMissions();renderReviewList();$("assistantInput").addEventListener("keydown",e=>{if(e.key==="Enter"&&(e.ctrlKey||e.metaKey))askTutor()})}
+function initSmart(){for(const s of subjects){for(const id of ["assistantSubject","reviewSubject"]){const op=document.createElement("option");op.value=s.name;op.textContent=s.name;$(id).append(op)}}tutorMessage("Olá! Sou o tutor gratuito do Portal 803. Faço buscas nos conteúdos da turma, sem API paga. Escolha uma matéria e pergunte algo, ou use os botões de exemplos. Não compartilhe dados pessoais.");renderMissions();renderReviewList();$("assistantInput").addEventListener("keydown",e=>{if(e.key==="Enter"&&(e.ctrlKey||e.metaKey))askTutor()})}
 
 function init(){
  initExtra803();
@@ -871,7 +871,7 @@ async function registerOffline(){const el=document.getElementById('offlineStatus
 function initExtra803(){for(const s of subjects){const opt=document.createElement('option');opt.value=s.name;opt.textContent=s.name;document.getElementById('arenaSubject').append(opt)}document.getElementById('calendarDate').value=new Date().toLocaleDateString('en-CA');renderCalendar()}
 
 
-// NEXO 803: metas pessoais locais; nenhuma conta, ranking ou API paga.
+// Portal 803: metas pessoais locais; nenhuma conta, ranking ou API paga.
 const nexoKey='nexo803-goals-v1';
 function nexoWeek(){const d=new Date(),day=(d.getDay()+6)%7;d.setDate(d.getDate()-day);return [d.getFullYear(),String(d.getMonth()+1).padStart(2,'0'),String(d.getDate()).padStart(2,'0')].join('-')}
 function nexoRead(){try{const x=JSON.parse(localStorage.getItem(nexoKey)||'{}');return x&&typeof x==='object'?x:{}}catch{return {}}}
@@ -915,7 +915,7 @@ function generateNexoQuestions(){
   nexoGenerator.items=result;nexoGenerator.index=0;nexoGenerator.correct=0;
   notice.textContent=matches.length||!topic?'✅ '+result.length+' questões criadas!':'⚠️ Não encontrei questões específicas sobre "'+topic+'". Criei '+result.length+' questões gerais de '+s+'. Para usar seu próprio assunto, experimente o Laboratório.';
   showNexoGenerated();
- }catch(error){notice.textContent='Não foi possível criar o desafio. Atualize a página e tente novamente.';console.error('NEXO generator',error)}
+ }catch(error){notice.textContent='Não foi possível criar o desafio. Atualize a página e tente novamente.';console.error('Portal generator',error)}
 }
 function showNexoGenerated(){
  const g=nexoGenerator,heading=document.getElementById('genHeading'),q=document.getElementById('genQuestion'),root=document.getElementById('genAnswers'),next=document.getElementById('genNext'),feedback=document.getElementById('genFeedback');
@@ -929,7 +929,7 @@ function initNexoGenerator(){const el=document.getElementById('genSubject');for(
 initNexoGenerator();
 
 
-/* NEXO 803 — Laboratório local de perguntas por lacunas */
+/* Portal 803 — Laboratório local de perguntas por lacunas */
 const labState={items:[],index:0,correct:0,answered:false};
 const labStop=new Set('sobre entre depois antes também quando muito muita muitos muitas porque porém assim ainda outro outra outros outras pelas pelos nossa nosso nossos suas seus deles delas então onde enquanto desde todos todas todos cada aquilo aquele aquela essas esses isso isto para como mais menos esta este esse essa foram seria sendo pelo pela uma umas uns dos das que com sem aos nas nos por não são tem era ser ter foi sua seu seus suas eles elas você vocês'.split(' '));
 function labTokens(sentence){return [...sentence.matchAll(/[A-Za-zÀ-ÿ][A-Za-zÀ-ÿ-]{3,}/g)].map(m=>({word:m[0],pos:m.index})).filter(t=>!labStop.has(t.word.toLocaleLowerCase('pt-BR')))}
