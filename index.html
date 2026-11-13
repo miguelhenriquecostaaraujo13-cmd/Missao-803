@@ -392,6 +392,30 @@ button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-vis
     <div class="card span-5"><h3>Privacidade da turma</h3><p class="small">O sistema não publica nomes, apelidos, notas ou respostas individuais. Cada participante só pode alterar seu próprio registro; a turma consulta somente os totais gerais.</p><div id="classWall" class="callout small">Mural individual desativado para proteger a privacidade dos estudantes.</div></div>
     <div class="card span-12"><h3>Como funciona?</h3><ol><li>Clique em “Conectar e sincronizar meu progresso”.</li><li>A página cria ou recupera sua sessão anônima.</li><li>Marque conteúdos na trilha e responda questões normalmente.</li><li>As alterações são enviadas ao banco e somadas ao painel da turma.</li></ol><p class="small muted">A sessão anônima fica vinculada ao navegador. Ao trocar de dispositivo ou limpar os dados do navegador, você pode aparecer como um novo participante.</p></div>
   </div>
+  <div class="card" style="margin-top:18px" id="portalNotasCard">
+    <h3>📊 Média das provas da turma — participação opcional</h3>
+    <p class="small muted">Você pode informar uma nota de 0 a 10. Sua nota individual fica protegida no Supabase e não aparece no mural. Só exibimos médias agrupadas quando pelo menos cinco alunos contribuíram para a mesma prova. Para maior privacidade, as médias são arredondadas de 0,5 em 0,5 ponto. Não inclua nome nem dados pessoais.</p>
+    <div class="grid">
+      <div class="span-6">
+        <label for="portalGradeExam"><b>Escolha a prova</b></label>
+        <select id="portalGradeExam" class="study-field">
+          <option value="matematica_1611">16/11 — Matemática</option><option value="portugues_1711">17/11 — Português</option>
+          <option value="geografia_1811">18/11 — Geografia</option><option value="educacao_fisica_1811">18/11 — Ed. Física teórica</option>
+          <option value="historia_1911">19/11 — História</option><option value="ingles_1911">19/11 — Inglês</option>
+          <option value="ciencias_2311">23/11 — Ciências</option><option value="arte_2311">23/11 — Arte</option>
+        </select>
+        <label for="portalGradeValue"><b>Sua nota (0 a 10)</b></label>
+        <input id="portalGradeValue" class="study-field" type="number" inputmode="decimal" min="0" max="10" step="0.5" placeholder="Ex.: 8,5">
+        <div class="row"><button class="btn orange" type="button" onclick="portalGradeSave()">Salvar minha nota</button><button class="btn light" type="button" onclick="portalGradeDelete()">Excluir minha nota desta prova</button></div>
+        <p class="small muted" id="portalGradeStatus" role="status">O envio é voluntário. É necessário conectar-se ao Supabase para contribuir; não há divulgação de notas individuais.</p>
+      </div>
+      <div class="span-6">
+        <div class="between"><h3>Médias disponíveis</h3><button class="btn light" type="button" onclick="portalGradeRefresh()">↻ Atualizar</button></div>
+        <div id="portalGradeAverages"><p class="small muted">Carregando médias coletivas…</p></div>
+        <p class="small muted">A média é calculada com as notas informadas voluntariamente; pode não representar toda a turma. Mesmo com cinco respostas, evite comparar ou tentar descobrir notas de colegas.</p>
+      </div>
+    </div>
+  </div>
 </section>
 
 
@@ -1207,6 +1231,67 @@ async function portalPublicRefresh(){
 }
 portalPublicRefresh();
 portalOwnerCheck();
+
+
+/* Notas voluntárias por prova: RLS impede leitura pública das notas individuais. */
+const portalGradeNames={
+ matematica_1611:"Matemática (16/11)",portugues_1711:"Português (17/11)",
+ geografia_1811:"Geografia (18/11)",educacao_fisica_1811:"Ed. Física teórica (18/11)",
+ historia_1911:"História (19/11)",ingles_1911:"Inglês (19/11)",
+ ciencias_2311:"Ciências (23/11)",arte_2311:"Arte (23/11)"
+};
+function portalGradeMsg(t){const el=document.getElementById("portalGradeStatus");if(el)el.textContent=t}
+async function portalGradeSession(){
+ const client=ensureCloudClient();
+ const {data,error}=await client.auth.getSession();if(error)throw error;
+ let session=data?.session;
+ if(!session){const auth=await client.auth.signInAnonymously();if(auth.error)throw auth.error;session=auth.data?.session}
+ if(!session?.user?.id)throw new Error("Sessão indisponível.");
+ return {client,user:session.user};
+}
+async function portalGradeSave(){
+ const prova=document.getElementById("portalGradeExam").value;
+ const raw=document.getElementById("portalGradeValue").value.replace(",",".");
+ const nota=Number(raw);
+ if(!Object.hasOwn(portalGradeNames,prova)||raw.trim()===""||!Number.isFinite(nota)||nota<0||nota>10||Math.round(nota*2)!==nota*2){portalGradeMsg("Informe uma nota de 0 a 10 em intervalos de 0,5 ponto.");return}
+ if(!confirm("Enviar voluntariamente sua nota desta prova? Ela será armazenada de forma privada e entrará somente no cálculo da média coletiva."))return;
+ portalGradeMsg("Salvando a nota com proteção de acesso…");
+ try{
+  const {client,user}=await portalGradeSession();
+  const {error}=await client.from("portal803_notas").upsert({usuario_id:user.id,prova,nota},{onConflict:"usuario_id,prova"});
+  if(error)throw error;
+  document.getElementById("portalGradeValue").value="";
+  portalGradeMsg("✅ Nota salva com privacidade. Você pode substituí-la ou excluí-la depois.");
+  await portalGradeRefresh();
+ }catch(e){portalGradeMsg("Não foi possível salvar a nota. Para contribuir sem conta, o login anônimo precisa estar habilitado no Supabase. Tente conectar na aba Turma 803.")}
+}
+async function portalGradeDelete(){
+ const prova=document.getElementById("portalGradeExam").value;
+ if(!Object.hasOwn(portalGradeNames,prova)||!confirm("Excluir sua nota desta prova, se houver alguma?"))return;
+ try{
+  const {client,user}=await portalGradeSession();
+  const {error}=await client.from("portal803_notas").delete().eq("usuario_id",user.id).eq("prova",prova);
+  if(error)throw error;
+  portalGradeMsg("✅ Sua nota desta prova foi excluída, se estava cadastrada.");
+  await portalGradeRefresh();
+ }catch(e){portalGradeMsg("Não foi possível excluir a nota agora. Verifique a conexão com o Supabase.")}
+}
+async function portalGradeRefresh(){
+ const root=document.getElementById("portalGradeAverages");if(!root)return;
+ root.replaceChildren();
+ try{
+  const {data,error}=await ensureCloudClient().rpc("portal803_medias_provas");
+  if(error)throw error;
+  const grades=new Map((data||[]).filter(x=>Object.hasOwn(portalGradeNames,x.prova)).map(x=>[x.prova,x.media]));
+  for(const [key,name] of Object.entries(portalGradeNames)){
+   const row=document.createElement("div");row.className="between mission";
+   const label=document.createElement("span");label.textContent=name;
+   const result=document.createElement("b");result.textContent=grades.has(key)?Number(grades.get(key)).toFixed(1).replace(".",",")+" / 10":"Aguardando 5 notas";
+   row.append(label,result);root.append(row);
+  }
+ }catch(e){root.textContent="As médias online não estão disponíveis no momento."}
+}
+portalGradeRefresh();
 
 init();renderNexo();
 </script>
