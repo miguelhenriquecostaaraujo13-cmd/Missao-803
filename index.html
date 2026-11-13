@@ -75,11 +75,104 @@ footer{background:var(--navy);color:#cbd9e3;padding:24px 16px;text-align:center;
 .mission{border:1px solid var(--line);background:#fff;padding:13px;border-radius:12px;margin:9px 0}
 .mission.completed{border-color:#6bb79b;background:#f0faf5}
 .mission .row{margin-top:9px}
+
+/* Portal 803 — 3 estilos (Aurora, Noite, Papel): preserva as funções originais */
+html[data-portal-theme="aurora"]{color-scheme:light;--paper:#f2f6ff;--white:#fff;--ink:#132139;--muted:#60738b;--line:#e4ebf6;--navy:#5845c9;--navy2:#249cde;--orange:#ffb55b;--teal:#6754e9;--shadow:0 18px 40px rgba(32,55,113,.08);--portal-sidebar:#131b36;--portal-side-text:#eef2ff;--portal-panel:#f7f9fe;--portal-hero1:#5642c7;--portal-hero2:#1d9bbb;--portal-soft:#eef1fd}
+html[data-portal-theme="noite"]{color-scheme:dark;--paper:#090e19;--white:#141d2e;--ink:#eef5ff;--muted:#9baec8;--line:#293950;--navy:#61dcba;--navy2:#63afff;--orange:#fbbf68;--teal:#61dcba;--shadow:0 18px 40px rgba(0,0,0,.24);--portal-sidebar:#070b14;--portal-side-text:#eef5ff;--portal-panel:#1a2638;--portal-hero1:#155f72;--portal-hero2:#2d3774;--portal-soft:#1a2638}
+html[data-portal-theme="papel"]{color-scheme:light;--paper:#f6f5f1;--white:#fffefa;--ink:#273442;--muted:#6b7785;--line:#e7e5de;--navy:#1d635e;--navy2:#5b927c;--orange:#f6bd60;--teal:#1d635e;--shadow:0 10px 26px rgba(25,55,54,.055);--portal-sidebar:#173d43;--portal-side-text:#f7f7f0;--portal-panel:#f7f5ee;--portal-hero1:#27685c;--portal-hero2:#71968b;--portal-soft:#f0f3ec}
+html{scroll-behavior:smooth}
+body{display:grid;grid-template-columns:255px minmax(0,1fr);grid-template-areas:"side hero" "side content" "side foot";align-items:start;min-height:100vh;background:var(--paper);color:var(--ink);transition:background .25s,color .25s}
+header{grid-area:hero;min-width:0;margin:22px clamp(18px,3vw,48px) 4px;border-radius:24px;background:linear-gradient(110deg,var(--portal-hero1),var(--portal-hero2));padding:26px 24px 30px;box-shadow:var(--shadow)}
+header:after{top:15%;right:5%;color:#ffffff13}
+header .wrap{max-width:none;padding:0}
+header .topline{color:#e4edfc}
+header h1{font-size:clamp(2rem,3.8vw,3rem);margin:20px 0 12px}
+header h1 span{color:#ffdf9f !important}
+header p{color:#eef7ff}
+.exam-pill{background:#ffffff1f;border-color:#ffffff3b;color:#fff}
+.logo{color:#162f44;background:#ffca73}
+.portal-top{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.portal-eyebrow{font-size:.72rem;letter-spacing:.11em;font-weight:850;color:#e4f2ff}
+.portal-theme-label{display:flex;align-items:center;gap:8px;font-size:.83rem;font-weight:800;color:#fff}
+.portal-theme-label select{padding:9px 12px;border-radius:12px;background:var(--white);border:1px solid var(--line);color:var(--ink);max-width:180px}
+nav{grid-area:side;position:sticky;top:0;left:0;height:100vh;overflow-y:auto;overflow-x:hidden;background:var(--portal-sidebar);border:0;box-shadow:none;z-index:20;display:flex;flex-direction:column;padding:22px 13px}
+nav:before{content:"✦  Portal 803";display:block;color:#fff;font-size:1.23rem;letter-spacing:-.04em;font-weight:900;padding:10px 11px 18px;border-bottom:1px solid #ffffff25;margin-bottom:8px}
+.navinner{display:flex;flex-direction:column;overflow:visible;gap:4px;padding:7px 0;max-width:none}
+.navquick{display:block;padding:10px 3px 12px;max-width:none}
+.navquick label{display:block;color:#adbed5;margin:0 0 8px;font-size:.78rem}
+.navquick select{display:block;width:100%;max-width:100%;background:#ffffff12;border:1px solid #ffffff35;color:#fff;font-size:.86rem}
+.navquick select option{background:var(--portal-sidebar);color:#fff}
+.navbtn{display:block;width:100%;white-space:normal;text-align:left;padding:11px 13px;border-radius:12px;font-size:.86rem;font-weight:700;color:#c1d0e6}
+.navbtn.active{color:#fff;background:#ffffff24;box-shadow:inset 3px 0 var(--orange)}
+.navbtn:hover{color:white;background:#ffffff17}
+main{grid-area:content;min-width:0;max-width:1600px;width:100%;margin:18px auto 55px;padding:0 clamp(18px,3vw,48px)}
+footer{grid-area:foot;margin:0 clamp(18px,3vw,48px) 28px;padding:19px 22px;border-radius:18px;background:var(--portal-sidebar);color:#dce9f3}
+.card{background:var(--white);border:1px solid var(--line);border-radius:20px;padding:20px;box-shadow:var(--shadow);min-width:0}
+.grid{gap:15px;grid-template-columns:repeat(12,minmax(0,1fr))}
+h2,h3,summary,.metric,.statbox b,.timer,.flash{color:var(--ink)}
+h2{letter-spacing:-.025em}
+h3{letter-spacing:-.02em}
+.btn{background:var(--navy);color:var(--white);border-radius:12px;padding:11px 15px}
+html[data-portal-theme="noite"] .btn:not(.light):not(.orange){color:#092221}
+.btn.orange{background:var(--orange);color:#18293e}
+.btn.light{background:var(--portal-soft);color:var(--ink);border:1px solid var(--line)}
+input,select,textarea{accent-color:var(--teal)}
+select,.study-field{background:var(--portal-panel);border-color:var(--line);color:var(--ink)}
+input::placeholder,textarea::placeholder{color:var(--muted)}
+.subject-tile,details,.topic,.resource,.note-item,.library-entry,.mission,.status-line,.statbox,.assistant-chat,.library-empty,.flash,.qoption{background:var(--white);color:var(--ink);border-color:var(--line)}
+.subject-tile b,.resource a,.topic.done label{color:var(--ink)}
+details summary,.topic,.statbox,.assistant-chat,.status-line{background:var(--portal-panel)}
+th{background:var(--portal-panel);color:var(--ink)}
+.qoption:has(input:checked){background:var(--portal-soft);border-color:var(--teal)}
+.tag{background:var(--portal-soft);color:var(--ink);border:1px solid var(--line)}
+.flash{background:var(--portal-panel);border-color:var(--teal)}
+.progress{background:var(--portal-soft);border:1px solid var(--line)}
+.progress>i{background:linear-gradient(90deg,var(--teal),var(--navy2))}
+.assistant-msg.bot,.assistant-msg.me{background:var(--portal-soft);color:var(--ink)}
+.callout{background:var(--portal-panel);color:var(--ink);border-color:var(--orange)}
+.cloud-state,.cloud-state.ok,.cloud-state.warn,.cloud-state.err{color:var(--ink);background:var(--portal-panel);border:1px solid var(--line)}
+.feedback.good,.good{background:#1fa56c1f;color:var(--ink);border:1px solid #3bbd8890}
+.feedback.bad,.bad{background:#c94e4e18;color:var(--ink);border:1px solid #e1848490}
+.theme-showcase{margin:16px 0 22px;padding:20px}
+.theme-showcase-head{display:flex;align-items:center;justify-content:space-between;gap:15px;flex-wrap:wrap}
+.theme-eyebrow{font-size:.72rem;color:var(--muted);font-weight:850;letter-spacing:.11em}
+.theme-showcase h3{font-size:1.25rem;margin:4px 0}
+.theme-showcase p{margin:0 0 10px}
+.theme-current{border:1px solid var(--line);border-radius:15px;background:var(--portal-panel);padding:9px 12px;color:var(--ink);font-size:.82rem;font-weight:800}
+.theme-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:12px}
+.theme-card{background:var(--portal-panel);border:1px solid var(--line);color:var(--ink);border-radius:16px;padding:12px;display:flex;flex-direction:column;gap:6px;text-align:left;cursor:pointer}
+.theme-card[aria-pressed="true"]{outline:2px solid var(--teal);outline-offset:-2px}
+.theme-card small{color:var(--muted)}
+.theme-swatch{height:77px;border-radius:11px;display:flex;gap:6px;padding:10px;width:100%}
+.theme-swatch i{border-radius:7px;flex:1}
+.swatch-aurora{background:#e9f0ff}.swatch-aurora i:nth-child(1){background:#5542c7}.swatch-aurora i:nth-child(2){background:#249cde}.swatch-aurora i:nth-child(3){background:#fff}
+.swatch-noite{background:#090e19}.swatch-noite i:nth-child(1){background:#131b36}.swatch-noite i:nth-child(2){background:#155f72}.swatch-noite i:nth-child(3){background:#61dcba}
+.swatch-papel{background:#f6f5f1}.swatch-papel i:nth-child(1){background:#173d43}.swatch-papel i:nth-child(2){background:#71968b}.swatch-papel i:nth-child(3){background:#fffefa}
+button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid var(--navy2);outline-offset:2px}
+@media(max-width:1020px){body{grid-template-columns:210px minmax(0,1fr)}nav{padding:14px 9px}header,footer{margin-left:18px;margin-right:18px}main{padding:0 18px}}
+@media(max-width:790px){
+ body{display:block}
+ header{margin:10px 12px 8px;padding:23px 18px}
+ header:after{font-size:110px}
+ nav{position:sticky;top:0;height:auto;max-height:none;overflow:hidden;display:block;padding:6px 8px;border-bottom:1px solid var(--line);background:var(--portal-sidebar)}
+ nav:before{display:none}
+ .navquick{display:flex;gap:10px;align-items:center;padding:7px 5px}
+ .navquick label{white-space:nowrap;margin:0}
+ .navquick select{width:100%;max-width:none}
+ .navinner{display:flex;flex-direction:row;overflow-x:auto;overflow-y:hidden;padding:3px 0 7px;gap:6px}
+ .navbtn{width:auto;flex:none;white-space:nowrap;padding:9px 11px}
+ main{padding:0 13px;margin:18px auto 38px}
+ footer{margin:0 12px 16px}
+ .theme-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+}
+@media(max-width:480px){.theme-grid{grid-template-columns:1fr}.theme-card{display:grid;grid-template-columns:78px 1fr;align-items:center}.theme-swatch{grid-row:span 2;height:54px}.theme-card small{grid-column:2}.portal-top{align-items:start}.portal-eyebrow{display:none}.card{padding:15px}}
+
 </style>
  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.105.0"></script>
 </head>
 <body>
 <header><div class="wrap">
+  <div class="portal-top"><span class="portal-eyebrow">✦ PLATAFORMA DE ESTUDOS DA TURMA 803</span><label class="portal-theme-label" for="portalThemeSelect">🎨 Estilo <select id="portalThemeSelect" aria-label="Escolha a aparência do Portal 803"><option value="aurora">🌈 Aurora</option><option value="noite">🌙 Noite</option><option value="papel">🌿 Papel</option></select></label></div>
   <div class="topline"><span class="logo">803</span> Instituto Educacional Missão Paz <span>•</span> Central de Estudos</div>
   <h1>Portal 803<br><span style="color:#ffb45f">Conecte seu conhecimento</span></h1>
   <p>Evolua a cada missão! Uma plataforma gratuita de estudos, metas, desafios e conquistas da turma 803.</p>
@@ -114,6 +207,13 @@ footer{background:var(--navy);color:#cbd9e3;padding:24px 16px;text-align:center;
 <main>
 <section id="inicio" class="view active">
   <h2>Seu painel de missão</h2><p class="sub">Seu progresso é salvo neste navegador. Marque os tópicos na trilha e veja os indicadores se atualizarem.</p>
+  <div class="theme-showcase card" aria-label="Personalizar aparência"><div class="theme-showcase-head"><div><span class="theme-eyebrow">PERSONALIZE SUA EXPERIÊNCIA</span><h3>Escolha seu estilo ✨</h3><p class="small muted">Três visuais do Portal 803, com os mesmos recursos e o mesmo progresso.</p></div><span class="theme-current" id="portalThemeCurrent">Aurora</span></div>
+    <div class="theme-grid">
+      <button class="theme-card" type="button" data-portal-theme="aurora" aria-pressed="true"><span class="theme-swatch swatch-aurora"><i></i><i></i><i></i></span><b>🌈 Aurora</b><small>Moderno e colorido</small></button>
+      <button class="theme-card" type="button" data-portal-theme="noite" aria-pressed="false"><span class="theme-swatch swatch-noite"><i></i><i></i><i></i></span><b>🌙 Noite</b><small>Escuro e elegante</small></button>
+      <button class="theme-card" type="button" data-portal-theme="papel" aria-pressed="false"><span class="theme-swatch swatch-papel"><i></i><i></i><i></i></span><b>🌿 Papel</b><small>Claro e minimalista</small></button>
+    </div>
+  </div>
   <div class="grid">
     <div class="card span-3"><div class="muted small">Tópicos concluídos</div><div class="metric" id="doneMetric">0 <small>/ 0</small></div><div class="progress"><i id="mainProgress"></i></div><div class="small muted" id="progressLabel">Comece pelo primeiro tópico!</div></div>
     <div class="card span-3"><div class="muted small">Questões respondidas</div><div class="metric" id="answeredMetric">0</div><div class="small muted">Pratique e confira as explicações.</div></div>
@@ -968,6 +1068,27 @@ function renderNexoPerformance(){
  for(const s of subjects){const rec=(state.scoreBySubject||{})[s.name]||{c:0,n:0},n=Number(rec.n)||0,c=Number(rec.c)||0,p=n?Math.round(100*c/n):0;const wrap=document.createElement('div');wrap.className='mission';const title=document.createElement('div');title.textContent=s.icon+' '+s.name+' — '+(n?p+'% de acertos ('+c+'/'+n+')':'Sem questões respondidas');const track=document.createElement('div');track.style.cssText='height:10px;background:#e3eaf0;border-radius:99px;margin:10px 0;overflow:hidden';const bar=document.createElement('div');bar.style.cssText='height:100%;width:'+p+'%;background:#36a6a0;border-radius:99px';track.append(bar);const tip=document.createElement('p');tip.className='small muted';tip.textContent=!n?'Comece pelo simulado desta matéria.':p<60?'Revise os conteúdos e tente mais questões.':'Continue praticando para consolidar o aprendizado.';wrap.append(title,track,tip);root.append(wrap)}
 }
 renderNexoPerformance();
+
+
+/* Portal 803: tema só altera a aparência; todo o progresso continua nas mesmas chaves. */
+const PORTAL_THEME_KEY="portal803-theme-v1";
+function setPortalTheme(theme){
+ const allowed=["aurora","noite","papel"];
+ const selected=allowed.includes(theme)?theme:"aurora";
+ document.documentElement.dataset.portalTheme=selected;
+ try{localStorage.setItem(PORTAL_THEME_KEY,selected)}catch(e){}
+ const sel=document.getElementById("portalThemeSelect");if(sel)sel.value=selected;
+ const display=document.getElementById("portalThemeCurrent");if(display)display.textContent=({aurora:"🌈 Aurora",noite:"🌙 Noite",papel:"🌿 Papel"})[selected];
+ document.querySelectorAll("[data-portal-theme]").forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.portalTheme===selected)));
+ const meta=document.querySelector('meta[name="theme-color"]');
+ if(meta)meta.content=({aurora:"#131b36",noite:"#090e19",papel:"#173d43"})[selected];
+}
+(function initPortalThemes(){
+ let theme="aurora";try{theme=localStorage.getItem(PORTAL_THEME_KEY)||"aurora"}catch(e){}
+ setPortalTheme(theme);
+ document.querySelectorAll("[data-portal-theme]").forEach(b=>b.addEventListener("click",()=>setPortalTheme(b.dataset.portalTheme)));
+ document.getElementById("portalThemeSelect").addEventListener("change",e=>setPortalTheme(e.target.value));
+})();
 
 init();renderNexo();
 </script>
