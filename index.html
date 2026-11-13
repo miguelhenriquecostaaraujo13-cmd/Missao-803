@@ -201,12 +201,12 @@ button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-vis
   <button class="navbtn" data-view="arena">🎮 Arena 803</button>
   <button class="navbtn" data-view="calendario">📅 Calendário</button>
   <button class="navbtn" data-view="professor">👩‍🏫 Professor</button>
-  <button class="navbtn" data-view="criador">🛠️ Estúdio do Criador</button>
+  <button class="navbtn" data-view="criador">🔒 Modo Proprietário</button>
   <button class="navbtn" data-view="offline">📶 Offline</button>
 
 </div></nav>
 <main>
-<section id="inicio" class="view active">
+<section id="inicio" class="view active"><div class="card" style="margin-bottom:16px" id="portalPublicBulletin"><h3>📢 Avisos e provas atualizados</h3><p class="small muted">Publicações oficiais cadastradas pelo proprietário do Portal 803.</p><div id="portalPublicItems"><p class="small muted">Carregando avisos...</p></div></div>
   <h2>Seu painel de missão</h2><p class="sub">Seu progresso é salvo neste navegador. Marque os tópicos na trilha e veja os indicadores se atualizarem.</p>
   <div class="theme-showcase card" aria-label="Personalizar aparência"><div class="theme-showcase-head"><div><span class="theme-eyebrow">PERSONALIZE SUA EXPERIÊNCIA</span><h3>Escolha seu estilo ✨</h3><p class="small muted">Três visuais do Portal 803, com os mesmos recursos e o mesmo progresso.</p></div><span class="theme-current" id="portalThemeCurrent">Aurora</span></div>
     <div class="theme-grid">
@@ -220,7 +220,7 @@ button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-vis
     <div class="card span-3"><div class="muted small">Questões respondidas</div><div class="metric" id="answeredMetric">0</div><div class="small muted">Pratique e confira as explicações.</div></div>
     <div class="card span-3"><div class="muted small">Acertos</div><div class="metric" id="correctMetric">0</div><div class="small muted">Cada erro é uma pista do que revisar.</div></div>
     <div class="card span-3"><div class="muted small">Próxima etapa</div><div class="metric" style="font-size:1.2rem" id="nextExam">Matemática</div><div class="small muted" id="nextExamDate">16 de novembro</div></div>
-    <div class="card span-7"><h3>Calendário oficial das provas</h3><table><thead><tr><th>Data</th><th>Avaliações</th><th>Preparação sugerida</th></tr></thead><tbody>
+    <div class="card span-7"><h3>Cronograma inicial de provas — confira atualizações nos avisos</h3><table><thead><tr><th>Data</th><th>Avaliações</th><th>Preparação sugerida</th></tr></thead><tbody>
       <tr><td><b>16/11</b></td><td>Matemática</td><td>Estatística, gráficos, acréscimos, descontos e inflação.</td></tr>
       <tr><td><b>17/11</b></td><td>Língua Portuguesa</td><td>Gêneros, argumentação, coesão, regência e crase.</td></tr>
       <tr><td><b>18/11</b></td><td>Geografia + Educação Física (teórica)</td><td>América/África, regiões polares, saúde e atletismo.</td></tr>
@@ -402,38 +402,22 @@ button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-vis
 <section id="calendario" class="view"><h2>📅 Calendário de estudos</h2><p class="sub">Organize suas tarefas e acompanhe as provas. Datas do roteiro original de novembro de 2026: confirme com o professor caso o calendário mude.</p><div class="grid"><div class="card span-6"><h3>Meu compromisso</h3><label for="calendarDate">Data</label><input id="calendarDate" class="study-field" type="date"><label for="calendarTask">O que vou estudar?</label><input id="calendarTask" class="study-field" maxlength="140" placeholder="Ex.: revisar porcentagem"><button class="btn orange" onclick="addCalendarTask()">Adicionar lembrete</button><p class="small muted">Os lembretes ficam neste navegador e não enviam notificações automáticas.</p></div><div class="card span-6"><h3>Próximas tarefas</h3><div id="calendarItems"></div></div><div class="card span-12"><h3>Semana de provas</h3><p>📚 Período previsto no roteiro: <b>16 a 23 de novembro de 2026</b>. Consulte o cronograma oficial da turma para saber qual prova acontece em cada dia.</p><p class="small muted" id="calendarCountdown"></p></div></div></section>
 <section id="professor" class="view"><h2>👩‍🏫 Espaço do professor</h2><p class="sub">Materiais e instruções para docentes e responsáveis, sem expor dados dos estudantes.</p><div class="grid"><div class="card span-6"><h3>Como aprovar materiais da biblioteca</h3><p>As publicações enviadas pelos alunos ficam pendentes até revisão no painel administrativo do Supabase. Somente responsáveis autorizados devem ter acesso ao painel.</p><p class="small muted">Esta página é informativa; não concede permissões de administrador. A aprovação precisa ser feita com acesso administrativo separado.</p></div><div class="card span-6"><h3>Atividade sugerida</h3><p>Peça que os alunos criem um resumo com suas palavras, respondam uma questão e comparem a explicação com o material da aula. Incentive a checagem de fontes.</p><button class="btn light" onclick="showView('biblioteca')">Abrir biblioteca</button></div></div></section>
 <section id="criador" class="view">
- <h2>🛠️ Estúdio do Criador</h2>
- <p class="sub">Prepare avisos e atualizações para o Portal 803. Este é um editor de rascunhos, não um painel de administração autenticado.</p>
- <div class="callout" style="margin-bottom:16px"><b>Importante:</b> qualquer visitante pode abrir esta ferramenta, mas seus rascunhos ficam apenas no próprio navegador. Eles <b>não</b> alteram o site dos colegas. Para publicar oficialmente, exporte o arquivo e envie para atualização pelo GitHub. Não digite senhas nem dados pessoais aqui.</div>
- <div class="grid">
-  <div class="card span-6">
-   <h3>📢 Criar aviso para a turma</h3>
-   <label for="creatorNoticeTitle">Título do aviso</label>
-   <input id="creatorNoticeTitle" class="study-field" maxlength="90" placeholder="Ex.: Revisão de Matemática">
-   <label for="creatorNoticeText">Mensagem</label>
-   <textarea id="creatorNoticeText" class="study-field" maxlength="1200" rows="5" placeholder="Escreva aqui seu aviso para a turma..."></textarea>
-   <button class="btn orange" type="button" onclick="creatorAddNotice()">+ Salvar aviso no rascunho</button>
-   <p id="creatorStatus" class="small muted" role="status">Nenhum aviso enviado para publicação.</p>
-  </div>
-  <div class="card span-6">
-   <h3>📆 Propor alteração de prova</h3>
-   <label for="creatorExamSubject">Matéria</label>
-   <input id="creatorExamSubject" class="study-field" maxlength="80" placeholder="Ex.: História">
-   <label for="creatorExamDate">Data</label>
-   <input id="creatorExamDate" class="study-field" type="date">
-   <label for="creatorExamTopics">Conteúdo da prova</label>
-   <textarea id="creatorExamTopics" class="study-field" rows="3" maxlength="700" placeholder="Ex.: capítulos 5 e 6"></textarea>
-   <button class="btn orange" type="button" onclick="creatorAddExam()">+ Salvar prova no rascunho</button>
-  </div>
-  <div class="card span-12">
-   <h3>🗂️ Minhas propostas de atualização</h3>
-   <p class="small muted">A lista abaixo é um rascunho local. Revise antes de enviar qualquer alteração para publicação.</p>
-   <div id="creatorDraftList"></div>
-   <div class="row" style="margin-top:15px">
-    <button class="btn orange" onclick="creatorExport()">⬇ Exportar alterações (.json)</button>
-    <button class="btn light" onclick="creatorCopy()">📋 Copiar resumo</button>
-    <button class="btn light" onclick="creatorClear()">🗑 Apagar rascunhos</button>
-   </div>
+ <h2>🔒 Modo Proprietário — Portal 803</h2><p class="sub">Administração protegida por login do Supabase e permissões do banco de dados. Nenhuma senha fica no código do site.</p>
+ <div id="portalOwnerLogin" class="card" style="max-width:680px">
+  <h3>Entrar como proprietário</h3>
+  <p class="small muted">Use seu próprio e-mail e senha. Criar uma conta não dá privilégios de proprietário automaticamente: o acesso precisa ser autorizado no Supabase.</p>
+  <label for="portalOwnerEmail">E-mail da conta</label><input id="portalOwnerEmail" class="study-field" type="email" autocomplete="username" maxlength="254" placeholder="seu e-mail">
+  <label for="portalOwnerPassword">Senha</label><input id="portalOwnerPassword" class="study-field" type="password" autocomplete="current-password" minlength="12" placeholder="Sua senha (não compartilhe)">
+  <div class="row"><button class="btn orange" type="button" onclick="portalOwnerAuth('login')">🔐 Entrar</button><button class="btn light" type="button" onclick="portalOwnerAuth('register')">Criar minha conta</button><button class="btn light" type="button" onclick="portalOwnerLogout()">Sair da conta</button></div>
+  <p id="portalOwnerStatus" role="status" class="small muted">Aguardando login. A conta proprietária precisa ser aprovada pelo administrador do projeto.</p>
+  <div id="portalOwnerSetup" hidden><p class="small muted">Seu identificador de usuário no Supabase (não é uma senha). Apenas quem administra o banco pode liberar esse identificador:</p><code id="portalOwnerUid" style="display:block;overflow-wrap:anywhere"></code><button class="btn light" type="button" onclick="portalOwnerCopyUid()">Copiar meu identificador</button><p class="small muted">No Supabase → SQL Editor, o responsável pelo projeto deve adicionar esse identificador à tabela <code>public.portal803_admins</code>. Nenhuma conta é promovida automaticamente.</p></div>
+ </div>
+ <div id="portalOwnerPrivate" hidden>
+  <div class="callout" style="margin:15px 0">✅ Acesso autorizado. As publicações abaixo são gravadas no Supabase e aparecem para a turma. Revise datas e textos antes de publicar.</div>
+  <div class="grid">
+   <div class="card span-6"><h3>📢 Publicar aviso oficial</h3><label for="portalOfficialTitle">Título</label><input id="portalOfficialTitle" class="study-field" maxlength="90"><label for="portalOfficialBody">Aviso</label><textarea id="portalOfficialBody" class="study-field" maxlength="1200" rows="5"></textarea><button class="btn orange" onclick="portalPublishNotice()">Publicar para a turma</button></div>
+   <div class="card span-6"><h3>📅 Publicar informação de prova</h3><label for="portalOfficialSubject">Matéria</label><input id="portalOfficialSubject" class="study-field" maxlength="80"><label for="portalOfficialDate">Data</label><input id="portalOfficialDate" class="study-field" type="date"><label for="portalOfficialTopics">Conteúdo</label><textarea id="portalOfficialTopics" class="study-field" maxlength="700" rows="3"></textarea><button class="btn orange" onclick="portalPublishExam()">Publicar para a turma</button></div>
+   <div class="card span-12"><h3>📋 Publicações oficiais</h3><div id="portalOwnerList"></div></div>
   </div>
  </div>
 </section>
@@ -1128,19 +1112,101 @@ function setPortalTheme(theme){
 })();
 
 
-/* Portal 803 — Estúdio local de propostas, sem falso login de proprietário */
-const CREATOR_DRAFT_KEY="portal803-creator-drafts-v1";
-function creatorRead(){try{const data=JSON.parse(localStorage.getItem(CREATOR_DRAFT_KEY)||"[]");return Array.isArray(data)?data.filter(x=>x&&["notice","exam"].includes(x.type)).slice(0,80):[]}catch(e){return []}}
-let creatorDrafts=creatorRead();
-function creatorSave(){try{localStorage.setItem(CREATOR_DRAFT_KEY,JSON.stringify(creatorDrafts))}catch(e){document.getElementById("creatorStatus").textContent="Não foi possível salvar neste dispositivo."}creatorRender()}
-function creatorAddNotice(){const title=document.getElementById("creatorNoticeTitle").value.trim(),body=document.getElementById("creatorNoticeText").value.trim();if(title.length<4||body.length<10){document.getElementById("creatorStatus").textContent="Informe um título e uma mensagem de pelo menos 10 caracteres.";return}creatorDrafts.push({id:Date.now().toString(36)+Math.random().toString(36).slice(2,8),type:"notice",title,body});creatorSave();document.getElementById("creatorNoticeTitle").value="";document.getElementById("creatorNoticeText").value="";document.getElementById("creatorStatus").textContent="Aviso guardado apenas neste navegador. Exporte para solicitar publicação."}
-function creatorAddExam(){const subject=document.getElementById("creatorExamSubject").value.trim(),date=document.getElementById("creatorExamDate").value,topics=document.getElementById("creatorExamTopics").value.trim();if(!subject||!/^\d{4}-\d{2}-\d{2}$/.test(date)){document.getElementById("creatorStatus").textContent="Informe a matéria e uma data válida.";return}creatorDrafts.push({id:Date.now().toString(36)+Math.random().toString(36).slice(2,8),type:"exam",subject,date,topics});creatorSave();document.getElementById("creatorExamSubject").value="";document.getElementById("creatorExamDate").value="";document.getElementById("creatorExamTopics").value="";document.getElementById("creatorStatus").textContent="Proposta de prova guardada apenas neste navegador."}
-function creatorRender(){const root=document.getElementById("creatorDraftList");if(!root)return;root.replaceChildren();if(!creatorDrafts.length){const p=document.createElement("p");p.className="small muted";p.textContent="Nenhum rascunho ainda.";root.append(p);return}for(const draft of creatorDrafts){const item=document.createElement("div");item.className="mission";const title=document.createElement("b");title.textContent=draft.type==="notice"?"📢 "+draft.title:"📆 "+draft.subject+" — "+draft.date;const description=document.createElement("p");description.style.whiteSpace="pre-wrap";description.textContent=draft.type==="notice"?draft.body:draft.topics;const remove=document.createElement("button");remove.type="button";remove.className="btn light";remove.textContent="Remover";remove.addEventListener("click",()=>{creatorDrafts=creatorDrafts.filter(x=>x.id!==draft.id);creatorSave()});item.append(title,description,remove);root.append(item)}}
-function creatorExport(){const payload={app:"Portal 803",purpose:"Propostas de atualização para revisão e publicação manual",version:1,items:creatorDrafts};const blob=new Blob([JSON.stringify(payload,null,2)],{type:"application/json;charset=utf-8"});const url=URL.createObjectURL(blob),a=document.createElement("a");a.href=url;a.download="portal803-propostas.json";document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),2000);document.getElementById("creatorStatus").textContent="Arquivo exportado. Ele ainda não foi publicado."}
-function creatorSummary(){return creatorDrafts.map(d=>d.type==="notice"?"AVISO: "+d.title+"\n"+d.body:"PROVA: "+d.subject+" em "+d.date+"\n"+d.topics).join("\n\n---\n\n")}
-async function creatorCopy(){const text=creatorSummary();if(!text){document.getElementById("creatorStatus").textContent="Crie um rascunho antes de copiar.";return}try{await navigator.clipboard.writeText(text);document.getElementById("creatorStatus").textContent="Resumo copiado. Envie para revisão antes de publicar."}catch(e){document.getElementById("creatorStatus").textContent="Não foi possível copiar. Use a exportação .json."}}
-function creatorClear(){if(!creatorDrafts.length)return;if(!confirm("Apagar todos os rascunhos deste navegador?"))return;creatorDrafts=[];creatorSave();document.getElementById("creatorStatus").textContent="Rascunhos apagados."}
-creatorRender();
+/* Portal 803 — Modo Proprietário Supabase. Nunca confiar em esconder HTML como proteção. */
+let portalIsOwner=false;
+let portalOwnerReady=false;
+function portalOwnerStatus(message){const e=document.getElementById("portalOwnerStatus");if(e)e.textContent=message}
+function portalOwnerClient(){return ensureCloudClient()}
+async function portalOwnerCheck(){
+ try{
+  const c=portalOwnerClient(),res=await c.auth.getUser();
+  const u=res.data?.user;
+  const valid=u && !u.is_anonymous && u.email;
+  portalIsOwner=false;
+  document.getElementById("portalOwnerPrivate").hidden=true;
+  document.getElementById("portalOwnerSetup").hidden=!valid;
+  if(!valid){portalOwnerStatus("Faça login com sua conta de e-mail para verificar suas permissões.");return}
+  document.getElementById("portalOwnerUid").textContent=u.id;
+  const {data,error}=await c.from("portal803_admins").select("user_id").eq("user_id",u.id).maybeSingle();
+  if(error)throw error;
+  portalIsOwner=!!data;
+  document.getElementById("portalOwnerPrivate").hidden=!portalIsOwner;
+  portalOwnerStatus(portalIsOwner?"✅ Proprietário autenticado. Você pode publicar avisos e provas.":"Conta autenticada, mas ainda não autorizada como proprietária. Copie seu identificador para cadastrar no Supabase.");
+  if(portalIsOwner)await portalOwnerRefresh();
+ }catch(e){portalIsOwner=false;document.getElementById("portalOwnerPrivate").hidden=true;portalOwnerStatus("Não consegui verificar suas permissões. Confira a conexão com o Supabase.")}
+}
+async function portalOwnerAuth(action){
+ const email=document.getElementById("portalOwnerEmail").value.trim(),password=document.getElementById("portalOwnerPassword").value;
+ if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)||password.length<12){portalOwnerStatus("Informe um e-mail válido e uma senha de pelo menos 12 caracteres.");return}
+ try{
+  const c=portalOwnerClient();
+  portalOwnerStatus(action==="register"?"Criando a conta...":"Verificando login...");
+  const res=action==="register"?await c.auth.signUp({email,password,options:{emailRedirectTo:location.origin+location.pathname}}):await c.auth.signInWithPassword({email,password});
+  document.getElementById("portalOwnerPassword").value="";
+  if(res.error)throw res.error;
+  if(action==="register"&&!res.data?.session){portalOwnerStatus("Cadastro solicitado. Confira seu e-mail para confirmar a conta. Se o link redirecionar incorretamente, configure a URL do GitHub Pages em Supabase → Authentication → URL Configuration.");return}
+  await portalOwnerCheck();
+ }catch(e){document.getElementById("portalOwnerPassword").value="";portalOwnerStatus("Não foi possível autenticar. Confira os dados, a confirmação do e-mail e a configuração do Supabase.")}
+}
+async function portalOwnerLogout(){
+ try{await portalOwnerClient().auth.signOut()}catch(e){}
+ cloudUser=null;portalIsOwner=false;document.getElementById("portalOwnerPassword").value="";document.getElementById("portalOwnerPrivate").hidden=true;document.getElementById("portalOwnerSetup").hidden=true;portalOwnerStatus("Sessão encerrada neste navegador.");}
+async function portalOwnerCopyUid(){
+ const uid=document.getElementById("portalOwnerUid").textContent;
+ if(!uid)return;
+ try{await navigator.clipboard.writeText(uid);portalOwnerStatus("Identificador copiado. Ele deve ser aprovado somente pelo administrador do Supabase.")}catch(e){portalOwnerStatus("Selecione e copie o identificador exibido acima.")}
+}
+async function portalPublishNotice(){
+ if(!portalIsOwner)return;
+ const title=document.getElementById("portalOfficialTitle").value.trim(),body=document.getElementById("portalOfficialBody").value.trim();
+ if(title.length<4||body.length<10){portalOwnerStatus("Preencha o título e o aviso.");return}
+ try{const {error}=await portalOwnerClient().from("portal803_announcements").insert({title,body,published:true});if(error)throw error;
+ document.getElementById("portalOfficialTitle").value="";document.getElementById("portalOfficialBody").value="";
+ portalOwnerStatus("✅ Aviso publicado no banco de dados.");await portalOwnerRefresh();await portalPublicRefresh();
+ }catch(e){portalOwnerStatus("Não foi possível publicar. Verifique sua autorização e tente novamente.")}
+}
+async function portalPublishExam(){
+ if(!portalIsOwner)return;
+ const subject=document.getElementById("portalOfficialSubject").value.trim(),exam_date=document.getElementById("portalOfficialDate").value,topics=document.getElementById("portalOfficialTopics").value.trim();
+ if(subject.length<2||!/^\d{4}-\d{2}-\d{2}$/.test(exam_date)){portalOwnerStatus("Informe matéria e data válidas.");return}
+ try{const {error}=await portalOwnerClient().from("portal803_exams").insert({subject,exam_date,topics,published:true});if(error)throw error;
+ document.getElementById("portalOfficialSubject").value="";document.getElementById("portalOfficialDate").value="";document.getElementById("portalOfficialTopics").value="";
+ portalOwnerStatus("✅ Prova publicada no banco de dados.");await portalOwnerRefresh();await portalPublicRefresh();
+ }catch(e){portalOwnerStatus("Não foi possível publicar. Verifique sua autorização e tente novamente.")}
+}
+async function portalOwnerRefresh(){
+ if(!portalIsOwner)return;
+ const root=document.getElementById("portalOwnerList");root.replaceChildren();
+ for(const [table,description] of [["portal803_announcements","aviso"],["portal803_exams","prova"]]){
+  const {data,error}=await portalOwnerClient().from(table).select("*").order("created_at",{ascending:false}).limit(50);
+  if(error){portalOwnerStatus("Não foi possível carregar as publicações.");continue}
+  for(const item of data||[]){
+   const card=document.createElement("div");card.className="mission";
+   const title=document.createElement("b");title.textContent=description==="aviso"?"📢 "+item.title:"📅 "+item.subject+" — "+item.exam_date;
+   const body=document.createElement("p");body.textContent=description==="aviso"?item.body:item.topics;
+   const btn=document.createElement("button");btn.className="btn light";btn.textContent="Excluir publicação";btn.onclick=async()=>{
+    if(!portalIsOwner||!confirm("Excluir esta publicação oficial?"))return;
+    const {error:err}=await portalOwnerClient().from(table).delete().eq("id",item.id);
+    if(err){portalOwnerStatus("Não foi possível excluir.");return}
+    await portalOwnerRefresh();await portalPublicRefresh();
+   };card.append(title,body,btn);root.append(card);
+  }
+ }
+ if(!root.childElementCount)root.textContent="Nenhuma publicação cadastrada ainda.";
+}
+async function portalPublicRefresh(){
+ const root=document.getElementById("portalPublicItems");if(!root)return;root.replaceChildren();
+ try{
+  const c=portalOwnerClient();
+  const [a,b]=await Promise.all([c.from("portal803_announcements").select("title,body,created_at").eq("published",true).order("created_at",{ascending:false}).limit(8),c.from("portal803_exams").select("subject,exam_date,topics").eq("published",true).order("exam_date",{ascending:true}).limit(8)]);
+  if(a.error||b.error)throw new Error("Dados indisponíveis");
+  const all=[...(a.data||[]).map(x=>({title:"📢 "+x.title,body:x.body})),...(b.data||[]).map(x=>({title:"📅 "+x.subject+" — "+x.exam_date.split("-").reverse().join("/"),body:x.topics}))];
+  if(!all.length){root.textContent="Ainda não há publicações adicionais do proprietário. Consulte o cronograma inicial.";return}
+  for(const x of all){const p=document.createElement("div");p.className="mission";const title=document.createElement("b");title.textContent=x.title;const body=document.createElement("p");body.textContent=x.body;p.append(title,body);root.append(p)}
+ }catch(e){root.textContent="Avisos online indisponíveis. O restante do site continua funcionando."}
+}
+portalPublicRefresh();
+portalOwnerCheck();
 
 init();renderNexo();
 </script>
