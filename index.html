@@ -195,6 +195,32 @@ button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-vis
  .navquick label{font-size:.78rem;color:#f0f5ff}
  .navquick select{min-width:0;flex:1;max-width:100%;font-size:.88rem}
 }
+
+/* Correção de legibilidade: retângulos escuros, letras claras e seleção nítida. */
+nav .navgroup{background:#202e4b;border:1px solid #4b6288}
+nav .navgroup[open]{background:#26395c;border-color:#8ea8d4}
+nav .navgroup>summary{background:#314769;color:#ffffff;text-shadow:none}
+nav .navgroup[open]>summary{background:#385681;color:#ffffff}
+nav .navgroup>summary:after{color:#ffffff}
+nav .navgroup .navcount{background:#172943;color:#ffffff;border:1px solid #8199b8}
+nav .navgroup-items{background:#1e304e}
+nav .navgroup-items .navbtn{background:#263b5d;color:#f5f9ff;border:1px solid #405c7d}
+nav .navgroup-items .navbtn:hover{background:#395b86;color:#ffffff}
+nav .navgroup-items .navbtn.active{background:#f4c876;color:#14253e;box-shadow:none;border-color:#f4c876;font-weight:850}
+nav .navquick select{background:#23395b;color:#ffffff;border:2px solid #8ca8d0;opacity:1}
+nav .navquick select optgroup{background:#23395b;color:#ffffff}
+nav .navquick select option{background:#23395b;color:#ffffff}
+html[data-portal-theme="noite"] nav .navgroup,
+html[data-portal-theme="noite"] nav .navgroup-items{background:#15243b}
+html[data-portal-theme="noite"] nav .navgroup>summary{background:#26415c}
+html[data-portal-theme="noite"] nav .navgroup-items .navbtn{background:#1d334d;border-color:#526e8c;color:#ffffff}
+html[data-portal-theme="noite"] nav .navgroup-items .navbtn.active{background:#f6cf8a;color:#14263b}
+html[data-portal-theme="papel"] nav .navgroup,
+html[data-portal-theme="papel"] nav .navgroup-items{background:#244c50}
+html[data-portal-theme="papel"] nav .navgroup>summary{background:#306467}
+html[data-portal-theme="papel"] nav .navgroup-items .navbtn{background:#315c61;border-color:#799ca0;color:#ffffff}
+html[data-portal-theme="papel"] nav .navgroup-items .navbtn.active{background:#f5d38d;color:#193c3d}
+@media(max-width:790px){nav .navquick select{background:#23395b;color:#ffffff;border:2px solid #a7c5e9}nav .navquick select option,nav .navquick select optgroup{background:#23395b;color:#ffffff}}
 </style>
  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.105.0"></script>
 </head>
