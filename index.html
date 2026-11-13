@@ -201,6 +201,7 @@ button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-vis
   <button class="navbtn" data-view="arena">🎮 Arena 803</button>
   <button class="navbtn" data-view="calendario">📅 Calendário</button>
   <button class="navbtn" data-view="professor">👩‍🏫 Professor</button>
+  <button class="navbtn" data-view="criador">🛠️ Estúdio do Criador</button>
   <button class="navbtn" data-view="offline">📶 Offline</button>
 
 </div></nav>
@@ -400,6 +401,42 @@ button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-vis
 <section id="arena" class="view"><h2>🎮 Arena 803 — Desafio do conhecimento</h2><p class="sub">Jogue para aprender, sem ranking entre colegas. As perguntas são selecionadas dos simulados existentes.</p><div class="grid"><div class="card span-7"><h3 id="arenaTitle">Prepare-se para o desafio</h3><p id="arenaQuestion">Escolha uma matéria e comece uma rodada de cinco perguntas.</p><div id="arenaOptions" class="mission"></div><div class="row"><button class="btn orange" onclick="startArena()">▶ Nova rodada</button><button class="btn light" onclick="showView('quiz')">Abrir simulados</button></div><p class="small muted" id="arenaFeedback" role="status"></p></div><div class="card span-5"><h3>Minha rodada</h3><div class="metric" id="arenaScore">0 / 5</div><p class="small muted" id="arenaProgress">Nenhuma rodada iniciada.</p><label for="arenaSubject"><b>Matéria</b></label><select id="arenaSubject" class="study-field"><option value="Todas">Todas</option></select><p class="small muted">Sem competição pública, notas individuais ou pressão. O objetivo é praticar.</p></div></div></section>
 <section id="calendario" class="view"><h2>📅 Calendário de estudos</h2><p class="sub">Organize suas tarefas e acompanhe as provas. Datas do roteiro original de novembro de 2026: confirme com o professor caso o calendário mude.</p><div class="grid"><div class="card span-6"><h3>Meu compromisso</h3><label for="calendarDate">Data</label><input id="calendarDate" class="study-field" type="date"><label for="calendarTask">O que vou estudar?</label><input id="calendarTask" class="study-field" maxlength="140" placeholder="Ex.: revisar porcentagem"><button class="btn orange" onclick="addCalendarTask()">Adicionar lembrete</button><p class="small muted">Os lembretes ficam neste navegador e não enviam notificações automáticas.</p></div><div class="card span-6"><h3>Próximas tarefas</h3><div id="calendarItems"></div></div><div class="card span-12"><h3>Semana de provas</h3><p>📚 Período previsto no roteiro: <b>16 a 23 de novembro de 2026</b>. Consulte o cronograma oficial da turma para saber qual prova acontece em cada dia.</p><p class="small muted" id="calendarCountdown"></p></div></div></section>
 <section id="professor" class="view"><h2>👩‍🏫 Espaço do professor</h2><p class="sub">Materiais e instruções para docentes e responsáveis, sem expor dados dos estudantes.</p><div class="grid"><div class="card span-6"><h3>Como aprovar materiais da biblioteca</h3><p>As publicações enviadas pelos alunos ficam pendentes até revisão no painel administrativo do Supabase. Somente responsáveis autorizados devem ter acesso ao painel.</p><p class="small muted">Esta página é informativa; não concede permissões de administrador. A aprovação precisa ser feita com acesso administrativo separado.</p></div><div class="card span-6"><h3>Atividade sugerida</h3><p>Peça que os alunos criem um resumo com suas palavras, respondam uma questão e comparem a explicação com o material da aula. Incentive a checagem de fontes.</p><button class="btn light" onclick="showView('biblioteca')">Abrir biblioteca</button></div></div></section>
+<section id="criador" class="view">
+ <h2>🛠️ Estúdio do Criador</h2>
+ <p class="sub">Prepare avisos e atualizações para o Portal 803. Este é um editor de rascunhos, não um painel de administração autenticado.</p>
+ <div class="callout" style="margin-bottom:16px"><b>Importante:</b> qualquer visitante pode abrir esta ferramenta, mas seus rascunhos ficam apenas no próprio navegador. Eles <b>não</b> alteram o site dos colegas. Para publicar oficialmente, exporte o arquivo e envie para atualização pelo GitHub. Não digite senhas nem dados pessoais aqui.</div>
+ <div class="grid">
+  <div class="card span-6">
+   <h3>📢 Criar aviso para a turma</h3>
+   <label for="creatorNoticeTitle">Título do aviso</label>
+   <input id="creatorNoticeTitle" class="study-field" maxlength="90" placeholder="Ex.: Revisão de Matemática">
+   <label for="creatorNoticeText">Mensagem</label>
+   <textarea id="creatorNoticeText" class="study-field" maxlength="1200" rows="5" placeholder="Escreva aqui seu aviso para a turma..."></textarea>
+   <button class="btn orange" type="button" onclick="creatorAddNotice()">+ Salvar aviso no rascunho</button>
+   <p id="creatorStatus" class="small muted" role="status">Nenhum aviso enviado para publicação.</p>
+  </div>
+  <div class="card span-6">
+   <h3>📆 Propor alteração de prova</h3>
+   <label for="creatorExamSubject">Matéria</label>
+   <input id="creatorExamSubject" class="study-field" maxlength="80" placeholder="Ex.: História">
+   <label for="creatorExamDate">Data</label>
+   <input id="creatorExamDate" class="study-field" type="date">
+   <label for="creatorExamTopics">Conteúdo da prova</label>
+   <textarea id="creatorExamTopics" class="study-field" rows="3" maxlength="700" placeholder="Ex.: capítulos 5 e 6"></textarea>
+   <button class="btn orange" type="button" onclick="creatorAddExam()">+ Salvar prova no rascunho</button>
+  </div>
+  <div class="card span-12">
+   <h3>🗂️ Minhas propostas de atualização</h3>
+   <p class="small muted">A lista abaixo é um rascunho local. Revise antes de enviar qualquer alteração para publicação.</p>
+   <div id="creatorDraftList"></div>
+   <div class="row" style="margin-top:15px">
+    <button class="btn orange" onclick="creatorExport()">⬇ Exportar alterações (.json)</button>
+    <button class="btn light" onclick="creatorCopy()">📋 Copiar resumo</button>
+    <button class="btn light" onclick="creatorClear()">🗑 Apagar rascunhos</button>
+   </div>
+  </div>
+ </div>
+</section>
 <section id="offline" class="view"><h2>📶 Estudo sem internet</h2><p class="sub">O tutor local, os exercícios já incluídos e o caderno funcionam sem API paga. O painel coletivo e a biblioteca precisam de internet.</p><div class="grid"><div class="card span-6"><h3>Instalar para acesso rápido</h3><p>Depois de publicar o site com HTTPS, o navegador poderá armazenar os arquivos principais para estudo offline.</p><button class="btn orange" onclick="registerOffline()">Preparar modo offline</button><p class="small muted" id="offlineStatus" role="status">Para ativar, acesse a versão publicada por HTTPS.</p></div><div class="card span-6"><h3>Backup do caderno</h3><p>Suas anotações são guardadas no navegador. Antes de trocar de celular ou limpar os dados, exporte um backup.</p><button class="btn light" onclick="showView('caderno')">Abrir meu caderno</button></div></div></section>
 
 <section id="metas803" class="view"><h2>📈 Minhas metas — Portal 803</h2><p class="sub">Um espaço pessoal para definir objetivos e acompanhar sua evolução. Tudo é salvo apenas neste navegador.</p>
@@ -1089,6 +1126,21 @@ function setPortalTheme(theme){
  document.querySelectorAll("[data-portal-theme]").forEach(b=>b.addEventListener("click",()=>setPortalTheme(b.dataset.portalTheme)));
  document.getElementById("portalThemeSelect").addEventListener("change",e=>setPortalTheme(e.target.value));
 })();
+
+
+/* Portal 803 — Estúdio local de propostas, sem falso login de proprietário */
+const CREATOR_DRAFT_KEY="portal803-creator-drafts-v1";
+function creatorRead(){try{const data=JSON.parse(localStorage.getItem(CREATOR_DRAFT_KEY)||"[]");return Array.isArray(data)?data.filter(x=>x&&["notice","exam"].includes(x.type)).slice(0,80):[]}catch(e){return []}}
+let creatorDrafts=creatorRead();
+function creatorSave(){try{localStorage.setItem(CREATOR_DRAFT_KEY,JSON.stringify(creatorDrafts))}catch(e){document.getElementById("creatorStatus").textContent="Não foi possível salvar neste dispositivo."}creatorRender()}
+function creatorAddNotice(){const title=document.getElementById("creatorNoticeTitle").value.trim(),body=document.getElementById("creatorNoticeText").value.trim();if(title.length<4||body.length<10){document.getElementById("creatorStatus").textContent="Informe um título e uma mensagem de pelo menos 10 caracteres.";return}creatorDrafts.push({id:Date.now().toString(36)+Math.random().toString(36).slice(2,8),type:"notice",title,body});creatorSave();document.getElementById("creatorNoticeTitle").value="";document.getElementById("creatorNoticeText").value="";document.getElementById("creatorStatus").textContent="Aviso guardado apenas neste navegador. Exporte para solicitar publicação."}
+function creatorAddExam(){const subject=document.getElementById("creatorExamSubject").value.trim(),date=document.getElementById("creatorExamDate").value,topics=document.getElementById("creatorExamTopics").value.trim();if(!subject||!/^\d{4}-\d{2}-\d{2}$/.test(date)){document.getElementById("creatorStatus").textContent="Informe a matéria e uma data válida.";return}creatorDrafts.push({id:Date.now().toString(36)+Math.random().toString(36).slice(2,8),type:"exam",subject,date,topics});creatorSave();document.getElementById("creatorExamSubject").value="";document.getElementById("creatorExamDate").value="";document.getElementById("creatorExamTopics").value="";document.getElementById("creatorStatus").textContent="Proposta de prova guardada apenas neste navegador."}
+function creatorRender(){const root=document.getElementById("creatorDraftList");if(!root)return;root.replaceChildren();if(!creatorDrafts.length){const p=document.createElement("p");p.className="small muted";p.textContent="Nenhum rascunho ainda.";root.append(p);return}for(const draft of creatorDrafts){const item=document.createElement("div");item.className="mission";const title=document.createElement("b");title.textContent=draft.type==="notice"?"📢 "+draft.title:"📆 "+draft.subject+" — "+draft.date;const description=document.createElement("p");description.style.whiteSpace="pre-wrap";description.textContent=draft.type==="notice"?draft.body:draft.topics;const remove=document.createElement("button");remove.type="button";remove.className="btn light";remove.textContent="Remover";remove.addEventListener("click",()=>{creatorDrafts=creatorDrafts.filter(x=>x.id!==draft.id);creatorSave()});item.append(title,description,remove);root.append(item)}}
+function creatorExport(){const payload={app:"Portal 803",purpose:"Propostas de atualização para revisão e publicação manual",version:1,items:creatorDrafts};const blob=new Blob([JSON.stringify(payload,null,2)],{type:"application/json;charset=utf-8"});const url=URL.createObjectURL(blob),a=document.createElement("a");a.href=url;a.download="portal803-propostas.json";document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),2000);document.getElementById("creatorStatus").textContent="Arquivo exportado. Ele ainda não foi publicado."}
+function creatorSummary(){return creatorDrafts.map(d=>d.type==="notice"?"AVISO: "+d.title+"\n"+d.body:"PROVA: "+d.subject+" em "+d.date+"\n"+d.topics).join("\n\n---\n\n")}
+async function creatorCopy(){const text=creatorSummary();if(!text){document.getElementById("creatorStatus").textContent="Crie um rascunho antes de copiar.";return}try{await navigator.clipboard.writeText(text);document.getElementById("creatorStatus").textContent="Resumo copiado. Envie para revisão antes de publicar."}catch(e){document.getElementById("creatorStatus").textContent="Não foi possível copiar. Use a exportação .json."}}
+function creatorClear(){if(!creatorDrafts.length)return;if(!confirm("Apagar todos os rascunhos deste navegador?"))return;creatorDrafts=[];creatorSave();document.getElementById("creatorStatus").textContent="Rascunhos apagados."}
+creatorRender();
 
 init();renderNexo();
 </script>
