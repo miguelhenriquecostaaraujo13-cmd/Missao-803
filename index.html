@@ -848,16 +848,25 @@ function nexoMathQuestion(level){
  return {s:'Matemática',q:'Um produto custa R$ '+base.toFixed(2).replace('.',',')+'. Qual será o valor após '+(discount?'um desconto':'um acréscimo')+' de '+pct+'%?',o:opts.map(v=>'R$ '+v.toFixed(2).replace('.',',')),a:opts.indexOf(correct),e:'Calcule '+pct+'% de '+base+' e '+(discount?'subtraia':'some')+' ao preço inicial. Resultado: R$ '+result.toFixed(2).replace('.',',')+'.'};
 }
 function generateNexoQuestions(){
- const s=document.getElementById('genSubject').value,topic=document.getElementById('genTopic').value.trim().toLocaleLowerCase('pt-BR'),level=document.getElementById('genLevel').value,count=Number(document.getElementById('genAmount').value);
- let pool=quizzes.filter(q=>q.s===s&&(!topic||(q.q+' '+q.e).toLocaleLowerCase('pt-BR').includes(topic)));
- if(!pool.length&&topic){document.getElementById('genNotice').textContent='Não encontramos esse assunto no banco de questões. Tente outra palavra-chave ou deixe o campo vazio.';return}
- const result=[];const shuffled=[...pool].sort(()=>Math.random()-.5);
- for(let i=0;i<count;i++){
-  if(s==='Matemática'&&(!topic||/porcent|desconto|acrésc|financeir/i.test(topic))&&(i%2===0||!shuffled.length))result.push(nexoMathQuestion(level));
-  else if(shuffled.length)result.push(shuffled[(i+({facil:0,medio:1,dificil:2}[level]||0))%shuffled.length]);
- }
- if(!result.length){document.getElementById('genNotice').textContent='Não há questões disponíveis com esses filtros.';return}
- nexoGenerator.items=result;nexoGenerator.index=0;nexoGenerator.correct=0;document.getElementById('genNotice').textContent='Desafio criado! A dificuldade ajusta a seleção e, em Matemática, os valores dos exercícios.';showNexoGenerated();
+ const subject=document.getElementById('genSubject'),topicEl=document.getElementById('genTopic'),notice=document.getElementById('genNotice');
+ const s=subject.value,topic=topicEl.value.trim().toLocaleLowerCase('pt-BR'),level=document.getElementById('genLevel').value,count=Number(document.getElementById('genAmount').value)||5;
+ try{
+  let pool=quizzes.filter(q=>q.s===s);
+  if(!pool.length){notice.textContent='Ainda não existem questões cadastradas para esta matéria. Escolha outra matéria.';return}
+  const normalized=v=>String(v||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLocaleLowerCase('pt-BR');
+  const query=normalized(topic);
+  const matches=query?pool.filter(q=>normalized(q.q+' '+q.e).includes(query)):pool;
+  const selected=matches.length?matches:pool;
+  const shuffled=[...selected].sort(()=>Math.random()-.5);
+  const result=[];
+  for(let i=0;i<count;i++){
+   if(s==='Matemática'&&(!topic||/porcent|desconto|acresc|financeir/i.test(normalized(topic)))&&(i%2===0||!shuffled.length))result.push(nexoMathQuestion(level));
+   else result.push(shuffled[(i+({facil:0,medio:1,dificil:2}[level]||0))%shuffled.length]);
+  }
+  nexoGenerator.items=result;nexoGenerator.index=0;nexoGenerator.correct=0;
+  notice.textContent=matches.length||!topic?'✅ '+result.length+' questões criadas!':'⚠️ Não encontrei questões específicas sobre "'+topic+'". Criei '+result.length+' questões gerais de '+s+'. Para usar seu próprio assunto, experimente o Laboratório.';
+  showNexoGenerated();
+ }catch(error){notice.textContent='Não foi possível criar o desafio. Atualize a página e tente novamente.';console.error('NEXO generator',error)}
 }
 function showNexoGenerated(){
  const g=nexoGenerator,heading=document.getElementById('genHeading'),q=document.getElementById('genQuestion'),root=document.getElementById('genAnswers'),next=document.getElementById('genNext'),feedback=document.getElementById('genFeedback');
