@@ -1477,7 +1477,8 @@ function remindersClearInbox(){
 remindersLoadUI();
 remindersTick();
 if(reminderSettings.announcements)remindersCheckAnnouncements();
-setInterval(()=>{remindersTick();if(reminderSettings.announcements)remindersCheckAnnouncements()},15*60*1000);
+setInterval(()=>remindersTick(),60*1000);
+setInterval(()=>{if(reminderSettings.announcements)remindersCheckAnnouncements()},15*60*1000);
 document.addEventListener("visibilitychange",()=>{if(!document.hidden){remindersTick();if(reminderSettings.announcements)remindersCheckAnnouncements()}});
 window.addEventListener("focus",()=>remindersTick());
 
