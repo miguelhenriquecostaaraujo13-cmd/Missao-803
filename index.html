@@ -1,0 +1,815 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#10283f">
+<title>Missão 803 | Plataforma Inteligente de Estudos</title>
+<style>
+:root{--navy:#10283f;--navy2:#173d5c;--orange:#ff9b37;--teal:#36a6a0;--paper:#f4f7fa;--ink:#172b3c;--muted:#637487;--line:#dce5ec;--white:#fff;--green:#18845d;--red:#b84642;--shadow:0 14px 34px rgba(16,40,63,.10)}
+*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,Arial,sans-serif;line-height:1.5}
+header{background:linear-gradient(120deg,var(--navy),var(--navy2));color:white;padding:28px 18px 22px;position:relative;overflow:hidden}
+header:after{content:"803";position:absolute;right:5%;top:-30px;font-size:150px;font-weight:900;color:rgba(255,255,255,.055);pointer-events:none}
+.wrap{max-width:1120px;margin:auto;padding:0 16px}.topline{display:flex;align-items:center;gap:9px;flex-wrap:wrap;color:#c8d8e4;font-size:.82rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase}
+.logo{background:var(--orange);color:var(--navy);padding:5px 9px;border-radius:9px;font-weight:950}
+h1{font-size:clamp(1.85rem,5vw,3.2rem);line-height:1.05;margin:18px 0 8px;max-width:700px}
+header p{color:#d8e4ec;margin:0;max-width:760px}
+.exam-strip{display:flex;gap:8px;flex-wrap:wrap;margin-top:20px}.exam-pill{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.18);padding:8px 11px;border-radius:12px;font-size:.82rem}
+nav{position:sticky;top:0;z-index:10;background:#fff;border-bottom:1px solid var(--line);box-shadow:0 5px 18px rgba(16,40,63,.05)}
+.navinner{max-width:1120px;margin:auto;padding:9px 16px;display:flex;gap:7px;overflow-x:auto}
+.navbtn{border:0;background:transparent;color:var(--muted);padding:10px 13px;border-radius:10px;font-weight:750;white-space:nowrap;cursor:pointer}
+.navbtn.active{background:var(--navy);color:#fff}
+main{max-width:1120px;margin:22px auto 60px;padding:0 16px}.view{display:none}.view.active{display:block}
+h2{font-size:1.5rem;margin:4px 0 6px;color:var(--navy)}h3{margin:0 0 8px;color:var(--navy)}.sub{color:var(--muted);margin:0 0 18px}
+.grid{display:grid;grid-template-columns:repeat(12,1fr);gap:14px}.card{background:var(--white);border:1px solid var(--line);border-radius:17px;padding:17px;box-shadow:var(--shadow)}
+.span-3{grid-column:span 3}.span-4{grid-column:span 4}.span-5{grid-column:span 5}.span-6{grid-column:span 6}.span-7{grid-column:span 7}.span-8{grid-column:span 8}.span-12{grid-column:span 12}
+.metric{font-size:2rem;font-weight:900;color:var(--navy);line-height:1.15}.metric small{font-size:.9rem;color:var(--muted);font-weight:650}
+.progress{height:11px;background:#e8eef3;border-radius:999px;overflow:hidden;margin:10px 0}.progress>i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--teal),#70c9a5);border-radius:999px;transition:width .25s}
+.btn{border:0;border-radius:11px;padding:11px 15px;background:var(--navy);color:white;font-weight:800;cursor:pointer}.btn:hover{filter:brightness(1.12)}.btn.orange{background:var(--orange);color:var(--navy)}.btn.light{background:#eaf1f5;color:var(--navy)}.btn:disabled{opacity:.45;cursor:not-allowed}
+.row{display:flex;align-items:center;gap:10px;flex-wrap:wrap}.between{display:flex;justify-content:space-between;align-items:center;gap:12px}.muted{color:var(--muted)}.tag{display:inline-block;background:#e7f4f2;color:#176b66;font-weight:800;font-size:.76rem;padding:4px 8px;border-radius:999px}
+.subject-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:11px}.subject-tile{border:1px solid var(--line);background:white;border-radius:14px;padding:13px;text-align:left;cursor:pointer}.subject-tile b{display:block;color:var(--navy);margin-bottom:4px}.subject-tile span{font-size:.8rem;color:var(--muted)}
+input,select,textarea{font:inherit}select{padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:white;color:var(--ink);max-width:100%}
+.topic-list{display:grid;gap:9px}.topic{display:flex;gap:10px;align-items:flex-start;padding:10px 11px;background:#f8fafc;border:1px solid #e8eef3;border-radius:11px}.topic input{margin-top:5px;accent-color:var(--teal);width:18px;height:18px}.topic label{cursor:pointer;flex:1}.topic.done label{text-decoration:line-through;color:#738393}
+details{border:1px solid var(--line);border-radius:13px;background:white;margin:10px 0;overflow:hidden}summary{padding:13px 15px;font-weight:850;color:var(--navy);cursor:pointer;background:#f8fafc}details .inside{padding:14px}
+.qoptions{display:grid;gap:8px;margin:14px 0}.qoption{display:flex;align-items:flex-start;gap:9px;padding:11px;border:1px solid var(--line);border-radius:11px;cursor:pointer}.qoption:has(input:checked){border-color:var(--teal);background:#eff9f7}.qoption input{margin-top:4px;accent-color:var(--teal)}
+.feedback{padding:13px;border-radius:12px;margin-top:12px}.good{background:#e7f6ee;border:1px solid #b9e3ca;color:#155d3d}.bad{background:#fff0ed;border:1px solid #f0c5bd;color:#8e332e}
+.flash{min-height:180px;display:flex;align-items:center;justify-content:center;text-align:center;padding:25px;border:2px dashed #9fc5c3;border-radius:17px;background:#f1faf8;font-size:1.15rem;font-weight:750;color:var(--navy)}
+.timer{font-variant-numeric:tabular-nums;font-size:clamp(3rem,12vw,5rem);font-weight:950;letter-spacing:-.04em;color:var(--navy);text-align:center;margin:13px 0}
+.small{font-size:.86rem}.callout{background:#fff5e9;border-left:4px solid var(--orange);padding:12px 14px;border-radius:10px;color:#67451e}
+table{width:100%;border-collapse:collapse;font-size:.92rem}th,td{padding:11px 10px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}th{color:var(--navy);background:#f4f7fa}
+footer{background:var(--navy);color:#cbd9e3;padding:24px 16px;text-align:center;font-size:.9rem}
+@media(max-width:800px){.span-3,.span-4,.span-5,.span-6,.span-7,.span-8{grid-column:span 12}.subject-grid{grid-template-columns:repeat(2,1fr)}header{padding-top:22px}.exam-pill{font-size:.76rem}}
+@media(max-width:420px){.subject-grid{grid-template-columns:1fr 1fr}.card{padding:14px}.navbtn{padding:9px 11px}}
+
+.cloud-state{padding:11px 13px;border-radius:11px;background:#eef3f7;color:var(--navy);font-size:.9rem}
+.cloud-state.ok{background:#e7f6ee;color:#155d3d}.cloud-state.warn{background:#fff5e9;color:#754714}.cloud-state.err{background:#fff0ed;color:#8e332e}
+.statbox{background:#f6f9fb;border:1px solid var(--line);padding:13px;border-radius:13px}
+.statbox b{display:block;font-size:1.8rem;color:var(--navy);line-height:1.15}
+.leader-row{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:10px;border-bottom:1px solid var(--line)}
+.leader-row:last-child{border-bottom:0}
+
+
+.study-field{display:block;width:100%;padding:11px;border:1px solid var(--line);border-radius:10px;background:#fff;margin:6px 0 12px}
+.study-area{min-height:170px;resize:vertical}.resource-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.resource{border:1px solid var(--line);border-radius:13px;padding:15px;background:white;display:flex;flex-direction:column;gap:8px}
+.resource a{font-weight:800;color:#0c667f;overflow-wrap:anywhere}.resource p{margin:0;color:var(--muted);font-size:.9rem}
+.note-item{border:1px solid var(--line);border-radius:12px;padding:13px;margin:9px 0;background:#fff;overflow-wrap:anywhere}
+.note-item p{white-space:pre-wrap}.note-item .row{margin-top:9px}
+@media(max-width:650px){.resource-grid{grid-template-columns:1fr}}
+
+.library-filters{display:flex;gap:10px;flex-wrap:wrap;align-items:end}
+.library-filters>label{display:flex;flex-direction:column;gap:6px;flex:1;min-width:180px}
+.library-entry{padding:15px;border:1px solid var(--line);border-radius:13px;background:#fff;margin-top:12px;white-space:normal;overflow-wrap:anywhere}
+.library-entry h3{margin:7px 0}.library-entry p{white-space:pre-wrap;line-height:1.6}
+.library-entry .row{margin-top:12px}
+.library-empty{padding:22px;border:1px dashed var(--line);border-radius:12px;color:var(--muted)}
+.status-line{padding:10px;border-radius:9px;background:#edf4f8;margin-top:10px}
+@media(max-width:650px){.library-filters{display:block}.library-filters>label{margin-bottom:10px}}
+
+.assistant-chat{max-height:390px;overflow:auto;background:#f6f9fb;border:1px solid var(--line);padding:14px;border-radius:13px;display:grid;gap:10px}
+.assistant-msg{padding:11px 13px;border-radius:12px;white-space:pre-wrap;overflow-wrap:anywhere;max-width:95%}
+.assistant-msg.bot{background:#e8f4f2;justify-self:start}.assistant-msg.me{background:#e9eef9;justify-self:end}
+.mission{border:1px solid var(--line);background:#fff;padding:13px;border-radius:12px;margin:9px 0}
+.mission.completed{border-color:#6bb79b;background:#f0faf5}
+.mission .row{margin-top:9px}
+</style>
+ <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.105.0"></script>
+</head>
+<body>
+<header><div class="wrap">
+  <div class="topline"><span class="logo">803</span> Instituto Educacional Missão Paz <span>•</span> Central de Estudos</div>
+  <h1>MISSÃO 803<br><span style="color:#ffb45f">Operação Nota Máxima</span></h1>
+  <p>Uma central interativa para estudar, praticar, acompanhar seu progresso e chegar às avaliações com confiança. Aprender junto faz a diferença!</p>
+  <div class="exam-strip">
+    <span class="exam-pill">16/11 · Matemática</span><span class="exam-pill">17/11 · Português</span>
+    <span class="exam-pill">18/11 · Geografia + Ed. Física teórica</span><span class="exam-pill">19/11 · História + Inglês</span><span class="exam-pill">23/11 · Ciências + Arte</span>
+  </div>
+</div></header>
+<nav><div class="navinner">
+  <button class="navbtn active" data-view="inicio">🏁 Painel</button>
+  <button class="navbtn" data-view="trilha">✅ Minha trilha</button>
+  <button class="navbtn" data-view="quiz">🧠 Simulados</button>
+  <button class="navbtn" data-view="cartoes">🗂️ Memorização</button>
+  <button class="navbtn" data-view="foco">⏱️ Foco</button>
+  <button class="navbtn" data-view="metodos">📚 Métodos</button>
+  <button class="navbtn" data-view="turma">🌐 Turma 803</button>
+  <button class="navbtn" data-view="videoaulas">🎬 Videoaulas</button>
+  <button class="navbtn" data-view="caderno">📝 Meu caderno</button>
+  <button class="navbtn" data-view="biblioteca">🤝 Biblioteca 803</button>
+  <button class="navbtn" data-view="assistente">✨ Tutor grátis</button>
+  <button class="navbtn" data-view="revisoes">🎯 Missões e revisões</button>
+  <button class="navbtn" data-view="arena">🎮 Arena 803</button>
+  <button class="navbtn" data-view="calendario">📅 Calendário</button>
+  <button class="navbtn" data-view="professor">👩‍🏫 Professor</button>
+  <button class="navbtn" data-view="offline">📶 Offline</button>
+
+</div></nav>
+<main>
+<section id="inicio" class="view active">
+  <h2>Seu painel de missão</h2><p class="sub">Seu progresso é salvo neste navegador. Marque os tópicos na trilha e veja os indicadores se atualizarem.</p>
+  <div class="grid">
+    <div class="card span-3"><div class="muted small">Tópicos concluídos</div><div class="metric" id="doneMetric">0 <small>/ 0</small></div><div class="progress"><i id="mainProgress"></i></div><div class="small muted" id="progressLabel">Comece pelo primeiro tópico!</div></div>
+    <div class="card span-3"><div class="muted small">Questões respondidas</div><div class="metric" id="answeredMetric">0</div><div class="small muted">Pratique e confira as explicações.</div></div>
+    <div class="card span-3"><div class="muted small">Acertos</div><div class="metric" id="correctMetric">0</div><div class="small muted">Cada erro é uma pista do que revisar.</div></div>
+    <div class="card span-3"><div class="muted small">Próxima etapa</div><div class="metric" style="font-size:1.2rem" id="nextExam">Matemática</div><div class="small muted" id="nextExamDate">16 de novembro</div></div>
+    <div class="card span-7"><h3>Calendário oficial das provas</h3><table><thead><tr><th>Data</th><th>Avaliações</th><th>Preparação sugerida</th></tr></thead><tbody>
+      <tr><td><b>16/11</b></td><td>Matemática</td><td>Estatística, gráficos, acréscimos, descontos e inflação.</td></tr>
+      <tr><td><b>17/11</b></td><td>Língua Portuguesa</td><td>Gêneros, argumentação, coesão, regência e crase.</td></tr>
+      <tr><td><b>18/11</b></td><td>Geografia + Educação Física (teórica)</td><td>América/África, regiões polares, saúde e atletismo.</td></tr>
+      <tr><td><b>19/11</b></td><td>História + Inglês</td><td>Brasil Império e tempos verbais em inglês.</td></tr>
+      <tr><td><b>23/11</b></td><td>Ciências + Arte</td><td>Reprodução e sexualidade; arte, política e música.</td></tr>
+    </tbody></table></div>
+    <div class="card span-5"><h3>Desafio de hoje</h3><p id="dailyChallenge">Escolha uma matéria e estude por 25 minutos. Depois, tente explicar o conteúdo sem olhar o caderno.</p>
+      <div class="callout small">⭐ Regra de ouro: não marque “domino” apenas porque leu. Marque quando conseguir explicar ou resolver uma questão sem consultar.</div>
+      <div class="row" style="margin-top:14px"><button class="btn orange" onclick="showView('trilha')">Abrir minha trilha</button><button class="btn light" onclick="showView('quiz')">Fazer uma questão</button></div>
+    </div>
+    <div class="card span-12"><div class="between"><h3>Progresso por matéria</h3><span class="tag">Atualização automática</span></div><div id="subjectProgress"></div></div>
+  </div>
+</section>
+
+<section id="trilha" class="view">
+  <h2>Minha trilha de aprendizagem</h2><p class="sub">Marque cada tópico ao terminar. Use o campo de filtro para encontrar uma matéria rapidamente.</p>
+  <div class="row" style="margin-bottom:14px"><select id="subjectFilter" aria-label="Filtrar por matéria"><option value="Todas">Todas as matérias</option></select><button class="btn light" onclick="exportProgress()">⬇ Exportar meu progresso</button><label class="btn light" style="cursor:pointer">⬆ Importar progresso<input type="file" id="importFile" accept="application/json" hidden></label></div>
+  <div id="topicArea"></div>
+  <div class="callout small" style="margin-top:14px">O arquivo exportado permite levar seu progresso para outro dispositivo. Cada aluno mantém seu próprio registro; esta página não cria um placar compartilhado da turma.</div>
+</section>
+
+<section id="quiz" class="view">
+  <h2>Central de simulados</h2><p class="sub">Responda, confira a correção e leia a explicação. Você pode trocar de matéria a qualquer momento.</p>
+  <div class="grid">
+    <div class="card span-4"><label for="quizSubject"><b>Escolha a matéria</b></label><select id="quizSubject" style="width:100%;margin:8px 0 14px"></select>
+      <div class="metric" id="quizScore">0/0</div><div class="small muted">Acertos nesta sessão</div>
+      <hr style="border:0;border-top:1px solid var(--line);margin:16px 0">
+      <p class="small muted">Dica: explique em voz alta por que a alternativa escolhida está certa. Isso ajuda a fixar o conteúdo.</p>
+      <button class="btn light" onclick="newQuestion()">↻ Sortear outra questão</button>
+    </div>
+    <div class="card span-8"><div class="between"><span class="tag" id="quizTag">Questão de treino</span><span class="small muted" id="questionCount"></span></div>
+      <h3 id="questionText" style="margin-top:12px">Escolha uma matéria para começar.</h3>
+      <div class="qoptions" id="options"></div><button class="btn orange" id="checkAnswer" onclick="checkAnswer()">Corrigir resposta</button>
+      <div id="feedback" aria-live="polite"></div>
+    </div>
+  </div>
+</section>
+
+<section id="cartoes" class="view">
+  <h2>Cartões de memorização</h2><p class="sub">Leia a pergunta, tente responder de cabeça e só então revele o verso.</p>
+  <div class="card">
+    <div class="row"><label for="flashSubject"><b>Matéria:</b></label><select id="flashSubject"></select><span class="tag" id="flashCount">Cartão 1</span></div>
+    <div class="flash" id="flashFront" style="margin:16px 0">Qual é a ideia principal deste conteúdo?</div>
+    <div id="flashBack" class="feedback good" hidden></div>
+    <div class="row" style="justify-content:center"><button class="btn orange" id="revealFlash" onclick="revealFlash()">Revelar resposta</button><button class="btn light" onclick="nextFlash()">Próximo cartão →</button></div>
+  </div>
+</section>
+
+<section id="foco" class="view">
+  <h2>Sala de foco</h2><p class="sub">Use ciclos curtos para estudar com atenção e fazer pausas. O cronômetro funciona nesta página enquanto ela estiver aberta.</p>
+  <div class="grid">
+    <div class="card span-7" style="text-align:center">
+      <div class="row" style="justify-content:center"><button class="btn light" onclick="setTimer(25,'Foco')">Foco · 25 min</button><button class="btn light" onclick="setTimer(5,'Pausa')">Pausa · 5 min</button><button class="btn light" onclick="setTimer(15,'Pausa longa')">Pausa longa · 15 min</button></div>
+      <div class="tag" id="timerMode" style="margin-top:18px">Foco</div><div class="timer" id="timerDisplay">25:00</div>
+      <div class="row" style="justify-content:center"><button class="btn orange" id="timerStart" onclick="toggleTimer()">▶ Começar</button><button class="btn light" onclick="resetTimer()">↺ Reiniciar</button></div>
+      <p class="small muted" id="timerNote">Durante o foco: uma tarefa, uma aba e celular em modo silencioso.</p>
+    </div>
+    <div class="card span-5"><h3>Missão do ciclo</h3><ol><li>Defina um tópico específico.</li><li>Estude sem distrações.</li><li>Faça uma pausa curta.</li><li>Feche o material e escreva o que lembra.</li><li>Resolva 2 ou 3 questões.</li></ol><div class="callout small">Se estiver cansado, faça uma pausa maior. Qualidade e constância valem mais que estudar sem parar.</div></div>
+  </div>
+</section>
+
+<section id="metodos" class="view">
+  <h2>Estratégias que funcionam</h2><p class="sub">Combine métodos. Não basta reler: é importante puxar a informação da memória e usá-la.</p>
+  <div class="grid">
+    <div class="card span-6"><span class="tag">1 · Pomodoro</span><h3 style="margin-top:9px">Foco + pausa</h3><p>Estude por 25 minutos, faça 5 minutos de pausa e repita. Depois de alguns ciclos, faça uma pausa mais longa. Ajuste o tempo à sua concentração.</p><b>Use para:</b> exercícios de Matemática, leitura de História e revisão de Inglês.</div>
+    <div class="card span-6"><span class="tag">2 · Técnica Feynman</span><h3 style="margin-top:9px">Explique com suas palavras</h3><p>Escolha um conceito e explique como se estivesse ensinando a alguém mais novo. Onde travar, volte ao material e simplifique.</p><b>Use para:</b> inflação, Primeiro Reinado, regiões polares e sistemas reprodutores.</div>
+    <div class="card span-6"><span class="tag">3 · Recordação ativa</span><h3 style="margin-top:9px">Tente lembrar sem olhar</h3><p>Feche o livro e escreva tudo o que lembra. Depois confira, corrija e destaque o que faltou.</p><b>Use para:</b> conceitos, vocabulário, datas e características dos gêneros textuais.</div>
+    <div class="card span-6"><span class="tag">4 · Repetição espaçada</span><h3 style="margin-top:9px">Revise em intervalos</h3><p>Retome o mesmo conteúdo em momentos diferentes: no mesmo dia, no dia seguinte e alguns dias depois. A revisão deve exigir esforço de memória.</p><b>Use para:</b> Inglês, História, Ciências e Arte.</div>
+    <div class="card span-6"><span class="tag">5 · Intercalação</span><h3 style="margin-top:9px">Alterne tipos de tarefa</h3><p>Depois de um bloco de teoria, faça questões; alterne assuntos relacionados em vez de passar horas repetindo uma única atividade.</p><b>Use para:</b> porcentagem e gráficos; Simple Past e Present Perfect.</div>
+    <div class="card span-6"><span class="tag">6 · Caderno de erros</span><h3 style="margin-top:9px">Transforme erro em pista</h3><p>Anote a questão, o motivo do erro e a regra correta. Refaça a questão depois sem consultar a correção.</p><b>Use para:</b> todas as matérias, especialmente exercícios e interpretação.</div>
+  </div>
+</section>
+
+
+<section id="videoaulas" class="view">
+ <h2>🎬 Videoaulas por matéria</h2><p class="sub">Links de busca no YouTube por assunto do roteiro. São buscas direcionadas, não vídeos individuais verificados. Escolha uma aula adequada e confira as orientações do professor.</p>
+ <div class="card" style="margin-bottom:14px"><label for="videoFilter"><b>Matéria</b></label><select id="videoFilter" onchange="renderVideos()"><option value="Todas">Todas</option></select><p class="small muted">Depois de assistir, escreva um resumo com suas palavras no Meu caderno.</p></div>
+ <div id="videoList" class="resource-grid"></div>
+</section>
+<section id="caderno" class="view">
+ <h2>📝 Meu caderno de estudos</h2><p class="sub">Crie resumos, anotações, perguntas, links e materiais de apoio. Cada aluno guarda seu próprio caderno neste navegador.</p>
+ <div class="callout small" style="margin-bottom:14px">🔒 As anotações não são enviadas ao painel coletivo. Você escolhe o que compartilhar. Faça backups: limpar os dados do navegador pode apagar o caderno local. Não escreva senhas, telefones, endereços ou dados pessoais.</div>
+ <div class="grid">
+ <div class="card span-7"><h3>Escrever ou editar uma anotação</h3>
+ <label for="noteSubject"><b>Matéria</b></label><select id="noteSubject" class="study-field"></select>
+ <label for="noteTitle"><b>Título</b></label><input class="study-field" id="noteTitle" maxlength="100" placeholder="Ex.: Resumo do Primeiro Reinado">
+ <label for="noteBody"><b>Meu resumo / minhas anotações</b></label><textarea class="study-field study-area" id="noteBody" maxlength="20000" placeholder="Explique o assunto com suas palavras..."></textarea>
+ <label for="noteLink"><b>Link de material de apoio (opcional)</b></label><input class="study-field" id="noteLink" type="url" maxlength="1500" placeholder="https://...">
+ <p class="small muted" id="draftStatus">Rascunho salvo automaticamente neste navegador enquanto você escreve.</p>
+ <div class="row"><button class="btn orange" onclick="saveNote()">💾 Salvar anotação</button><button class="btn light" onclick="clearNoteEditor()">Nova anotação</button></div><p class="small muted" id="noteStatus" role="status"></p></div>
+ <div class="card span-5"><h3>Enviar e receber materiais</h3><p class="small">Selecione uma anotação salva e use <b>Compartilhar</b> para enviar o texto pelo WhatsApp ou por outro aplicativo, quando disponível. Também é possível baixar um arquivo de texto.</p>
+ <button class="btn light" onclick="exportNotes()">⬇️ Fazer backup de todas as anotações</button>
+ <p class="small muted">Para recuperar um backup ou importar anotações recebidas de outra pessoa:</p><label for="importNotes"><b>Importar arquivo JSON</b></label><input class="study-field" type="file" id="importNotes" accept=".json,application/json" onchange="importNotesFile(this)">
+ <p class="small muted">Importar acrescenta anotações ao seu caderno; não altera o progresso da trilha. Revise qualquer conteúdo recebido antes de estudar por ele.</p></div>
+ <div class="card span-12"><div class="between"><h3>Minhas anotações</h3><span class="tag" id="noteCount">0 anotações</span></div><label for="notesFilter">Filtrar por matéria</label><select id="notesFilter" onchange="renderNotes()"><option value="Todas">Todas</option></select><div id="notesList"></div></div>
+ </div>
+</section>
+
+
+<section id="biblioteca" class="view">
+  <h2>🤝 Biblioteca Colaborativa 803</h2>
+  <p class="sub">Compartilhe voluntariamente resumos de estudo com a turma. Um professor ou responsável precisa aprovar o material antes que ele apareça para os colegas.</p>
+  <div class="callout small" style="margin-bottom:14px">🛡️ Segurança: publique apenas conteúdo escolar escrito por você. Não inclua nomes completos, fotos de pessoas, telefones, endereços, conversas privadas ou dados pessoais. Não envie respostas de provas em andamento. Materiais publicados podem ser lidos pelos participantes da plataforma.</div>
+  <div class="grid">
+    <div class="card span-7">
+      <h3>Publicar um material para revisão</h3>
+      <label for="libSubject"><b>Matéria</b></label><select id="libSubject" class="study-field"></select>
+      <label for="libTitle"><b>Título do material</b></label><input id="libTitle" class="study-field" maxlength="100" placeholder="Ex.: Resumo da Regência">
+      <label for="libBody"><b>Explicação / resumo</b></label><textarea id="libBody" class="study-field study-area" maxlength="5000" placeholder="Escreva com suas palavras. Mínimo de 20 caracteres."></textarea>
+      <label for="libLink"><b>Link complementar (opcional, https://)</b></label><input id="libLink" class="study-field" type="url" maxlength="1000" placeholder="https://...">
+      <label style="display:flex;align-items:flex-start;gap:8px;margin:12px 0"><input type="checkbox" id="libConsent"> <span>Quero compartilhar este material com a turma depois de uma revisão pelo responsável.</span></label>
+      <div class="row"><button class="btn orange" onclick="submitLibraryItem()">📨 Enviar para aprovação</button><button class="btn light" onclick="copyNoteToLibrary()">📝 Usar anotação aberta</button></div>
+      <div id="libStatus" class="status-line small" role="status">Para publicar, conecte-se primeiro na aba Turma 803.</div>
+    </div>
+    <div class="card span-5">
+      <h3>Como funciona?</h3>
+      <ol><li>Você prepara seu próprio resumo.</li><li>Envia para aprovação, sem identificar quem é você.</li><li>Um professor ou responsável revisa e aprova no Supabase.</li><li>Os colegas podem ler, filtrar por matéria e salvar uma cópia no caderno pessoal.</li></ol>
+      <p class="small muted">Os materiais ficam pendentes até a aprovação. Não existe chat aberto, curtidas competitivas ou ranking individual.</p>
+      <button class="btn light" onclick="refreshLibrary()">↻ Atualizar biblioteca</button>
+    </div>
+    <div class="card span-12">
+      <div class="between"><h3>Materiais da turma</h3><span class="tag" id="libCount">0 materiais</span></div>
+      <div class="library-filters"><label><b>Filtrar matéria</b><select id="libFilter" class="study-field" onchange="renderLibrary()"><option value="Todas">Todas</option></select></label><label><b>Buscar assunto</b><input id="libSearch" class="study-field" maxlength="80" placeholder="Digite uma palavra" oninput="renderLibrary()"></label></div>
+      <div id="libItems" class="library-empty">Conecte-se para ver os materiais compartilhados.</div>
+    </div>
+    <div class="card span-12"><h3>Minhas publicações</h3><p class="small muted">Veja quais materiais você enviou e retire uma publicação quando quiser.</p><div id="libMine" class="library-empty">Nenhuma publicação nesta sessão.</div></div>
+  </div>
+</section>
+
+
+<section id="assistente" class="view">
+ <h2>🧠 Tutor gratuito da Missão 803</h2>
+ <p class="sub">Tire dúvidas usando os resumos, tópicos e cartões da turma. Funciona no navegador, sem API paga e sem limite de perguntas.</p>
+ <div class="callout small" style="margin-bottom:15px"><b>100% gratuito:</b> suas perguntas não são enviadas à OpenAI nem ao Supabase. O tutor local pesquisa conteúdos previamente preparados, por isso não é uma IA generativa e pode não encontrar todas as respostas. Não informe dados pessoais; confira explicações com o professor.</div>
+ <div class="grid"><div class="card span-8">
+ <div id="assistantChat" class="assistant-chat" role="log" aria-live="polite"></div>
+ <label for="assistantSubject"><b>Matéria</b></label><select id="assistantSubject" class="study-field"><option value="Todas">Todas</option></select>
+ <label for="assistantInput"><b>Sua dúvida</b></label><textarea id="assistantInput" class="study-field" rows="3" maxlength="1200" placeholder="Ex.: Qual a diferença entre população e amostra?"></textarea>
+ <div class="row"><button id="askTutorButton" class="btn orange" onclick="askTutor()">🔎 Buscar explicação</button><button class="btn light" onclick="tutorSuggestion()">💡 Sugerir revisão</button><button class="btn light" onclick="tutorQuiz()">🧠 Praticar uma questão</button></div>
+ <div class="row" style="margin-top:10px"><button class="btn light" onclick="quickTutor('O que é população e amostra?')">📊 População e amostra</button><button class="btn light" onclick="quickTutor('Como calcular porcentagem?')">➗ Porcentagem</button><button class="btn light" onclick="quickTutor('O que é tese?')">✍️ Tese</button></div>
+ </div><div class="card span-4"><h3>Como estudar com o tutor?</h3><p>📚 Localiza conceitos dos resumos da turma.</p><p>🗂️ Encontra respostas dos cartões de memorização.</p><p>🎯 Recomenda exercícios e matérias que precisam de revisão.</p><p>🔒 As perguntas permanecem no navegador.</p><p class="small muted">Sem assinatura, cartão, créditos ou acesso obrigatório à internet para o tutor. A biblioteca compartilhada e o painel coletivo continuam precisando de conexão.</p></div></div>
+</section>
+<section id="revisoes" class="view">
+ <h2>🎯 Missões e revisões inteligentes</h2>
+ <p class="sub">Pequenas tarefas de estudo, revisões espaçadas e recomendações baseadas no que você ainda precisa praticar.</p>
+ <div class="grid"><div class="card span-7"><div class="between"><h3>Missões de hoje</h3><span class="tag" id="missionCount">0/3 concluídas</span></div><div id="missionList"></div><p class="small muted">As missões são sugestões. O progresso das missões fica salvo neste navegador.</p></div>
+ <div class="card span-5"><h3>Minha revisão recomendada</h3><div id="reviewAdvice" class="callout">Preparando sugestão...</div><button class="btn light" onclick="showView('trilha')">📚 Ir para a trilha</button><button class="btn light" onclick="showView('quiz')">🧠 Abrir simulado</button></div>
+ <div class="card span-12"><h3>Repetição espaçada</h3><p class="small muted">Depois de revisar um conteúdo, agende a próxima revisão. O intervalo aumenta aos poucos: 1, 3, 7 e 14 dias.</p><div class="row"><label for="reviewSubject"><b>Matéria</b></label><select id="reviewSubject"></select><button class="btn orange" onclick="scheduleReview()">📅 Revisei hoje</button></div><div id="reviewList" style="margin-top:14px"></div></div></div>
+</section>
+
+<section id="turma" class="view">
+  <h2>Painel coletivo da Turma 803</h2>
+  <p class="sub">Entre com uma sessão anônima para contar sua participação no progresso coletivo. Não pedimos nome, e-mail ou telefone.</p>
+  <div class="grid">
+    <div class="card span-12">
+      <div class="between"><div><h3>Participar do painel coletivo</h3><p class="small muted">Cada navegador cria uma identificação anônima. Seu progresso individual continua privado.</p></div><span class="tag">Sem nome ou e-mail</span></div>
+      <div class="row">
+        <button class="btn orange" onclick="connectClassBoard()">Conectar e sincronizar meu progresso</button>
+        <button class="btn light" onclick="manualRefreshClassBoard()">↻ Atualizar painel</button>
+      </div>
+      <div class="cloud-state warn" id="cloudStatus" style="margin-top:12px">Pronto para conectar. É necessário ter internet e o login anônimo ativado no projeto.</div>
+      <p class="small muted" style="margin-bottom:0">Não compartilhe informações pessoais. O painel coletivo mostra apenas números somados da turma, sem lista de alunos ou ranking individual.</p>
+    </div>
+    <div class="card span-3"><div class="small muted">Participantes cadastrados</div><div class="metric" id="classParticipants">—</div></div>
+    <div class="card span-3"><div class="small muted">Pessoas que já estudaram</div><div class="metric" id="classActive">—</div></div>
+    <div class="card span-3"><div class="small muted">Tópicos marcados pela turma</div><div class="metric" id="classTopics">—</div></div>
+    <div class="card span-3"><div class="small muted">Questões respondidas</div><div class="metric" id="classQuestions">—</div></div>
+    <div class="card span-7"><div class="between"><h3>Progresso coletivo</h3><span class="tag">Atualização online</span></div><div class="progress"><i id="classProgressBar"></i></div><div class="small muted" id="classProgressLabel">Aguardando conexão com a base da turma.</div><p class="small muted">A porcentagem é a média das marcações em relação aos tópicos disponíveis para cada participante.</p></div>
+    <div class="card span-5"><h3>Privacidade da turma</h3><p class="small">O sistema não publica nomes, apelidos, notas ou respostas individuais. Cada participante só pode alterar seu próprio registro; a turma consulta somente os totais gerais.</p><div id="classWall" class="callout small">Mural individual desativado para proteger a privacidade dos estudantes.</div></div>
+    <div class="card span-12"><h3>Como funciona?</h3><ol><li>Clique em “Conectar e sincronizar meu progresso”.</li><li>A página cria ou recupera sua sessão anônima.</li><li>Marque conteúdos na trilha e responda questões normalmente.</li><li>As alterações são enviadas ao banco e somadas ao painel da turma.</li></ol><p class="small muted">A sessão anônima fica vinculada ao navegador. Ao trocar de dispositivo ou limpar os dados do navegador, você pode aparecer como um novo participante.</p></div>
+  </div>
+</section>
+
+
+<section id="arena" class="view"><h2>🎮 Arena 803 — Desafio do conhecimento</h2><p class="sub">Jogue para aprender, sem ranking entre colegas. As perguntas são selecionadas dos simulados existentes.</p><div class="grid"><div class="card span-7"><h3 id="arenaTitle">Prepare-se para o desafio</h3><p id="arenaQuestion">Escolha uma matéria e comece uma rodada de cinco perguntas.</p><div id="arenaOptions" class="mission"></div><div class="row"><button class="btn orange" onclick="startArena()">▶ Nova rodada</button><button class="btn light" onclick="showView('quiz')">Abrir simulados</button></div><p class="small muted" id="arenaFeedback" role="status"></p></div><div class="card span-5"><h3>Minha rodada</h3><div class="metric" id="arenaScore">0 / 5</div><p class="small muted" id="arenaProgress">Nenhuma rodada iniciada.</p><label for="arenaSubject"><b>Matéria</b></label><select id="arenaSubject" class="study-field"><option value="Todas">Todas</option></select><p class="small muted">Sem competição pública, notas individuais ou pressão. O objetivo é praticar.</p></div></div></section>
+<section id="calendario" class="view"><h2>📅 Calendário de estudos</h2><p class="sub">Organize suas tarefas e acompanhe as provas. Datas do roteiro original de novembro de 2026: confirme com o professor caso o calendário mude.</p><div class="grid"><div class="card span-6"><h3>Meu compromisso</h3><label for="calendarDate">Data</label><input id="calendarDate" class="study-field" type="date"><label for="calendarTask">O que vou estudar?</label><input id="calendarTask" class="study-field" maxlength="140" placeholder="Ex.: revisar porcentagem"><button class="btn orange" onclick="addCalendarTask()">Adicionar lembrete</button><p class="small muted">Os lembretes ficam neste navegador e não enviam notificações automáticas.</p></div><div class="card span-6"><h3>Próximas tarefas</h3><div id="calendarItems"></div></div><div class="card span-12"><h3>Semana de provas</h3><p>📚 Período previsto no roteiro: <b>16 a 23 de novembro de 2026</b>. Consulte o cronograma oficial da turma para saber qual prova acontece em cada dia.</p><p class="small muted" id="calendarCountdown"></p></div></div></section>
+<section id="professor" class="view"><h2>👩‍🏫 Espaço do professor</h2><p class="sub">Materiais e instruções para docentes e responsáveis, sem expor dados dos estudantes.</p><div class="grid"><div class="card span-6"><h3>Como aprovar materiais da biblioteca</h3><p>As publicações enviadas pelos alunos ficam pendentes até revisão no painel administrativo do Supabase. Somente responsáveis autorizados devem ter acesso ao painel.</p><p class="small muted">Esta página é informativa; não concede permissões de administrador. A aprovação precisa ser feita com acesso administrativo separado.</p></div><div class="card span-6"><h3>Atividade sugerida</h3><p>Peça que os alunos criem um resumo com suas palavras, respondam uma questão e comparem a explicação com o material da aula. Incentive a checagem de fontes.</p><button class="btn light" onclick="showView('biblioteca')">Abrir biblioteca</button></div></div></section>
+<section id="offline" class="view"><h2>📶 Estudo sem internet</h2><p class="sub">O tutor local, os exercícios já incluídos e o caderno funcionam sem API paga. O painel coletivo e a biblioteca precisam de internet.</p><div class="grid"><div class="card span-6"><h3>Instalar para acesso rápido</h3><p>Depois de publicar o site com HTTPS, o navegador poderá armazenar os arquivos principais para estudo offline.</p><button class="btn orange" onclick="registerOffline()">Preparar modo offline</button><p class="small muted" id="offlineStatus" role="status">Para ativar, acesse a versão publicada por HTTPS.</p></div><div class="card span-6"><h3>Backup do caderno</h3><p>Suas anotações são guardadas no navegador. Antes de trocar de celular ou limpar os dados, exporte um backup.</p><button class="btn light" onclick="showView('caderno')">Abrir meu caderno</button></div></div></section>
+</main>
+<footer><b>MISSÃO 803 · Instituto Educacional Missão Paz</b><br>Organização, respeito, colaboração e aprendizagem. Um passo de cada vez!<br><span class="small">Material de apoio elaborado a partir do roteiro de estudos enviado pela turma. O mural coletivo depende de configuração do banco online pelo responsável.</span></footer>
+
+<script>
+
+// ===== SUPABASE | MISSÃO 803 =====
+// URL e chave publishable são credenciais públicas do cliente; políticas RLS protegem os dados.
+const SUPABASE_URL = "https://mbltrucgwqozrujxifcx.supabase.co";
+const SUPABASE_ANON_KEY = "sb_publishable_kLsE6obFofxRlM6R5ozVrA_TtGowU32";
+const CLASS_CODE = "MISSAO803";
+let cloudClient = null, cloudUser = null, cloudSaveTimer = null, cloudSyncBusy = false;
+
+function cloudConfigured(){
+  return !!(SUPABASE_URL.startsWith("https://") && SUPABASE_ANON_KEY.startsWith("sb_publishable_") && window.supabase && window.supabase.createClient);
+}
+function setCloudStatus(message,kind="warn"){
+  const el=$("cloudStatus"); if(!el)return;
+  el.textContent=message;el.className="cloud-state "+kind;
+}
+function ensureCloudClient(){
+  if(!cloudConfigured()) throw new Error("A biblioteca de conexão não carregou. Verifique sua internet e atualize a página.");
+  if(!cloudClient) cloudClient=window.supabase.createClient(SUPABASE_URL,SUPABASE_ANON_KEY,{
+    auth:{autoRefreshToken:true,persistSession:true,detectSessionInUrl:false}
+  });
+  return cloudClient;
+}
+async function connectClassBoard(){
+  try{
+    ensureCloudClient();
+    setCloudStatus("Conectando com segurança ao painel da turma…","warn");
+    let {data:{session},error}=await cloudClient.auth.getSession();
+    if(error)throw error;
+    if(!session){
+      const auth=await cloudClient.auth.signInAnonymously();
+      if(auth.error)throw auth.error;
+      session=auth.data.session;
+    }
+    if(!session) throw new Error("Não foi possível criar uma sessão anônima.");
+    cloudUser=session.user;
+    setCloudStatus("Conexão criada. Recuperando seu progresso e atualizando os totais…","warn");
+    const {data:remote,error:readError}=await cloudClient.from("missao803_participantes")
+      .select("topicos_concluidos,questoes_respondidas,acertos")
+      .eq("id",cloudUser.id).maybeSingle();
+    if(readError)throw readError;
+    if(remote){
+      state.done=[...new Set([...(remote.topicos_concluidos||[]),...(state.done||[])])];
+      state.answered=Math.max(state.answered||0,remote.questoes_respondidas||0);
+      state.correct=Math.max(state.correct||0,remote.acertos||0);
+      saveLocalOnly();renderTopics();updateDashboard();
+    }
+    await syncToCloud();
+    await refreshClassBoard();
+    await refreshLibrary();
+    setCloudStatus("Conectado e sincronizado! Seus tópicos e questões já entram nos totais da 803.","ok");
+  }catch(err){
+    console.error("Missão 803 Supabase:",err);
+    const message=String(err?.message||err);
+    if(/anonymous|signup|disabled|not enabled/i.test(message)){
+      setCloudStatus("O banco está conectado, mas o login anônimo ainda não está habilitado. O responsável precisa ativar Authentication → Sign In / Providers → Anonymous Sign-Ins.","err");
+    } else if(/row-level security|permission|42501|401|403/i.test(message)){
+      setCloudStatus("A conexão chegou ao banco, mas as permissões recusaram a operação. Avise o responsável para revisar as políticas do banco.","err");
+    } else {
+      setCloudStatus("Não foi possível conectar: "+message+". Verifique internet e tente novamente.","err");
+    }
+  }
+}
+function queueCloudSync(){
+  if(!cloudClient || !cloudUser)return;
+  clearTimeout(cloudSaveTimer);
+  cloudSaveTimer=setTimeout(()=>syncToCloud().catch(err=>{
+    console.error(err);setCloudStatus("Não foi possível sincronizar agora. Verifique a conexão e tente atualizar o painel.","err");
+  }),800);
+}
+async function syncToCloud(){
+  if(!cloudClient || !cloudUser)return;
+  if(cloudSyncBusy){queueCloudSync();return;}
+  cloudSyncBusy=true;
+  try{
+    const payload={
+      id:cloudUser.id,
+      codigo_turma:CLASS_CODE,
+      topicos_concluidos:[...new Set(state.done||[])],
+      questoes_respondidas:Math.max(0,Number(state.answered)||0),
+      acertos:Math.min(Math.max(0,Number(state.correct)||0),Math.max(0,Number(state.answered)||0)),
+      atualizado_em:new Date().toISOString()
+    };
+    const {error}=await cloudClient.from("missao803_participantes").upsert(payload,{onConflict:"id"});
+    if(error)throw error;
+    await refreshClassBoard();
+  }finally{cloudSyncBusy=false;}
+}
+async function manualRefreshClassBoard(){
+  if(!cloudClient || !cloudUser){setCloudStatus("Clique primeiro em Conectar e sincronizar meu progresso.","warn");return;}
+  try{await refreshClassBoard();setCloudStatus("Painel coletivo atualizado.","ok");}
+  catch(err){console.error(err);setCloudStatus("Não foi possível atualizar: "+String(err?.message||err),"err");}
+}
+async function refreshClassBoard(){
+  if(!cloudClient)throw new Error("A conexão ainda não foi iniciada.");
+  const {data,error}=await cloudClient.from("missao803_painel_coletivo")
+    .select("participantes,ativos,topicos_marcados,questoes_respondidas,atualizado_em")
+    .eq("id",true).single();
+  if(error)throw error;
+  const d=data||{};
+  $("classParticipants").textContent=d.participantes??0;
+  $("classActive").textContent=d.ativos??0;
+  $("classTopics").textContent=d.topicos_marcados??0;
+  $("classQuestions").textContent=d.questoes_respondidas??0;
+  const totalPossible=(d.participantes||0)*allTopics().length;
+  const percent=totalPossible?Math.min(100,Math.round(100*(d.topicos_marcados||0)/totalPossible)):0;
+  $("classProgressBar").style.width=percent+"%";
+  $("classProgressLabel").textContent=totalPossible?`${percent}% das marcações possíveis já foram concluídas pelos participantes cadastrados.`:"Aguardando as primeiras marcações dos participantes.";
+  $("classWall").textContent="Nenhum dado individual é exibido. O painel compartilha apenas os totais gerais da turma.";
+}
+async function loadOwnCloudRecord(){
+  if(!cloudConfigured())return;
+  try{
+    ensureCloudClient();
+    const {data:{session},error}=await cloudClient.auth.getSession();
+    if(error)throw error;
+    if(!session){setCloudStatus("Clique em Conectar e sincronizar meu progresso para participar do painel coletivo.","warn");return;}
+    cloudUser=session.user;
+    const {data:remote,error:readError}=await cloudClient.from("missao803_participantes")
+      .select("topicos_concluidos,questoes_respondidas,acertos")
+      .eq("id",cloudUser.id).maybeSingle();
+    if(readError)throw readError;
+    if(remote){
+      state.done=[...new Set([...(remote.topicos_concluidos||[]),...(state.done||[])])];
+      state.answered=Math.max(state.answered||0,remote.questoes_respondidas||0);
+      state.correct=Math.max(state.correct||0,remote.acertos||0);
+      saveLocalOnly();renderTopics();updateDashboard();
+    }
+    await syncToCloud();
+    await refreshLibrary();
+    setCloudStatus("Sua sessão foi recuperada e o progresso está sincronizado.","ok");
+  }catch(err){console.warn("Cloud restore:",err);setCloudStatus("A sessão coletiva ainda não está ativa. Clique em Conectar para tentar novamente.","warn");}
+}
+function saveLocalOnly(){try{localStorage.setItem(storageKey,JSON.stringify(state))}catch(e){}}
+
+const subjects = [
+ {name:"Língua Portuguesa",icon:"✍️",topics:[
+  ["Capítulo 8 · Palavras que convencem",["Texto argumentativo: estrutura, características, linguagem e meios de circulação","Texto expositivo: estrutura, características, linguagem e circulação","Texto dissertativo-argumentativo: assunto, tema, tese, argumentos, estrutura e coesão","Parágrafo-padrão: tópico frasal, desenvolvimento, defesa e conclusão","Regência verbal: VTD, VTI, VTDI e VI","Uso da crase"]],
+  ["Capítulo 9 · Opiniões em foco",["Artigo de opinião: estrutura, estratégias argumentativas, modalizadores e organizadores textuais","Verbos de ligação e predicativos no artigo de opinião","Texto editorial: estrutura, linguagem e meios de circulação","Coesão textual: anáfora, catáfora, substituição lexical, elipse e repetição","Resenha crítica: estrutura e linguagem"]]
+ ],summary:"Diferencie o objetivo dos gêneros: argumentar é defender uma posição; expor é apresentar informações. No texto dissertativo-argumentativo, identifique tema, tese e argumentos. Na coesão, observe como pronomes, substituições e elipses conectam ideias. Revise a regência dos verbos e os casos de crase trabalhados em aula."},
+ {name:"Matemática",icon:"📊",topics:[
+  ["Capítulo 10 · Pesquisa estatística",["O que são pesquisas estatísticas e para que servem","Elementos de uma pesquisa: pergunta, população, amostra e variáveis","Apresentação dos dados: tabelas, frequências e gráficos","Analisar os dados de uma pesquisa e interpretar seus significados"]],
+  ["Capítulo 11 · Matemática financeira",["Acréscimos e decréscimos: calcular e comparar valores","Inflação: aumento geral de preços e poder de compra"]]
+ ],summary:"Em uma pesquisa, população é o grupo inteiro investigado e amostra é uma parte desse grupo. Tabelas e gráficos organizam dados; a interpretação deve considerar título, legenda, escala e valores. Para porcentagens, transforme a taxa em fração de 100 ou decimal. Acréscimo aumenta o valor; desconto diminui. Inflação reduz o poder de compra quando os preços sobem."},
+ {name:"História",icon:"🏛️",topics:[
+  ["Capítulo 10 · Primeiro Reinado (1822–1831)",["Independência e organização do novo Estado","Constituição de 1824 e características do governo de D. Pedro I","Conflitos políticos, crise e abdicação em 1831"]],
+  ["Capítulo 11 · Período Regencial (1831–1840)",["Regências: organização política entre os dois reinados","Ato Adicional de 1834 e disputas políticas","Revoltas regenciais: causas, grupos e reivindicações","Golpe da Maioridade e início do Segundo Reinado"]]
+ ],summary:"O Primeiro Reinado foi o governo de D. Pedro I após a Independência. A Constituição de 1824 centralizou poder no imperador, incluindo o Poder Moderador. Crises políticas e econômicas contribuíram para a abdicação em 1831. Como D. Pedro II era menor de idade, começou o Período Regencial, marcado por disputas sobre centralização e autonomia provincial e por revoltas em diferentes regiões."},
+ {name:"Ciências",icon:"🧬",topics:[
+  ["Capítulo 7 · Reprodução: processos biológicos e sexualidade",["Adolescência e puberdade: mudanças físicas, emocionais e sociais","Reprodução humana e fecundação","Sistema reprodutor masculino: órgãos e funções","Sistema reprodutor feminino: órgãos e funções","Métodos contraceptivos: tipos, finalidade e prevenção da gravidez","Infecções sexualmente transmissíveis (ISTs): prevenção, informação e cuidado","Sexualidade e afetividade na adolescência: respeito, consentimento e responsabilidade"]]
+ ],summary:"Puberdade é uma fase de mudanças hormonais e corporais que ocorre em ritmos diferentes para cada pessoa. Estude os órgãos e funções dos sistemas reprodutores e o processo de fecundação. Métodos contraceptivos têm diferentes funções; preservativos também ajudam a reduzir o risco de ISTs. Informação confiável, consentimento, respeito e acompanhamento de profissionais de saúde são fundamentais."},
+ {name:"Geografia",icon:"🌍",topics:[
+  ["Capítulo 8 · Contextos transatlânticos: América e África",["Semelhanças e diferenças entre América e África","Relações históricas e conexões transatlânticas","Movimento Black Lives Matter e combate ao racismo"]],
+  ["Capítulo 9 · Regiões polares: os extremos do mundo",["Polo Norte (Ártico) e Polo Sul (Antártida): localização e diferenças","Aspectos físicos das regiões polares","Geopolítica do Ártico","Exploração econômica nas regiões polares","População do Ártico","Ocupação e pesquisa na Antártida"]]
+ ],summary:"O Ártico é uma região ao redor do Polo Norte, formada principalmente por oceano cercado por terras; há populações residentes. A Antártida é um continente no Polo Sul, coberto por gelo, sem população permanente nativa e dedicado principalmente à pesquisa científica. A geopolítica do Ártico envolve rotas, recursos e interesses de países. Estude também as conexões históricas entre América e África e o combate ao racismo."},
+ {name:"Arte",icon:"🎭",topics:[
+  ["Capítulo 7 · Política e arte em contexto",["Movimentos artísticos e sociedade","Mudanças representativas na arte do século XX","Do Realismo ao Modernismo","Nacionalismo, protesto e denúncia","Grafite e pichação: contextos e diferenças","Lambe-lambe como intervenção urbana"]],
+  ["Capítulo 8 · Sociedade em cena",["Teatro político no Brasil","Cinema Novo","Performance e política","Happening e artistas propositores"]],
+  ["Capítulo 9 · Ao som do tempo",["Heitor Villa-Lobos: música e política","A era dos festivais de música","Tropicalismo","Berlim e a música que vence barreiras","Movimento negro e música estadunidense","O som de protesto da China"]]
+ ],summary:"A arte dialoga com seu tempo e pode expressar identidades, críticas e reivindicações. O Modernismo rompeu com padrões acadêmicos e buscou novas linguagens. Grafite, lambe-lambe, teatro, cinema e performance podem ocupar espaços públicos e provocar reflexão. Na música, conecte artistas, movimentos e contextos históricos, como Villa-Lobos, festivais e Tropicalismo."},
+ {name:"Inglês",icon:"🇬🇧",topics:[
+  ["Chapter 6 · High Tech Way of Life",["Present Perfect com NEVER e EVER","Present Perfect com SINCE, FOR e HOW LONG"]],
+  ["Chapter 7 · How to Express Your Feelings",["Present Perfect com JUST, ALREADY e YET","Vocabulário: frustrated, disgusted, shocked, overwhelmed, depressed, enraged, confused, surprised, exhausted, bored, embarrassed e frightened","Simple Past x Present Perfect"]]
+ ],summary:"Present Perfect = have/has + particípio passado. EVER pergunta sobre experiências; NEVER indica nunca. SINCE marca o início de um período e FOR sua duração. JUST indica algo que acabou de acontecer; ALREADY, algo que já aconteceu; YET aparece com frequência em perguntas e negativas. Simple Past indica um momento passado concluído; Present Perfect relaciona a experiência ao presente."},
+ {name:"Educação Física",icon:"🏃",topics:[
+  ["Conteúdos teóricos",["Sedentarismo: conceito, fatores e consequências para a saúde","Gasto energético: energia utilizada pelo corpo em atividades e funções vitais","Cálculo do IMC: peso (kg) dividido pela altura (m) ao quadrado; compreender limitações na adolescência","Atletismo feminino: história, participação, conquistas e igualdade no esporte","Revisar também o conteúdo descrito no roteiro do caderno"]]
+ ],summary:"Sedentarismo é a falta de atividade física regular suficiente. O gasto energético varia com características individuais e atividades realizadas. O IMC é calculado por peso ÷ altura², mas em crianças e adolescentes precisa ser interpretado por curvas específicas de idade e sexo, não pelos limites adultos isoladamente. Estude a história e a participação das mulheres no atletismo."}
+];
+const quizzes = [
+ {s:"Matemática",q:"Uma pesquisa ouviu 40 estudantes de uma escola que tem 400 alunos. Os 40 estudantes representam:",o:["A população inteira","Uma amostra","Uma variável","Uma frequência"],a:1,e:"A amostra é uma parte da população. A população investigada é o conjunto dos 400 alunos."},
+ {s:"Matemática",q:"Um produto custa R$ 80 e recebe desconto de 25%. Qual é o preço após o desconto?",o:["R$ 20","R$ 55","R$ 60","R$ 65"],a:2,e:"25% de 80 = 20. Então, 80 − 20 = R$ 60."},
+ {s:"Matemática",q:"Uma tabela mostra 12, 15 e 18 alunos em três grupos. Qual é o total?",o:["35","45","40","55"],a:1,e:"12 + 15 + 18 = 45. Some as frequências para encontrar o total."},
+ {s:"Língua Portuguesa",q:"Qual elemento apresenta a opinião central que será defendida em um texto dissertativo-argumentativo?",o:["A tese","A legenda","A bibliografia","O título apenas"],a:0,e:"A tese é o ponto de vista central defendido pelo autor por meio de argumentos."},
+ {s:"Língua Portuguesa",q:"Em “Marina comprou um livro. Ela começou a lê-lo”, o pronome “Ela” retoma Marina. Esse recurso é:",o:["Catáfora","Anáfora","Elipse","Hipérbole"],a:1,e:"Anáfora retoma uma informação apresentada anteriormente no texto."},
+ {s:"Língua Portuguesa",q:"Qual alternativa apresenta um exemplo de texto expositivo?",o:["Um texto que apresenta informações e explica como funciona o ciclo da água","Uma campanha que tenta convencer o leitor a comprar algo","Um conto de fantasia","Um diálogo teatral"],a:0,e:"O texto expositivo tem como objetivo informar e explicar um assunto."},
+ {s:"Geografia",q:"Qual afirmação diferencia corretamente Ártico e Antártida?",o:["Ambos são continentes habitados permanentemente","O Ártico é oceano cercado por terras; a Antártida é um continente","A Antártida fica no Polo Norte","O Ártico não possui população"],a:1,e:"O Ártico é uma região polar setentrional centrada no Oceano Glacial Ártico. A Antártida é um continente no extremo sul."},
+ {s:"Geografia",q:"O movimento Black Lives Matter está relacionado principalmente:",o:["À defesa do colonialismo","Ao combate ao racismo e à violência racial","À exploração do Ártico","À expansão do turismo polar"],a:1,e:"Black Lives Matter é um movimento que denuncia o racismo e reivindica igualdade e justiça para pessoas negras."},
+ {s:"Geografia",q:"Por que o Ártico tem importância geopolítica?",o:["Por não possuir recursos naturais","Pelo interesse em recursos, rotas marítimas e influência territorial","Porque é um continente sem países próximos","Porque não sofre mudanças ambientais"],a:1,e:"Recursos naturais, rotas marítimas, soberania e mudanças ambientais tornam a região estratégica."},
+ {s:"Educação Física",q:"Como se calcula o IMC?",o:["Altura dividida pelo peso","Peso dividido pela altura ao quadrado","Peso multiplicado pela idade","Altura ao quadrado dividida pela idade"],a:1,e:"A fórmula é IMC = peso (kg) ÷ altura² (m²). Em adolescentes, a interpretação precisa considerar idade e sexo."},
+ {s:"Educação Física",q:"Qual é uma característica do sedentarismo?",o:["Prática frequente de atividades físicas","Baixo nível de atividade física no cotidiano","Participação em todos os esportes","Aumento obrigatório do gasto energético"],a:1,e:"Sedentarismo é associado a baixos níveis de atividade física; movimentar-se regularmente favorece a saúde."},
+ {s:"Educação Física",q:"O gasto energético do corpo está relacionado:",o:["Somente ao sono","À energia usada nas funções vitais e nas atividades","Apenas à altura","Somente à prática de atletismo"],a:1,e:"O corpo gasta energia para manter funções vitais e realizar movimentos e atividades."},
+ {s:"História",q:"Quem governou o Brasil durante o Primeiro Reinado?",o:["D. Pedro I","D. Pedro II","Deodoro da Fonseca","Getúlio Vargas"],a:0,e:"O Primeiro Reinado corresponde ao governo de D. Pedro I, de 1822 a 1831."},
+ {s:"História",q:"O Período Regencial começou porque:",o:["O Brasil deixou de ser independente","D. Pedro II ainda era menor de idade quando D. Pedro I abdicou","A República foi proclamada","A Constituição de 1824 foi anulada imediatamente"],a:1,e:"Com a abdicação de D. Pedro I em 1831, seu filho era menor de idade; o país passou a ser governado por regentes."},
+ {s:"História",q:"O Ato Adicional de 1834 está ligado a mudanças:",o:["Na organização política do Período Regencial","Na proclamação da República","Na independência do Brasil","Na abolição da escravidão"],a:0,e:"O Ato Adicional alterou a Constituição de 1824 e ampliou a autonomia provincial, entre outras mudanças."},
+ {s:"Inglês",q:"Complete: “I have lived here ___ 2020.”",o:["for","since","yet","ever"],a:1,e:"SINCE é usado com o ponto de início: since 2020. FOR indica duração, como for three years."},
+ {s:"Inglês",q:"Qual frase usa corretamente o Present Perfect?",o:["She have finished.","She has finished.","She did finished.","She has finish."],a:1,e:"Com he, she e it usamos HAS + particípio passado: has finished."},
+ {s:"Inglês",q:"Em uma pergunta sobre experiência de vida, qual palavra é comum?",o:["EVER","YESTERDAY","AGO","LAST"],a:0,e:"EVER é usado em perguntas sobre experiências: Have you ever visited...?"},
+ {s:"Ciências",q:"A puberdade é:",o:["Um processo idêntico e na mesma idade para todos","Uma fase de mudanças corporais relacionadas à maturação","Uma doença","O fim do desenvolvimento humano"],a:1,e:"A puberdade envolve mudanças físicas e hormonais, que variam de pessoa para pessoa."},
+ {s:"Ciências",q:"Qual opção ajuda a reduzir o risco de várias ISTs?",o:["Compartilhar objetos pessoais","Usar preservativos corretamente e buscar informação de saúde confiável","Ignorar sintomas","Tomar medicamentos sem orientação"],a:1,e:"Preservativos reduzem o risco de muitas ISTs. Testagem, vacinação quando indicada e orientação de profissionais também são importantes."},
+ {s:"Ciências",q:"O que significa consentimento?",o:["Concordância livre, informada e que pode ser retirada","Aceitar algo por pressão","Não poder mudar de ideia","Uma obrigação em qualquer relacionamento"],a:0,e:"Consentimento exige liberdade e respeito; pode ser retirado a qualquer momento. Pressão não é consentimento."},
+ {s:"Arte",q:"Uma característica frequentemente associada ao Modernismo é:",o:["Manter sempre as regras acadêmicas tradicionais","Experimentar novas linguagens e romper padrões artísticos anteriores","Rejeitar qualquer tema social","Usar apenas esculturas clássicas"],a:1,e:"O Modernismo buscou inovação formal e novas maneiras de representar o mundo."},
+ {s:"Arte",q:"Grafite, teatro político e música de protesto podem:",o:["Expressar críticas e reflexões sobre a sociedade","Ter somente função decorativa","Não ter relação com seu contexto histórico","Ser sempre manifestações sem público"],a:0,e:"Diferentes linguagens artísticas podem comunicar ideias, identidades, críticas e reivindicações."},
+ {s:"Arte",q:"Heitor Villa-Lobos é conhecido principalmente por sua atuação como:",o:["Pintor modernista","Compositor e maestro brasileiro","Atleta olímpico","Diretor do Cinema Novo"],a:1,e:"Villa-Lobos foi um importante compositor brasileiro, associado à valorização de elementos da cultura musical do país."}
+];
+const flashcards = {
+ "Matemática":[["O que é população em uma pesquisa?","É o conjunto total de elementos que se deseja investigar."],["O que é amostra?","É uma parte da população selecionada para participar da pesquisa."],["Como calcular 10% de um valor?","Divida o valor por 10 ou multiplique por 0,10."],["O que é inflação?","Aumento generalizado dos preços, que pode reduzir o poder de compra."]],
+ "Língua Portuguesa":[["O que é tese?","É a ideia ou o ponto de vista central defendido no texto."],["O que é anáfora?","Retomada de um elemento mencionado anteriormente."],["Qual a função do texto expositivo?","Apresentar e explicar informações sobre um assunto."],["O que é parágrafo-padrão?","Um parágrafo organizado em tópico frasal, desenvolvimento e fechamento/conclusão."]],
+ "Geografia":[["O que é o Ártico?","Região polar do norte, centrada no Oceano Glacial Ártico e cercada por terras."],["O que é a Antártida?","Continente localizado no Polo Sul, coberto por uma grande camada de gelo."],["Por que o Ártico é estratégico?","Por recursos, rotas marítimas, interesses territoriais e questões ambientais."],["Qual é a pauta central do Black Lives Matter?","Combate ao racismo e reivindicação de igualdade e justiça para pessoas negras."]],
+ "Educação Física":[["Qual a fórmula do IMC?","Peso em quilogramas dividido pela altura em metros ao quadrado."],["O que é gasto energético?","Energia utilizada pelo corpo em funções vitais e atividades."],["O que é sedentarismo?","Nível insuficiente de atividade física regular no cotidiano."]],
+ "História":[["Quando ocorreu o Primeiro Reinado?","De 1822 a 1831, durante o governo de D. Pedro I."],["Por que começou o Período Regencial?","Porque D. Pedro II era menor de idade quando D. Pedro I abdicou."],["O que foi o Ato Adicional de 1834?","Uma reforma constitucional que alterou a organização política durante a Regência."]],
+ "Inglês":[["Como formar o Present Perfect?","Have/has + particípio passado do verbo principal."],["Quando usar SINCE e FOR?","SINCE indica o início; FOR indica a duração de um período."],["Qual a diferença básica entre Simple Past e Present Perfect?","Simple Past situa ação concluída em tempo passado; Present Perfect liga a experiência/ação ao presente."]],
+ "Ciências":[["O que é puberdade?","Fase de mudanças hormonais e corporais da adolescência, em ritmos individuais."],["Para que servem os métodos contraceptivos?","Para prevenir gravidez; preservativos também reduzem o risco de muitas ISTs."],["O que é consentimento?","Concordância livre e informada, sem pressão, que pode ser retirada."]],
+ "Arte":[["O que caracteriza o Modernismo?","Experimentação e ruptura com padrões artísticos tradicionais."],["O que é performance?","Linguagem artística em que a ação do artista e sua presença podem compor a obra."],["Como a arte pode ser política?","Pode expressar críticas, identidades, reivindicações e reflexões sociais."]]
+};
+
+const storageKey="missao803-v1";
+let state={done:[],answered:0,correct:0,scoreBySubject:{},seenQuiz:[],flashIndex:0};
+try{state={...state,...JSON.parse(localStorage.getItem(storageKey)||"{}")}}catch(e){}
+let currentQuiz=null,answeredCurrent=false,timerSeconds=1500,timerInterval=null,timerKind="Foco",flashRevealed=false;
+const $=id=>document.getElementById(id);
+function save(){saveLocalOnly();queueCloudSync()}
+function allTopics(){return subjects.flatMap(s=>s.topics.flatMap(g=>g[1].map(t=>({s:s.name,t}))));}
+function updateDashboard(){
+ if(document.getElementById("missionList"))setTimeout(()=>renderMissions(),0);
+ const all=allTopics(),n=state.done.length,percent=all.length?Math.round(100*n/all.length):0;
+ $("doneMetric").innerHTML=`${n} <small>/ ${all.length}</small>`;$("mainProgress").style.width=percent+"%";$("progressLabel").textContent=percent+"% concluído • continue no seu ritmo";
+ $("answeredMetric").textContent=state.answered;$("correctMetric").textContent=state.correct;
+ const ex=[["16/11","Matemática"],["17/11","Língua Portuguesa"],["18/11","Geografia + Educação Física"],["19/11","História + Inglês"],["23/11","Ciências + Arte"]];
+ const now=new Date();now.setHours(0,0,0,0);let next=ex.find(x=>{const [d,m]=x[0].split("/").map(Number);return new Date(2026,m-1,d)>=now});
+ $("nextExam").textContent=next?next[1]:"Missão concluída!";$("nextExamDate").textContent=next?next[0]+"/2026":"Parabéns pela dedicação!";
+ const bars=subjects.map(s=>{let total=s.topics.reduce((a,g)=>a+g[1].length,0),done=s.topics.reduce((a,g)=>a+g[1].filter(t=>state.done.includes(s.name+"|"+t)).length,0);return `<div style="margin:12px 0"><div class="between"><b>${s.icon} ${s.name}</b><span class="small muted">${done}/${total}</span></div><div class="progress"><i style="width:${100*done/total}%"></i></div></div>`}).join("");
+ $("subjectProgress").innerHTML=bars;
+}
+function showView(id){document.querySelectorAll(".view").forEach(v=>v.classList.toggle("active",v.id===id));document.querySelectorAll(".navbtn").forEach(b=>b.classList.toggle("active",b.dataset.view===id));window.scrollTo({top:0,behavior:"smooth"})}
+document.querySelectorAll(".navbtn").forEach(b=>b.addEventListener("click",()=>showView(b.dataset.view)));
+function renderTopics(){
+ const filter=$("subjectFilter").value;let list=subjects.filter(s=>filter==="Todas"||s.name===filter);
+ $("topicArea").innerHTML=list.map(s=>{let count=s.topics.reduce((a,g)=>a+g[1].filter(t=>state.done.includes(s.name+"|"+t)).length,0),total=s.topics.reduce((a,g)=>a+g[1].length,0);
+ return `<details ${filter!=="Todas"?"open":""}><summary>${s.icon} ${s.name} · ${count}/${total} tópicos marcados</summary><div class="inside"><p class="small">${s.summary}</p>${s.topics.map(g=>`<h4>${g[0]}</h4><div class="topic-list">${g[1].map(t=>{let key=s.name+"|"+t,checked=state.done.includes(key);return `<div class="topic ${checked?"done":""}"><input type="checkbox" id="${escapeHtml(key)}" ${checked?"checked":""} onchange="toggleTopic(this,'${escapeJs(key)}')"><label for="${escapeHtml(key)}">${escapeHtml(t)}</label></div>`}).join("")}</div>`).join("")}</div></details>`}).join("");
+}
+function escapeHtml(x){return x.replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll('"',"&quot;").replaceAll("'","&#39;")}
+function escapeJs(x){return x.replaceAll("\\","\\\\").replaceAll("'","\\'")}
+function toggleTopic(el,key){if(el.checked&&!state.done.includes(key))state.done.push(key);if(!el.checked)state.done=state.done.filter(x=>x!==key);save();renderTopics();updateDashboard()}
+function exportProgress(){const blob=new Blob([JSON.stringify(state,null,2)],{type:"application/json"}),a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="progresso-missao-803.json";a.click();URL.revokeObjectURL(a.href)}
+$("importFile").addEventListener("change",async e=>{let f=e.target.files[0];if(!f)return;try{let v=JSON.parse(await f.text());if(!Array.isArray(v.done))throw Error();state={...state,...v};save();renderTopics();updateDashboard();alert("Progresso importado!")}catch(err){alert("Não foi possível importar. Selecione um arquivo de progresso válido.")}e.target.value=""});
+function initSelects(){
+ subjects.forEach(s=>{["subjectFilter","quizSubject","flashSubject"].forEach(id=>{let op=document.createElement("option");op.value=s.name;op.textContent=s.name;$(id).appendChild(op)})});
+ $("subjectFilter").addEventListener("change",renderTopics);$("quizSubject").addEventListener("change",newQuestion);$("flashSubject").addEventListener("change",()=>{state.flashIndex=0;renderFlash()});
+}
+function newQuestion(){
+ let s=$("quizSubject").value||subjects[0].name,arr=quizzes.map((q,i)=>({...q,index:i})).filter(q=>q.s===s),last=state.seenQuiz.filter(i=>arr.some(q=>q.index===i)),pool=arr.filter(q=>!last.includes(q.index));if(!pool.length){state.seenQuiz=state.seenQuiz.filter(i=>!arr.some(q=>q.index===i));pool=arr}
+ currentQuiz=pool[Math.floor(Math.random()*pool.length)];state.seenQuiz.push(currentQuiz.index);save();answeredCurrent=false;$("quizTag").textContent=currentQuiz.s;$("questionText").textContent=currentQuiz.q;$("questionCount").textContent=`${arr.length} questões nesta matéria`;
+ $("options").innerHTML=currentQuiz.o.map((o,i)=>`<label class="qoption"><input type="radio" name="answer" value="${i}"><span><b>${String.fromCharCode(65+i)}.</b> ${o}</span></label>`).join("");$("feedback").innerHTML="";$("checkAnswer").disabled=false;let sc=state.scoreBySubject[s]||{c:0,n:0};$("quizScore").textContent=`${sc.c}/${sc.n}`;
+}
+function checkAnswer(){if(!currentQuiz||answeredCurrent)return;let pick=document.querySelector('input[name="answer"]:checked');if(!pick){$("feedback").innerHTML='<div class="feedback bad">Escolha uma alternativa antes de corrigir.</div>';return}let right=Number(pick.value)===currentQuiz.a;answeredCurrent=true;state.answered++;if(right)state.correct++;let s=currentQuiz.s,sc=state.scoreBySubject[s]||{c:0,n:0};sc.n++;if(right)sc.c++;state.scoreBySubject[s]=sc;save();$("feedback").innerHTML=`<div class="feedback ${right?"good":"bad"}"><b>${right?"Muito bem! Resposta correta.":"Vamos aprender com essa!"}</b><br>${currentQuiz.e}</div>`;$("checkAnswer").disabled=true;$("quizScore").textContent=`${sc.c}/${sc.n}`;updateDashboard()}
+function renderFlash(){let s=$("flashSubject").value||subjects[0].name,arr=flashcards[s],idx=state.flashIndex%arr.length;flashRevealed=false;$("flashCount").textContent=`Cartão ${idx+1} de ${arr.length}`;$("flashFront").textContent=arr[idx][0];$("flashBack").hidden=true;$("flashBack").textContent=arr[idx][1];$("revealFlash").disabled=false}
+function revealFlash(){flashRevealed=true;$("flashBack").hidden=false;$("revealFlash").disabled=true}
+function nextFlash(){let s=$("flashSubject").value||subjects[0].name;state.flashIndex=(state.flashIndex+1)%flashcards[s].length;renderFlash()}
+function setTimer(min,kind){clearInterval(timerInterval);timerSeconds=min*60;timerKind=kind;$("timerMode").textContent=kind;$("timerNote").textContent=kind==="Foco"?"Escolha um tópico e elimine distrações.": "Levante, beba água e descanse um pouco.";$("timerStart").textContent="▶ Começar";renderTimer()}
+function renderTimer(){$("timerDisplay").textContent=String(Math.floor(timerSeconds/60)).padStart(2,"0")+":"+String(timerSeconds%60).padStart(2,"0")}
+function toggleTimer(){if(timerInterval){clearInterval(timerInterval);timerInterval=null;$("timerStart").textContent="▶ Continuar";return}$("timerStart").textContent="Ⅱ Pausar";timerInterval=setInterval(()=>{if(timerSeconds>0){timerSeconds--;renderTimer()}else{clearInterval(timerInterval);timerInterval=null;$("timerStart").textContent="▶ Começar";$("timerNote").textContent="Ciclo concluído! Faça uma pausa e registre o que aprendeu.";try{new AudioContext().resume()}catch(e){}alert(timerKind+" concluído!")}},1000)}
+function resetTimer(){clearInterval(timerInterval);timerInterval=null;timerSeconds=timerKind==="Foco"?1500:timerKind==="Pausa"?300:900;renderTimer();$("timerStart").textContent="▶ Começar"}
+
+// Biblioteca: cada URL abre uma busca de videoaulas (não um vídeo verificado).
+const videoTopics = [
+["Matemática","Pesquisa estatística, população, amostra, gráficos"],["Matemática","Acréscimos, descontos e inflação"],
+["Língua Portuguesa","Texto argumentativo, expositivo e dissertativo-argumentativo"],["Língua Portuguesa","Artigo de opinião, editorial e resenha crítica"],["Língua Portuguesa","Coesão textual, anáfora, catáfora e elipse"],["Língua Portuguesa","Regência verbal e crase"],
+["Geografia","África e América, semelhanças e movimento Black Lives Matter"],["Geografia","Ártico e Antártida, regiões polares e geopolítica"],
+["Educação Física","Sedentarismo, gasto energético e IMC na adolescência"],["Educação Física","Atletismo feminino e sua história"],
+["História","Primeiro Reinado de Dom Pedro I 1822 a 1831"],["História","Período Regencial 1831 a 1840 e revoltas"],
+["Inglês","Present perfect ever never since for how long"],["Inglês","Present perfect just already yet e simple past"],["Inglês","Emotions feelings vocabulary English"],
+["Ciências","Adolescência, puberdade e reprodução humana 8º ano"],["Ciências","Sistemas reprodutores masculino e feminino 8º ano"],["Ciências","Métodos contraceptivos e prevenção de ISTs 8º ano"],
+["Arte","Realismo modernismo e arte de protesto"],["Arte","Grafite pichação e lambe-lambe arte urbana"],["Arte","Teatro político cinema novo performance happening"],["Arte","Tropicalismo festivais de música e protesto"],["Arte","Heitor Villa Lobos música e política"]
+];
+function renderVideos(){
+ const filter=$("videoFilter").value;
+ $("videoList").replaceChildren();
+ for(const [subject,topic] of videoTopics){
+  if(filter!=="Todas"&&filter!==subject)continue;
+  const card=document.createElement("article");card.className="resource";
+  const tag=document.createElement("span");tag.className="tag";tag.textContent=subject;
+  const title=document.createElement("b");title.textContent=topic;
+  const p=document.createElement("p");p.textContent="Buscar videoaulas sobre este conteúdo";
+  const link=document.createElement("a");link.href="https://www.youtube.com/results?search_query="+encodeURIComponent(topic+" videoaula português");link.target="_blank";link.rel="noopener noreferrer";link.textContent="▶ Procurar videoaulas";
+  card.append(tag,title,p,link);$("videoList").append(card);
+ }
+}
+const NOTE_KEY="missao803-caderno-v1";
+let notes=[],editingNote=null;
+try{const raw=JSON.parse(localStorage.getItem(NOTE_KEY)||"[]");if(Array.isArray(raw))notes=raw.filter(n=>n&&typeof n.title==="string"&&typeof n.body==="string").slice(0,300)}catch(e){}
+function notePersist(){try{localStorage.setItem(NOTE_KEY,JSON.stringify(notes));$("noteStatus").textContent="Salvo neste navegador.";return true}catch(e){$("noteStatus").textContent="Sem espaço para salvar. Faça backup e libere espaço no navegador.";return false}}
+function clearNoteEditor(){localStorage.removeItem(DRAFT_KEY);editingNote=null;$("noteTitle").value="";$("noteBody").value="";$("noteLink").value="";$("noteStatus").textContent="Pronto para uma nova anotação."}
+function safeNoteLink(raw){try{if(!raw)return "";const u=new URL(raw);return ["https:","http:"].includes(u.protocol)?u.href:""}catch(e){return ""}}
+function saveNote(){
+ const title=$("noteTitle").value.trim(),body=$("noteBody").value.trim(),link=$("noteLink").value.trim();
+ if(!title||!body){$("noteStatus").textContent="Preencha o título e as anotações.";return}
+ if(link&&!safeNoteLink(link)){$("noteStatus").textContent="Use um link começando com https:// ou http://";return}
+ const item={id:editingNote||String(Date.now())+Math.random().toString(36).slice(2),subject:$("noteSubject").value,title,body,link:safeNoteLink(link),updated:new Date().toISOString()};
+ const index=notes.findIndex(n=>n.id===item.id);if(index<0)notes.unshift(item);else notes[index]=item;
+ if(!notePersist())return;clearNoteEditor();renderNotes();
+}
+function noteText(n){return `MISSÃO 803 — MATERIAL DE ESTUDOS\nMatéria: ${n.subject}\nTítulo: ${n.title}\n\n${n.body}${n.link?"\n\nMaterial complementar: "+n.link:""}\n\nCompartilhado voluntariamente por um estudante da turma.`}
+function noteDownload(name,content,type){const a=document.createElement("a"),url=URL.createObjectURL(new Blob([content],{type}));a.href=url;a.download=name;document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),5000)}
+async function shareNote(id){const n=notes.find(x=>x.id===id);if(!n)return;const txt=noteText(n);if(navigator.share){try{await navigator.share({title:n.title,text:txt});return}catch(e){if(e.name==="AbortError")return}}noteDownload("missao803-anotacao.txt",txt,"text/plain;charset=utf-8");alert("Arquivo de texto criado. Envie-o pelo WhatsApp como documento.")}
+function exportNotes(){noteDownload("missao803-meu-caderno.json",JSON.stringify({app:"missao803-notes-v1",notes},null,2),"application/json;charset=utf-8")}
+async function importNotesFile(input){const file=input.files?.[0];if(!file)return;if(file.size>2000000){alert("Arquivo muito grande.");input.value="";return}
+ try{const data=JSON.parse(await file.text());if(data.app!=="missao803-notes-v1"||!Array.isArray(data.notes))throw Error("Formato de backup não reconhecido");let added=0;
+ for(const n of data.notes.slice(0,300)){if(!n||typeof n.title!=="string"||typeof n.body!=="string"||!n.title.trim()||!n.body.trim())continue;
+ if(n.title.length>100||n.body.length>20000||!subjects.some(s=>s.name===n.subject))continue;
+ const item={id:String(Date.now())+Math.random().toString(36).slice(2),subject:n.subject,title:n.title,body:n.body,link:safeNoteLink(n.link),updated:new Date().toISOString()};notes.push(item);added++}
+ if(notePersist()){renderNotes();alert(`${added} anotações importadas.`)}
+ }catch(e){alert("Não foi possível importar: "+e.message)}input.value="";
+}
+function editNote(id){const n=notes.find(x=>x.id===id);if(!n)return;editingNote=id;$("noteSubject").value=n.subject;$("noteTitle").value=n.title;$("noteBody").value=n.body;$("noteLink").value=n.link||"";$("noteStatus").textContent="Editando anotação existente.";$("noteTitle").focus()}
+function deleteNote(id){if(!confirm("Excluir esta anotação do seu navegador?"))return;notes=notes.filter(x=>x.id!==id);notePersist();renderNotes()}
+function renderNotes(){const filter=$("notesFilter").value,container=$("notesList");container.replaceChildren();$("noteCount").textContent=notes.length+" anotações";
+ const filtered=notes.filter(n=>filter==="Todas"||n.subject===filter);
+ if(!filtered.length){const p=document.createElement("p");p.className="muted";p.textContent="Nenhuma anotação por aqui. Crie seu primeiro resumo!";container.append(p);return}
+ for(const n of filtered){const card=document.createElement("div");card.className="note-item";
+ const title=document.createElement("h3");title.textContent=n.title;
+ const meta=document.createElement("span");meta.className="tag";meta.textContent=n.subject;
+ const body=document.createElement("p");body.textContent=n.body.length>600?n.body.slice(0,600)+"…":n.body;
+ const row=document.createElement("div");row.className="row";
+ for(const [label,handler] of [["✏️ Editar",()=>editNote(n.id)],["📤 Compartilhar",()=>shareNote(n.id)],["🗑️ Excluir",()=>deleteNote(n.id)]]){const b=document.createElement("button");b.className="btn light";b.textContent=label;b.addEventListener("click",handler);row.append(b)}
+ if(n.link){const a=document.createElement("a");a.href=safeNoteLink(n.link);a.target="_blank";a.rel="noopener noreferrer";a.textContent="🔗 Material complementar";card.append(title,meta,body,a,row)}else card.append(title,meta,body,row);
+ container.append(card)}
+}
+function initResources(){const subjectsNames=subjects.map(s=>s.name);for(const id of ["videoFilter","noteSubject","notesFilter"]){const sel=$(id);for(const s of subjectsNames){const opt=document.createElement("option");opt.value=s;opt.textContent=s;sel.append(opt)}}renderVideos();renderNotes()}
+
+
+// ===== BIBLIOTECA COLABORATIVA: publicação voluntária com revisão =====
+let libraryItems=[];
+function libraryMessage(message){const e=$("libStatus");if(e)e.textContent=message}
+function libraryConnected(){return !!(cloudClient&&cloudUser)}
+function copyNoteToLibrary(){
+ if(!editingNote){libraryMessage("Abra uma anotação no Meu caderno, clique em Editar e depois volte aqui para copiá-la.");return}
+ const n=notes.find(x=>x.id===editingNote);if(!n)return;
+ $("libSubject").value=n.subject;$("libTitle").value=n.title;$("libBody").value=n.body.slice(0,5000);$("libLink").value=n.link||"";
+ libraryMessage("Anotação copiada. Revise o texto e marque a autorização antes de enviar.");
+}
+async function submitLibraryItem(){
+ if(!libraryConnected()){libraryMessage("Primeiro conecte-se na aba Turma 803.");return}
+ const materia=$("libSubject").value,titulo=$("libTitle").value.trim(),conteudo=$("libBody").value.trim(),link=$("libLink").value.trim();
+ if(titulo.length<4||conteudo.length<20){libraryMessage("Informe um título com 4 caracteres e um resumo com pelo menos 20 caracteres.");return}
+ if(link && (!safeNoteLink(link)||!link.startsWith("https://"))){libraryMessage("Use somente links começando com https://");return}
+ if(!$("libConsent").checked){libraryMessage("Marque a autorização voluntária para publicar.");return}
+ libraryMessage("Enviando para a fila de revisão…");
+ try{
+  const {error}=await cloudClient.from("missao803_biblioteca").insert({autor_id:cloudUser.id,materia,titulo,conteudo,link:link||null,status:"pendente"});
+  if(error)throw error;
+  $("libTitle").value="";$("libBody").value="";$("libLink").value="";$("libConsent").checked=false;
+  libraryMessage("Material enviado! Ele ficará visível para a turma após aprovação do responsável.");
+  await refreshLibrary();
+ }catch(e){console.error(e);libraryMessage("Não foi possível enviar. Verifique a conexão e tente novamente.")}
+}
+async function refreshLibrary(){
+ if(!libraryConnected()){libraryMessage("Conecte-se na aba Turma 803 para abrir a biblioteca.");return}
+ try{
+  const {data,error}=await cloudClient.from("missao803_biblioteca").select("id,autor_id,materia,titulo,conteudo,link,status,criado_em").order("criado_em",{ascending:false}).limit(150);
+  if(error)throw error;
+  libraryItems=data||[];renderLibrary();
+ }catch(e){console.error(e);libraryMessage("Não foi possível atualizar a biblioteca. Confira a conexão.")}
+}
+function libraryNode(tag,content,cls){const el=document.createElement(tag);if(cls)el.className=cls;if(content!==undefined)el.textContent=content;return el}
+function libraryCard(item,isOwn){
+ const box=libraryNode("article",undefined,"library-entry");
+ const badge=libraryNode("span",item.materia,"tag");const title=libraryNode("h3",item.titulo);const body=libraryNode("p",item.conteudo);
+ box.append(badge,title,body);
+ if(isOwn)box.append(libraryNode("span",item.status==="aprovado"?"Publicado":item.status==="pendente"?"Aguardando aprovação":"Não aprovado","tag"));
+ if(item.link){const a=libraryNode("a","🔗 Link complementar");a.href=item.link;a.target="_blank";a.rel="noopener noreferrer nofollow";box.append(a)}
+ const row=libraryNode("div",undefined,"row");
+ if(item.status==="aprovado"){
+  const save=libraryNode("button","📥 Salvar no meu caderno","btn light");save.type="button";
+  save.addEventListener("click",()=>{
+   if(notes.length>=300){libraryMessage("Seu caderno está cheio. Faça backup antes de importar mais anotações.");return}
+   notes.unshift({id:crypto.randomUUID?crypto.randomUUID():String(Date.now()),subject:item.materia,title:item.titulo,body:item.conteudo,link:item.link||"",updated:new Date().toISOString()});
+   if(notePersist()){renderNotes();libraryMessage("Resumo salvo no seu caderno local. Revise as informações antes de estudar.")}
+  });row.append(save);
+ }
+ if(isOwn){const del=libraryNode("button","🗑️ Retirar publicação","btn light");del.type="button";del.addEventListener("click",()=>removeLibraryItem(item.id));row.append(del)}
+ if(row.childNodes.length)box.append(row);
+ return box;
+}
+function renderLibrary(){
+ const filter=$("libFilter").value,term=$("libSearch").value.toLocaleLowerCase("pt-BR").trim();
+ const approved=libraryItems.filter(x=>x.status==="aprovado" && (filter==="Todas"||x.materia===filter) && (!term||(x.titulo+" "+x.conteudo).toLocaleLowerCase("pt-BR").includes(term)));
+ const list=$("libItems");list.replaceChildren();list.className="";
+ $("libCount").textContent=approved.length+" materiais";
+ if(!approved.length)list.append(libraryNode("p","Nenhum material aprovado para este filtro. Que tal criar um resumo?","library-empty"));
+ for(const item of approved)list.append(libraryCard(item,false));
+ const mine=$("libMine");mine.replaceChildren();mine.className="";
+ const own=libraryItems.filter(x=>x.autor_id===cloudUser?.id);
+ if(!own.length)mine.append(libraryNode("p","Você ainda não enviou materiais para revisão.","library-empty"));
+ for(const item of own)mine.append(libraryCard(item,true));
+}
+async function removeLibraryItem(id){
+ if(!libraryConnected())return;
+ if(!confirm("Retirar este material da biblioteca da turma?"))return;
+ const {error}=await cloudClient.from("missao803_biblioteca").delete().eq("id",id).eq("autor_id",cloudUser.id);
+ if(error){libraryMessage("Não foi possível retirar o material.");return}
+ await refreshLibrary();libraryMessage("Material retirado da biblioteca.");
+}
+function initLibrary(){for(const id of ["libSubject","libFilter"]){const sel=$(id);for(const s of subjects){const option=document.createElement("option");option.value=s.name;option.textContent=s.name;sel.append(option)}}}
+
+
+const DRAFT_KEY="missao803-caderno-rascunho-v1";
+let draftTimer=null;
+function saveNoteDraft(){
+ clearTimeout(draftTimer);draftTimer=setTimeout(()=>{
+  const draft={subject:$("noteSubject").value,title:$("noteTitle").value,body:$("noteBody").value,link:$("noteLink").value};
+  try{localStorage.setItem(DRAFT_KEY,JSON.stringify(draft));$("draftStatus").textContent="Rascunho salvo neste navegador."}catch(e){$("draftStatus").textContent="Sem espaço para salvar o rascunho."}
+ },500)
+}
+function initDraft(){
+ try{const d=JSON.parse(localStorage.getItem(DRAFT_KEY)||"null");if(d){for(const [k,id] of [["subject","noteSubject"],["title","noteTitle"],["body","noteBody"],["link","noteLink"]])if(typeof d[k]==="string")$(id).value=d[k]}}catch(e){}
+ for(const id of ["noteSubject","noteTitle","noteBody","noteLink"])$(id).addEventListener("input",saveNoteDraft)
+}
+
+
+// ===== TUTOR LOCAL E REVISÕES =====
+const SMART_KEY="missao803-smart-v1";
+let smartState={missions:{},reviews:{}};
+try{const saved=JSON.parse(localStorage.getItem(SMART_KEY)||"{}");if(saved&&typeof saved==="object")smartState={missions:saved.missions||{},reviews:saved.reviews||{}}}catch(e){}
+function saveSmart(){try{localStorage.setItem(SMART_KEY,JSON.stringify(smartState))}catch(e){}}
+function tokenize803(text){return String(text||"").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase().split(/[^a-z0-9]+/).filter(w=>w.length>=4)}
+function tutorMessage(text,role="bot"){
+ const item=document.createElement("div");item.className="assistant-msg "+role;item.textContent=String(text).slice(0,1800);
+ $("assistantChat").append(item);$("assistantChat").scrollTop=$("assistantChat").scrollHeight;
+}
+function tutorSubject(){const value=$("assistantSubject").value;return value==="Todas"?null:value}
+function bestStudyMatch(query,subject){
+ const terms=[...new Set(tokenize803(query))];
+ const docs=[];
+ for(const s of subjects){if(subject&&subject!==s.name)continue;
+  docs.push({subject:s.name,label:"Resumo da matéria",text:s.summary,kind:"summary"});
+  for(const group of s.topics)for(const topic of group[1])docs.push({subject:s.name,label:topic,text:topic,kind:"topic"});
+  for(const card of flashcards[s.name]||[])docs.push({subject:s.name,label:card[0],text:card[1],kind:"card"});
+ }
+ let best=null,score=0;
+ for(const d of docs){const hay=tokenize803(d.label+" "+d.text);const hits=terms.reduce((n,t)=>n+(hay.some(w=>w===t||w.startsWith(t)||t.startsWith(w))?1:0),0);const s=hits/(Math.sqrt(hay.length)+2)+(d.kind==="card"?0.02:0);
+ if(hits>0&&s>score){best=d;score=s}}
+ return best;
+}
+function localTutorAnswer(query,selected){
+ const terms=[...new Set(tokenize803(query))].filter(t=>!["como","qual","quais","para","sobre","porque","explica","explique","diferenca","entre","exemplo","exemplos","fazer","isso","esse","essa","uma","mais","pode","quero","saber"].includes(t));
+ const docs=[];
+ for(const s of subjects){if(selected&&selected!==s.name)continue;
+  for(const card of flashcards[s.name]||[])docs.push({subject:s.name,title:card[0],body:card[1],kind:"card"});
+  for(const group of s.topics)for(const topic of group[1])docs.push({subject:s.name,title:topic,body:s.summary,kind:"topic"});
+  docs.push({subject:s.name,title:"Resumo de "+s.name,body:s.summary,kind:"summary"});
+ }
+ const scored=docs.map(d=>{const title=tokenize803(d.title),body=tokenize803(d.body);let score=0;
+  for(const t of terms){if(title.some(w=>w===t))score+=5;else if(title.some(w=>w.startsWith(t)||t.startsWith(w)))score+=2;
+   if(body.some(w=>w===t))score+=1.2;else if(body.some(w=>w.startsWith(t)||t.startsWith(w)))score+=.4;}
+  if(d.kind==="card")score+=0.3;
+  return {...d,score};
+ }).sort((a,b)=>b.score-a.score);
+ if(!terms.length||!scored.length||scored[0].score<1.2){return "Não encontrei uma explicação específica para essa pergunta nos materiais cadastrados. Tente usar palavras-chave, escolher a matéria ou clicar em uma das perguntas sugeridas. Você também pode abrir a Trilha e os Cartões para revisar."}
+ const top=scored[0];
+ let text="📚 "+top.subject+" — "+top.title+"\n\n"+top.body;
+ const other=scored.find(x=>x.subject===top.subject&&x.kind==="card"&&x.title!==top.title&&x.score>1.2);
+ if(top.kind!=="card"&&other)text+="\n\n💡 Cartão relacionado: "+other.title+"\n"+other.body;
+ text+="\n\n✏️ Agora tente explicar com suas palavras e depois faça uma questão no Simulado.";
+ return text;
+}
+function askTutor(){
+ const input=$("assistantInput"),q=input.value.trim();
+ if(q.length<3){tutorMessage("Escreva uma dúvida com pelo menos 3 caracteres.");return}
+ tutorMessage(q,"me");input.value="";
+ tutorMessage(localTutorAnswer(q,tutorSubject()));
+}
+function quickTutor(question){$("assistantInput").value=question;askTutor()}
+function weakestSubject(){const ranked=subjects.map(s=>{const score=state.scoreBySubject[s.name]||{n:0,c:0};const topics=s.topics.flatMap(g=>g[1]);const undone=topics.filter(t=>!state.done.includes(s.name+"|"+t));return {s,score,undone,priority:(score.n>=2?(1-score.c/score.n)*5:0)+(undone.length/Math.max(1,topics.length))*2}});ranked.sort((a,b)=>b.priority-a.priority);return ranked[0]}
+function tutorSuggestion(){const v=weakestSubject();const topic=v.undone[0]||v.s.topics[0][1][0];tutorMessage(`🎯 Sugestão: revise ${v.s.name}.\nAssunto: ${topic}.\nLeia o resumo na Trilha, explique com suas palavras e depois responda uma questão no Simulado.`)}
+function tutorQuiz(){const s=tutorSubject()||weakestSubject().s.name;$("quizSubject").value=s;newQuestion();showView("quiz")}
+function missionDate(){return new Date().toLocaleDateString("en-CA")}
+function missionEntries(){const v=weakestSubject();return [
+ {key:"review",title:"📚 Revisar um conteúdo",detail:"Escolha um tópico não concluído de "+v.s.name+" e faça um resumo de 3 frases."},
+ {key:"quiz",title:"🧠 Praticar um simulado",detail:"Responda uma questão com calma e leia a explicação."},
+ {key:"flash",title:"🗂️ Treinar a memória",detail:"Revise 3 cartões e tente lembrar antes de revelar a resposta."}
+]}
+function renderMissions(){const date=missionDate(),done=smartState.missions[date]||[],entries=missionEntries();$("missionCount").textContent=done.length+"/3 concluídas";const root=$("missionList");root.replaceChildren();
+ for(const entry of entries){const item=document.createElement("div");item.className="mission"+(done.includes(entry.key)?" completed":"");const title=document.createElement("b");title.textContent=entry.title;const desc=document.createElement("p");desc.className="small muted";desc.textContent=entry.detail;const row=document.createElement("div");row.className="row";const btn=document.createElement("button");btn.className="btn light";btn.textContent=done.includes(entry.key)?"✓ Concluída — desfazer":"✓ Marcar como concluída";btn.onclick=()=>toggleMission(entry.key);row.append(btn);item.append(title,desc,row);root.append(item)}
+ const weak=weakestSubject();const sc=weak.score;$("reviewAdvice").textContent=`Comece por ${weak.s.name}. ${sc.n?`Você acertou ${sc.c} de ${sc.n} questões nessa matéria.`:"Você ainda não respondeu questões suficientes nessa matéria."} ${weak.undone.length?`Há ${weak.undone.length} tópicos ainda não marcados como estudados.`:"Todos os tópicos estão marcados; faça uma revisão dos cartões."}`;
+}
+function toggleMission(key){const date=missionDate();const list=smartState.missions[date]||[];smartState.missions[date]=list.includes(key)?list.filter(x=>x!==key):[...list,key];saveSmart();renderMissions()}
+function scheduleReview(){const subject=$("reviewSubject").value;if(!subject)return;const prev=smartState.reviews[subject]||{step:-1};const step=Math.min(3,prev.step+1);const days=[1,3,7,14][step];const due=new Date();due.setHours(12,0,0,0);due.setDate(due.getDate()+days);smartState.reviews[subject]={step,due:due.toISOString(),last:new Date().toISOString()};saveSmart();renderReviewList()}
+function renderReviewList(){const root=$("reviewList");root.replaceChildren();const items=Object.entries(smartState.reviews).sort((a,b)=>a[1].due.localeCompare(b[1].due));if(!items.length){root.textContent="Nenhuma revisão agendada. Escolha uma matéria acima.";return}for(const [subject,info] of items){const p=document.createElement("div");p.className="mission";const date=new Date(info.due);const due=date.getTime()<=Date.now();p.textContent=`${due?"🔔 Revisão pendente":"📅"} ${subject} — ${date.toLocaleDateString("pt-BR")}`;root.append(p)}}
+function initSmart(){for(const s of subjects){for(const id of ["assistantSubject","reviewSubject"]){const op=document.createElement("option");op.value=s.name;op.textContent=s.name;$(id).append(op)}}tutorMessage("Olá! Sou o tutor gratuito da Missão 803. Faço buscas nos conteúdos da turma, sem API paga. Escolha uma matéria e pergunte algo, ou use os botões de exemplos. Não compartilhe dados pessoais.");renderMissions();renderReviewList();$("assistantInput").addEventListener("keydown",e=>{if(e.key==="Enter"&&(e.ctrlKey||e.metaKey))askTutor()})}
+
+function init(){
+ initExtra803();
+ initSelects();renderTopics();updateDashboard();newQuestion();renderFlash();initResources();initLibrary();initDraft();initSmart();loadOwnCloudRecord();
+ const day=new Date().getDate(),month=new Date().getMonth()+1;
+ let challenge="Escolha uma matéria e estude por 25 minutos. Depois, tente explicar o conteúdo sem olhar o caderno.";
+ if(month===11&&day<=15)challenge="Prioridade: Matemática e Português. Faça exercícios de estatística/porcentagem e revise tese, coesão, regência e crase.";
+ else if(month===11&&day===16)challenge="Depois da prova de Matemática, faça uma revisão de Português: gêneros textuais, argumentação e coesão.";
+ else if(month===11&&day===17)challenge="Depois de Português, revise Geografia e Educação Física teórica.";
+ else if(month===11&&day===18)challenge="Depois das provas, revise História e Inglês: Brasil Império e Present Perfect.";
+ else if(month===11&&day>=19&&day<=22)challenge="Foco em Ciências e Arte: revise os conceitos e tente responder cartões e questões sem consultar.";
+ $("dailyChallenge").textContent=challenge;
+}
+
+// MISSÃO 803 — ferramentas gratuitas e locais
+const arenaState={round:[],index:0,correct:0,locked:false};
+function arenaPool(){
+ const wanted=document.getElementById('arenaSubject').value;
+ const pool=[];
+ // Reuse existing question bank, regardless of the current quiz screen.
+ for(const q of quizzes){if(wanted!=='Todas'&&wanted!==q.s)continue;
+  if(typeof q.q==='string'&&Array.isArray(q.o)&&Number.isInteger(q.a)&&q.a>=0&&q.a<q.o.length)pool.push({text:q.q,opts:q.o,idx:q.a});
+ }
+ return pool;
+}
+function startArena(){const pool=arenaPool().sort(()=>Math.random()-.5);arenaState.round=pool.slice(0,5);arenaState.index=0;arenaState.correct=0;arenaState.locked=false;if(!pool.length){document.getElementById('arenaQuestion').textContent='Não há questões compatíveis nesta matéria. Use a aba Simulados para praticar.';document.getElementById('arenaOptions').replaceChildren();return}showArenaQuestion()}
+function showArenaQuestion(){const a=arenaState,root=document.getElementById('arenaOptions');root.replaceChildren();document.getElementById('arenaScore').textContent=`${a.correct} / ${a.round.length}`;if(a.index>=a.round.length){document.getElementById('arenaTitle').textContent='🏆 Rodada concluída';document.getElementById('arenaQuestion').textContent=`Você acertou ${a.correct} de ${a.round.length} questões. Continue praticando!`;document.getElementById('arenaProgress').textContent='Rodada encerrada';return}const q=a.round[a.index];a.locked=false;document.getElementById('arenaTitle').textContent=`Questão ${a.index+1} de ${a.round.length}`;document.getElementById('arenaQuestion').textContent=q.text;document.getElementById('arenaProgress').textContent=`Pergunta ${a.index+1}/${a.round.length}`;document.getElementById('arenaFeedback').textContent='';q.opts.forEach((opt,i)=>{const btn=document.createElement('button');btn.className='btn light';btn.style.margin='5px';btn.textContent=String(opt);btn.onclick=()=>{if(a.locked)return;a.locked=true;const good=i===q.idx;if(good)a.correct++;document.getElementById('arenaFeedback').textContent=good?'✓ Resposta correta!':'Ainda não. A resposta esperada é: '+String(q.opts[q.idx]);document.getElementById('arenaScore').textContent=`${a.correct} / ${a.round.length}`;const next=document.createElement('button');next.className='btn orange';next.textContent='Próxima questão →';next.onclick=()=>{a.index++;showArenaQuestion()};root.append(next)};root.append(btn)})}
+const calendarKey='missao803-calendar-v1';
+function calendarLoad(){try{const data=JSON.parse(localStorage.getItem(calendarKey)||'[]');return Array.isArray(data)?data.filter(x=>x&&typeof x.date==='string'&&typeof x.task==='string').slice(0,100):[]}catch{return []}}
+function calendarSave(list){localStorage.setItem(calendarKey,JSON.stringify(list))}
+function addCalendarTask(){const date=document.getElementById('calendarDate').value,task=document.getElementById('calendarTask').value.trim();if(!date||!task)return alert('Escolha uma data e descreva a tarefa.');const list=calendarLoad();list.push({id:Date.now()+Math.random(),date,task});calendarSave(list);document.getElementById('calendarTask').value='';renderCalendar()}
+function removeCalendarTask(id){calendarSave(calendarLoad().filter(x=>x.id!==id));renderCalendar()}
+function renderCalendar(){const root=document.getElementById('calendarItems');root.replaceChildren();const list=calendarLoad().sort((a,b)=>a.date.localeCompare(b.date));if(!list.length)root.textContent='Nenhuma tarefa agendada ainda.';for(const x of list){const line=document.createElement('div');line.className='mission';const title=document.createElement('span');title.textContent=x.date.split('-').reverse().join('/')+' · '+x.task;const btn=document.createElement('button');btn.className='btn light';btn.textContent='Concluir/remover';btn.onclick=()=>removeCalendarTask(x.id);line.append(title,document.createElement('br'),btn);root.append(line)}const days=Math.ceil((new Date('2026-11-16T12:00:00-03:00')-new Date())/86400000);document.getElementById('calendarCountdown').textContent=days>0?`Faltam aproximadamente ${days} dias para o início previsto das provas.`:'Consulte o cronograma atualizado com a escola.'}
+async function registerOffline(){const el=document.getElementById('offlineStatus');if(!('serviceWorker'in navigator)){el.textContent='Seu navegador não oferece suporte a esse recurso.';return}if(location.protocol!=='https:'&&location.hostname!=='localhost'){el.textContent='Abra o site publicado em HTTPS para preparar o modo offline.';return}try{await navigator.serviceWorker.register('./sw.js');el.textContent='Modo offline preparado. Visite as páginas enquanto estiver conectado para armazenar o conteúdo.'}catch{el.textContent='Não foi possível instalar o modo offline neste navegador.'}}
+function initExtra803(){for(const s of subjects){const opt=document.createElement('option');opt.value=s.name;opt.textContent=s.name;document.getElementById('arenaSubject').append(opt)}document.getElementById('calendarDate').value=new Date().toLocaleDateString('en-CA');renderCalendar()}
+
+init();
+</script>
+</body>
+</html>
