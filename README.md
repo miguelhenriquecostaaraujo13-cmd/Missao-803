@@ -43,6 +43,21 @@ Na aba **🔔 Lembretes**, o aluno escolhe voluntariamente lembrete diário (hor
 
 O botão **Permitir notificações** solicita autorização expressa do navegador; o site pode mostrar alertas do sistema quando a página estiver aberta, com suporte variando conforme sistema e navegador. O service worker também permite abrir a página ao tocar num aviso. **Não há Web Push com o site totalmente fechado**: isso dependeria de assinaturas de dispositivo, VAPID, servidor de envio e agendamento, ainda não implementados. Os lembretes não são garantidos em horário exato se o navegador suspender a página; são verificados ao abrir, ao voltar para a aba e periodicamente enquanto o site está em execução.
 
+## Evolução do Portal 803 — etapas
+
+### Etapa 1: organização e navegação (implementada)
+- Página inicial com pesquisa de ferramentas por nome ou categoria, inclusive com pesquisa sem acentos.
+- Atalhos rápidos para trilha, simulados, calendário, caderno, biblioteca e lembretes.
+- Ferramentas favoritas (até 12) e botão para retomar a última área utilizada.
+- Preferências guardadas **somente no navegador** em `portal803-favorite-tools-v1` e `portal803-last-tool-v1`.
+- Todas as 22 ferramentas e os três temas de visual preservados. As chaves de progresso e do Supabase não foram alteradas.
+
+### Etapas seguintes (planejadas, não implementadas)
+- **Etapa 2 — estudo personalizado:** marcações de compreensão por cores, checklist por prova e caderno de erros individual.
+- **Etapa 3 — acompanhamento:** gráficos de evolução e calendário visual com eventos oficiais atualizados.
+- **Etapa 4 — colaboração e acessibilidade:** melhorias do painel proprietário, recebimento privado de relatos de problemas e controles de leitura.
+- Antes de qualquer recurso que envie dados de estudantes para a nuvem, revisar consentimento, segurança, políticas de acesso e privacidade.
+
 ## Publicação
 
 Publicação atual pelo GitHub Pages: https://miguelhenriquecostaaraujo13-cmd.github.io/Missao-803/
