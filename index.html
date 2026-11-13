@@ -221,6 +221,23 @@ html[data-portal-theme="papel"] nav .navgroup>summary{background:#306467}
 html[data-portal-theme="papel"] nav .navgroup-items .navbtn{background:#315c61;border-color:#799ca0;color:#ffffff}
 html[data-portal-theme="papel"] nav .navgroup-items .navbtn.active{background:#f5d38d;color:#193c3d}
 @media(max-width:790px){nav .navquick select{background:#23395b;color:#ffffff;border:2px solid #a7c5e9}nav .navquick select option,nav .navquick select optgroup{background:#23395b;color:#ffffff}}
+
+/* Portal 803: central de navegação organizada, legível em todos os temas. */
+.portal-smart{margin-bottom:18px}
+.portal-smart-head,.portal-smart-line{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.portal-smart-head h2{margin:4px 0;font-size:clamp(1.3rem,2.4vw,1.7rem)}
+.portal-smart-line{margin:16px 0 8px}
+.portal-smart-line h3{margin:0}
+.portal-tool-grid,.portal-tool-results{display:grid;grid-template-columns:repeat(auto-fit,minmax(175px,1fr));gap:9px;margin-top:9px}
+.portal-tool-results[hidden]{display:none}
+.portal-tool-tile{display:flex;align-items:center;justify-content:space-between;gap:8px;min-width:0;border:1px solid var(--line);background:var(--portal-panel);border-radius:13px;padding:6px 7px;color:var(--ink)}
+.portal-tool-open{flex:1;text-align:left;background:transparent;border:0;color:var(--ink);font:inherit;font-weight:700;font-size:.88rem;cursor:pointer;padding:9px 7px;min-width:0;overflow-wrap:anywhere}
+.portal-tool-star{flex:none;border:1px solid var(--line);background:var(--white);color:var(--ink);border-radius:10px;font-size:1.04rem;width:36px;height:36px;cursor:pointer}
+.portal-tool-open:hover,.portal-tool-open:focus-visible{color:var(--navy)}
+.portal-tool-star:hover,.portal-tool-star:focus-visible{outline:2px solid var(--orange)}
+.portal-tool-empty{grid-column:1/-1;color:var(--muted);padding:10px}
+@media(max-width:570px){.portal-tool-grid,.portal-tool-results{grid-template-columns:repeat(2,minmax(0,1fr))}.portal-tool-tile{padding:4px;gap:3px}.portal-tool-open{font-size:.8rem;padding:9px 4px}.portal-tool-star{width:32px;height:34px}}
+@media(max-width:360px){.portal-tool-grid,.portal-tool-results{grid-template-columns:1fr}}
 </style>
  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.105.0"></script>
 </head>
@@ -237,7 +254,21 @@ html[data-portal-theme="papel"] nav .navgroup-items .navbtn.active{background:#f
 </div></header>
 <nav aria-label="Navegação principal do Portal 803"><div class="navquick"><label for="nexoNavJump">🧭 Ir para ferramenta</label><select id="nexoNavJump" aria-label="Escolher uma ferramenta por categoria"></select></div><div class="navinner"><details class="navgroup" data-category="inicio" open><summary>🏠 Início<span class="navcount">1</span></summary><div class="navgroup-items"><button type="button" class="navbtn active" data-view="inicio" aria-current="page">🏁 Meu painel</button></div></details><details class="navgroup" data-category="aprender"><summary>📚 Aprender<span class="navcount">6</span></summary><div class="navgroup-items"><button type="button" class="navbtn" data-view="trilha">✅ Minha trilha</button><button type="button" class="navbtn" data-view="videoaulas">🎬 Videoaulas</button><button type="button" class="navbtn" data-view="cartoes">🗂️ Memorização</button><button type="button" class="navbtn" data-view="metodos">📚 Métodos de estudo</button><button type="button" class="navbtn" data-view="assistente">✨ Tutor grátis</button><button type="button" class="navbtn" data-view="revisoes">🎯 Missões e revisões</button></div></details><details class="navgroup" data-category="praticar"><summary>🧠 Praticar<span class="navcount">5</span></summary><div class="navgroup-items"><button type="button" class="navbtn" data-view="quiz">🧠 Simulados</button><button type="button" class="navbtn" data-view="gerador">⚡ Gerador de questões</button><button type="button" class="navbtn" data-view="laboratorio">🧪 Laboratório</button><button type="button" class="navbtn" data-view="arena">🎮 Arena 803</button><button type="button" class="navbtn" data-view="desempenho">📊 Desempenho</button></div></details><details class="navgroup" data-category="organizar"><summary>🗓️ Organizar<span class="navcount">5</span></summary><div class="navgroup-items"><button type="button" class="navbtn" data-view="metas803">📈 Minhas metas</button><button type="button" class="navbtn" data-view="calendario">📅 Calendário</button><button type="button" class="navbtn" data-view="foco">⏱️ Foco</button><button type="button" class="navbtn" data-view="caderno">📝 Meu caderno</button><button type="button" class="navbtn" data-view="lembretes">🔔 Lembretes</button></div></details><details class="navgroup" data-category="turma"><summary>🤝 Turma<span class="navcount">2</span></summary><div class="navgroup-items"><button type="button" class="navbtn" data-view="turma">🌐 Painel da turma</button><button type="button" class="navbtn" data-view="biblioteca">🤝 Biblioteca 803</button></div></details><details class="navgroup" data-category="administracao"><summary>⚙️ Administração e ajuda<span class="navcount">3</span></summary><div class="navgroup-items"><button type="button" class="navbtn" data-view="professor">👩‍🏫 Professor</button><button type="button" class="navbtn" data-view="criador">🔒 Modo Proprietário</button><button type="button" class="navbtn" data-view="offline">📶 Modo offline</button></div></details></div><p class="navhint">Escolha uma categoria para encontrar a ferramenta que precisa.</p></nav>
 <main>
-<section id="inicio" class="view active"><div id="reminderHomeBanner" aria-live="polite"></div><div class="card" style="margin-bottom:16px" id="portalPublicBulletin"><h3>📢 Avisos e provas atualizados</h3><p class="small muted">Publicações oficiais cadastradas pelo proprietário do Portal 803.</p><div id="portalPublicItems"><p class="small muted">Carregando avisos...</p></div></div>
+<section id="inicio" class="view active">
+<div class="portal-smart card" aria-label="Central de acesso e ferramentas">
+ <div class="portal-smart-head">
+  <div><span class="small muted">✨ PORTAL 803 • ETAPA 1</span><h2>O que vamos estudar hoje?</h2><p class="small muted">Encontre rapidamente uma ferramenta, retome seus estudos ou abra seus favoritos.</p></div>
+  <button class="btn light" type="button" id="portalContinue" onclick="portalContinueLearning()">▶ Continuar estudando</button>
+ </div>
+ <label for="portalToolSearch"><b>🔎 Encontrar ferramenta</b></label>
+ <input id="portalToolSearch" class="study-field" type="search" maxlength="70" autocomplete="off" placeholder="Ex.: simulado, calendário, notas, biblioteca…">
+ <div id="portalToolResults" class="portal-tool-results" aria-live="polite" hidden></div>
+ <div class="portal-smart-line"><h3>⭐ Meus favoritos</h3><span class="small muted">Salvos apenas neste dispositivo</span></div>
+ <div id="portalFavoriteTools" class="portal-tool-grid"></div>
+ <div class="portal-smart-line"><h3>⚡ Atalhos de estudo</h3><span class="small muted">Um toque para começar</span></div>
+ <div id="portalQuickTools" class="portal-tool-grid"></div>
+ <p class="small muted" id="portalSmartStatus" role="status">Para favoritar uma ferramenta, toque na estrela ao lado dela.</p>
+</div><div id="reminderHomeBanner" aria-live="polite"></div><div class="card" style="margin-bottom:16px" id="portalPublicBulletin"><h3>📢 Avisos e provas atualizados</h3><p class="small muted">Publicações oficiais cadastradas pelo proprietário do Portal 803.</p><div id="portalPublicItems"><p class="small muted">Carregando avisos...</p></div></div>
   <h2>Seu painel de missão</h2><p class="sub">Seu progresso é salvo neste navegador. Marque os tópicos na trilha e veja os indicadores se atualizarem.</p>
   <div class="theme-showcase card" aria-label="Personalizar aparência"><div class="theme-showcase-head"><div><span class="theme-eyebrow">PERSONALIZE SUA EXPERIÊNCIA</span><h3>Escolha seu estilo ✨</h3><p class="small muted">Três visuais do Portal 803, com os mesmos recursos e o mesmo progresso.</p></div><span class="theme-current" id="portalThemeCurrent">Aurora</span></div>
     <div class="theme-grid">
@@ -746,6 +777,7 @@ function showView(id){
  const parent=document.querySelector('.navbtn[data-view="'+id+'"]')?.closest(".navgroup");
  if(parent){document.querySelectorAll(".navgroup").forEach(g=>{g.open=g===parent})}
  const quick=document.getElementById("nexoNavJump");if(quick)quick.value=id;
+ portalRememberTool(id);
  if(id==="desempenho")renderNexoPerformance();
  window.scrollTo({top:0,behavior:"smooth"});
 }
@@ -763,6 +795,82 @@ document.querySelectorAll(".navgroup").forEach(group=>{
 });
 nexoNavJump.value="inicio";
 nexoNavJump.addEventListener("change",()=>showView(nexoNavJump.value));
+
+/* Navegação e favoritos locais. Não altera nenhuma chave de progresso anterior. */
+const PORTAL_FAVORITES_KEY="portal803-favorite-tools-v1";
+const PORTAL_LAST_TOOL_KEY="portal803-last-tool-v1";
+const portalDefaultQuick=["trilha","quiz","calendario","caderno","biblioteca","lembretes"];
+const portalToolDirectory=[...document.querySelectorAll(".navbtn[data-view]")].map(btn=>({
+ id:btn.dataset.view,label:btn.textContent.trim(),
+ group:btn.closest(".navgroup")?.querySelector("summary")?.childNodes[0]?.textContent?.trim()||"Ferramentas"
+}));
+function portalSafeRead(key,defaultValue){try{const value=JSON.parse(localStorage.getItem(key)||"null");return value===null?defaultValue:value}catch(e){return defaultValue}}
+let portalFavorites=portalSafeRead(PORTAL_FAVORITES_KEY,[]);
+if(!Array.isArray(portalFavorites))portalFavorites=[];
+portalFavorites=[...new Set(portalFavorites)].filter(id=>portalToolDirectory.some(item=>item.id===id)).slice(0,12);
+let portalLastTool=portalSafeRead(PORTAL_LAST_TOOL_KEY,"trilha");
+function portalToolById(id){return portalToolDirectory.find(item=>item.id===id)}
+function portalSmartText(message){const el=document.getElementById("portalSmartStatus");if(el)el.textContent=message}
+function portalToggleFavorite(id){
+ if(!portalToolById(id))return;
+ if(portalFavorites.includes(id)){portalFavorites=portalFavorites.filter(v=>v!==id);portalSmartText("Favorito removido.")}
+ else if(portalFavorites.length>=12){portalSmartText("Você pode escolher até 12 favoritos.");return}
+ else{portalFavorites.push(id);portalSmartText("⭐ Ferramenta adicionada aos favoritos!")}
+ try{localStorage.setItem(PORTAL_FAVORITES_KEY,JSON.stringify(portalFavorites))}catch(e){portalSmartText("Não foi possível guardar favoritos neste navegador.")}
+ portalRenderToolLists();
+}
+function portalToolTile(item){
+ const tile=document.createElement("div");tile.className="portal-tool-tile";
+ const open=document.createElement("button");open.type="button";open.className="portal-tool-open";open.textContent=item.label;
+ open.title="Abrir "+item.label;open.onclick=()=>showView(item.id);
+ const star=document.createElement("button");star.type="button";star.className="portal-tool-star";
+ const selected=portalFavorites.includes(item.id);
+ star.textContent=selected?"★":"☆";star.setAttribute("aria-pressed",String(selected));
+ star.setAttribute("aria-label",(selected?"Remover dos favoritos: ":"Adicionar aos favoritos: ")+item.label);
+ star.onclick=()=>portalToggleFavorite(item.id);
+ tile.append(open,star);return tile;
+}
+function portalFillToolList(element,items,empty){
+ if(!element)return;element.replaceChildren();
+ if(!items.length){const p=document.createElement("p");p.className="portal-tool-empty";p.textContent=empty;element.append(p);return}
+ for(const item of items)element.append(portalToolTile(item));
+}
+function portalRenderToolLists(){
+ portalFillToolList(document.getElementById("portalFavoriteTools"),
+  portalFavorites.map(portalToolById).filter(Boolean),
+  "Nenhum favorito ainda. Toque em ☆ nos atalhos para começar.");
+ portalFillToolList(document.getElementById("portalQuickTools"),
+  portalDefaultQuick.map(portalToolById).filter(Boolean),"");
+ portalSearchTools();
+ portalUpdateContinue();
+}
+function portalSearchTools(){
+ const input=document.getElementById("portalToolSearch"),root=document.getElementById("portalToolResults");
+ if(!input||!root)return;
+ const q=input.value.normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLocaleLowerCase("pt-BR").trim();
+ root.hidden=!q;
+ if(!q)return;
+ const matches=portalToolDirectory.filter(item=>(item.label+" "+item.group).normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLocaleLowerCase("pt-BR").includes(q));
+ portalFillToolList(root,matches,"Nenhuma ferramenta encontrada. Tente outro nome.");
+}
+function portalUpdateContinue(){
+ const btn=document.getElementById("portalContinue");if(!btn)return;
+ const last=portalToolById(portalLastTool);
+ btn.textContent=last?"▶ Retomar: "+last.label:"▶ Continuar estudando";
+}
+function portalContinueLearning(){
+ const id=portalToolById(portalLastTool)?.id||"trilha";
+ showView(id);
+}
+function portalRememberTool(id){
+ if(id==="inicio"||!portalToolById(id))return;
+ portalLastTool=id;
+ try{localStorage.setItem(PORTAL_LAST_TOOL_KEY,JSON.stringify(id))}catch(e){}
+ portalUpdateContinue();
+}
+document.getElementById("portalToolSearch")?.addEventListener("input",portalSearchTools);
+portalRenderToolLists();
+
 function renderTopics(){
  const filter=$("subjectFilter").value;let list=subjects.filter(s=>filter==="Todas"||s.name===filter);
  $("topicArea").innerHTML=list.map(s=>{let count=s.topics.reduce((a,g)=>a+g[1].filter(t=>state.done.includes(s.name+"|"+t)).length,0),total=s.topics.reduce((a,g)=>a+g[1].length,0);
