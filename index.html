@@ -394,7 +394,7 @@ button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-vis
   </div>
   <div class="card" style="margin-top:18px" id="portalNotasCard">
     <h3>📊 Média das provas da turma — participação opcional</h3>
-    <p class="small muted">Você pode informar uma nota de 0 a 10. Sua nota individual fica protegida no Supabase e não aparece no mural. Só exibimos médias agrupadas quando pelo menos cinco alunos contribuíram para a mesma prova. Para maior privacidade, as médias são arredondadas de 0,5 em 0,5 ponto. Não inclua nome nem dados pessoais.</p>
+    <p class="small muted">Nesta 3ª etapa, cada prova vale de 0 a 12 pontos (na 1ª e na 2ª etapas, o máximo era 10). Sua nota individual fica protegida no Supabase e não aparece no mural. Só exibimos médias agrupadas quando pelo menos cinco alunos contribuíram para a mesma prova. Para maior privacidade, as médias são arredondadas de 0,5 em 0,5 ponto. Não inclua nome nem dados pessoais.</p>
     <div class="grid">
       <div class="span-6">
         <label for="portalGradeExam"><b>Escolha a prova</b></label>
@@ -404,8 +404,8 @@ button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-vis
           <option value="historia_1911">19/11 — História</option><option value="ingles_1911">19/11 — Inglês</option>
           <option value="ciencias_2311">23/11 — Ciências</option><option value="arte_2311">23/11 — Arte</option>
         </select>
-        <label for="portalGradeValue"><b>Sua nota (0 a 10)</b></label>
-        <input id="portalGradeValue" class="study-field" type="number" inputmode="decimal" min="0" max="10" step="0.5" placeholder="Ex.: 8,5">
+        <label for="portalGradeValue"><b>Sua nota da 3ª etapa (0 a 12)</b></label>
+        <input id="portalGradeValue" class="study-field" type="number" inputmode="decimal" min="0" max="12" step="0.5" placeholder="Ex.: 8,5">
         <div class="row"><button class="btn orange" type="button" onclick="portalGradeSave()">Salvar minha nota</button><button class="btn light" type="button" onclick="portalGradeDelete()">Excluir minha nota desta prova</button></div>
         <p class="small muted" id="portalGradeStatus" role="status">O envio é voluntário. É necessário conectar-se ao Supabase para contribuir; não há divulgação de notas individuais.</p>
       </div>
@@ -1253,7 +1253,7 @@ async function portalGradeSave(){
  const prova=document.getElementById("portalGradeExam").value;
  const raw=document.getElementById("portalGradeValue").value.replace(",",".");
  const nota=Number(raw);
- if(!Object.hasOwn(portalGradeNames,prova)||raw.trim()===""||!Number.isFinite(nota)||nota<0||nota>10||Math.round(nota*2)!==nota*2){portalGradeMsg("Informe uma nota de 0 a 10 em intervalos de 0,5 ponto.");return}
+ if(!Object.hasOwn(portalGradeNames,prova)||raw.trim()===""||!Number.isFinite(nota)||nota<0||nota>12||Math.round(nota*2)!==nota*2){portalGradeMsg("Informe uma nota de 0 a 12 em intervalos de 0,5 ponto.");return}
  if(!confirm("Enviar voluntariamente sua nota desta prova? Ela será armazenada de forma privada e entrará somente no cálculo da média coletiva."))return;
  portalGradeMsg("Salvando a nota com proteção de acesso…");
  try{
@@ -1286,7 +1286,7 @@ async function portalGradeRefresh(){
   for(const [key,name] of Object.entries(portalGradeNames)){
    const row=document.createElement("div");row.className="between mission";
    const label=document.createElement("span");label.textContent=name;
-   const result=document.createElement("b");result.textContent=grades.has(key)?Number(grades.get(key)).toFixed(1).replace(".",",")+" / 10":"Aguardando 5 notas";
+   const result=document.createElement("b");result.textContent=grades.has(key)?Number(grades.get(key)).toFixed(1).replace(".",",")+" / 12":"Aguardando 5 notas";
    row.append(label,result);root.append(row);
   }
  }catch(e){root.textContent="As médias online não estão disponíveis no momento."}
