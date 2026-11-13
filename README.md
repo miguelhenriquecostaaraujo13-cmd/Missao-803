@@ -1,4 +1,4 @@
-# NEXO 803 🎓⚡
+# Portal 803 🎓⚡
 
 **Conecte seu conhecimento. Evolua a cada missão!**
 
@@ -17,9 +17,13 @@ Plataforma independente e gratuita de estudos para a turma 803.
 
 ## Publicação
 
-GitHub Pages: https://miguelhenriquecostaaraujo13-cmd.github.io/Missao-803/
+Publicação atual pelo GitHub Pages: https://miguelhenriquecostaaraujo13-cmd.github.io/Missao-803/
 
-O repositório permanece com o nome `Missao-803`, mas o nome público da plataforma é **NEXO 803**.
+Para publicar também no Netlify, entre em https://app.netlify.com, importe o repositório `miguelhenriquecostaaraujo13-cmd/Missao-803`, use a branch `main`, deixe o comando de build vazio e o diretório de publicação como `.` (raiz). Escolha o nome do projeto `portal803` se estiver disponível. A URL `portal803.netlify.app` só pode ser confirmada no painel Netlify, após criá-la. Não é necessário plano pago.
+
+**Importante:** O histórico salvo no navegador sob o endereço do GitHub Pages não é automaticamente transferido para o novo domínio do Netlify. Exporte seus dados antes da mudança, quando possível.
+
+O repositório permanece com o nome `Missao-803`, mas o nome público da plataforma é **Portal 803**.
 
 ## Gratuidade e limitações
 
