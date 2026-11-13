@@ -167,6 +167,13 @@ button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-vis
 }
 @media(max-width:480px){.theme-grid{grid-template-columns:1fr}.theme-card{display:grid;grid-template-columns:78px 1fr;align-items:center}.theme-swatch{grid-row:span 2;height:54px}.theme-card small{grid-column:2}.portal-top{align-items:start}.portal-eyebrow{display:none}.card{padding:15px}}
 
+
+/* Central de lembretes: respeita os três temas, inclusive no celular. */
+#reminderDaily,#reminderExams,#reminderAnnouncements,#reminderSystem{width:18px;height:18px;accent-color:var(--teal)}
+#reminderInbox .mission{overflow-wrap:anywhere}
+.reminder-banner{margin:0 0 15px;padding:13px 16px;border:1px solid var(--line);border-left:4px solid var(--teal);border-radius:14px;background:var(--white);box-shadow:var(--shadow);color:var(--ink)}
+.reminder-banner b{display:block;margin-bottom:4px}
+.reminder-banner .btn{margin-top:8px}
 </style>
  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.105.0"></script>
 </head>
@@ -200,13 +207,14 @@ button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-vis
   <button class="navbtn" data-view="revisoes">🎯 Missões e revisões</button>
   <button class="navbtn" data-view="arena">🎮 Arena 803</button>
   <button class="navbtn" data-view="calendario">📅 Calendário</button>
+  <button class="navbtn" data-view="lembretes">🔔 Lembretes</button>
   <button class="navbtn" data-view="professor">👩‍🏫 Professor</button>
   <button class="navbtn" data-view="criador">🔒 Modo Proprietário</button>
   <button class="navbtn" data-view="offline">📶 Offline</button>
 
 </div></nav>
 <main>
-<section id="inicio" class="view active"><div class="card" style="margin-bottom:16px" id="portalPublicBulletin"><h3>📢 Avisos e provas atualizados</h3><p class="small muted">Publicações oficiais cadastradas pelo proprietário do Portal 803.</p><div id="portalPublicItems"><p class="small muted">Carregando avisos...</p></div></div>
+<section id="inicio" class="view active"><div id="reminderHomeBanner" aria-live="polite"></div><div class="card" style="margin-bottom:16px" id="portalPublicBulletin"><h3>📢 Avisos e provas atualizados</h3><p class="small muted">Publicações oficiais cadastradas pelo proprietário do Portal 803.</p><div id="portalPublicItems"><p class="small muted">Carregando avisos...</p></div></div>
   <h2>Seu painel de missão</h2><p class="sub">Seu progresso é salvo neste navegador. Marque os tópicos na trilha e veja os indicadores se atualizarem.</p>
   <div class="theme-showcase card" aria-label="Personalizar aparência"><div class="theme-showcase-head"><div><span class="theme-eyebrow">PERSONALIZE SUA EXPERIÊNCIA</span><h3>Escolha seu estilo ✨</h3><p class="small muted">Três visuais do Portal 803, com os mesmos recursos e o mesmo progresso.</p></div><span class="theme-current" id="portalThemeCurrent">Aurora</span></div>
     <div class="theme-grid">
@@ -423,7 +431,32 @@ button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-vis
 <section id="laboratorio" class="view"><h2>🧪 Laboratório de Questões</h2><p class="sub">Cole um resumo ou texto de estudo e pratique com perguntas de completar lacunas. Tudo acontece no seu navegador: sem IA paga e sem enviar o texto para servidores.</p><div class="grid"><div class="card span-6"><label for="labText"><b>Meu texto de estudo</b></label><textarea id="labText" class="study-field" rows="10" maxlength="12000" placeholder="Exemplo: A fotossíntese é o processo pelo qual as plantas produzem seu alimento usando luz solar."></textarea><p class="small muted">Use frases explicativas com pelo menos algumas palavras. Evite colar informações pessoais.</p><label for="labCount">Quantidade de questões</label><select id="labCount" class="study-field"><option>3</option><option selected>5</option><option>10</option></select><button class="btn orange" onclick="labGenerate()">⚡ Criar questões</button><button class="btn light" onclick="labClear()">Limpar texto</button><p id="labStatus" class="small muted" role="status">Nenhum texto enviado.</p></div><div class="card span-6"><h3 id="labHeading">Questões geradas</h3><p id="labQuestion">As perguntas aparecerão aqui depois que você colar seu texto no campo da esquerda e clicar em “Criar questões”.</p><div id="labOptions"></div><p id="labFeedback" role="status"></p><button id="labNext" class="btn orange" onclick="labNextQuestion()" hidden>Próxima →</button><p id="labProgress" class="small muted"></p></div></div></section>
 <section id="desempenho" class="view"><h2>📊 Meu desempenho por matéria</h2><p class="sub">Veja seus resultados nos simulados e descubra onde revisar. Os dados ficam salvos neste navegador.</p><div class="card"><button class="btn orange" onclick="renderNexoPerformance()">↻ Atualizar resultados</button><div id="nexoPerformance" style="margin-top:16px"></div><p class="small muted">Os resultados mostram apenas as questões respondidas nos simulados. Eles não são notas escolares.</p></div></section>
 <section id="arena" class="view"><h2>🎮 Arena 803 — Desafio do conhecimento</h2><p class="sub">Jogue para aprender, sem ranking entre colegas. As perguntas são selecionadas dos simulados existentes.</p><div class="grid"><div class="card span-7"><h3 id="arenaTitle">Prepare-se para o desafio</h3><p id="arenaQuestion">Escolha uma matéria e comece uma rodada de cinco perguntas.</p><div id="arenaOptions" class="mission"></div><div class="row"><button class="btn orange" onclick="startArena()">▶ Nova rodada</button><button class="btn light" onclick="showView('quiz')">Abrir simulados</button></div><p class="small muted" id="arenaFeedback" role="status"></p></div><div class="card span-5"><h3>Minha rodada</h3><div class="metric" id="arenaScore">0 / 5</div><p class="small muted" id="arenaProgress">Nenhuma rodada iniciada.</p><label for="arenaSubject"><b>Matéria</b></label><select id="arenaSubject" class="study-field"><option value="Todas">Todas</option></select><p class="small muted">Sem competição pública, notas individuais ou pressão. O objetivo é praticar.</p></div></div></section>
-<section id="calendario" class="view"><h2>📅 Calendário de estudos</h2><p class="sub">Organize suas tarefas e acompanhe as provas. Datas do roteiro original de novembro de 2026: confirme com o professor caso o calendário mude.</p><div class="grid"><div class="card span-6"><h3>Meu compromisso</h3><label for="calendarDate">Data</label><input id="calendarDate" class="study-field" type="date"><label for="calendarTask">O que vou estudar?</label><input id="calendarTask" class="study-field" maxlength="140" placeholder="Ex.: revisar porcentagem"><button class="btn orange" onclick="addCalendarTask()">Adicionar lembrete</button><p class="small muted">Os lembretes ficam neste navegador e não enviam notificações automáticas.</p></div><div class="card span-6"><h3>Próximas tarefas</h3><div id="calendarItems"></div></div><div class="card span-12"><h3>Semana de provas</h3><p>📚 Período previsto no roteiro: <b>16 a 23 de novembro de 2026</b>. Consulte o cronograma oficial da turma para saber qual prova acontece em cada dia.</p><p class="small muted" id="calendarCountdown"></p></div></div></section>
+<section id="calendario" class="view"><h2>📅 Calendário de estudos</h2><p class="sub">Organize suas tarefas e acompanhe as provas. Datas do roteiro original de novembro de 2026: confirme com o professor caso o calendário mude.</p><div class="grid"><div class="card span-6"><h3>Meu compromisso</h3><label for="calendarDate">Data</label><input id="calendarDate" class="study-field" type="date"><label for="calendarTask">O que vou estudar?</label><input id="calendarTask" class="study-field" maxlength="140" placeholder="Ex.: revisar porcentagem"><button class="btn orange" onclick="addCalendarTask()">Adicionar lembrete</button><p class="small muted">As tarefas ficam neste navegador. Para receber lembretes de estudo e provas, configure a aba 🔔 Lembretes.</p></div><div class="card span-6"><h3>Próximas tarefas</h3><div id="calendarItems"></div></div><div class="card span-12"><h3>Semana de provas</h3><p>📚 Período previsto no roteiro: <b>16 a 23 de novembro de 2026</b>. Consulte o cronograma oficial da turma para saber qual prova acontece em cada dia.</p><p class="small muted" id="calendarCountdown"></p></div></div></section>
+<section id="lembretes" class="view">
+<h2>🔔 Central de lembretes</h2><p class="sub">Estude no seu ritmo: escolha quais lembretes quer receber. Nada é ativado sem sua escolha.</p>
+<div class="callout" style="margin-bottom:15px"><b>Como funciona:</b> lembretes dentro do site quando você o abre e alertas do sistema enquanto a página está aberta (mesmo em outra aba, quando o navegador permitir). <b>Com o site totalmente fechado, não há envio push automático nesta versão.</b> As preferências e o histórico ficam no seu navegador.</div>
+<div class="grid">
+ <div class="card span-6"><h3>⚙️ Meus lembretes</h3>
+  <label class="row" style="margin:12px 0"><input type="checkbox" id="reminderDaily"> <b>📚 Lembrete diário para estudar</b></label>
+  <label for="reminderTime">Meu horário preferido</label><input id="reminderTime" type="time" value="19:00" class="study-field">
+  <label class="row" style="margin:12px 0"><input type="checkbox" id="reminderExams"> <b>📅 Avisar sobre provas do dia seguinte</b></label>
+  <label class="row" style="margin:12px 0"><input type="checkbox" id="reminderAnnouncements"> <b>📢 Avisar sobre novos comunicados oficiais</b></label>
+  <div class="row"><button class="btn orange" type="button" onclick="remindersSaveSettings()">Salvar preferências</button><button class="btn light" type="button" onclick="remindersDisable()">Desativar lembretes</button></div>
+  <p class="small muted" id="reminderStatus" role="status">Nenhum aviso foi ativado neste dispositivo.</p>
+ </div>
+ <div class="card span-6"><h3>📱 Alertas do celular ou computador</h3>
+  <p class="small muted">A permissão é opcional e é solicitada somente quando você clicar no botão. O navegador e o sistema operacional podem limitar os alertas.</p>
+  <label class="row" style="margin:12px 0"><input type="checkbox" id="reminderSystem"> <b>Também mostrar alertas do sistema</b></label>
+  <div class="row"><button class="btn orange" type="button" onclick="remindersRequestPermission()">🔔 Permitir notificações</button><button class="btn light" type="button" onclick="remindersTest()">Testar aviso</button></div>
+  <p class="small muted" id="reminderPermission" role="status">Permissão do navegador: ainda não verificada.</p>
+  <p class="small muted">Não é preciso fornecer nome, telefone ou e-mail para esses lembretes. O site não envia seus horários ou preferências ao Supabase.</p>
+ </div>
+ <div class="card span-12"><div class="between"><h3>📬 Minha caixa de lembretes</h3><button class="btn light" type="button" onclick="remindersClearInbox()">Limpar avisos</button></div>
+  <p class="small muted">Os avisos aparecem aqui quando o Portal 803 estiver aberto. Você também pode ver recados oficiais no painel inicial.</p>
+  <div id="reminderInbox" aria-live="polite"></div>
+ </div>
+</div>
+</section>
 <section id="professor" class="view"><h2>👩‍🏫 Espaço do professor</h2><p class="sub">Materiais e instruções para docentes e responsáveis, sem expor dados dos estudantes.</p><div class="grid"><div class="card span-6"><h3>Como aprovar materiais da biblioteca</h3><p>As publicações enviadas pelos alunos ficam pendentes até revisão no painel administrativo do Supabase. Somente responsáveis autorizados devem ter acesso ao painel.</p><p class="small muted">Esta página é informativa; não concede permissões de administrador. A aprovação precisa ser feita com acesso administrativo separado.</p></div><div class="card span-6"><h3>Atividade sugerida</h3><p>Peça que os alunos criem um resumo com suas palavras, respondam uma questão e comparem a explicação com o material da aula. Incentive a checagem de fontes.</p><button class="btn light" onclick="showView('biblioteca')">Abrir biblioteca</button></div></div></section>
 <section id="criador" class="view">
  <h2>🔒 Modo Proprietário — Portal 803</h2><p class="sub">Administração protegida por login do Supabase e permissões do banco de dados. Nenhuma senha fica no código do site.</p>
@@ -1292,6 +1325,161 @@ async function portalGradeRefresh(){
  }catch(e){root.textContent="As médias online não estão disponíveis no momento."}
 }
 portalGradeRefresh();
+
+
+/* Portal 803: lembretes opt-in. Sem coleta de dados pessoais e sem prometer push fechado. */
+const REMINDER_SETTINGS_KEY="portal803-reminders-v1";
+const REMINDER_INBOX_KEY="portal803-reminder-inbox-v1";
+const REMINDER_DELIVERED_KEY="portal803-reminder-delivered-v1";
+const REMINDER_ANNOUNCEMENT_KEY="portal803-reminder-announcements-v1";
+function reminderRead(key,fallback){try{const d=JSON.parse(localStorage.getItem(key)||"null");return d===null?fallback:d}catch(e){return fallback}}
+function reminderStore(key,value){try{localStorage.setItem(key,JSON.stringify(value))}catch(e){}}
+let reminderSettings=reminderRead(REMINDER_SETTINGS_KEY,{enabled:false,daily:false,exams:false,announcements:false,system:false,time:"19:00"});
+let reminderInbox=reminderRead(REMINDER_INBOX_KEY,[]);
+if(!Array.isArray(reminderInbox))reminderInbox=[];
+let reminderDelivered=reminderRead(REMINDER_DELIVERED_KEY,{});
+if(!reminderDelivered||typeof reminderDelivered!=="object"||Array.isArray(reminderDelivered))reminderDelivered={};
+let reminderAnnouncementsReady=false;
+function remindersStatus(message){const el=document.getElementById("reminderStatus");if(el)el.textContent=message}
+function remindersPermissionStatus(){
+ const el=document.getElementById("reminderPermission");if(!el)return;
+ el.textContent=!("Notification" in window)?"Este navegador não oferece alertas do sistema. Os lembretes internos ainda funcionam.":"Permissão do navegador: "+({granted:"permitida",denied:"bloqueada nas configurações do navegador",default:"não solicitada"})[Notification.permission];
+}
+function remindersLoadUI(){
+ document.getElementById("reminderDaily").checked=!!reminderSettings.daily;
+ document.getElementById("reminderExams").checked=!!reminderSettings.exams;
+ document.getElementById("reminderAnnouncements").checked=!!reminderSettings.announcements;
+ document.getElementById("reminderSystem").checked=!!reminderSettings.system;
+ document.getElementById("reminderTime").value=/^([01]\d|2[0-3]):[0-5]\d$/.test(reminderSettings.time)?reminderSettings.time:"19:00";
+ remindersStatus(reminderSettings.enabled?"Preferências ativas neste navegador. Você pode mudar ou desativar quando quiser.":"Lembretes desativados. Salve as preferências para ativá-los.");
+ remindersPermissionStatus();remindersRenderInbox();
+}
+function remindersSaveSettings(){
+ const time=document.getElementById("reminderTime").value||"19:00";
+ if(!/^([01]\d|2[0-3]):[0-5]\d$/.test(time)){remindersStatus("Escolha um horário válido.");return}
+ const daily=document.getElementById("reminderDaily").checked,exams=document.getElementById("reminderExams").checked,announcements=document.getElementById("reminderAnnouncements").checked;
+ const system=document.getElementById("reminderSystem").checked;
+ reminderSettings={enabled:daily||exams||announcements,daily,exams,announcements,system,time};
+ reminderStore(REMINDER_SETTINGS_KEY,reminderSettings);
+ remindersStatus(reminderSettings.enabled?"✅ Lembretes ativados! Abra o site para recebê-los; alertas do sistema exigem permissão.":"Nenhum tipo de lembrete selecionado. Todos permanecem desativados.");
+ remindersTick();
+ if(reminderSettings.announcements)remindersCheckAnnouncements();
+}
+function remindersDisable(){
+ reminderSettings={enabled:false,daily:false,exams:false,announcements:false,system:false,time:reminderSettings.time||"19:00"};
+ reminderStore(REMINDER_SETTINGS_KEY,reminderSettings);
+ remindersLoadUI();
+ remindersStatus("✅ Lembretes desativados neste dispositivo.");
+}
+async function remindersRequestPermission(){
+ if(!("Notification" in window)){remindersPermissionStatus();return}
+ if(!window.isSecureContext){remindersStatus("Abra o Portal 803 em HTTPS para solicitar permissão.");return}
+ try{
+  // A solicitação parte diretamente do clique voluntário.
+  const permission=await Notification.requestPermission();
+  remindersPermissionStatus();
+  if(permission==="granted"){
+   document.getElementById("reminderSystem").checked=true;
+   remindersStatus("✅ Permissão concedida. Selecione seus lembretes e clique em Salvar preferências.");
+  }else remindersStatus("A permissão não foi concedida. Os lembretes dentro do site continuam disponíveis.");
+ }catch(e){remindersStatus("Seu navegador não permitiu solicitar notificações. Você ainda pode usar os avisos dentro do site.")}
+}
+async function remindersSystemNotify(title,message,tag){
+ if(!reminderSettings.system||!("Notification" in window)||Notification.permission!=="granted")return;
+ try{
+  if("serviceWorker" in navigator){
+   const reg=await navigator.serviceWorker.register("./sw.js");
+   await reg.showNotification(title,{body:message,tag:"portal803-"+tag,data:{url:location.origin+location.pathname}});
+  }else{new Notification(title,{body:message,tag:"portal803-"+tag})}
+ }catch(e){/* Aviso interno continua disponível se o sistema não oferecer suporte. */}
+}
+function remindersRenderInbox(){
+ const root=document.getElementById("reminderInbox");if(!root)return;root.replaceChildren();
+ const items=reminderInbox.filter(x=>x&&typeof x.title==="string"&&typeof x.body==="string").slice(0,35);
+ if(!items.length){const p=document.createElement("p");p.className="small muted";p.textContent="Nenhum lembrete recebido ainda.";root.append(p);return}
+ for(const x of items){const row=document.createElement("div");row.className="mission";const title=document.createElement("b");title.textContent=x.title;const body=document.createElement("p");body.textContent=x.body;const date=document.createElement("small");date.className="muted";date.textContent=x.at?new Date(x.at).toLocaleString("pt-BR"):"";row.append(title,body,date);root.append(row)}
+}
+function remindersBanner(title,message){
+ const root=document.getElementById("reminderHomeBanner");if(!root)return;
+ root.replaceChildren();const panel=document.createElement("div");panel.className="reminder-banner";
+ const h=document.createElement("b");h.textContent=title;const p=document.createElement("span");p.textContent=message;
+ const btn=document.createElement("button");btn.className="btn light";btn.textContent="Ver lembretes";btn.onclick=()=>showView("lembretes");
+ panel.append(h,p,document.createElement("br"),btn);root.append(panel);
+}
+function remindersDeliver(key,title,body){
+ if(reminderDelivered[key])return;
+ reminderDelivered[key]=new Date().toISOString();
+ const entries=Object.entries(reminderDelivered);
+ if(entries.length>120){entries.sort((a,b)=>String(b[1]).localeCompare(String(a[1])));reminderDelivered=Object.fromEntries(entries.slice(0,90))}
+ reminderStore(REMINDER_DELIVERED_KEY,reminderDelivered);
+ reminderInbox.unshift({title,body,at:new Date().toISOString()});reminderInbox=reminderInbox.slice(0,35);
+ reminderStore(REMINDER_INBOX_KEY,reminderInbox);remindersRenderInbox();
+ remindersBanner(title,body);remindersSystemNotify(title,body,key);
+}
+function remindersDay(date){return [date.getFullYear(),String(date.getMonth()+1).padStart(2,"0"),String(date.getDate()).padStart(2,"0")].join("-")}
+function remindersTomorrow(){
+ const d=new Date();d.setHours(12,0,0,0);d.setDate(d.getDate()+1);return remindersDay(d);
+}
+const reminderBaseExams=[
+ {date:"2026-11-16",name:"Matemática"},
+ {date:"2026-11-17",name:"Português"},
+ {date:"2026-11-18",name:"Geografia e Educação Física teórica"},
+ {date:"2026-11-19",name:"História e Inglês"},
+ {date:"2026-11-23",name:"Ciências e Arte"}
+];
+let reminderOfficialExams=[];
+function remindersTick(){
+ if(!reminderSettings.enabled)return;
+ const now=new Date(),today=remindersDay(now),time=String(now.getHours()).padStart(2,"0")+":"+String(now.getMinutes()).padStart(2,"0");
+ if(reminderSettings.daily&&time>=reminderSettings.time&&time<"23:00"){
+  remindersDeliver("study-"+today,"📚 Hora de estudar!","Portal 803: que tal revisar uma matéria e fazer algumas questões?");
+ }
+ if(reminderSettings.exams){
+  const next=remindersTomorrow();
+  const relevant=[...reminderBaseExams,...reminderOfficialExams].filter(x=>x.date===next&&x.name);
+  const names=[...new Set(relevant.map(x=>String(x.name).slice(0,80)))];
+  if(names.length)remindersDeliver("exam-"+next,"📝 Prova amanhã","Confira o cronograma e revise: "+names.join(", ")+".");
+ }
+}
+async function remindersCheckAnnouncements(){
+ if(!reminderSettings.enabled||!reminderSettings.announcements||!navigator.onLine)return;
+ try{
+  const client=ensureCloudClient();
+  const [notices,exams]=await Promise.all([
+   client.from("portal803_announcements").select("id,title,created_at").eq("published",true).order("created_at",{ascending:false}).limit(25),
+   client.from("portal803_exams").select("subject,exam_date").eq("published",true).gte("exam_date",remindersDay(new Date())).limit(30)
+  ]);
+  if(!exams.error)reminderOfficialExams=(exams.data||[]).map(x=>({name:x.subject,date:x.exam_date})).filter(x=>x.name&&x.date);
+  if(notices.error)throw notices.error;
+  const newest=(notices.data||[]).filter(x=>x&&x.id);
+  const saved=reminderRead(REMINDER_ANNOUNCEMENT_KEY,null);
+  if(!Array.isArray(saved)){reminderStore(REMINDER_ANNOUNCEMENT_KEY,newest.map(x=>x.id));reminderAnnouncementsReady=true;remindersTick();return}
+  const known=new Set(saved);
+  for(const n of newest.slice().reverse()){
+   if(!known.has(n.id))remindersDeliver("announcement-"+n.id,"📢 Novo aviso da turma","Confira os comunicados oficiais na página inicial do Portal 803.");
+  }
+  reminderStore(REMINDER_ANNOUNCEMENT_KEY,[...new Set([...newest.map(x=>x.id),...saved])].slice(0,120));
+  reminderAnnouncementsReady=true;remindersTick();
+ }catch(e){/* Se não houver internet, mantém os avisos locais. */}
+}
+function remindersTest(){
+ const title="🔔 Teste do Portal 803",body="Seu lembrete de demonstração está funcionando dentro do site!";
+ reminderInbox.unshift({title,body,at:new Date().toISOString()});reminderInbox=reminderInbox.slice(0,35);
+ reminderStore(REMINDER_INBOX_KEY,reminderInbox);remindersRenderInbox();remindersBanner(title,body);
+ remindersSystemNotify(title,body,"test-"+Date.now());
+ remindersStatus("✅ Lembrete de teste criado! O alerta do sistema só aparece se estiver habilitado e autorizado.");
+}
+function remindersClearInbox(){
+ if(!confirm("Apagar os lembretes recebidos neste navegador? As preferências serão mantidas."))return;
+ reminderInbox=[];reminderStore(REMINDER_INBOX_KEY,reminderInbox);remindersRenderInbox();
+ document.getElementById("reminderHomeBanner").replaceChildren();remindersStatus("Caixa de lembretes limpa.");
+}
+remindersLoadUI();
+remindersTick();
+if(reminderSettings.announcements)remindersCheckAnnouncements();
+setInterval(()=>{remindersTick();if(reminderSettings.announcements)remindersCheckAnnouncements()},15*60*1000);
+document.addEventListener("visibilitychange",()=>{if(!document.hidden){remindersTick();if(reminderSettings.announcements)remindersCheckAnnouncements()}});
+window.addEventListener("focus",()=>remindersTick());
 
 init();renderNexo();
 </script>
