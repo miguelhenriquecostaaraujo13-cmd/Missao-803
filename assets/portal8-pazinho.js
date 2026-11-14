@@ -1,4 +1,4 @@
-/* Pazinho: balões por ferramenta, sem coleta de dados, sem áudio ou serviços externos. */
+/* Neo: balões por ferramenta, sem coleta de dados, sem áudio ou serviços externos. */
 (() => {
  "use strict";
  const STORAGE_KEY="portal8-pazinho-enabled-v1";
@@ -55,7 +55,7 @@
   const title=widget?.querySelector(".pazinho-topo span");if(title)title.textContent="💙 Dica do "+mascotName;
   if(avatar){avatar.title=mascotName+": mostrar uma dica";avatar.setAttribute("aria-label",mascotName+": mostrar dica da ferramenta")}
   if(close)close.setAttribute("aria-label","Fechar dica do "+mascotName);
-  if(fala&&fala.textContent)fala.textContent=fala.textContent.replace(/\bPazinho\b/gi,mascotName);
+  if(fala&&fala.textContent)fala.textContent=fala.textContent;
   const current=document.getElementById("portal8MascotNameCurrent");
   if(current)current.textContent=mascotName;
   const input=document.getElementById("portal8MascotNameInput");
@@ -152,7 +152,7 @@
   entryTimer=setTimeout(()=>{
    if(!enabled)return;
    setMotionMode();pauseClock();
-   fala.textContent=nextTip(activeId).replace(/\{mascote\}/g,mascotName).replace(/\bPazinho\b/gi,mascotName);
+   fala.textContent=nextTip(activeId).replace(/\{mascote\}/g,mascotName);
    balao.hidden=false;
    // Atualiza o conteúdo sem reconstruir o resto da página.
    balao.classList.remove("is-open");
