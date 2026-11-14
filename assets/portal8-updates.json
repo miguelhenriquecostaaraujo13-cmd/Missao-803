@@ -1,5 +1,12 @@
 [
   {
+    "id": "versao-a7bbbf7d4106",
+    "title": "Oficina Criativa Neo libera ideias aprovadas para todas as turmas",
+    "body": "42 experiências reunidas em área pública, com Ateliê reservado ao administrador e backup de preferências local corrigido.",
+    "date": "2026-11-14",
+    "important": true
+  },
+  {
     "id": "versao-50344a6903cf",
     "title": "Ateliê Neo separado dos mapas e melhorias em todas as 31 ferramentas",
     "body": "Busca rápida Ctrl+K, atalhos, favoritos e visual responsivo; testes de mapas agora somente no painel do administrador.",
