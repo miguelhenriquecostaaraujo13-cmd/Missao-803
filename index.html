@@ -651,7 +651,41 @@ html[data-phase-motion="reduce"] .view.active.portal8-enter-active{
 <link rel="stylesheet" href="./assets/portal8-expansao.css?v=18">
 <link rel="stylesheet" href="./assets/portal8-pazinho.css?v=22">
 <link rel="stylesheet" href="./assets/portal8-perfil.css?v=21">
-<link rel="stylesheet" href="./assets/portal8-horizonte.css?v=24">
+<link rel="stylesheet" href="./assets/portal8-horizonte.css?v=25">
+<style id="mpMenuCalendarV25">
+/* Menu v25 — correção em TODOS os temas; carregada após todos os CSS antigos. */
+html nav{background:#103755!important;color:#effaff!important}
+html nav::before{color:#f2fcff!important;border-bottom-color:#3a6b88!important}
+html nav .navquick label{color:#d6eaf5!important}
+html nav .navquick select{background:#183f61!important;border:1.5px solid #8abbcf!important;color:#fff!important;border-radius:12px!important;box-shadow:none!important}
+html nav .navquick select option,html nav .navquick select optgroup{background:#183f61!important;color:#fff!important}
+html nav .navgroup{background:#163c5e!important;border:1px solid #47718d!important;border-radius:14px!important;box-shadow:none!important}
+html nav .navgroup[open]{background:#173f63!important;border-color:#89bfd3!important}
+html nav .navgroup>summary{background:#1d496e!important;color:#f7fcff!important;text-shadow:none!important;border-radius:13px!important;filter:none!important}
+html nav .navgroup[open]>summary{background:#20577c!important;color:#fff!important}
+html nav .navgroup>summary::after{color:#daf6ff!important}
+html nav .navgroup .navcount{background:#103451!important;color:#f7fdff!important;border:1px solid #7cacc8!important}
+html nav .navgroup-items{background:#133b5d!important;padding:7px!important}
+html nav .navgroup-items .navbtn{background:#1b496d!important;color:#f5fbff!important;border:1px solid #416e90!important;box-shadow:none!important;border-radius:11px!important}
+html nav .navgroup-items .navbtn:hover{background:#296388!important;color:#fff!important;border-color:#a0d5e1!important}
+html nav .navgroup-items .navbtn.active,html nav .navgroup-items .navbtn[aria-current="page"]{background:#b9eaf1!important;color:#103d59!important;border-color:#b9eaf1!important;box-shadow:inset 4px 0 #258da7!important;font-weight:900!important}
+html nav .navhint{color:#c4e0ed!important}
+html nav :is(summary,button,select):focus-visible{outline:3px solid #ffd781!important;outline-offset:2px}
+@media(max-width:790px){html nav{background:#103755!important;border-bottom:1px solid #5686a1!important}}
+/* Calendário oficial da folha: visual separado do calendário de provas. */
+.mp-school-year{margin:19px 0;padding:19px;border-radius:21px 10px 21px 10px;border:1px solid var(--line);background:var(--white);box-shadow:0 7px 21px rgba(12,57,96,.08)}
+.mp-school-year h3{margin:0 0 6px;color:var(--ink)}
+.mp-school-year .mp-school-intro{font-size:.87rem;color:var(--muted);line-height:1.65;margin:0 0 15px}
+.mp-school-events{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.mp-school-event{display:flex;flex-direction:column;min-width:0;gap:5px;padding:12px 14px;border-radius:13px;border:1px solid var(--line);border-left:4px solid #2587ab;background:var(--portal-panel);color:var(--ink)}
+.mp-school-event-date{font-size:.77rem;font-weight:900;color:var(--muted)}
+.mp-school-event-title{font-size:.93rem;line-height:1.3;color:var(--ink)}
+.mp-school-event-type{font-size:.73rem;color:var(--muted);font-weight:800}
+.mp-school-event-details{margin:4px 0 0;color:var(--muted);font-size:.78rem}
+.mp-school-feriado{border-left-color:#c85d57}.mp-school-sabado,.mp-school-termino{border-left-color:#178ac8}.mp-school-planejamento{border-left-color:#dba32b}.mp-school-recesso{border-left-color:#4b9e65}.mp-school-etapa{border-left-color:#7174c7}
+.mp-school-year .mp-school-link{margin-top:13px}
+@media(max-width:580px){.mp-school-year{padding:14px}.mp-school-events{grid-template-columns:1fr}}
+</style>
 </head>
 <body>
 <div id="portal8RouteIndicator" class="portal8-route-indicator" aria-hidden="true"></div>
@@ -708,6 +742,12 @@ html[data-phase-motion="reduce"] .view.active.portal8-enter-active{
  <div class="mp-overview-card"><span class="mp-tile-icon" aria-hidden="true">✓</span><div><span class="mp-tile-label">Tópicos revisados</span><strong class="mp-tile-value" id="mpHomeCompleted">0 / 0</strong></div></div>
  <div class="mp-overview-card"><span class="mp-tile-icon" aria-hidden="true">★</span><div><span class="mp-tile-label">Acertos nos exercícios</span><strong class="mp-tile-value" id="mpHomeAccuracy">—</strong></div></div>
  <div class="mp-overview-card"><span class="mp-tile-icon" aria-hidden="true">▦</span><div><span class="mp-tile-label">Próxima etapa de estudos</span><strong class="mp-tile-value" id="mpHomeNext">Consulte o calendário</strong></div></div>
+</section>
+<section class="mp-school-year" id="mpSchoolYearHome" aria-label="Próximos eventos do calendário escolar 2026">
+ <h3>📅 Agenda da escola • novembro e dezembro</h3>
+ <p class="mp-school-intro">Datas transcritas do calendário escolar impresso do Instituto Educacional Missão Paz, a partir de 16/11/2026. Não substituem os comunicados e provas publicados pelos professores.</p>
+ <div class="mp-school-events" id="mpSchoolEventsHome" aria-live="polite"><p class="small muted">Carregando eventos restantes do ano…</p></div>
+ <button type="button" class="btn light mp-school-link" onclick="showView('calendario')">Ver calendário escolar completo →</button>
 </section>
 <section class="portal8-pro-home" aria-label="Encontre sua ferramenta de estudos">
   <div class="portal8-pro-heading">
@@ -1046,7 +1086,12 @@ html[data-phase-motion="reduce"] .view.active.portal8-enter-active{
  <div class="p8x-heading"><div><span class="p8x-eyebrow">10 · ATIVIDADES DA TURMA</span><h3>📌 Quadro de atividades e trabalhos</h3><p id="p8xActivitiesSubtitle">Prazos publicados para a turma.</p></div><button type="button" class="btn light" onclick="portal8Classes.loadActivities()">↻ Atualizar</button></div>
  <div id="p8xActivitiesList" class="p8x-grid two" aria-live="polite"><p class="p8x-note">Consultando atividades...</p></div>
  <p class="p8x-note">Os trabalhos são publicados pelo administrador. Confirme prazos e instruções com os professores.</p>
-</section><h2>📅 Calendário e horários</h2><p class="sub">Veja o calendário comum de provas do 8º ano, organize suas tarefas e, na 803, consulte também os horários de cada aula.</p><section class="portal8-school-schedule portal8-803-only card" id="portal8Aulas803" aria-labelledby="portal8Aulas803Titulo">
+</section><h2>📅 Calendário e horários</h2><p class="sub">Veja o calendário comum de provas do 8º ano, organize suas tarefas e, na 803, consulte também os horários de cada aula.</p><section class="mp-school-year" aria-label="Calendário oficial restante de 2026">
+ <h3>🏫 Calendário escolar — 16/11 a 31/12/2026</h3>
+ <p class="mp-school-intro">Transcrição da folha do Instituto Educacional Missão Paz enviada em 14/11. Inclui feriados, sábado letivo, encerramento de etapa, término do ano letivo, planejamento e recesso. As datas de provas estão em uma seção separada abaixo.</p>
+ <div class="mp-school-events" id="mpSchoolEventsFull" aria-live="polite"><p class="small muted">Carregando datas escolares…</p></div>
+ <p class="small muted" style="margin-top:12px">Legenda da folha: F = feriado, SL = sábado letivo, T = término do ano letivo, PL = planejamento, R = recesso. Se houver mudança, confirme com a secretaria.</p>
+</section><section class="portal8-school-schedule portal8-803-only card" id="portal8Aulas803" aria-labelledby="portal8Aulas803Titulo">
  <div class="portal8-school-schedule-head">
   <div><span class="portal8-schedule-kicker">⏰ ROTINA ESCOLAR • 07h00 ÀS 11h30</span><h3 id="portal8Aulas803Titulo">Horário semanal de aulas — Turma 803</h3>
   <p class="small muted">Aulas de segunda a sexta-feira, das <b>7h às 11h30</b>.</p></div>
@@ -2821,7 +2866,7 @@ async function portal8UpdateSite(){
    await Promise.all(regs.map(r=>r.update().catch(()=>null)));
   }
  }catch(e){}
- location.replace(location.pathname+"?versao=recursos-aprovados-v24&atualizacao="+Date.now());
+ location.replace(location.pathname+"?versao=recursos-aprovados-v25&atualizacao="+Date.now());
 }
 function portal8EnableScrollReveal(){
  if(window.matchMedia?.("(prefers-reduced-motion: reduce)").matches||document.documentElement.dataset.phaseMotion==="reduce")return;
@@ -2852,6 +2897,7 @@ init();renderNexo();
 <script src="./assets/portal8-duvidas-v18.js?v=18"></script>
 <script src="./assets/portal8-pazinho.js?v=23"></script>
 <script src="./assets/portal8-horizonte.js?v=23"></script>
+<script src="./assets/portal8-calendario-final2026.js?v=25"></script>
 <script src="./assets/portal8-perfil.js?v=21"></script>
 </body>
 </html>
