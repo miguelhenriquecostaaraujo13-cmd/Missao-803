@@ -1,5 +1,12 @@
 [
   {
+    "id": "versao-8b8733740f39",
+    "title": "Todas as apresentações visíveis do mascote usam Neo",
+    "body": "Corrigidos texto antigo do estudo, título das imagens e documentação; cache atualizado para v36.",
+    "date": "2026-11-14",
+    "important": true
+  },
+  {
     "id": "versao-a7bbbf7d4106",
     "title": "Oficina Criativa Neo libera ideias aprovadas para todas as turmas",
     "body": "42 experiências reunidas em área pública, com Ateliê reservado ao administrador e backup de preferências local corrigido.",
