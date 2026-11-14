@@ -203,7 +203,7 @@
   });
   document.addEventListener("portal8:viewchange",()=>close());
   window.addEventListener("resize",()=>close());
-  document.addEventListener("scroll",()=>{if(!panel.hidden)close()},true);
+  document.addEventListener("scroll",event=>{if(!panel.hidden&&!panel.contains(event.target))close()},true);
   window.neoMoreMenu={openSearch:showSearch,openCurrent:()=>{
    const id=document.querySelector(".view.active")?.id||"inicio";
    const button=$(id)?.querySelector(".neo-more-trigger-v39");
