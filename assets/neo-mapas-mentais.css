@@ -22,3 +22,16 @@
 @media print{body *{visibility:hidden!important}.neo-print-poster,.neo-print-poster *{visibility:visible!important}.neo-print-poster{position:fixed!important;left:5%;top:5%;width:90%;min-height:60vh;padding:34px!important;background:#fff!important;color:#111!important;border:2px solid #111!important;white-space:pre-wrap;font-size:21pt;line-height:1.6}}
 /* O laboratório só pode ser exibido quando o servidor confirmou a autorização. */
 #neoLab[hidden],nav .navbtn[data-view="neoLab"][hidden],#neoOwnerCard[hidden]{display:none!important}
+
+
+/* v32 — mapas organizados e responsivos; sem recorte ou sobreposição de ramificações */
+.neo-map-layout{grid-template-columns:minmax(240px,.7fr) minmax(0,1.45fr);align-items:start}
+.neo-map-preview{min-width:0;overflow:hidden}
+#neoMapCanvas{padding:12px;max-width:100%;overflow:auto;background:#eaf5fa;min-height:280px;max-height:85vh;overscroll-behavior:contain}
+#neoMapCanvas svg{display:block;width:100%;min-width:0!important;max-width:none;height:auto;min-height:240px;filter:drop-shadow(0 4px 12px rgba(13,65,108,.12))}
+#neoMapStyle{border-color:#6eb5ce;box-shadow:0 2px 8px rgba(16,75,113,.07)}
+.neo-map-preview>h3{letter-spacing:-.015em}
+.neo-map-outline{background:var(--portal-panel);border:1px solid var(--line);line-height:1.7}
+@media(max-width:980px){.neo-map-layout{grid-template-columns:1fr}#neoMapCanvas{max-height:none}}
+@media(max-width:560px){#neoMapCanvas{padding:4px}#neoMapCanvas svg{width:100%;min-width:460px!important}.neo-map-preview{padding:12px}}
+@media(prefers-reduced-motion:reduce){#neoMapCanvas svg{transition:none!important}}
