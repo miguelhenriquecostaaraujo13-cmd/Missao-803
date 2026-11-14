@@ -657,7 +657,7 @@ html[data-phase-motion="reduce"] .view.active.portal8-enter-active{
 <link rel="stylesheet" href="./assets/portal8-horizonte.css?v=25">
 <link rel="stylesheet" href="./assets/neo-lab.css?v=27">
 <link rel="stylesheet" href="./assets/neo-acesso-rapido.css?v=28">
-<link rel="stylesheet" href="./assets/neo-mapas-mentais.css?v=29">
+<link rel="stylesheet" href="./assets/neo-mapas-mentais.css?v=32">
 <link rel="stylesheet" href="./assets/neo-ideias.css?v=30">
 <link rel="stylesheet" href="./assets/neo-arcade.css?v=31">
 <style id="mpMenuCalendarV25">
@@ -980,19 +980,20 @@ html nav :is(summary,button,select):focus-visible{outline:3px solid #ffd781!impo
  <p class="small muted">O Arcade Neo é uma atividade complementar. Não registra notas oficiais ou dados de avaliação escolar. Pausa automaticamente ao sair da aba ou minimizar o navegador. Sem comunicação com servidores de jogos.</p>
 </section>
 <section id="mapasNeo" class="view">
- <h2>🧠 Mapas Mentais Neo</h2>
- <p class="sub">Escolha a matéria, selecione o conteúdo específico e gere um esquema visual. Use os tópicos já cadastrados no portal ou escreva suas próprias ramificações. Tudo gratuito, sem API externa.</p>
+ <h2>🧠 Neo Mapas Inteligentes</h2>
+ <p class="sub">Seu gerador especializado de mapas: organiza assuntos e cartões do próprio portal, escolhe conexões relevantes e desenha ramificações alinhadas, sem sobreposição. Gratuito, sem API paga. É um motor inteligente local, não uma IA generativa: ele não inventa explicações sobre temas ausentes.</p>
  <div class="neo-map-layout">
  <div class="neo-map-controls">
   <h3>📚 Preparar meu mapa</h3>
   <label for="neoMapSubject">Matéria</label><select id="neoMapSubject"></select>
   <label for="neoMapTopic">Assunto cadastrado</label><select id="neoMapTopic"></select>
   <label for="neoMapCustom">Ou escreva um assunto específico</label><input id="neoMapCustom" maxlength="100" placeholder="Ex.: Probabilidade, Brasil Império">
+  <label for="neoMapStyle">Estilo do mapa</label><select id="neoMapStyle"><option value="oceano">💙 Oceano Neo</option><option value="aurora">💜 Aurora</option><option value="natureza">💚 Natureza</option><option value="caderno">📘 Caderno</option></select>
   <label for="neoMapBranches">Minhas ideias (uma por linha; opcional)</label>
   <textarea id="neoMapBranches" maxlength="1200" rows="5" placeholder="Conceito principal&#10;Exemplo prático&#10;Dúvida para revisar"></textarea>
   <p class="small muted">O mapa usa capítulos, tópicos e cartões existentes quando encontra correspondência. Caso contrário, suas ideias são usadas sem gerar explicações inventadas.</p>
   <div class="neo-map-actions">
-   <button type="button" id="neoMapGenerate" class="btn orange">✨ Gerar mapa mental</button>
+   <button type="button" id="neoMapGenerate" class="btn orange">✨ Criar mapa inteligente</button>
    <button type="button" id="neoMapDownload" class="btn light">⬇ Salvar mapa SVG</button>
    <button type="button" id="neoMapCopy" class="btn light">📋 Copiar esquema</button>
   </div>
@@ -1322,7 +1323,7 @@ html nav :is(summary,button,select):focus-visible{outline:3px solid #ffd781!impo
   <p class="small muted">Escolha o nome que todos os alunos verão nas dicas e transições do livrinho. Só um administrador autorizado pode salvar a alteração.</p>
   <label for="portal8MascotNameInput"><b>Novo nome do mascote</b></label>
   <input id="portal8MascotNameInput" class="study-field" type="text" minlength="2" maxlength="24" placeholder="Digite o novo nome" autocomplete="off">
-  <p class="small muted">Nome atual: <strong id="portal8MascotNameCurrent">Pazinho</strong></p>
+  <p class="small muted">Nome atual: <strong id="portal8MascotNameCurrent">Neo</strong></p>
   <div class="row"><button type="button" class="btn orange" onclick="window.portal8MascotSaveName?.()">💾 Salvar nome</button></div>
   <p id="portal8MascotNameStatus" class="small muted" role="status" aria-live="polite"></p>
  </section>
@@ -3083,7 +3084,7 @@ async function portal8UpdateSite(){
    await Promise.all(regs.map(r=>r.update().catch(()=>null)));
   }
  }catch(e){}
- location.replace(location.pathname+"?versao=recursos-aprovados-v31&atualizacao="+Date.now());
+ location.replace(location.pathname+"?versao=recursos-aprovados-v32&atualizacao="+Date.now());
 }
 function portal8EnableScrollReveal(){
  if(window.matchMedia?.("(prefers-reduced-motion: reduce)").matches||document.documentElement.dataset.phaseMotion==="reduce")return;
@@ -3112,13 +3113,13 @@ init();renderNexo();
 <script src="./assets/portal8-estudos-v18.js?v=18"></script>
 <script src="./assets/portal8-turmas-v18.js?v=18"></script>
 <script src="./assets/portal8-duvidas-v18.js?v=18"></script>
-<script src="./assets/portal8-pazinho.js?v=23"></script>
+<script src="./assets/portal8-pazinho.js?v=32"></script>
 <script src="./assets/portal8-horizonte.js?v=23"></script>
 <script src="./assets/portal8-calendario-final2026.js?v=25"></script>
 <script src="./assets/neo-tutor-local.js?v=26"></script>
 <script src="./assets/neo-lab.js?v=28"></script>
 <script src="./assets/neo-acesso-rapido.js?v=28"></script>
-<script src="./assets/neo-mapas-mentais.js?v=29"></script>
+<script src="./assets/neo-mapas-mentais.js?v=32"></script>
 <script src="./assets/neo-prototipos-admin.js?v=29"></script>
 <script src="./assets/neo-ideias-mapas.js?v=30"></script>
 <script src="./assets/neo-estudio-inovacoes.js?v=30"></script>
