@@ -1,0 +1,35 @@
+/* Arcade Educativo Neo — minijogos de verdade, responsivos, teclado e toque. */
+.neo-arcade-intro{background:linear-gradient(125deg,#103e70,#0b8b9f);border-radius:22px 10px 22px 10px;padding:22px;color:#fff;margin:0 0 20px;box-shadow:0 14px 28px #103c6740}
+.neo-arcade-intro h3{color:#fff;margin:0 0 5px;font-size:clamp(1.35rem,3vw,1.9rem)}
+.neo-arcade-intro p{color:#e4faff;line-height:1.65;margin:0}
+.neo-arcade-picker{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:15px 0}
+.neo-arcade-picker button{display:flex;flex-direction:column;gap:7px;align-items:flex-start;text-align:left;min-height:100px;padding:16px;border-radius:16px;border:2px solid var(--line);background:var(--white);color:var(--ink);cursor:pointer;font:inherit;transition:border-color .2s,transform .2s}
+.neo-arcade-picker button strong{font-size:.97rem}
+.neo-arcade-picker button small{color:var(--muted);font-size:.79rem}
+.neo-arcade-picker button:hover{transform:translateY(-2px);border-color:#2c9cb5}
+.neo-arcade-picker button[aria-pressed="true"]{background:linear-gradient(135deg,#e6f8fc,#fffaf0);border-color:#208da9;box-shadow:0 7px 17px #0e668022}
+.neo-arcade-stage{padding:16px;border-radius:20px 9px 20px 9px;background:var(--white);border:1px solid var(--line);box-shadow:0 8px 20px #0a4a741c}
+.neo-arcade-stage h3{margin:0 0 5px;color:var(--ink)}
+.neo-arcade-stage>p{font-size:.86rem;color:var(--muted);line-height:1.6;margin:8px 0 13px}
+#neoArcadeCanvas{display:block;width:100%;height:auto;aspect-ratio:9/5;max-height:560px;background:#103c66;border-radius:16px;box-shadow:inset 0 0 0 2px #ffffff26;outline-offset:4px}
+#neoArcadeCanvas:focus-visible{outline:3px solid #e7ad50}
+.neo-arcade-toolbar{display:flex;align-items:center;flex-wrap:wrap;gap:9px;margin-top:13px}
+.neo-arcade-toolbar .btn{min-height:43px}
+.neo-arcade-toolbar>span{margin-left:auto;color:var(--muted);font-size:.81rem}
+.neo-arcade-touch{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:12px;padding:12px;border-radius:14px;background:var(--portal-panel)}
+.neo-arcade-touch .neo-arcade-pad{display:grid;grid-template-columns:repeat(3,55px);grid-template-rows:repeat(2,50px);gap:6px}
+.neo-arcade-touch button{display:grid;place-items:center;min-width:52px;min-height:48px;border:1px solid #66a6bc;background:var(--white);color:var(--ink);border-radius:13px;font:inherit;font-weight:900;font-size:1.1rem;cursor:pointer;touch-action:none;user-select:none;-webkit-user-select:none}
+.neo-arcade-touch button:active{background:#cceef4;transform:scale(.98)}
+.neo-arcade-touch .neo-arcade-up{grid-column:2;grid-row:1}
+.neo-arcade-touch .neo-arcade-left{grid-column:1;grid-row:2}
+.neo-arcade-touch .neo-arcade-down{grid-column:2;grid-row:2}
+.neo-arcade-touch .neo-arcade-right{grid-column:3;grid-row:2}
+.neo-arcade-touch .neo-arcade-jump{min-width:105px;background:#fce2a5;color:#184167;border-color:#e4b85a}
+.neo-arcade-status{color:var(--ink);background:var(--portal-panel);padding:11px 13px;border-radius:12px;font-size:.88rem;line-height:1.45;margin-top:12px}
+.neo-arcade-info{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:14px 0}
+.neo-arcade-info>div{padding:13px;border:1px solid var(--line);border-radius:13px;background:var(--white);font-size:.84rem;color:var(--muted)}
+.neo-arcade-info strong{display:block;margin-bottom:6px;color:var(--ink)}
+#arcadeNeo [hidden]{display:none!important}
+@media(max-width:690px){.neo-arcade-picker{grid-template-columns:1fr}.neo-arcade-picker button{min-height:62px;padding:11px 13px}.neo-arcade-picker button strong{font-size:.9rem}.neo-arcade-stage{padding:10px}.neo-arcade-info{grid-template-columns:1fr}.neo-arcade-toolbar>span{margin-left:0;width:100%}}
+@media(max-width:430px){.neo-arcade-touch{padding:8px}.neo-arcade-touch .neo-arcade-pad{grid-template-columns:repeat(3,47px);grid-template-rows:repeat(2,47px);gap:5px}.neo-arcade-touch button{min-width:44px;min-height:44px}.neo-arcade-touch .neo-arcade-jump{min-width:75px}}
+@media(prefers-reduced-motion:reduce){.neo-arcade-picker button{transition:none!important}}
