@@ -689,7 +689,7 @@ html[data-phase-motion="reduce"] .view.active.portal8-enter-active{
 <link rel="stylesheet" href="./assets/neo-arcade-arte-v38.css?v=38">
 <link rel="stylesheet" href="./assets/portal-polimento-v39.css?v=39">
 <link rel="stylesheet" href="./assets/neo-central-3.css?v=1">
-<link rel="stylesheet" href="./assets/neo-visual-4.css?v=1">
+<link rel="stylesheet" href="./assets/neo-visual-4.css?v=2">
 <style id="mpMenuCalendarV25">
 /* Menu v25 — correção em TODOS os temas; carregada após todos os CSS antigos. */
 html nav{background:#103755!important;color:#effaff!important}
@@ -3242,7 +3242,7 @@ async function portal8UpdateSite(){
    await Promise.all(regs.map(r=>r.update().catch(()=>null)));
   }
  }catch(e){}
- location.replace(location.pathname+"?versao=recursos-aprovados-v39&atualizacao="+Date.now());
+ location.replace(location.pathname+"?versao=neo4-games3d-pixel&atualizacao="+Date.now());
 }
 function portal8EnableScrollReveal(){
  if(window.matchMedia?.("(prefers-reduced-motion: reduce)").matches||document.documentElement.dataset.phaseMotion==="reduce")return;
@@ -3291,9 +3291,9 @@ init();renderNexo();
 <script src="./assets/neo-arcade.js?v=38"></script>
 <script src="./assets/neo-admin-gate.js?v=29"></script>
 <script src="./assets/portal8-perfil.js?v=21"></script>
-<script src="./assets/neo-central-3.js?v=1"></script>
+<script src="./assets/neo-central-3.js?v=2"></script>
 <script src="./assets/neo-agents-4.js?v=1"></script>
-<script src="./assets/neo-games-4.js?v=1"></script>
+<script src="./assets/neo-games-4.js?v=2"></script>
 <div id="p8FirstVisit" role="dialog" aria-modal="true" aria-labelledby="p8WelcomeTitle" hidden>
   <div class="p8-welcome-card">
     <span class="p8-welcome-brand">✨ NEO · PORTAL MISSÃO PAZ</span>
