@@ -186,3 +186,6 @@ html #neoGames40 .mp5-puzzle-shell>small{display:block;margin:13px 0 3px;color:#
  html #neoGames40 .mp5-puzzle-shell{padding:10px}
  html #neoGames40 .mp5-puzzle-answers{grid-template-columns:1fr}
 }
+
+/* O painel de ferramentas não pode cobrir a tela inteira ao ser aberto. */
+html body nav .mp5-tools-drawer .navinner{max-height:min(58vh,440px)!important;overflow-y:auto!important;overscroll-behavior:contain;scrollbar-width:thin}
