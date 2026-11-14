@@ -1,5 +1,12 @@
 [
   {
+    "id": "versao-ac9ac975cf29",
+    "title": "Menu de três pontinhos corrigido e nova Jornada Neo de estudos",
+    "body": "Popover funcional no celular e desktop, favoritos unificados, Modo Foco, acessibilidade e melhorias gerais nas 32 ferramentas.",
+    "date": "2026-11-14",
+    "important": true
+  },
+  {
     "id": "versao-4f324461c36a",
     "title": "Minijogos Neo ganham Visual 2.0 com personagens, cenários e animações",
     "body": "Modo de teste comparável ao clássico, sprites próprios desenhados em canvas e salto aprimorado. Arcade continua gratuito.",
@@ -94,13 +101,6 @@
     "id": "versao-6f12c778be15",
     "title": "Calendário escolar restante de 2026 e correção definitiva das cores do menu",
     "body": "Novo calendário da escola a partir de 16/11 e paleta azul/turquesa unificada em todos os temas, sem mexer nas 28 ferramentas.",
-    "date": "2026-11-14",
-    "important": true
-  },
-  {
-    "id": "versao-cd01ed3ed4c0",
-    "title": "Nova identidade Horizonte Missão Paz com mascote de formatura",
-    "body": "O portal ganhou uma página inicial original, métricas reais e visual renovado. As 28 ferramentas e todas as configurações anteriores foram preservadas.",
     "date": "2026-11-14",
     "important": true
   }
