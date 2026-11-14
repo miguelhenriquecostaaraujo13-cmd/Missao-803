@@ -22,6 +22,21 @@ const games={
  words:{name:"Ritmo dos Conectivos",tag:"Português • Reflexos",help:"Mude de pista para pegar conectivos que combinem com a missão (oposição, adição ou conclusão). Desvie dos outros! Faça 10 acertos.",keys:"← → para mudar de pista"}
 };
 let game=null;
+const STAGES={
+ explorador:{name:"Explorador",fractions:3,cell:2,words:6,lives:4,speed:.92},
+ missao:{name:"Missão",fractions:6,cell:3,words:10,lives:3,speed:1},
+ desafio:{name:"Desafio",fractions:9,cell:3,words:15,lives:3,speed:1.08}
+};
+const stage=()=>STAGES[$("neoArcadeChallenge")?.value]||STAGES.missao;
+function updateMission(){
+ const progress=$("neoArcadeProgress"),label=$("neoArcadeMissionProgress");
+ if(!progress||!game||!active)return;
+ const total=game.goal||1;
+ const done=active==="fractions"?game.done:active==="cell"?game.delivered:game.caught;
+ progress.max=total;progress.value=Math.min(total,done);
+ const sentence=stage().name+" · "+Math.min(total,done)+"/"+total+" objetivos";
+ if(label&&label.textContent!==sentence)label.textContent=sentence;
+}
 function pill(text,x,y,bg="#ffffff",color="#153c5f",font="bold 17px system-ui"){
  ctx.font=font;const width=Math.min(500,ctx.measureText(text).width+27);
  ctx.fillStyle=bg;round(x-width/2,y-16,width,33,13);ctx.fill();
@@ -54,10 +69,13 @@ function status(msg){
 function setActive(name){
  if(!games[name])return;
  active=name;game=create(name);paused=false;finished=false;clearKeys();prev=0;
+ const stageInfo=stage();
  window.neoGameBrain?.start(name);
  $("neoArcadePause").textContent="⏸ Pausar";
  $("neoArcadeTitle").textContent=games[name].name;
- $("neoArcadeInstructions").textContent=games[name].help+" "+games[name].keys;
+ $("neoArcadeInstructions").textContent=games[name].help+" "+games[name].keys+" · Fase "+stageInfo.name+"."; 
+ updateMission();
+ try{$("neoArcadeBest").textContent="Seu recorde nesta fase: "+(Number(localStorage.getItem("neo-arcade-best-v2-"+name+"-"+$("neoArcadeChallenge").value))||0)+" pontos"}catch(_){} 
  document.querySelectorAll("[data-neo-game]").forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.neoGame===name)));
  status("Jogo iniciado! Use os controles do teclado ou os botões na tela.");
  $("neoArcadeCanvas").focus({preventScroll:true});
@@ -71,7 +89,7 @@ function create(name){
 }
 function saveBest(){
  try{
-  const key="neo-arcade-best-v1-"+active;const best=Number(localStorage.getItem(key))||0;
+  const key="neo-arcade-best-v2-"+active+"-"+($("neoArcadeChallenge")?.value||"missao");const best=Number(localStorage.getItem(key))||0;
   if(game.score>best)localStorage.setItem(key,String(game.score));
   const el=$("neoArcadeBest");el.textContent="Recorde neste aparelho: "+Math.max(best,game.score)+" pontos";
  }catch(_){}
@@ -79,7 +97,8 @@ function saveBest(){
 function end(won,message){
  if(finished)return;
  paused=true;finished=true;clearKeys();
- if(won){game.score+=20;saveBest()}
+ if(won)game.score+=20;
+ saveBest();updateMission();
  status((won?"🏆 Vitória! ":"Fim de partida. ")+message+" Você pode jogar novamente.");
  $("neoArcadePause").textContent="▶ Jogar novamente";
 }
@@ -92,7 +111,7 @@ function frame(t){
  }
  const dt=prev?Math.min(.035,(t-prev)/1000):0;prev=t;
  if(!paused&&!finished){game.update(dt); }
- draw();
+ updateMission();draw();
  if(!paused&&!finished)raf=requestAnimationFrame(frame);
 }
 function draw(){
@@ -108,7 +127,7 @@ function draw(){
 }
 class Fractions{
  constructor(){
-  this.score=0;this.lives=3;this.won=false;this.done=0;this.inv=0;this.p={x:65,y:404,vx:0,vy:0,w:29,h:36};
+  this.goal=stage().fractions;this.score=0;this.lives=stage().lives;this.won=false;this.done=0;this.inv=0;this.p={x:65,y:404,vx:0,vy:0,w:29,h:36};
   this.platforms=[{x:0,y:449,w:900,h:51},{x:91,y:351,w:181,h:20},{x:351,y:282,w:205,h:20},{x:634,y:351,w:178,h:20}];
   this.spots=[{x:171,y:318},{x:442,y:249},{x:717,y:318},{x:836,y:414}];this.next();
  }
@@ -144,8 +163,8 @@ class Fractions{
     orb.used=true;this.inv=.42;
     if(orb.correct){
      this.done++;this.score+=10;window.neoGameBrain?.good();
-     status("✅ Fração equivalente! "+this.done+" de 6 acertos.");
-     if(this.done>=6){this.won=true;end(true,"Você dominou as equivalências de frações!");return}
+     status("✅ Fração equivalente! "+this.done+" de "+this.goal+" acertos.");
+     if(this.done>=this.goal){this.won=true;end(true,"Você dominou as equivalências de frações!");return}
      this.next();
     }else{this.lives--;window.neoGameBrain?.miss();status("Essa fração não é equivalente a "+this.round.goal+". Experimente outra.");
      if(this.lives<=0)end(false,"Revise equivalências e tente novamente.");
@@ -160,13 +179,13 @@ class Fractions{
   for(const o of this.orbs){if(o.used)continue;ctx.fillStyle=o.correct?"#fff1a9":"#e5f7ff";ctx.beginPath();ctx.arc(o.x,o.y,23,0,7);ctx.fill();
    ctx.lineWidth=3;ctx.strokeStyle="#1790b3";ctx.stroke();text(o.label,o.x,o.y,16,"#163b60",900,"center");}
   if(this.inv<=0||Math.floor(this.inv*10)%2===0)avatar(this.p.x+15,this.p.y+15,18);
-  hud("🏃 Corrida das Frações",this.score,this.lives,this.done+"/6");
+  hud("🏃 Corrida das Frações",this.score,this.lives,this.done+"/"+this.goal);
   pill("Colete uma fração equivalente a "+this.round.goal,450,103,"#fff8dd","#123c63");
  }
 }
 class Cell{
  constructor(){
-  this.score=0;this.lives=3;this.won=false;this.delivered=0;this.inv=0;this.p={x:80,y:267,r:17};this.carry=null;
+  this.goal=stage().cell;this.score=0;this.lives=stage().lives;this.won=false;this.delivered=0;this.inv=0;this.p={x:80,y:267,r:17};this.carry=null;
   this.walls=[{x:285,y:124,w:35,h:255},{x:584,y:75,w:35,h:295}];
   this.items=[{name:"Mitocôndria",role:"ENERGIA",x:130,y:135,color:"#ffd175",taken:false,done:false},
    {name:"Ribossomo",role:"PROTEÍNAS",x:116,y:304,color:"#e2a9ff",taken:false,done:false},
@@ -185,7 +204,7 @@ class Cell{
   if(!this.moveCollide(this.p.x+dx,this.p.y))this.p.x+=dx;
   if(!this.moveCollide(this.p.x,this.p.y+dy))this.p.y+=dy;
   for(const v of this.viruses){
-   v.y+=v.dy*dt*(window.neoGameBrain?.multiplier()||1);if(v.y<125||v.y>435)v.dy*=-1;
+   v.y+=v.dy*dt*stage().speed*(window.neoGameBrain?.multiplier()||1);if(v.y<125||v.y>435)v.dy*=-1;
    if(this.inv<=0&&distance(v.x,v.y,this.p.x,this.p.y)<30){
     this.lives--;this.inv=1.4;window.neoGameBrain?.miss();status("⚠️ Vírus encontrado! Desvie e continue o transporte.");
     if(this.lives<=0){end(false,"Sua célula precisa de proteção.");return}
@@ -199,9 +218,9 @@ class Cell{
    for(const station of this.stations)if(distance(770,station.y,this.p.x,this.p.y)<64){
     if(this.carry.role===station.role){
      this.carry.done=true;this.score+=20;this.delivered++;window.neoGameBrain?.good();
-     status("✅ "+this.carry.name+" entregue! "+this.delivered+"/3.");
+     status("✅ "+this.carry.name+" entregue! "+this.delivered+"/"+this.goal+". ");
      this.carry=null;
-     if(this.delivered===3){this.won=true;end(true,"Você organizou a célula!");return}
+     if(this.delivered>=this.goal){this.won=true;end(true,"Você organizou a célula!");return}
     }else if(!this.hintCooldown||this.hintCooldown<=0){
      status("Este setor é "+station.role+". Sua organela pertence ao setor "+this.carry.role+".");this.hintCooldown=1.2;
     }
@@ -222,13 +241,13 @@ class Cell{
    text("✦",v.x,v.y,25,"#793a59",800,"center");}
   if(this.inv<=0||Math.floor(this.inv*8)%2===0)avatar(this.p.x,this.p.y,17,this.carry?"#ffe19d":"#acf2ed");
   if(this.carry)pill("📦 "+this.carry.name,this.p.x,this.p.y-37,"#fffbef","#123c5a","bold 13px system-ui");
-  hud("🧬 Missão Célula",this.score,this.lives,this.delivered+"/3");
+  hud("🧬 Missão Célula",this.score,this.lives,this.delivered+"/"+this.goal);
   pill("Leve cada organela ao setor de sua função",440,103,"#ffffff","#164a61","bold 14px system-ui");
  }
 }
 class Words{
  constructor(){
-  this.score=0;this.lives=3;this.won=false;this.caught=0;this.lane=1;this.falling=[];this.clock=0;this.tick=0;this.prevL=false;this.prevR=false;
+  this.goal=stage().words;this.score=0;this.lives=stage().lives;this.won=false;this.caught=0;this.lane=1;this.falling=[];this.clock=0;this.tick=0;this.prevL=false;this.prevR=false;
   this.categories=[
    {name:"OPOSIÇÃO",words:["mas","porém","contudo","entretanto"]},
    {name:"ADIÇÃO",words:["também","além disso","e","ainda"]},
@@ -248,14 +267,14 @@ class Words{
   this.prevL=keys.left;this.prevR=keys.right;
   this.clock+=dt;this.tick+=dt;
   if(this.clock>Math.max(.67,1.2-this.caught*.03)/(window.neoGameBrain?.multiplier()||1)){this.clock=0;this.spawn()}
-  const speed=(135+Math.min(115,this.caught*9))*(window.neoGameBrain?.multiplier()||1);
+  const speed=(135+Math.min(115,this.caught*9))*stage().speed*(window.neoGameBrain?.multiplier()||1);
   for(const o of this.falling){
    o.y+=dt*speed;
    if(!o.passed&&o.y>418){o.passed=true;
     if(o.lane===this.lane){
      if(o.category===this.target.name){
-      this.score+=10;this.caught++;window.neoGameBrain?.good();status("✅ Boa combinação! "+this.caught+"/10 conectivos.");
-      if(this.caught>=10){this.won=true;end(true,"Você dominou os conectivos em movimento!");return}
+      this.score+=10;this.caught++;window.neoGameBrain?.good();status("✅ Boa combinação! "+this.caught+"/"+this.goal+" conectivos.");
+      if(this.caught>=this.goal){this.won=true;end(true,"Você dominou os conectivos em movimento!");return}
       this.nextTarget();
      }else{this.lives--;window.neoGameBrain?.miss();status("O conectivo '"+o.word+"' não expressa "+this.target.name+".");
       if(this.lives<=0){end(false,"Continue treinando os tipos de conectivos.");return}}
@@ -274,7 +293,7 @@ class Words{
   for(const o of this.falling){const x=255+o.lane*195;pill(o.word,x,o.y,o.category===this.target.name?"#c6f4dd":"#fff0b8","#153d57","bold 19px system-ui")}
   ctx.fillStyle="#ffffff";round(215+this.lane*195,420,80,45,13);ctx.fill();
   avatar(255+this.lane*195,431,17,"#f8d28a");
-  hud("📝 Ritmo dos Conectivos",this.score,this.lives,this.caught+"/10");
+  hud("📝 Ritmo dos Conectivos",this.score,this.lives,this.caught+"/"+this.goal);
   pill("Pegue apenas conectivos de "+this.target.name,450,102,"#fff","#133866","bold 18px system-ui");
   text("← Mude de pista →",450,484,16,"#f8f2ff",700,"center");
  }
@@ -302,6 +321,7 @@ function init(){
  document.querySelectorAll("[data-neo-game]").forEach(b=>b.addEventListener("click",()=>setActive(b.dataset.neoGame)));
  $("neoArcadePause")?.addEventListener("click",toggle);
  $("neoArcadeRestart")?.addEventListener("click",()=>setActive(active||"fractions"));
+ $("neoArcadeChallenge")?.addEventListener("change",()=>{if(active)setActive(active)});
  const map={ArrowLeft:"left",a:"left",A:"left",ArrowRight:"right",d:"right",D:"right",ArrowUp:"up",w:"up",W:"up",ArrowDown:"down",s:"down",S:"down"," ":"jump"};
  document.addEventListener("keydown",e=>{
   if(!active||!$("arcadeNeo")?.classList.contains("active"))return;
