@@ -724,7 +724,7 @@ html nav :is(summary,button,select):focus-visible{outline:3px solid #ffd781!impo
 .mp-school-year .mp-school-link{margin-top:13px}
 @media(max-width:580px){.mp-school-year{padding:14px}.mp-school-events{grid-template-columns:1fr}}
 </style>
-<link rel="stylesheet" href="./assets/portal-design-5.css?v=1">
+<link rel="stylesheet" href="./assets/portal-design-5.css?v=2">
 </head>
 <body>
 <a class="neo-skip-to-content" href="#conteudoPrincipal">Pular para o conteúdo principal</a>
@@ -3274,7 +3274,7 @@ async function portal8UpdateSite(){
    await Promise.all(regs.map(r=>r.update().catch(()=>null)));
   }
  }catch(e){}
- location.replace(location.pathname+"?versao=mp5-home-world-redesign&atualizacao="+Date.now());
+ location.replace(location.pathname+"?versao=mp5-redesign-3d-labirinto&atualizacao="+Date.now());
 }
 function portal8EnableScrollReveal(){
  if(window.matchMedia?.("(prefers-reduced-motion: reduce)").matches||document.documentElement.dataset.phaseMotion==="reduce")return;
@@ -3413,6 +3413,7 @@ init();renderNexo();
   initialize();
 })();
 </script>
+<script src="./assets/neo-puzzle-5.js?v=1"></script>
 <script src="./assets/portal-design-5.js?v=1"></script>
 </body>
 </html>
