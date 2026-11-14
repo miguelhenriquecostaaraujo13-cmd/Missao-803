@@ -238,6 +238,29 @@ html[data-portal-theme="papel"] nav .navgroup-items .navbtn.active{background:#f
 .portal-tool-empty{grid-column:1/-1;color:var(--muted);padding:10px}
 @media(max-width:570px){.portal-tool-grid,.portal-tool-results{grid-template-columns:repeat(2,minmax(0,1fr))}.portal-tool-tile{padding:4px;gap:3px}.portal-tool-open{font-size:.8rem;padding:9px 4px}.portal-tool-star{width:32px;height:34px}}
 @media(max-width:360px){.portal-tool-grid,.portal-tool-results{grid-template-columns:1fr}}
+
+/* Etapas 2–4: ferramentas de aprendizagem privadas e acessibilidade. */
+.phase-levels{display:flex;gap:5px;flex-wrap:wrap;margin:5px 0 3px}
+.phase-levels button{border:1px solid var(--line);border-radius:9px;padding:5px 7px;background:var(--portal-panel);color:var(--ink);font-size:.77rem;cursor:pointer}
+.phase-levels button[aria-pressed="true"]{outline:2px solid var(--navy);font-weight:800}
+.phase-check{display:flex;align-items:flex-start;gap:9px;margin:9px 0;padding:10px;border-radius:10px;background:var(--portal-panel);color:var(--ink)}
+.phase-check input{width:18px;height:18px;flex:none}
+.phase-calendar{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:5px;margin-top:12px}
+.phase-calendar .day{border:1px solid var(--line);border-radius:9px;background:var(--portal-panel);padding:6px;min-height:53px;color:var(--ink);font-size:.75rem;overflow-wrap:anywhere}
+.phase-calendar .day b{display:block}
+.phase-calendar .day.exam{border-color:var(--teal)}
+.phase-calendar .day.task{box-shadow:inset 0 -3px var(--orange)}
+.phase-calendar .day.empty{background:transparent;border:0}
+.phase-chart-row{margin:12px 0}
+.phase-chart-track{height:12px;background:var(--line);border-radius:99px;overflow:hidden}
+.phase-chart-fill{height:100%;background:var(--teal)}
+html[data-phase-font="large"]{font-size:112%}
+html[data-phase-font="larger"]{font-size:122%}
+html[data-phase-contrast="true"]{--line:#627eae;--muted:#354962}
+html[data-portal-theme="noite"][data-phase-contrast="true"]{--line:#9db9df;--muted:#d1dcec}
+html[data-phase-contrast="true"] .card,html[data-phase-contrast="true"] .phase-levels button{border:2px solid var(--line)}
+html[data-phase-motion="reduce"] *,html[data-phase-motion="reduce"] *:before,html[data-phase-motion="reduce"] *:after{scroll-behavior:auto!important;animation:none!important;transition:none!important}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;animation:none!important;transition:none!important}}
 </style>
  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.105.0"></script>
 </head>
@@ -252,7 +275,7 @@ html[data-portal-theme="papel"] nav .navgroup-items .navbtn.active{background:#f
     <span class="exam-pill">18/11 · Geografia + Ed. Física teórica</span><span class="exam-pill">19/11 · História + Inglês</span><span class="exam-pill">23/11 · Ciências + Arte</span>
   </div>
 </div></header>
-<nav aria-label="Navegação principal do Portal 803"><div class="navquick"><label for="nexoNavJump">🧭 Ir para ferramenta</label><select id="nexoNavJump" aria-label="Escolher uma ferramenta por categoria"></select></div><div class="navinner"><details class="navgroup" data-category="inicio" open><summary>🏠 Início<span class="navcount">1</span></summary><div class="navgroup-items"><button type="button" class="navbtn active" data-view="inicio" aria-current="page">🏁 Meu painel</button></div></details><details class="navgroup" data-category="aprender"><summary>📚 Aprender<span class="navcount">6</span></summary><div class="navgroup-items"><button type="button" class="navbtn" data-view="trilha">✅ Minha trilha</button><button type="button" class="navbtn" data-view="videoaulas">🎬 Videoaulas</button><button type="button" class="navbtn" data-view="cartoes">🗂️ Memorização</button><button type="button" class="navbtn" data-view="metodos">📚 Métodos de estudo</button><button type="button" class="navbtn" data-view="assistente">✨ Tutor grátis</button><button type="button" class="navbtn" data-view="revisoes">🎯 Missões e revisões</button></div></details><details class="navgroup" data-category="praticar"><summary>🧠 Praticar<span class="navcount">5</span></summary><div class="navgroup-items"><button type="button" class="navbtn" data-view="quiz">🧠 Simulados</button><button type="button" class="navbtn" data-view="gerador">⚡ Gerador de questões</button><button type="button" class="navbtn" data-view="laboratorio">🧪 Laboratório</button><button type="button" class="navbtn" data-view="arena">🎮 Arena 803</button><button type="button" class="navbtn" data-view="desempenho">📊 Desempenho</button></div></details><details class="navgroup" data-category="organizar"><summary>🗓️ Organizar<span class="navcount">5</span></summary><div class="navgroup-items"><button type="button" class="navbtn" data-view="metas803">📈 Minhas metas</button><button type="button" class="navbtn" data-view="calendario">📅 Calendário</button><button type="button" class="navbtn" data-view="foco">⏱️ Foco</button><button type="button" class="navbtn" data-view="caderno">📝 Meu caderno</button><button type="button" class="navbtn" data-view="lembretes">🔔 Lembretes</button></div></details><details class="navgroup" data-category="turma"><summary>🤝 Turma<span class="navcount">2</span></summary><div class="navgroup-items"><button type="button" class="navbtn" data-view="turma">🌐 Painel da turma</button><button type="button" class="navbtn" data-view="biblioteca">🤝 Biblioteca 803</button></div></details><details class="navgroup" data-category="administracao"><summary>⚙️ Administração e ajuda<span class="navcount">3</span></summary><div class="navgroup-items"><button type="button" class="navbtn" data-view="professor">👩‍🏫 Professor</button><button type="button" class="navbtn" data-view="criador">🔒 Modo Proprietário</button><button type="button" class="navbtn" data-view="offline">📶 Modo offline</button></div></details></div><p class="navhint">Escolha uma categoria para encontrar a ferramenta que precisa.</p></nav>
+<nav aria-label="Navegação principal do Portal 803"><div class="navquick"><label for="nexoNavJump">🧭 Ir para ferramenta</label><select id="nexoNavJump" aria-label="Escolher uma ferramenta por categoria"></select></div><div class="navinner"><details class="navgroup" data-category="inicio" open><summary>🏠 Início<span class="navcount">1</span></summary><div class="navgroup-items"><button type="button" class="navbtn active" data-view="inicio" aria-current="page">🏁 Meu painel</button></div></details><details class="navgroup" data-category="aprender"><summary>📚 Aprender<span class="navcount">6</span></summary><div class="navgroup-items"><button type="button" class="navbtn" data-view="trilha">✅ Minha trilha</button><button type="button" class="navbtn" data-view="videoaulas">🎬 Videoaulas</button><button type="button" class="navbtn" data-view="cartoes">🗂️ Memorização</button><button type="button" class="navbtn" data-view="metodos">📚 Métodos de estudo</button><button type="button" class="navbtn" data-view="assistente">✨ Tutor grátis</button><button type="button" class="navbtn" data-view="revisoes">🎯 Missões e revisões</button></div></details><details class="navgroup" data-category="praticar"><summary>🧠 Praticar<span class="navcount">6</span></summary><div class="navgroup-items"><button type="button" class="navbtn" data-view="quiz">🧠 Simulados</button><button type="button" class="navbtn" data-view="gerador">⚡ Gerador de questões</button><button type="button" class="navbtn" data-view="laboratorio">🧪 Laboratório</button><button type="button" class="navbtn" data-view="arena">🎮 Arena 803</button><button type="button" class="navbtn" data-view="desempenho">📊 Desempenho</button><button type="button" class="navbtn" data-view="evolucao803">📈 Minha evolução</button></div></details><details class="navgroup" data-category="organizar"><summary>🗓️ Organizar<span class="navcount">6</span></summary><div class="navgroup-items"><button type="button" class="navbtn" data-view="metas803">📈 Minhas metas</button><button type="button" class="navbtn" data-view="revisao803">🗒️ Revisão para provas</button><button type="button" class="navbtn" data-view="calendario">📅 Calendário</button><button type="button" class="navbtn" data-view="foco">⏱️ Foco</button><button type="button" class="navbtn" data-view="caderno">📝 Meu caderno</button><button type="button" class="navbtn" data-view="lembretes">🔔 Lembretes</button></div></details><details class="navgroup" data-category="turma"><summary>🤝 Turma<span class="navcount">2</span></summary><div class="navgroup-items"><button type="button" class="navbtn" data-view="turma">🌐 Painel da turma</button><button type="button" class="navbtn" data-view="biblioteca">🤝 Biblioteca 803</button></div></details><details class="navgroup" data-category="administracao"><summary>⚙️ Administração e ajuda<span class="navcount">5</span></summary><div class="navgroup-items"><button type="button" class="navbtn" data-view="professor">👩‍🏫 Professor</button><button type="button" class="navbtn" data-view="criador">🔒 Modo Proprietário</button><button type="button" class="navbtn" data-view="offline">📶 Modo offline</button><button type="button" class="navbtn" data-view="ajuda803">🛠️ Relatar problema</button><button type="button" class="navbtn" data-view="acessibilidade803">♿ Acessibilidade</button></div></details></div><p class="navhint">Escolha uma categoria para encontrar a ferramenta que precisa.</p></nav>
 <main>
 <section id="inicio" class="view active">
 <div class="portal-smart card" aria-label="Central de acesso e ferramentas">
@@ -304,6 +327,19 @@ html[data-portal-theme="papel"] nav .navgroup-items .navbtn.active{background:#f
   <div class="callout small" style="margin-top:14px">O arquivo exportado permite levar seu progresso para outro dispositivo. Cada aluno mantém seu próprio registro; esta página não cria um placar compartilhado da turma.</div>
 </section>
 
+<section id="revisao803" class="view">
+<h2>🗒️ Minha revisão para provas</h2>
+<p class="sub">Checklist e caderno de erros privados deste dispositivo. As suas marcações não aparecem para os colegas.</p>
+<div class="grid">
+<div class="card span-6"><h3>✅ Checklist por matéria</h3>
+<label for="phaseSubject">Matéria para revisar</label><select id="phaseSubject" class="study-field" onchange="phaseRenderChecklist()"></select>
+<div id="phaseChecklist" style="margin-top:12px"></div><p class="small muted" id="phaseChecklistSummary" role="status"></p>
+<button type="button" class="btn light" onclick="showView('trilha')">Abrir trilha de conteúdos</button></div>
+<div class="card span-6"><h3>📖 Meu caderno de erros</h3>
+<p class="small muted">As questões que você errar nos simulados serão registradas automaticamente para revisão posterior. Não é uma nota escolar.</p>
+<div id="phaseMistakes"></div><button type="button" class="btn light" onclick="showView('quiz')">Praticar nos simulados</button></div>
+</div>
+</section>
 <section id="quiz" class="view">
   <h2>Central de simulados</h2><p class="sub">Responda, confira a correção e leia a explicação. Você pode trocar de matéria a qualquer momento.</p>
   <div class="grid">
@@ -484,8 +520,13 @@ html[data-portal-theme="papel"] nav .navgroup-items .navbtn.active{background:#f
 <section id="gerador" class="view"><h2>⚡ Gerador de questões Portal</h2><p class="sub">Crie desafios gratuitos a partir do banco de questões e de exercícios matemáticos gerados por regras. Não utiliza IA generativa nem API paga.</p><div class="grid"><div class="card span-5"><h3>Monte seu desafio</h3><label for="genSubject">Matéria</label><select id="genSubject" class="study-field"></select><label for="genTopic">Assunto ou palavra-chave (opcional)</label><input id="genTopic" class="study-field" maxlength="80" placeholder="Ex.: porcentagem, crase, Brasil"><label for="genLevel">Dificuldade</label><select id="genLevel" class="study-field"><option value="facil">Fácil</option><option value="medio" selected>Médio</option><option value="dificil">Difícil</option></select><label for="genAmount">Quantidade</label><select id="genAmount" class="study-field"><option>3</option><option selected>5</option><option>10</option></select><button class="btn orange" onclick="generateNexoQuestions()">⚡ Gerar desafio</button><p class="small muted" id="genNotice">As questões são educativas e podem se repetir em novos desafios.</p></div><div class="card span-7"><h3 id="genHeading">Seu desafio aparecerá aqui</h3><div id="genQuestion"></div><div id="genAnswers"></div><p id="genFeedback" role="status"></p><button class="btn light" id="genNext" onclick="nextNexoQuestion()" hidden>Próxima questão →</button><p id="genScore" class="small muted"></p></div></div></section>
 <section id="laboratorio" class="view"><h2>🧪 Laboratório de Questões</h2><p class="sub">Cole um resumo ou texto de estudo e pratique com perguntas de completar lacunas. Tudo acontece no seu navegador: sem IA paga e sem enviar o texto para servidores.</p><div class="grid"><div class="card span-6"><label for="labText"><b>Meu texto de estudo</b></label><textarea id="labText" class="study-field" rows="10" maxlength="12000" placeholder="Exemplo: A fotossíntese é o processo pelo qual as plantas produzem seu alimento usando luz solar."></textarea><p class="small muted">Use frases explicativas com pelo menos algumas palavras. Evite colar informações pessoais.</p><label for="labCount">Quantidade de questões</label><select id="labCount" class="study-field"><option>3</option><option selected>5</option><option>10</option></select><button class="btn orange" onclick="labGenerate()">⚡ Criar questões</button><button class="btn light" onclick="labClear()">Limpar texto</button><p id="labStatus" class="small muted" role="status">Nenhum texto enviado.</p></div><div class="card span-6"><h3 id="labHeading">Questões geradas</h3><p id="labQuestion">As perguntas aparecerão aqui depois que você colar seu texto no campo da esquerda e clicar em “Criar questões”.</p><div id="labOptions"></div><p id="labFeedback" role="status"></p><button id="labNext" class="btn orange" onclick="labNextQuestion()" hidden>Próxima →</button><p id="labProgress" class="small muted"></p></div></div></section>
 <section id="desempenho" class="view"><h2>📊 Meu desempenho por matéria</h2><p class="sub">Veja seus resultados nos simulados e descubra onde revisar. Os dados ficam salvos neste navegador.</p><div class="card"><button class="btn orange" onclick="renderNexoPerformance()">↻ Atualizar resultados</button><div id="nexoPerformance" style="margin-top:16px"></div><p class="small muted">Os resultados mostram apenas as questões respondidas nos simulados. Eles não são notas escolares.</p></div></section>
+<section id="evolucao803" class="view">
+<h2>📈 Minha evolução nos estudos</h2><p class="sub">Acompanhe a prática nos simulados ao longo do tempo. O histórico começa a ser registrado a partir desta atualização e fica no seu navegador.</p>
+<div class="card"><h3>Resultados recentes nos simulados</h3><div id="phaseEvolution"></div><p class="small muted">As barras mostram a proporção de acertos por dia, considerando apenas questões respondidas no Portal 803. Não são notas escolares nem comparação entre alunos.</p></div>
+<div class="card" style="margin-top:14px"><h3>📅 Calendário visual</h3><div class="row"><button type="button" class="btn light" onclick="phaseMonth(-1)">← Mês anterior</button><b id="phaseMonthLabel"></b><button type="button" class="btn light" onclick="phaseMonth(1)">Próximo mês →</button></div><div id="phaseMonthCalendar" class="phase-calendar"></div><div id="phaseMonthLegend" class="small muted" style="margin-top:10px"></div><p class="small muted">Mostra suas tarefas locais e as datas oficiais publicadas. O cronograma inicial de novembro de 2026 é indicativo: confirme sempre com a escola.</p></div>
+</section>
 <section id="arena" class="view"><h2>🎮 Arena 803 — Desafio do conhecimento</h2><p class="sub">Jogue para aprender, sem ranking entre colegas. As perguntas são selecionadas dos simulados existentes.</p><div class="grid"><div class="card span-7"><h3 id="arenaTitle">Prepare-se para o desafio</h3><p id="arenaQuestion">Escolha uma matéria e comece uma rodada de cinco perguntas.</p><div id="arenaOptions" class="mission"></div><div class="row"><button class="btn orange" onclick="startArena()">▶ Nova rodada</button><button class="btn light" onclick="showView('quiz')">Abrir simulados</button></div><p class="small muted" id="arenaFeedback" role="status"></p></div><div class="card span-5"><h3>Minha rodada</h3><div class="metric" id="arenaScore">0 / 5</div><p class="small muted" id="arenaProgress">Nenhuma rodada iniciada.</p><label for="arenaSubject"><b>Matéria</b></label><select id="arenaSubject" class="study-field"><option value="Todas">Todas</option></select><p class="small muted">Sem competição pública, notas individuais ou pressão. O objetivo é praticar.</p></div></div></section>
-<section id="calendario" class="view"><h2>📅 Calendário de estudos</h2><p class="sub">Organize suas tarefas e acompanhe as provas. Datas do roteiro original de novembro de 2026: confirme com o professor caso o calendário mude.</p><div class="grid"><div class="card span-6"><h3>Meu compromisso</h3><label for="calendarDate">Data</label><input id="calendarDate" class="study-field" type="date"><label for="calendarTask">O que vou estudar?</label><input id="calendarTask" class="study-field" maxlength="140" placeholder="Ex.: revisar porcentagem"><button class="btn orange" onclick="addCalendarTask()">Adicionar lembrete</button><p class="small muted">As tarefas ficam neste navegador. Para receber lembretes de estudo e provas, configure a aba 🔔 Lembretes.</p></div><div class="card span-6"><h3>Próximas tarefas</h3><div id="calendarItems"></div></div><div class="card span-12"><h3>Semana de provas</h3><p>📚 Período previsto no roteiro: <b>16 a 23 de novembro de 2026</b>. Consulte o cronograma oficial da turma para saber qual prova acontece em cada dia.</p><p class="small muted" id="calendarCountdown"></p></div></div></section>
+<section id="calendario" class="view"><h2>📅 Calendário de estudos</h2><p class="sub">Organize suas tarefas e acompanhe as provas. Datas do roteiro original de novembro de 2026: confirme com o professor caso o calendário mude.</p><div class="grid"><div class="card span-6"><h3>Meu compromisso</h3><label for="calendarDate">Data</label><input id="calendarDate" class="study-field" type="date"><label for="calendarTask">O que vou estudar?</label><input id="calendarTask" class="study-field" maxlength="140" placeholder="Ex.: revisar porcentagem"><button class="btn orange" onclick="addCalendarTask()">Adicionar lembrete</button><p class="small muted">As tarefas ficam neste navegador. Para receber lembretes de estudo e provas, configure a aba 🔔 Lembretes.</p></div><div class="card span-6"><h3>Próximas tarefas</h3><div id="calendarItems"></div></div><div class="card span-12"><p><button class="btn orange" type="button" onclick="showView(\'evolucao803\')">📅 Abrir calendário visual e gráficos</button></p></div><div class="card span-12"><h3>Semana de provas</h3><p>📚 Período previsto no roteiro: <b>16 a 23 de novembro de 2026</b>. Consulte o cronograma oficial da turma para saber qual prova acontece em cada dia.</p><p class="small muted" id="calendarCountdown"></p></div></div></section>
 <section id="lembretes" class="view">
 <h2>🔔 Central de lembretes</h2><p class="sub">Estude no seu ritmo: escolha quais lembretes quer receber. Nada é ativado sem sua escolha.</p>
 <div class="callout" style="margin-bottom:15px"><b>Como funciona:</b> lembretes dentro do site quando você o abre e alertas do sistema enquanto a página está aberta (mesmo em outra aba, quando o navegador permitir). <b>Com o site totalmente fechado, não há envio push automático nesta versão.</b> As preferências e o histórico ficam no seu navegador.</div>
@@ -511,6 +552,19 @@ html[data-portal-theme="papel"] nav .navgroup-items .navbtn.active{background:#f
  </div>
 </div>
 </section>
+<section id="ajuda803" class="view">
+<h2>🛠️ Relatar erro ou enviar sugestão</h2><p class="sub">Ajude a melhorar o Portal 803. Não envie nomes, telefones, senhas, dados de outros alunos ou fotografias pessoais.</p>
+<div class="card" style="max-width:760px"><label for="phaseReportCategory">Tipo de relato</label><select id="phaseReportCategory" class="study-field"><option value="erro">🐛 Erro no site</option><option value="sugestao">💡 Sugestão de melhoria</option><option value="acessibilidade">♿ Dificuldade de acessibilidade</option></select>
+<label for="phaseReportText">O que aconteceu? (15 a 800 caracteres)</label><textarea id="phaseReportText" class="study-field study-area" minlength="15" maxlength="800" placeholder="Ex.: Ao abrir Simulados, o botão não funciona no meu navegador…"></textarea>
+<div class="row"><button type="button" class="btn orange" onclick="phaseSendReport()">📨 Enviar relato privado</button></div><p class="small muted" id="phaseReportStatus" role="status">Enviar é opcional. O texto será armazenado no Supabase e visível apenas para você e administradores autorizados. Não envie informações pessoais.</p></div>
+</section>
+<section id="acessibilidade803" class="view">
+<h2>♿ Aparência e acessibilidade</h2><p class="sub">Personalize a leitura sem afetar outros estudantes. As escolhas ficam neste dispositivo.</p>
+<div class="card" style="max-width:760px"><label for="phaseFontSize"><b>Tamanho das letras</b></label><select id="phaseFontSize" class="study-field" onchange="phaseSaveAccess()"><option value="normal">Padrão</option><option value="large">Maior (+12%)</option><option value="larger">Muito maior (+22%)</option></select>
+<label class="row" style="margin:14px 0"><input type="checkbox" id="phaseHighContrast" onchange="phaseSaveAccess()"> <b>Alto contraste</b></label>
+<label class="row" style="margin:14px 0"><input type="checkbox" id="phaseReduceMotion" onchange="phaseSaveAccess()"> <b>Reduzir animações</b></label>
+<button type="button" class="btn light" onclick="phaseResetAccess()">↻ Restaurar aparência de leitura</button>
+<p class="small muted" id="phaseAccessStatus" role="status">Preferências locais. Os temas Aurora, Noite e Papel permanecem disponíveis.</p></div></section>
 <section id="professor" class="view"><h2>👩‍🏫 Espaço do professor</h2><p class="sub">Materiais e instruções para docentes e responsáveis, sem expor dados dos estudantes.</p><div class="grid"><div class="card span-6"><h3>Como aprovar materiais da biblioteca</h3><p>As publicações enviadas pelos alunos ficam pendentes até revisão no painel administrativo do Supabase. Somente responsáveis autorizados devem ter acesso ao painel.</p><p class="small muted">Esta página é informativa; não concede permissões de administrador. A aprovação precisa ser feita com acesso administrativo separado.</p></div><div class="card span-6"><h3>Atividade sugerida</h3><p>Peça que os alunos criem um resumo com suas palavras, respondam uma questão e comparem a explicação com o material da aula. Incentive a checagem de fontes.</p><button class="btn light" onclick="showView('biblioteca')">Abrir biblioteca</button></div></div></section>
 <section id="criador" class="view">
  <h2>🔒 Modo Proprietário — Portal 803</h2><p class="sub">Administração protegida por login do Supabase e permissões do banco de dados. Nenhuma senha fica no código do site.</p>
@@ -523,7 +577,7 @@ html[data-portal-theme="papel"] nav .navgroup-items .navbtn.active{background:#f
   <p id="portalOwnerStatus" role="status" class="small muted">Aguardando login. A conta proprietária precisa ser aprovada pelo administrador do projeto.</p>
   <div id="portalOwnerSetup" hidden><p class="small muted">Seu identificador de usuário no Supabase (não é uma senha). Apenas quem administra o banco pode liberar esse identificador:</p><code id="portalOwnerUid" style="display:block;overflow-wrap:anywhere"></code><button class="btn light" type="button" onclick="portalOwnerCopyUid()">Copiar meu identificador</button><p class="small muted">No Supabase → SQL Editor, o responsável pelo projeto deve adicionar esse identificador à tabela <code>public.portal803_admins</code>. Nenhuma conta é promovida automaticamente.</p></div>
  </div>
- <div id="portalOwnerPrivate" hidden>
+ <div id="portalOwnerPrivate" hidden><div class="card" style="margin:14px 0"><div class="between"><h3>🛠️ Relatos privados enviados à equipe</h3><button class="btn light" type="button" onclick="phaseOwnerReports()">↻ Atualizar relatos</button></div><p class="small muted">Somente proprietários autorizados conseguem consultar a fila. Não compartilhe relatos dos alunos.</p><div id="phaseOwnerReports"></div></div>
   <div class="callout" style="margin:15px 0">✅ Acesso autorizado. As publicações abaixo são gravadas no Supabase e aparecem para a turma. Revise datas e textos antes de publicar.</div>
   <div class="grid">
    <div class="card span-6"><h3>📢 Publicar aviso oficial</h3><label for="portalOfficialTitle">Título</label><input id="portalOfficialTitle" class="study-field" maxlength="90"><label for="portalOfficialBody">Aviso</label><textarea id="portalOfficialBody" class="study-field" maxlength="1200" rows="5"></textarea><button class="btn orange" onclick="portalPublishNotice()">Publicar para a turma</button></div>
@@ -779,6 +833,9 @@ function showView(id){
  const quick=document.getElementById("nexoNavJump");if(quick)quick.value=id;
  portalRememberTool(id);
  if(id==="desempenho")renderNexoPerformance();
+ if(id==="revisao803")phaseRenderReview();
+ if(id==="evolucao803")phaseRenderEvolution();
+ if(id==="acessibilidade803")phaseLoadAccessUI();
  window.scrollTo({top:0,behavior:"smooth"});
 }
 document.querySelectorAll(".navbtn").forEach(b=>b.addEventListener("click",()=>showView(b.dataset.view)));
@@ -875,6 +932,7 @@ function renderTopics(){
  const filter=$("subjectFilter").value;let list=subjects.filter(s=>filter==="Todas"||s.name===filter);
  $("topicArea").innerHTML=list.map(s=>{let count=s.topics.reduce((a,g)=>a+g[1].filter(t=>state.done.includes(s.name+"|"+t)).length,0),total=s.topics.reduce((a,g)=>a+g[1].length,0);
  return `<details ${filter!=="Todas"?"open":""}><summary>${s.icon} ${s.name} · ${count}/${total} tópicos marcados</summary><div class="inside"><p class="small">${s.summary}</p>${s.topics.map(g=>`<h4>${g[0]}</h4><div class="topic-list">${g[1].map(t=>{let key=s.name+"|"+t,checked=state.done.includes(key);return `<div class="topic ${checked?"done":""}"><input type="checkbox" id="${escapeHtml(key)}" ${checked?"checked":""} onchange="toggleTopic(this,'${escapeJs(key)}')"><label for="${escapeHtml(key)}">${escapeHtml(t)}</label></div>`}).join("")}</div>`).join("")}</div></details>`}).join("");
+ phaseRenderLevels();
 }
 function escapeHtml(x){return x.replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll('"',"&quot;").replaceAll("'","&#39;")}
 function escapeJs(x){return x.replaceAll("\\","\\\\").replaceAll("'","\\'")}
@@ -914,6 +972,7 @@ function checkAnswer(){
  const s=currentQuiz.s,sc=state.scoreBySubject[s]||{c:0,n:0};sc.n++;if(right)sc.c++;state.scoreBySubject[s]=sc;
  quizRoundAnswered.add(currentQuiz.index);if(right)quizRoundCorrect++;
  save();
+ phaseRecordQuiz(currentQuiz,right);
  $("feedback").innerHTML='<div class="feedback '+(right?'good':'bad')+'"><b>'+(right?'Muito bem! Resposta correta.':'Vamos aprender com essa!')+'</b><br>'+escapeHtml(currentQuiz.e)+'</div>';
  $("checkAnswer").disabled=true;$("quizScore").textContent=sc.c+"/"+sc.n;
  const total=quizzes.filter(q=>q.s===s).length;
@@ -1336,7 +1395,7 @@ async function portalOwnerCheck(){
   portalIsOwner=!!data;
   document.getElementById("portalOwnerPrivate").hidden=!portalIsOwner;
   portalOwnerStatus(portalIsOwner?"✅ Proprietário autenticado. Você pode publicar avisos e provas.":"Conta autenticada, mas ainda não autorizada como proprietária. Copie seu identificador para cadastrar no Supabase.");
-  if(portalIsOwner)await portalOwnerRefresh();
+  if(portalIsOwner){await portalOwnerRefresh();await phaseOwnerReports()}
  }catch(e){portalIsOwner=false;document.getElementById("portalOwnerPrivate").hidden=true;portalOwnerStatus("Não consegui verificar suas permissões. Confira a conexão com o Supabase.")}
 }
 async function portalOwnerAuth(action){
@@ -1628,6 +1687,152 @@ setInterval(()=>remindersTick(),60*1000);
 setInterval(()=>{if(reminderSettings.announcements)remindersCheckAnnouncements()},15*60*1000);
 document.addEventListener("visibilitychange",()=>{if(!document.hidden){remindersTick();if(reminderSettings.announcements)remindersCheckAnnouncements()}});
 window.addEventListener("focus",()=>remindersTick());
+
+
+/* Evolução do Portal 803. Os dados educativos desta seção permanecem neste navegador. */
+const PHASE_LEVEL_KEY="portal803-niveis-v1",PHASE_CHECK_KEY="portal803-checklist-v1",PHASE_ERRORS_KEY="portal803-erros-v1",PHASE_HISTORY_KEY="portal803-historico-v1",PHASE_ACCESS_KEY="portal803-acessibilidade-v1";
+function phaseRead(key,fallback){try{const value=JSON.parse(localStorage.getItem(key)||"null");return value===null?fallback:value}catch(e){return fallback}}
+function phaseWrite(key,value){try{localStorage.setItem(key,JSON.stringify(value))}catch(e){}}
+let phaseLevels=phaseRead(PHASE_LEVEL_KEY,{}),phaseChecks=phaseRead(PHASE_CHECK_KEY,{}),phaseErrors=phaseRead(PHASE_ERRORS_KEY,[]),phaseHistory=phaseRead(PHASE_HISTORY_KEY,[]);
+if(!phaseLevels||typeof phaseLevels!=="object"||Array.isArray(phaseLevels))phaseLevels={};
+if(!phaseChecks||typeof phaseChecks!=="object"||Array.isArray(phaseChecks))phaseChecks={};
+if(!Array.isArray(phaseErrors))phaseErrors=[];
+if(!Array.isArray(phaseHistory))phaseHistory=[];
+function phaseRenderLevels(){
+ document.querySelectorAll("#topicArea .topic").forEach(topic=>{
+  const input=topic.querySelector('input[type="checkbox"]');if(!input)return;
+  const key=input.id;
+  const wrap=document.createElement("div");wrap.className="phase-levels";wrap.setAttribute("aria-label","Meu nível de compreensão");
+  for(const [level,label] of [["entendi","🟢 Entendi"],["quase","🔵 Quase entendi"],["revisar","🩷 Preciso revisar"]]){
+   const btn=document.createElement("button");btn.type="button";btn.textContent=label;btn.setAttribute("aria-pressed",String(phaseLevels[key]===level));
+   btn.onclick=()=>{if(phaseLevels[key]===level)delete phaseLevels[key];else phaseLevels[key]=level;phaseWrite(PHASE_LEVEL_KEY,phaseLevels);phaseRenderLevels()};
+   wrap.append(btn);
+  }
+  topic.append(wrap);
+ });
+}
+const phaseChecklistSteps=["Revisar a teoria e os exemplos","Fazer questões da matéria","Conferir meus erros e tirar dúvidas","Explicar os assuntos sem consultar"];
+function phaseRenderChecklist(){
+ const subject=document.getElementById("phaseSubject")?.value,root=document.getElementById("phaseChecklist");if(!root||!subject)return;
+ root.replaceChildren();let count=0;
+ phaseChecklistSteps.forEach((name,i)=>{
+  const key=subject+"|"+i,checked=!!phaseChecks[key];if(checked)count++;
+  const line=document.createElement("label");line.className="phase-check";
+  const input=document.createElement("input");input.type="checkbox";input.checked=checked;input.onchange=()=>{phaseChecks[key]=input.checked;phaseWrite(PHASE_CHECK_KEY,phaseChecks);phaseRenderChecklist()};
+  const span=document.createElement("span");span.textContent=name;line.append(input,span);root.append(line);
+ });
+ document.getElementById("phaseChecklistSummary").textContent=count+" de "+phaseChecklistSteps.length+" atividades concluídas em "+subject+".";
+}
+function phaseRenderMistakes(){
+ const root=document.getElementById("phaseMistakes");if(!root)return;root.replaceChildren();
+ if(!phaseErrors.length){const p=document.createElement("p");p.className="small muted";p.textContent="Nenhum erro registrado desde a atualização. Continue praticando!";root.append(p);return}
+ for(const entry of phaseErrors.slice(0,12)){
+  const block=document.createElement("div");block.className="mission";
+  const label=document.createElement("b");label.textContent=entry.subject+" — "+entry.question;
+  const answer=document.createElement("p");answer.className="small muted";answer.textContent="Revisão: "+entry.explanation;
+  const btn=document.createElement("button");btn.type="button";btn.className="btn light";btn.textContent="Marcar como revisado";
+  btn.onclick=()=>{phaseErrors=phaseErrors.filter(x=>x.id!==entry.id);phaseWrite(PHASE_ERRORS_KEY,phaseErrors);phaseRenderMistakes()};
+  block.append(label,answer,btn);root.append(block);
+ }
+}
+function phaseRenderReview(){phaseRenderChecklist();phaseRenderMistakes()}
+function phaseRecordQuiz(q,right){
+ if(!q)return;
+ const today=new Date().toLocaleDateString("en-CA");
+ phaseHistory.push({date:today,subject:String(q.s||"Matéria").slice(0,60),correct:!!right});
+ phaseHistory=phaseHistory.slice(-240);phaseWrite(PHASE_HISTORY_KEY,phaseHistory);
+ if(!right){
+  const entry={id:Date.now()+"-"+Math.random().toString(36).slice(2,8),subject:String(q.s||"Matéria").slice(0,60),question:String(q.q||"Questão").slice(0,350),explanation:String(q.e||"Revise os tópicos da matéria.").slice(0,800)};
+  if(!phaseErrors.some(x=>x.question===entry.question&&x.subject===entry.subject))phaseErrors.unshift(entry);
+  phaseErrors=phaseErrors.slice(0,60);phaseWrite(PHASE_ERRORS_KEY,phaseErrors);
+ }
+}
+function phaseRenderEvolution(){
+ const root=document.getElementById("phaseEvolution");if(!root)return;root.replaceChildren();
+ const byDay=new Map();
+ for(const item of phaseHistory){if(typeof item.date!=="string")continue;const x=byDay.get(item.date)||{correct:0,total:0};x.total++;if(item.correct)x.correct++;byDay.set(item.date,x)}
+ if(!byDay.size){const p=document.createElement("p");p.className="small muted";p.textContent="Ainda não há histórico. Responda questões nos Simulados para construir seu gráfico.";root.append(p)}
+ for(const [day,x] of [...byDay.entries()].sort((a,b)=>a[0].localeCompare(b[0])).slice(-12)){
+  const line=document.createElement("div");line.className="phase-chart-row";
+  const label=document.createElement("div");label.className="between";const name=document.createElement("b");name.textContent=day.split("-").reverse().join("/");const score=document.createElement("span");score.textContent=x.correct+"/"+x.total+" acertos";label.append(name,score);
+  const track=document.createElement("div");track.className="phase-chart-track";const fill=document.createElement("div");fill.className="phase-chart-fill";fill.style.width=Math.round(x.correct/x.total*100)+"%";track.append(fill);line.append(label,track);root.append(line);
+ }
+ phaseRenderMonth();
+}
+let phaseMonthCursor=new Date();phaseMonthCursor.setDate(1);
+function phaseMonth(offset){phaseMonthCursor.setMonth(phaseMonthCursor.getMonth()+offset);phaseRenderMonth()}
+const phaseInitialExams=[["2026-11-16","Matemática"],["2026-11-17","Português"],["2026-11-18","Geografia / Ed. Física"],["2026-11-19","História / Inglês"],["2026-11-23","Ciências / Arte"]];
+let phaseOfficialExams=[];
+async function phaseFetchOfficialExams(){
+ try{const {data,error}=await ensureCloudClient().from("portal803_exams").select("subject,exam_date").eq("published",true).limit(100);if(error)throw error;phaseOfficialExams=(data||[]).filter(x=>/^\d{4}-\d{2}-\d{2}$/.test(x.exam_date)).map(x=>({date:x.exam_date,name:String(x.subject).slice(0,65)}));phaseRenderMonth()}catch(e){}
+}
+function phaseRenderMonth(){
+ const root=document.getElementById("phaseMonthCalendar"),label=document.getElementById("phaseMonthLabel"),legend=document.getElementById("phaseMonthLegend");if(!root)return;
+ root.replaceChildren();const y=phaseMonthCursor.getFullYear(),m=phaseMonthCursor.getMonth();
+ label.textContent=new Intl.DateTimeFormat("pt-BR",{month:"long",year:"numeric"}).format(phaseMonthCursor);
+ const today=new Date(y,m,1),first=(today.getDay()+6)%7,last=new Date(y,m+1,0).getDate();
+ for(const name of ["Seg","Ter","Qua","Qui","Sex","Sáb","Dom"]){const cell=document.createElement("b");cell.className="small muted";cell.textContent=name;root.append(cell)}
+ for(let i=0;i<first;i++){const pad=document.createElement("div");pad.className="day empty";root.append(pad)}
+ const tasks=calendarLoad();
+ for(let d=1;d<=last;d++){
+  const date=[y,String(m+1).padStart(2,"0"),String(d).padStart(2,"0")].join("-");
+  const original=phaseInitialExams.filter(x=>x[0]===date).map(x=>x[1]);
+  const official=phaseOfficialExams.filter(x=>x.date===date).map(x=>x.name);
+  const titles=[...new Set([...original,...official])],local=tasks.filter(x=>x.date===date);
+  const cell=document.createElement("div");cell.className="day"+(titles.length?" exam":"")+(local.length?" task":"");
+  const day=document.createElement("b");day.textContent=String(d);cell.append(day);
+  if(titles.length){const p=document.createElement("span");p.textContent="📝 "+titles.join(", ");cell.append(p)}
+  if(local.length){const p=document.createElement("small");p.textContent=" 📌 "+local.length+" tarefa(s)";cell.append(p)}
+  cell.title=[...titles,...local.map(x=>x.task)].join(" • ");root.append(cell);
+ }
+ legend.textContent="📝 Prova (roteiro inicial ou publicação oficial)  •  📌 Sua tarefa pessoal";
+}
+async function phaseSendReport(){
+ const cat=document.getElementById("phaseReportCategory").value,field=document.getElementById("phaseReportText"),message=field.value.trim(),status=document.getElementById("phaseReportStatus");
+ if(!["erro","sugestao","acessibilidade"].includes(cat)||message.length<15||message.length>800){status.textContent="Escreva entre 15 e 800 caracteres, sem dados pessoais.";return}
+ if(!confirm("Enviar este relato para a administração? Evite incluir informações pessoais."))return;
+ status.textContent="Enviando com acesso protegido…";
+ try{
+  const {client,user}=await portalGradeSession();
+  const {error}=await client.from("portal803_relatorios").insert({autor_id:user.id,categoria:cat,mensagem:message});
+  if(error)throw error;
+  field.value="";status.textContent="✅ Relato enviado! Ele ficará visível apenas a você e à administração autorizada.";
+ }catch(e){status.textContent="Não foi possível enviar. Verifique a conexão e se o acesso anônimo está habilitado."}
+}
+async function phaseOwnerReports(){
+ const root=document.getElementById("phaseOwnerReports");if(!root)return;root.replaceChildren();
+ if(!portalIsOwner){root.textContent="Faça login como proprietário autorizado.";return}
+ try{
+  const {data,error}=await portalOwnerClient().from("portal803_relatorios").select("id,categoria,mensagem,estado,criado_em").order("criado_em",{ascending:false}).limit(60);
+  if(error)throw error;
+  if(!data?.length){root.textContent="Nenhum relato recebido.";return}
+  for(const report of data){
+   const wrap=document.createElement("div");wrap.className="mission";
+   const header=document.createElement("b");header.textContent=report.categoria+" • "+new Date(report.criado_em).toLocaleDateString("pt-BR")+" • "+report.estado;
+   const body=document.createElement("p");body.textContent=report.mensagem;wrap.append(header,body);root.append(wrap);
+  }
+ }catch(e){root.textContent="Não foi possível consultar os relatos. Confirme as permissões no Supabase."}
+}
+let phaseAccess=phaseRead(PHASE_ACCESS_KEY,{font:"normal",contrast:false,motion:false});
+function phaseApplyAccess(){
+ const font=["normal","large","larger"].includes(phaseAccess.font)?phaseAccess.font:"normal";
+ document.documentElement.dataset.phaseFont=font;
+ document.documentElement.dataset.phaseContrast=!!phaseAccess.contrast;
+ document.documentElement.dataset.phaseMotion=phaseAccess.motion?"reduce":"normal";
+}
+function phaseLoadAccessUI(){
+ document.getElementById("phaseFontSize").value=phaseAccess.font||"normal";
+ document.getElementById("phaseHighContrast").checked=!!phaseAccess.contrast;
+ document.getElementById("phaseReduceMotion").checked=!!phaseAccess.motion;
+}
+function phaseSaveAccess(){
+ phaseAccess={font:document.getElementById("phaseFontSize").value,contrast:document.getElementById("phaseHighContrast").checked,motion:document.getElementById("phaseReduceMotion").checked};
+ phaseWrite(PHASE_ACCESS_KEY,phaseAccess);phaseApplyAccess();
+ document.getElementById("phaseAccessStatus").textContent="✅ Suas preferências de leitura foram salvas neste navegador.";
+}
+function phaseResetAccess(){phaseAccess={font:"normal",contrast:false,motion:false};phaseWrite(PHASE_ACCESS_KEY,phaseAccess);phaseApplyAccess();phaseLoadAccessUI()}
+for(const s of subjects){const op=document.createElement("option");op.value=s.name;op.textContent=s.name;document.getElementById("phaseSubject").append(op)}
+phaseApplyAccess();phaseLoadAccessUI();phaseRenderReview();phaseRenderEvolution();phaseFetchOfficialExams();
 
 init();renderNexo();
 </script>
