@@ -582,10 +582,18 @@ html[data-portal-theme="noite"] .portal8-pro-icon{background:#d5f0ff}
 @media(min-width:1000px){.portal8-schedule-mobile-tip{display:none}}
 @media(max-width:560px){.portal8-school-schedule{padding:14px}.portal8-school-table th,.portal8-school-table td{padding:10px 9px}.portal8-school-table{font-size:.81rem}.portal8-school-table td b{font-size:.8rem}}
 html[data-portal-theme="noite"] .portal8-schedule-class{background:#153d5d;color:#d9f7ff;border-color:#47799f}
+
+/* Sinal visual curto e perceptível ao trocar abas, sem animação em loop. */
+.portal8-route-indicator{position:fixed;z-index:9999;pointer-events:none;top:0;left:0;width:100%;height:5px;opacity:0;transform:scaleX(0);transform-origin:left center;background:linear-gradient(90deg,#05c5e7,#0a71e0,#ffcc77);box-shadow:0 2px 11px #0c7bd080}
+.portal8-route-indicator.portal8-route-active{animation:portal8RouteEnter .78s cubic-bezier(.17,.86,.24,1) both!important}
+@keyframes portal8RouteEnter{0%{opacity:1;transform:scaleX(.02)}65%{opacity:1;transform:scaleX(.81)}90%{opacity:1;transform:scaleX(1)}100%{opacity:0;transform:scaleX(1)}}
+@media(prefers-reduced-motion:reduce){.portal8-route-indicator.portal8-route-active{animation:none!important;opacity:0!important}}
+html[data-phase-motion="reduce"] .portal8-route-indicator.portal8-route-active{animation:none!important;opacity:0!important}
 </style>
  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.105.0"></script>
 </head>
 <body>
+<div id="portal8RouteIndicator" class="portal8-route-indicator" aria-hidden="true"></div>
 <section class="portal8-cover" id="portal8Cover" aria-label="Arte principal do Portal 8º Ano Missão Paz">
   <div class="portal8-cover-picture">
     <img id="portal8CoverImage" src="./assets/estudantes-cartoon-aprovado.png?rev=portal8-visual-v12" width="1672" height="941" alt="Ilustração cartoon aprovada dos estudantes reunidos em uma mesa de estudos, com uniformes azul e branco, livros e tablets do Portal 8º Ano Missão Paz." loading="eager" decoding="async" fetchpriority="high">
@@ -1301,9 +1309,15 @@ function portal8PlayViewEntrance(target){
   target.classList.add("portal8-fallback-enter");
  }
 }
+function portal8PlayRouteIndicator(){
+ if(!portal8MotionAllowed())return;
+ const bar=document.getElementById("portal8RouteIndicator");if(!bar)return;
+ bar.classList.remove("portal8-route-active");void bar.offsetWidth;bar.classList.add("portal8-route-active");
+}
 function showView(id){
  const target=document.getElementById(id);
  if(!target?.classList.contains("view"))return;
+ portal8PlayRouteIndicator();
  // Primeiro atualiza a seção e o menu; depois posiciona o usuário no conteúdo.
  document.querySelectorAll(".view").forEach(v=>{
   v.classList.toggle("active",v===target);
