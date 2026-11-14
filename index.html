@@ -544,6 +544,12 @@ html[data-phase-motion="reduce"] .view.active.portal8-view-enter > *{
  animation:none!important;opacity:1!important;transform:none!important;
 }
 
+
+/* Entrada individual da aba: animação programática, com reserva CSS para navegadores antigos. */
+.view.active.portal8-fallback-enter{animation:portal8OneShotView 760ms cubic-bezier(.17,.86,.24,1) both!important}
+@keyframes portal8OneShotView{from{opacity:.02;transform:translate3d(0,36px,0) scale(.982);filter:blur(4px)}to{opacity:1;transform:translate3d(0,0,0) scale(1);filter:blur(0)}}
+@media(prefers-reduced-motion:reduce){.view.active.portal8-fallback-enter{animation:none!important;opacity:1;transform:none;filter:none}}
+html[data-phase-motion="reduce"] .view.active.portal8-fallback-enter{animation:none!important;opacity:1;transform:none;filter:none}
 </style>
  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.105.0"></script>
 </head>
@@ -1205,17 +1211,49 @@ function portalReplayMotion(){
  const hero=document.querySelector(".school-hero");
  if(hero){hero.classList.remove("school-motion-replay");void hero.offsetWidth;hero.classList.add("school-motion-replay")}
 }
+/* A transição só começa depois que a nova aba realmente está visível. */
+let portal8ActiveViewAnimation=null;
+function portal8MotionAllowed(){
+ return document.documentElement.dataset.phaseMotion!=="reduce"
+  && !window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
+}
+function portal8ScrollToView(id){
+ const main=document.querySelector("main");
+ if(id==="inicio"||!main){
+  window.scrollTo({top:0,behavior:"instant"});
+  return;
+ }
+ const menu=document.querySelector("nav");
+ const menuHeight=menu?.getBoundingClientRect().height||0;
+ const y=Math.max(0,window.scrollY+main.getBoundingClientRect().top-menuHeight-14);
+ try{window.scrollTo({top:y,behavior:"instant"})}
+ catch(e){window.scrollTo(0,y)}
+}
+function portal8PlayViewEntrance(target){
+ if(!target?.classList.contains("active")||!portal8MotionAllowed())return;
+ if(portal8ActiveViewAnimation){try{portal8ActiveViewAnimation.cancel()}catch(e){}}
+ // Web Animations API: transição curta e única, independentemente do cache de estilos CSS.
+ if(typeof target.animate==="function"){
+  const anim=target.animate([
+   {opacity:0.02,transform:"translate3d(0,36px,0) scale(.982)",filter:"blur(4px)"},
+   {opacity:1,transform:"translate3d(0,0,0) scale(1)",filter:"blur(0px)"}
+  ],{duration:760,easing:"cubic-bezier(.17,.86,.24,1)",fill:"both",iterations:1});
+  portal8ActiveViewAnimation=anim;
+  anim.finished.then(()=>{if(portal8ActiveViewAnimation===anim){portal8ActiveViewAnimation=null;anim.cancel()}}).catch(()=>{});
+ }else{
+  target.classList.remove("portal8-fallback-enter");
+  void target.offsetWidth;
+  target.classList.add("portal8-fallback-enter");
+ }
+}
 function showView(id){
  const target=document.getElementById(id);
  if(!target?.classList.contains("view"))return;
- // Reinicia somente a animação curta de entrada ao abrir uma seção.
- target.classList.remove("portal8-view-enter");
- if(!window.matchMedia?.("(prefers-reduced-motion: reduce)").matches &&
-    document.documentElement.dataset.phaseMotion!=="reduce"){
-   void target.offsetWidth;
-   target.classList.add("portal8-view-enter");
- }
- document.querySelectorAll(".view").forEach(v=>v.classList.toggle("active",v.id===id));
+ // Primeiro atualiza a seção e o menu; depois posiciona o usuário no conteúdo.
+ document.querySelectorAll(".view").forEach(v=>{
+  v.classList.toggle("active",v===target);
+  v.classList.remove("portal8-fallback-enter","portal8-view-enter");
+ });
  document.querySelectorAll(".navbtn").forEach(b=>{
   const active=b.dataset.view===id;
   b.classList.toggle("active",active);
@@ -1231,7 +1269,14 @@ function showView(id){
  if(id==="revisao803")phaseRenderReview();
  if(id==="evolucao803")phaseRenderEvolution();
  if(id==="acessibilidade803")phaseLoadAccessUI();
- window.scrollTo({top:0,behavior:"smooth"});
+ portal8ScrollToView(id);
+ // Dois quadros garantem que a aba já esteja pintada antes de iniciar o efeito.
+ requestAnimationFrame(()=>{
+  requestAnimationFrame(()=>{
+   if(!target.classList.contains("active"))return;
+   portal8PlayViewEntrance(target);
+  });
+ });
 }
 document.querySelectorAll(".navbtn").forEach(b=>b.addEventListener("click",()=>showView(b.dataset.view)));
 const nexoNavJump=document.getElementById("nexoNavJump");
@@ -2480,10 +2525,7 @@ function portal8EnableScrollReveal(){
  },{threshold:.08,rootMargin:"0px 0px 25px 0px"});
  els.forEach(x=>observer.observe(x));
 }
-const portal8InitialView=document.querySelector(".view.active");
-if(portal8InitialView&&!window.matchMedia?.("(prefers-reduced-motion: reduce)").matches){
- portal8InitialView.classList.add("portal8-view-enter");
-}
+/* A capa inicial continua estática; a transição roda ao abrir cada ferramenta. */
 if(document.readyState==="complete")portal8EnableScrollReveal();
 else window.addEventListener("load",portal8EnableScrollReveal,{once:true});
 window.addEventListener("load",()=>{
