@@ -80,8 +80,9 @@ O botão **Permitir notificações** solicita autorização expressa do navegado
 - A página inicial utiliza a ilustração cartoon aprovada pelo criador, em `assets/estudantes-cartoon-aprovado.png` (imagem criada a partir da referência fornecida).
 - Novo banner panorâmico com **animação automática de entrada**, efeito de brilho, leve aproximação da imagem e ícones flutuantes; letreiro de ferramentas com movimento contínuo.
 - Há um botão **“✨ Reproduzir animações”**, além de três passos claros para começar: escolha uma matéria, pratique questões e revise.
+- A página inicial também mostra um carrossel de avisos e provas filtrados pela turma selecionada, com controles **Anterior**, **Próximo** e **Pausar**. A rotação automática é desativada quando o usuário ou sistema solicita redução de movimento.
 - As animações são CSS leves (sem vídeos, APIs pagas nem rastreamento). Respeitam `prefers-reduced-motion` e a preferência **Reduzir animações** do aluno.
-- O service worker contém o cartoon no cache offline da versão `portal8-missao-paz-animado-v8` para acesso após a primeira visita online.
+- O service worker contém o cartoon no cache offline da versão `portal8-missao-paz-animado-v9` para acesso após a primeira visita online.
 - Preservadas as 27 seções e os registros locais existentes, inclusive os resultados históricos da 803.
 
 ## Publicação
