@@ -1,10 +1,13 @@
-/* Ateliê Neo — 12 protótipos de avaliação em modo proprietário.
+/* Oficina Criativa Neo — 12 recursos locais publicados para estudantes.
  * Nada desta versão envia dados novos à nuvem; a sincronização é uma demonstração local.
  */
 (() => {
 "use strict";
 const $=id=>document.getElementById(id);
 const labStore="neo-admin-lab-v29-";
+const localSchoolKey=k=>"neo-lab-27-"+k+"-"+(typeof portal8Turma==="string"?portal8Turma:"geral");
+const localRead=(key,def)=>{try{return JSON.parse(localStorage.getItem(localSchoolKey(key)))??def}catch(_){return def}};
+const localWrite=(key,data)=>{try{localStorage.setItem(localSchoolKey(key),JSON.stringify(data));return true}catch(_){return false}};
 const get=(key,def)=>{try{return JSON.parse(localStorage.getItem(labStore+key))??def}catch(_){return def}};
 const put=(key,value)=>{try{localStorage.setItem(labStore+key,JSON.stringify(value));return true}catch(_){return false}};
 const make=(tag,parent,text,cls)=>{const el=document.createElement(tag);if(text!==undefined)el.textContent=text;if(cls)el.className=cls;parent?.append(el);return el};
@@ -21,7 +24,7 @@ const select=(values)=>{const e=document.createElement("select");values.forEach(
 const subjectsList=()=>typeof subjects!=="undefined"&&Array.isArray(subjects)?subjects.map(s=>s.name):["Matemática","Língua Portuguesa","Ciências"];
 function lessonBank(){return typeof quizzes!=="undefined"&&Array.isArray(quizzes)?quizzes.filter(x=>x.q&&Array.isArray(x.o)&&Number.isInteger(x.a)) : []}
 function addDifficulty(root){
- const box=row(root,"⭐⭐⭐ Banco de questões por dificuldade","Teste perguntas do acervo oficial do portal. Os níveis são faixas estimadas para este protótipo, não dificuldade avaliada pelos professores.");
+ const box=row(root,"⭐⭐⭐ Banco de questões por dificuldade","Pratique perguntas do acervo do portal. Os níveis são estimativas por extensão do texto, não uma classificação do professor.");
  const subject=label(box,"Matéria",select(["Todas",...subjectsList()]));
  const level=label(box,"Nível de teste",select(["Básico","Intermediário","Desafio"]));
  const result=output(box);
@@ -40,7 +43,7 @@ function addDifficulty(root){
  });
 }
 function addExamReview(root){
- const box=row(root,"⭐⭐⭐ Revisão por prova","Prévia de preparação por matéria. Consulte as datas confirmadas na ferramenta Calendário; este protótipo não altera nem cria provas.");
+ const box=row(root,"⭐⭐⭐ Revisão por prova","Monte um roteiro por matéria e confira as datas na ferramenta Calendário. Não cria nem altera provas.");
  const subject=label(box,"Matéria",select(subjectsList()));
  const result=output(box);
  button(box,"Montar revisão",()=>{
@@ -51,10 +54,10 @@ function addExamReview(root){
  });
 }
 function addSyncPrototype(root){
- const box=row(root,"⭐⭐⭐ Sincronização opcional — protótipo","O armazenamento em nuvem NÃO está ativado. Aqui você só testa exportar e importar preferências deste laboratório. Não inclua dados pessoais.");
+ const box=row(root,"⭐⭐⭐ Backup local de preferências","Exporte ou importe preferências pessoais da Oficina neste aparelho. Não existe sincronização automática entre dispositivos; os dados não são enviados à nuvem.");
  const result=output(box);
  button(box,"Exportar preferências locais",()=>{
-  const keys=["future","planner","bag"];const data={version:1,created:new Date().toISOString(),preferences:Object.fromEntries(keys.map(k=>[k,get(k,k==="future"||k==="bag"?[]:{})]))};
+  const keys=["future","planner","bag"];const data={version:1,created:new Date().toISOString(),preferences:Object.fromEntries(keys.map(k=>[k,k==="future"?get(k,[]):localRead(k,k==="bag"?[]:{})]))};
   const url=URL.createObjectURL(new Blob([JSON.stringify(data,null,2)],{type:"application/json"}));
   const a=document.createElement("a");a.href=url;a.download="atelier-neo-backup.json";a.click();setTimeout(()=>URL.revokeObjectURL(url),1500);
   result.textContent="Backup local baixado. Não foi enviado para a nuvem.";
@@ -67,15 +70,15 @@ function addSyncPrototype(root){
    if(parsed.version!==1||!parsed.preferences||typeof parsed.preferences!=="object")throw Error("Formato incompatível.");
    const p=parsed.preferences;
    if(p.future&&Array.isArray(p.future))put("future",p.future.filter(x=>typeof x==="string").slice(0,12));
-   if(p.planner&&typeof p.planner==="object"&&!Array.isArray(p.planner))put("planner",Object.fromEntries(Object.entries(p.planner).slice(0,7).map(([k,v])=>[k,String(v).slice(0,90)])));
-   if(p.bag&&Array.isArray(p.bag))put("bag",p.bag.filter(x=>typeof x==="string").slice(0,7));
+   if(p.planner&&typeof p.planner==="object"&&!Array.isArray(p.planner))localWrite("planner",Object.fromEntries(Object.entries(p.planner).slice(0,7).map(([k,v])=>[k,String(v).slice(0,90)])));
+   if(p.bag&&Array.isArray(p.bag))localWrite("bag",p.bag.filter(x=>typeof x==="string").slice(0,7));
    result.textContent="Preferências importadas localmente. Reabra a área para ver as alterações.";
-  }catch(e){result.textContent="Não consegui importar. Verifique o arquivo exportado pelo Ateliê."}
+  }catch(e){result.textContent="Não consegui importar. Verifique o arquivo exportado pela Oficina."}
   file.value="";
  });
 }
 function addAccess(root){
- const box=row(root,"⭐⭐⭐ Acessibilidade do laboratório","Experimente espaçamento ampliado, foco de leitura e palavras maiores apenas nesta área de testes.");
+ const box=row(root,"⭐⭐⭐ Acessibilidade da Oficina","Experimente espaçamento ampliado, foco de leitura e palavras maiores apenas nesta área.");
  const modes=label(box,"Visual para testar",select(["Padrão","Espaçado","Letras maiores","Foco de leitura"]));
  modes.value=get("labStyle","Padrão");
  const apply=()=>{const node=$("neoLab");if(!node)return;node.classList.remove("neo-test-spaced","neo-test-large","neo-test-focus");const mode=modes.value;if(mode==="Espaçado")node.classList.add("neo-test-spaced");if(mode==="Letras maiores")node.classList.add("neo-test-large");if(mode==="Foco de leitura")node.classList.add("neo-test-focus");put("labStyle",mode)};
@@ -93,14 +96,14 @@ function addExamples(root){
  });
 }
 function addCards(root){
- const box=row(root,"⭐⭐ Meus cartões de teste","Crie cartões apenas neste navegador. O experimento não envia cartões à biblioteca dos alunos.");
+ const box=row(root,"⭐⭐ Meus cartões de teste","Crie cartões apenas neste navegador. Seus cartões ficam neste navegador e não aparecem automaticamente no acervo público.");
  const front=label(box,"Pergunta",input("text","Ex.: O que é tese?"));
  const back=label(box,"Resposta",input("text","Explicação curta"));
  const status=output(box);
  button(box,"Salvar cartão local",()=>{
   if(front.value.trim().length<5||back.value.trim().length<3)return status.textContent="Escreva pergunta e resposta para salvar.";
   const cards=get("cards",[]);cards.unshift({q:front.value.trim().slice(0,180),a:back.value.trim().slice(0,400)});
-  put("cards",cards.slice(0,40));front.value="";back.value="";status.textContent="✅ Cartão salvo no laboratório.";
+  put("cards",cards.slice(0,40));front.value="";back.value="";status.textContent="✅ Cartão salvo neste dispositivo.";
  });
  button(box,"Sortear cartão",()=>{
   const cards=get("cards",[]);if(!cards.length)return status.textContent="Crie um cartão primeiro.";
@@ -162,8 +165,8 @@ function addFavorites(root){
 }
 function init(){
  const root=$("neoExperimentPrototypes");if(!root)return;
- const heading=make("h3",root,"🧪 Laboratório de 12 ideias aprovadas");
- make("p",root,"Todos os recursos abaixo são protótipos locais para avaliação. Nenhum é liberado aos estudantes automaticamente; a sincronização na nuvem é somente demonstrativa.");
+ const heading=make("h3",root,"📚 Ferramentas de estudo da Oficina Neo");
+ make("p",root,"Recursos disponíveis para todos os estudantes. Alguns são atividades guiadas ou prévias locais; a sincronização na nuvem não existe. Seus dados não são publicados.");
  const grid=make("div",root,undefined,"neo-lab-grid");
  [addDifficulty,addExamReview,addSyncPrototype,addAccess,addExamples,addCards,addSlides,addRecovery,addThemes,addAnimation,addPoster,addFavorites].forEach(fn=>fn(grid));
  const brainstorm=make("div",root,undefined,"neo-priority-board");
