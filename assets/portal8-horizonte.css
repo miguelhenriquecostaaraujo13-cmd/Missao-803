@@ -91,3 +91,69 @@ html[data-phase-motion="reduce"] #inicio .mp-horizon{animation:none!important}
 .portal8-cover{border-bottom:3px solid #f4be70;box-shadow:0 6px 17px rgba(3,51,89,.11)}
 .portal8-cover-bottom{padding-top:10px;padding-bottom:10px}
 @media(max-width:520px){.portal8-cover .portal8-cover-picture{height:160px}}
+
+
+/* v24 — navegação harmonizada com a identidade Horizonte.
+   Apenas cores, acabamento, foco e contraste; nenhuma alteração nas ferramentas. */
+html[data-portal-theme="aurora"] nav{background:#10375a!important}
+html[data-portal-theme="aurora"] nav::before{color:#f0fbff;border-bottom-color:#386182;letter-spacing:-.025em}
+html[data-portal-theme="aurora"] nav .navquick label{color:#d6e9f7!important}
+html[data-portal-theme="aurora"] nav .navquick select{
+  color:#f3fbff!important;background:#143d63!important;
+  border:1.5px solid #76abc9!important;border-radius:12px;
+  box-shadow:0 2px 10px #061e3438;
+}
+html[data-portal-theme="aurora"] nav .navquick select option,
+html[data-portal-theme="aurora"] nav .navquick select optgroup{
+  background:#143d63!important;color:#f3fbff!important
+}
+html[data-portal-theme="aurora"] nav .navgroup{
+  background:#153c60!important;border:1px solid #355f80!important;
+  border-radius:15px!important;box-shadow:none;
+}
+html[data-portal-theme="aurora"] nav .navgroup[open]{
+  background:#16456c!important;border-color:#6ab5d0!important;
+}
+html[data-portal-theme="aurora"] nav .navgroup>summary{
+  background:#19466d!important;color:#f6fbff!important;
+  border-radius:14px;font-weight:800;text-shadow:none!important;
+  transition:background .2s ease,color .2s ease;
+}
+html[data-portal-theme="aurora"] nav .navgroup[open]>summary{background:#1a537c!important;border-radius:14px 14px 8px 8px}
+html[data-portal-theme="aurora"] nav .navgroup>summary:hover{background:#215d87!important;filter:none}
+html[data-portal-theme="aurora"] nav .navgroup>summary::after{color:#c5f2fa!important}
+html[data-portal-theme="aurora"] nav .navgroup .navcount{
+  background:#0d304f!important;color:#e9f8ff!important;
+  border:1px solid #5e96b8!important;border-radius:9px;
+}
+html[data-portal-theme="aurora"] nav .navgroup-items{
+  background:#103c61!important;padding:7px!important;
+}
+html[data-portal-theme="aurora"] nav .navgroup-items .navbtn{
+  background:#17456c!important;color:#e9f5ff!important;
+  border:1px solid #355e81!important;border-radius:11px!important;
+  box-shadow:none!important;transition:background .18s ease,border-color .18s ease;
+}
+html[data-portal-theme="aurora"] nav .navgroup-items .navbtn:hover{
+  background:#225c86!important;color:#fff!important;border-color:#79bdd3!important;
+}
+html[data-portal-theme="aurora"] nav .navgroup-items .navbtn.active{
+  background:#b8ecf2!important;color:#0d3654!important;
+  border:1px solid #b8ecf2!important;box-shadow:inset 4px 0 #278ca5!important;
+  font-weight:900!important;
+}
+html[data-portal-theme="aurora"] nav :is(.navbtn,summary,select):focus-visible{
+  outline:3px solid #ffe09b!important;outline-offset:2px;
+}
+html[data-portal-theme="aurora"] nav .navhint{color:#c2dce9}
+/* Adaptado aos outros dois temas existentes, sem sobrescrever sua identidade. */
+html[data-portal-theme="noite"] nav .navgroup>summary{background:#1b3653!important}
+html[data-portal-theme="noite"] nav .navgroup[open]>summary{background:#24486b!important}
+html[data-portal-theme="noite"] nav .navgroup-items .navbtn.active{background:#b7e9ef!important;color:#133650!important;border-color:#b7e9ef!important}
+html[data-portal-theme="papel"] nav .navgroup>summary{background:#285f65!important}
+html[data-portal-theme="papel"] nav .navgroup[open]>summary{background:#317178!important}
+html[data-portal-theme="papel"] nav .navgroup-items .navbtn.active{background:#c4ece3!important;color:#174348!important;border-color:#c4ece3!important}
+@media(max-width:790px){
+ html[data-portal-theme="aurora"] nav{background:#10375a!important;border-bottom:1px solid #4f85a3!important}
+ html[data-portal-theme="aurora"] nav .navquick select{background:#173e63!important}
+}
