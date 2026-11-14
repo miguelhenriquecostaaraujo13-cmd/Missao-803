@@ -263,6 +263,19 @@ Os arquivos são `assets/neo-lab.js` e `assets/neo-lab.css`; o cache offline foi
 - Os nomes de arquivos antigos, classes CSS e identificadores internos permanecem inalterados para garantir compatibilidade com o site, caches e progressos já salvos. Esses identificadores técnicos não aparecem nos textos para alunos.
 - Cache offline `portal8-recursos-aprovados-v36` com nova versão de imagem e scripts para os navegadores carregarem a correção.
 
+## Versão 37 — três pontinhos do Daniel e Arcade por fases
+
+- **Organização sugerida pelo Daniel:** controles repetidos das 32 ferramentas agora ficam num menu acessível de **três pontinhos (⋯)**. A barra de navegação principal também ganhou menu compacto, com busca, início, jogos, mapas, flashcards e Oficina Criativa. Mantidos atalhos `Ctrl+K`/`⌘+K`, favoritos, links e permissões administrativas.
+- **Página inicial mais limpa:** os avisos antigos sobre mapas e Oficina foram agrupados num painel recolhível **Outras novidades do portal**. O Arcade e o roteiro de estudos continuam fáceis de localizar.
+- **Arcade Educativo Neo melhorado:** o catálogo dos três jogos ganhou cartões visuais originais e responsivos. Cada jogo agora possui três missões selecionáveis: **Explorador**, **Missão** e **Desafio**, com metas e vidas adequadas. Uma barra de progresso mostra a evolução de cada fase; trocar de fase reinicia a partida. Os recordes são pessoais e separados por fase, sem ranking público. O Diretor Neo adaptativo e as opções de toque permanecem ativos.
+- **Metas por jogo:** Frações com 3/6/9 coletas, Célula com 2/3/3 entregas, Conectivos com 6/10/15 acertos (Explorador/Missão/Desafio, respectivamente). Observar o desafio não muda notas nem boletins.
+- **Referências conceituais públicas:** Meu Bernoulli (organização de conteúdos e progresso), Geppetto (missões e adaptação de desafios), Escola Games (jogos de interação direta e objetivos claros). Foram usados apenas conceitos gerais; o visual, os textos, os jogos, os personagens e o código são originais do Missão Paz. Não há parceria nem integração com essas plataformas.
+  - Meu Bernoulli: https://www.bernoulli.com.br/sistema-de-ensino/diferenciais/tecnologias-educacionais/
+  - Geppetto: https://www.geppetto.com.br/
+  - Escola Games: https://www.escolagames.com.br/
+- **Novos arquivos:** `assets/portal-tres-pontinhos-v37.js`, `assets/portal-tres-pontinhos-v37.css`, `assets/neo-arcade-missoes-v37.css`. Atualizado `assets/neo-arcade.js`. Cache offline `portal8-recursos-aprovados-v37`.
+- **Validação:** 32 rotas preservadas, IDs únicos, scripts sintaticamente corretos. Início e desenho das nove combinações de jogo e fase validados em uma simulação de navegador. Não houve validação visual real em dispositivos físicos; jogos e menus devem ser testados no site publicado.
+
 ## Publicação
 
 Publicação atual pelo GitHub Pages: https://miguelhenriquecostaaraujo13-cmd.github.io/Missao-803/
