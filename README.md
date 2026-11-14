@@ -57,7 +57,7 @@ O botão **Permitir notificações** solicita autorização expressa do navegado
 - **Etapa 3:** gráfico do histórico diário de acertos nos simulados a partir desta atualização, e calendário mensal mostrando tarefas locais, cronograma inicial e datas oficiais cadastradas no Supabase.
 - **Etapa 4:** controles locais de tamanho da fonte, alto contraste e animações, além de formulário opt-in de relatos privados de problemas/sugestões. O proprietário aprovado acessa esses relatos pelo Modo Proprietário.
 - O histórico, os checklists e os níveis de compreensão ficam apenas no armazenamento local do aluno. Os relatos enviados são armazenados no Supabase, protegidos por políticas RLS que limitam a leitura ao autor e aos administradores autorizados. Relatos podem ser marcados como resolvidos pelo administrador autorizado.
-- A plataforma foi ampliada de 26 para 27 áreas, mantendo os temas e as chaves de armazenamento antigas da 803. Testar no celular e em diferentes navegadores após publicação.
+- A plataforma foi ampliada de 26 para 28 áreas, mantendo os temas e as chaves de armazenamento antigas da 803. Testar no celular e em diferentes navegadores após publicação.
 
 
 ## Expansão para o 8º ano (novembro de 2026)
@@ -82,18 +82,31 @@ O botão **Permitir notificações** solicita autorização expressa do navegado
 - Há um botão **“✨ Reproduzir animações”**, além de três passos claros para começar: escolha uma matéria, pratique questões e revise.
 - A página inicial também mostra um carrossel de avisos e provas filtrados pela turma selecionada, com controles **Anterior**, **Próximo** e **Pausar**. A rotação automática é desativada quando o usuário ou sistema solicita redução de movimento.
 - As animações são CSS leves (sem vídeos, APIs pagas nem rastreamento). Respeitam `prefers-reduced-motion` e a preferência **Reduzir animações** do aluno.
-- O service worker contém o cartoon no cache offline da versão `portal8-missao-paz-animado-v9` para acesso após a primeira visita online.
+- O service worker contém o cartoon e os recursos atuais no cache offline atualizado para acesso após a primeira visita online.
 - Preservadas as 27 seções e os registros locais existentes, inclusive os resultados históricos da 803.
 
-## Pazinho — mascote interativo
+## Pazinho — livrinho interativo
 
 - Ao trocar entre as **27 ferramentas**, o Pazinho aparece no canto inferior direito e mostra um **balão de fala com dica específica** da área aberta.
 - Cada área tem duas frases que se alternam. Clique no mascote ou no botão **✨ Outra dica** para ver mais uma. O balão fecha automaticamente após cerca de 5 segundos ou pelo botão ×.
 - A primeira visita da sessão também mostra uma saudação. O mascote continua disponível no cantinho, sem bloquear o uso da página.
 - Em **Acessibilidade** há a opção **Mostrar o Pazinho e suas dicas ao abrir ferramentas**. Ela pode ser desativada e a escolha fica apenas no dispositivo (`portal8-pazinho-enabled-v1`).
 - A entrada tem movimento suave e respeita as preferências de redução de movimento. Não há voz, rastreamento, cookies adicionais nem API paga.
-- A ilustração de estudantes cartoon aprovada permanece **inalterada**. O mascote usa uma nova pombinha azul inspirada nas cores da identidade alternativa do próprio portal, em `assets/pazinho.svg`.
+- A ilustração de estudantes cartoon aprovada permanece **inalterada**. O mascote agora é o livrinho azul com braços, pernas, olhos e sorriso, fiel ao desenho enviado pelo criador, em `assets/pazinho.svg`.
 - Componentes independentes: `assets/portal8-pazinho.css` e `assets/portal8-pazinho.js`; a função `showView` emite `portal8:viewchange` após a navegação.
+
+## Contas e perfis privados (novembro de 2026)
+
+- Nova aba **👤 Meu perfil** e atalho no cabeçalho para **Entrar / Criar conta**.
+- Login/cadastro com Supabase Auth por e-mail e senha (mínimo 12 caracteres), aproveitando a conexão já usada pelo Modo Proprietário. A confirmação por e-mail depende das configurações do Auth.
+- O perfil de cada aluno fica na tabela **`public.portal8_profiles`** com nome de exibição, turma, apresentação curta, avatar privado e data de criação. **RLS** limita leitura/escrita à própria conta real; sessões anônimas não acessam esses perfis.
+- A foto é convertida no navegador em WebP 320×320 e enviada ao bucket **privado** `portal8-avatars`. Políticas restringem cada usuário ao arquivo `<user-id>/avatar.webp`. A foto é baixada autenticada, e seu URL local em memória é descartado ao sair da conta.
+- A indicação **Proprietário autorizado** só aparece se a conta estiver cadastrada em `public.portal803_admins`, com verificação de RLS. Ela não depende de texto ou papel escrito pelo aluno. Nenhuma conta nova ganha poderes administrativos automaticamente.
+- O indicador **Nível de estudos** é ilustrativo e calculado somente a partir dos dados locais do navegador. Não é ranking entre colegas nem histórico sincronizado.
+- Dados de estudo antigos permanecem locais por padrão e não são transferidos automaticamente para uma conta online. O projeto permanece utilizável sem login.
+- **Atenção:** confirmação por e-mail requer autorizar o URL do GitHub Pages no Supabase Auth → URL Configuration. Links de e-mail só levam ao site; depois da confirmação pode ser necessário entrar manualmente.
+- Os arquivos do recurso são `assets/portal8-perfil.css` e `assets/portal8-perfil.js`. O cache offline foi atualizado, mas cadastro, login e upload de imagem dependem de conexão.
+- Para proteção de menores, fotos e apresentações são **privadas**. Não há busca pública de alunos, chat nem lista de perfis.
 
 ## Publicação
 
