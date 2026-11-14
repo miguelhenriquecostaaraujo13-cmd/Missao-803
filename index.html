@@ -633,6 +633,19 @@ html[data-phase-motion="reduce"] .view.active.portal8-enter-active{
  color:var(--ink);
  font-size:1.04rem;
 }
+
+/* Novidades automáticas do próprio portal, visualmente separadas dos avisos oficiais. */
+#portal8AutoUpdateNews[hidden]{display:none!important}
+#portal8AutoUpdateNews{margin:12px 0 17px}
+#portal8AutoUpdateNews .portal8-site-update{
+ margin:10px 0 0;padding:15px 17px;border-radius:15px;
+ border:1px solid #9ec8ed;border-left:4px solid #2189d4;
+ background:linear-gradient(120deg,#f2f9ff,var(--portal-panel,#fff));
+ box-shadow:0 4px 14px rgba(15,82,140,.07);
+}
+#portal8AutoUpdateNews .portal8-site-update b{display:block;font-size:1rem;color:var(--ink)}
+#portal8AutoUpdateNews .portal8-site-update small{display:block;margin-top:4px;color:var(--muted);font-weight:750}
+#portal8AutoUpdateNews .portal8-site-update p{white-space:pre-wrap;overflow-wrap:anywhere;margin:8px 0 0;line-height:1.55}
 </style>
  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.105.0"></script>
 <link rel="stylesheet" href="./assets/portal8-expansao.css?v=18">
