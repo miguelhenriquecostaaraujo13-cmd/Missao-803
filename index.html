@@ -872,7 +872,17 @@ html[data-phase-motion="reduce"] .view.active.portal8-enter-active{
 </section>
 
 
-<section id="biblioteca" class="view">
+<section id="biblioteca" class="view"><section class="card p8x-section" id="p8xDoubts">
+ <div class="p8x-heading"><div><span class="p8x-eyebrow">12 · CAIXA DE DÚVIDAS MODERADA</span><h3>❓ Pergunte sobre uma matéria</h3><p>Envie uma pergunta para revisão. Somente dúvidas aprovadas e respondidas serão compartilhadas.</p></div></div>
+ <div class="p8x-fields"><label>Matéria<select id="p8xDoubtSubject"></select></label><label>Sala atual<input id="p8xDoubtClass" class="p8x-entry" disabled value="Turma 803"></label></div>
+ <label for="p8xDoubtQuestion"><b>Minha dúvida</b></label>
+ <textarea id="p8xDoubtQuestion" class="p8x-entry" rows="4" minlength="15" maxlength="600" placeholder="Ex.: qual é a diferença entre população e amostra?"></textarea>
+ <label class="p8x-row"><input type="checkbox" id="p8xDoubtConsent"> <span class="p8x-note">Confirmo que não coloquei nomes, fotos, telefones, links ou outros dados pessoais.</span></label>
+ <div class="p8x-actions"><button type="button" class="btn orange" onclick="portal8Doubts.send()">📨 Enviar para moderação</button><button type="button" class="btn light" onclick="portal8Doubts.published()">↻ Atualizar respostas</button></div>
+ <p class="p8x-status" id="p8xDoubtStatus" role="status"></p>
+ <h4>📚 Dúvidas já respondidas nesta turma</h4><div id="p8xPublicDoubts"><p class="p8x-note">Consultando perguntas...</p></div>
+ <p class="p8x-note">As perguntas originais são privadas. O responsável poderá ajustar a redação antes de publicar uma resposta, sem identificar quem enviou.</p>
+</section>
   <h2 id="portal8LibTitle">🤝 Biblioteca Colaborativa — Turma 803</h2>
   <p class="sub">Compartilhe voluntariamente resumos de estudo com a turma. Um professor ou responsável precisa aprovar o material antes que ele apareça para os colegas.</p>
   <div class="callout small" style="margin-bottom:14px">🛡️ Segurança: publique apenas conteúdo escolar escrito por você. Não inclua nomes completos, fotos de pessoas, telefones, endereços, conversas privadas ou dados pessoais. Não envie respostas de provas em andamento. Materiais publicados podem ser lidos pelos participantes da plataforma.</div>
@@ -923,7 +933,11 @@ html[data-phase-motion="reduce"] .view.active.portal8-enter-active{
  <div class="card span-12"><h3>Repetição espaçada</h3><p class="small muted">Depois de revisar um conteúdo, agende a próxima revisão. O intervalo aumenta aos poucos: 1, 3, 7 e 14 dias.</p><div class="row"><label for="reviewSubject"><b>Matéria</b></label><select id="reviewSubject"></select><button class="btn orange" onclick="scheduleReview()">📅 Revisei hoje</button></div><div id="reviewList" style="margin-top:14px"></div></div></div>
 </section>
 
-<section id="desafio8ano" class="view"><h2>🏆 Missões coletivas do 8º ano</h2>
+<section id="desafio8ano" class="view"><section class="card p8x-section" id="p8xThemeMission">
+ <div class="p8x-heading"><div><span class="p8x-eyebrow">16 · MISSÃO COLETIVA TEMÁTICA</span><h3 id="p8xThemeTitle">🏆 Missão da semana</h3><p>Um tema diferente a cada semana, sem ranking individual.</p></div><span class="p8x-tag" id="p8xThemeWeek"></span></div>
+ <p id="p8xThemeDescription" class="p8x-note">Atividades voluntárias para sua turma.</p>
+ <div class="p8x-grid two"><div class="p8x-panel"><h4>Passos da missão</h4><ul id="p8xThemeSteps" class="p8x-list"></ul></div><div class="p8x-panel"><h4>Participe com sua turma</h4><p>Quando terminar os passos, registre a conclusão. Os totais só são mostrados quando houver participantes suficientes.</p><button type="button" class="btn orange" onclick="portal8MissionSubmit(true)">✅ Concluí a missão da semana</button><p class="p8x-note">O registro utiliza o painel coletivo existente e não divulga respostas individuais.</p></div></div>
+</section><h2>🏆 Missões coletivas do 8º ano</h2>
 <p class="sub">Uma maneira de acompanhar a participação voluntária das turmas, sem ranking de alunos, notas individuais ou competição obrigatória.</p>
 <div class="card"><h3>🌟 A turma evolui junta</h3><p class="small muted">Indicadores só aparecem quando pelo menos 5 participantes de uma turma autorizam a sincronização. As turmas são autodeclaradas, então estes números não são uma classificação oficial da escola.</p>
 <div class="row"><button type="button" class="btn orange" onclick="portal8RefreshChallenge()">↻ Atualizar metas coletivas</button><button type="button" class="btn light" onclick="portal8MissionSubmit(true)">✅ Concluir missão semanal</button><button type="button" class="btn light" onclick="portal8MissionSubmit(false)">↺ Desmarcar minha missão</button></div>
@@ -986,7 +1000,11 @@ html[data-phase-motion="reduce"] .view.active.portal8-enter-active{
 <div class="card" style="margin-top:14px"><h3>📅 Calendário visual</h3><div class="row"><button type="button" class="btn light" onclick="phaseMonth(-1)">← Mês anterior</button><b id="phaseMonthLabel"></b><button type="button" class="btn light" onclick="phaseMonth(1)">Próximo mês →</button></div><div id="phaseMonthCalendar" class="phase-calendar"></div><div id="phaseMonthLegend" class="small muted" style="margin-top:10px"></div><p class="small muted">As datas das provas da 3ª etapa são comuns às seis turmas; as tarefas pessoais continuam privadas. Confirme qualquer alteração com a escola.</p></div>
 </section>
 <section id="arena" class="view"><h2>🎮 Arena 803 — Desafio do conhecimento</h2><p class="sub">Jogue para aprender, sem ranking entre colegas. As perguntas são selecionadas dos simulados existentes.</p><div class="grid"><div class="card span-7"><h3 id="arenaTitle">Prepare-se para o desafio</h3><p id="arenaQuestion">Escolha uma matéria e comece uma rodada de cinco perguntas.</p><div id="arenaOptions" class="mission"></div><div class="row"><button class="btn orange" onclick="startArena()">▶ Nova rodada</button><button class="btn light" onclick="showView('quiz')">Abrir simulados</button></div><p class="small muted" id="arenaFeedback" role="status"></p></div><div class="card span-5"><h3>Minha rodada</h3><div class="metric" id="arenaScore">0 / 5</div><p class="small muted" id="arenaProgress">Nenhuma rodada iniciada.</p><label for="arenaSubject"><b>Matéria</b></label><select id="arenaSubject" class="study-field"><option value="Todas">Todas</option></select><p class="small muted">Sem competição pública, notas individuais ou pressão. O objetivo é praticar.</p></div></div></section>
-<section id="calendario" class="view"><h2>📅 Calendário e horários</h2><p class="sub">Veja o calendário comum de provas do 8º ano, organize suas tarefas e, na 803, consulte também os horários de cada aula.</p><section class="portal8-school-schedule portal8-803-only card" id="portal8Aulas803" aria-labelledby="portal8Aulas803Titulo">
+<section id="calendario" class="view"><section class="card p8x-section" id="p8xActivities">
+ <div class="p8x-heading"><div><span class="p8x-eyebrow">10 · ATIVIDADES DA TURMA</span><h3>📌 Quadro de atividades e trabalhos</h3><p id="p8xActivitiesSubtitle">Prazos publicados para a turma.</p></div><button type="button" class="btn light" onclick="portal8Classes.loadActivities()">↻ Atualizar</button></div>
+ <div id="p8xActivitiesList" class="p8x-grid two" aria-live="polite"><p class="p8x-note">Consultando atividades...</p></div>
+ <p class="p8x-note">Os trabalhos são publicados pelo administrador. Confirme prazos e instruções com os professores.</p>
+</section><h2>📅 Calendário e horários</h2><p class="sub">Veja o calendário comum de provas do 8º ano, organize suas tarefas e, na 803, consulte também os horários de cada aula.</p><section class="portal8-school-schedule portal8-803-only card" id="portal8Aulas803" aria-labelledby="portal8Aulas803Titulo">
  <div class="portal8-school-schedule-head">
   <div><span class="portal8-schedule-kicker">⏰ ROTINA ESCOLAR • 07h00 ÀS 11h30</span><h3 id="portal8Aulas803Titulo">Horário semanal de aulas — Turma 803</h3>
   <p class="small muted">Aulas de segunda a sexta-feira, das <b>7h às 11h30</b>.</p></div>
@@ -1066,7 +1084,22 @@ html[data-phase-motion="reduce"] .view.active.portal8-enter-active{
   <p id="portalOwnerStatus" role="status" class="small muted">Aguardando login. A conta proprietária precisa ser aprovada pelo administrador do projeto.</p>
   <div id="portalOwnerSetup" hidden><p class="small muted">Seu identificador de usuário no Supabase (não é uma senha). Apenas quem administra o banco pode liberar esse identificador:</p><code id="portalOwnerUid" style="display:block;overflow-wrap:anywhere"></code><button class="btn light" type="button" onclick="portalOwnerCopyUid()">Copiar meu identificador</button><p class="small muted">No Supabase → SQL Editor, o responsável pelo projeto deve adicionar esse identificador à tabela <code>public.portal803_admins</code>. Nenhuma conta é promovida automaticamente.</p></div>
  </div>
- <div id="portalOwnerPrivate" hidden><div class="card" style="margin-top:14px"><label for="portal8AdminScope"><b>📍 Público do novo aviso ou prova</b></label><select id="portal8AdminScope" class="study-field"><option value="geral">Todo o 8º ano (aviso geral)</option><option value="801">Turma 801</option><option value="802">Turma 802</option><option value="803" selected>Turma 803</option><option value="804">Turma 804</option><option value="806">Turma 806</option><option value="807">Turma 807</option></select><p class="small muted">Selecione a turma antes de publicar. Publicações antigas permanecem na 803.</p></div><div class="card" style="margin:14px 0"><div class="between"><h3>📚 Biblioteca — aprovação de materiais</h3><button class="btn light" type="button" onclick="portal8ModerateLibrary()">↻ Ver pendentes</button></div><p class="small muted">Reveja os materiais antes de autorizar uma publicação, sem divulgar identificações dos estudantes.</p><div id="portal8PendingLibrary"></div></div><div class="card" style="margin:14px 0"><div class="between"><h3>🛠️ Relatos privados enviados à equipe</h3><button class="btn light" type="button" onclick="phaseOwnerReports()">↻ Atualizar relatos</button></div><p class="small muted">Somente proprietários autorizados conseguem consultar a fila. Não compartilhe relatos dos alunos.</p><div id="phaseOwnerReports"></div></div>
+ <div id="portalOwnerPrivate" hidden><section class="card p8x-section" id="p8xAdminActivities">
+ <span class="p8x-eyebrow">ADMINISTRAÇÃO · IDEIA 10</span><h3>📌 Publicar atividade ou trabalho</h3><p class="p8x-note">Escolha corretamente o público, a matéria, o prazo e as instruções.</p>
+ <div class="p8x-fields">
+ <label>Turma<select id="p8xActTurma"><option value="geral">Todo o 8º ano</option><option value="801">801</option><option value="802">802</option><option value="803">803</option><option value="804">804</option><option value="806">806</option><option value="807">807</option></select></label>
+ <label>Matéria<input id="p8xActMateria" maxlength="70" placeholder="Ex.: Ciências"></label>
+ <label>Título<input id="p8xActTitulo" maxlength="110" placeholder="Ex.: Resumo do capítulo"></label>
+ <label>Data de entrega (opcional)<input id="p8xActEntrega" type="date"></label>
+ </div>
+ <label for="p8xActDescricao"><b>Descrição da atividade</b></label><textarea id="p8xActDescricao" class="p8x-entry" rows="4" maxlength="1200" placeholder="Oriente os alunos sobre o que fazer."></textarea>
+ <div class="p8x-actions"><button class="btn orange" type="button" onclick="portal8Classes.publishActivity()">📌 Publicar atividade</button></div><p id="p8xActStatus" role="status" class="p8x-status"></p>
+</section>
+<section class="card p8x-section" id="p8xAdminDoubts">
+ <div class="p8x-heading"><div><span class="p8x-eyebrow">ADMINISTRAÇÃO · IDEIA 12</span><h3>🛡️ Moderação de dúvidas</h3><p>Remova informações pessoais das perguntas e escreva uma resposta antes de publicar.</p></div>
+ <button type="button" class="btn light" onclick="portal8Doubts.pending()">↻ Atualizar fila</button></div>
+ <div id="p8xPendingDoubts"><p class="p8x-note">Somente a conta administradora autorizada pode acessar esta área.</p></div>
+</section><div class="card" style="margin-top:14px"><label for="portal8AdminScope"><b>📍 Público do novo aviso ou prova</b></label><select id="portal8AdminScope" class="study-field"><option value="geral">Todo o 8º ano (aviso geral)</option><option value="801">Turma 801</option><option value="802">Turma 802</option><option value="803" selected>Turma 803</option><option value="804">Turma 804</option><option value="806">Turma 806</option><option value="807">Turma 807</option></select><p class="small muted">Selecione a turma antes de publicar. Publicações antigas permanecem na 803.</p></div><div class="card" style="margin:14px 0"><div class="between"><h3>📚 Biblioteca — aprovação de materiais</h3><button class="btn light" type="button" onclick="portal8ModerateLibrary()">↻ Ver pendentes</button></div><p class="small muted">Reveja os materiais antes de autorizar uma publicação, sem divulgar identificações dos estudantes.</p><div id="portal8PendingLibrary"></div></div><div class="card" style="margin:14px 0"><div class="between"><h3>🛠️ Relatos privados enviados à equipe</h3><button class="btn light" type="button" onclick="phaseOwnerReports()">↻ Atualizar relatos</button></div><p class="small muted">Somente proprietários autorizados conseguem consultar a fila. Não compartilhe relatos dos alunos.</p><div id="phaseOwnerReports"></div></div>
   <div class="callout" style="margin:15px 0">✅ Acesso autorizado. As publicações abaixo são gravadas no Supabase e aparecem para a turma. Revise datas e textos antes de publicar.</div>
   <div class="grid">
    <div class="card span-6"><h3>📢 Publicar aviso oficial</h3><label for="portalOfficialTitle">Título</label><input id="portalOfficialTitle" class="study-field" maxlength="90"><label for="portalOfficialBody">Aviso</label><textarea id="portalOfficialBody" class="study-field" maxlength="1200" rows="5"></textarea><button class="btn orange" onclick="portalPublishNotice()">Publicar para a turma</button></div>
@@ -2676,5 +2709,7 @@ window.addEventListener("load",()=>{
 init();renderNexo();
 </script>
 <script src="./assets/portal8-estudos-v18.js?v=18"></script>
+<script src="./assets/portal8-turmas-v18.js?v=18"></script>
+<script src="./assets/portal8-duvidas-v18.js?v=18"></script>
 </body>
 </html>
