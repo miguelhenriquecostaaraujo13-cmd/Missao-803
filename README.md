@@ -276,6 +276,17 @@ Os arquivos são `assets/neo-lab.js` e `assets/neo-lab.css`; o cache offline foi
 - **Novos arquivos:** `assets/portal-tres-pontinhos-v37.js`, `assets/portal-tres-pontinhos-v37.css`, `assets/neo-arcade-missoes-v37.css`. Atualizado `assets/neo-arcade.js`. Cache offline `portal8-recursos-aprovados-v37`.
 - **Validação:** 32 rotas preservadas, IDs únicos, scripts sintaticamente corretos. Início e desenho das nove combinações de jogo e fase validados em uma simulação de navegador. Não houve validação visual real em dispositivos físicos; jogos e menus devem ser testados no site publicado.
 
+## Versão 38 — minijogos Visual 2.0 (teste)
+
+- **Arcade Educativo Neo — teste de visual completo:** o aluno pode alternar entre `✨ Visual 2.0 — personagens e cenários (TESTE)` e `⚪ Visual clássico` diretamente no Arcade. O novo visual é escolhido por padrão; a preferência é mantida apenas no navegador. A lógica anterior permanece acessível para comparação.
+- **🏃 Corrida das Frações:** o jogador agora aparece como um aventureiro 2D com cabeça, boné, corpo, mochila, pernas e braços animados, em cenário com céu, montanhas, nuvens e plataformas com textura. As bolinhas de frações viraram **cartas retangulares ilustradas** com valores e estrelas. O pulo ganhou pequenas janelas de tolerância na saída e chegada a plataformas.
+- **🧬 Missão Célula:** o jogador se transforma em **explorador de laboratório** com jaleco e capacete. Mitocôndrias, ribossomos e núcleo têm ilustrações próprias; vírus são inimigos com espinhos animados; paredes e estações receberam cenário celular colorido.
+- **🛹 Ritmo dos Conectivos:** as pistas se tornaram uma cena com iluminação; o jogador é um corredor sobre prancha com corpo, cabeça, braços e botas. As palavras aparecem em **placas retangulares** no lugar de objetos redondos.
+- **Efeitos leves de comemoração** aparecem em acertos e falhas; respeitam a preferência do sistema operacional por movimento reduzido. Os desenhos usam canvas, sem imagens importadas, downloads de recursos externos ou API paga.
+- Os jogos mantêm as três fases (Explorador, Missão, Desafio), controles de teclado e toque, progresso e recordes locais, além do Diretor Neo de ajuda. Os gráficos não afetam notas escolares ou acesso administrativo.
+- **Arquivos novos:** `assets/neo-arcade-arte-v38.js` e `assets/neo-arcade-arte-v38.css`. `assets/neo-arcade.js` ganhou integração de arte com fallback para o modo clássico. O cache foi atualizado para `portal8-recursos-aprovados-v38`.
+- **Validação:** os 18 cenários de inicialização/desenho (3 jogos × 3 fases × 2 estilos) passaram em simulação com canvas substituto; 32 áreas, navegação e IDs preservados. Teste visual e de desempenho em navegador/dispositivo real ainda necessário.
+
 ## Publicação
 
 Publicação atual pelo GitHub Pages: https://miguelhenriquecostaaraujo13-cmd.github.io/Missao-803/
