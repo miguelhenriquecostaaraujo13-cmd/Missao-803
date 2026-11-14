@@ -31,6 +31,12 @@
     if (code === "user_already_exists" || message.includes("already registered")) {
       return "📩 Já pode existir uma conta com esse e-mail. Use Entrar ou confirme o e-mail recebido.";
     }
+    if (code === "validation_failed" && message.includes("redirect")) {
+      return "⚠️ O endereço público do portal precisa ser autorizado nas configurações de redirecionamento do Supabase.";
+    }
+    if (message.includes("provider is not enabled") || message.includes("provider not enabled") || code === "provider_disabled" || message.includes("unsupported provider")) {
+      return "🔧 Entrar com Google ainda precisa ser ativado nas configurações de autenticação do portal. Continue usando e-mail e senha por enquanto.";
+    }
     if (code === "email_provider_disabled") {
       return "O login por e-mail está indisponível no servidor do portal.";
     }
@@ -41,6 +47,16 @@
       return "Não foi possível concluir o cadastro agora. Confira os campos, tente novamente mais tarde ou peça ajuda ao responsável pelo portal.";
     }
     return "Não foi possível entrar agora. Confira suas credenciais, a confirmação do e-mail e a conexão.";
+  }
+  // A URL deve ser pública: links para localhost não abrem em outros celulares.
+  const PUBLIC_PORTAL_URL="https://miguelhenriquecostaaraujo13-cmd.github.io/Missao-803/";
+  function publicRedirectURL() { return PUBLIC_PORTAL_URL; }
+  async function signInWithGoogle(client) {
+    if(!client?.auth?.signInWithOAuth)throw new Error("A conexão segura não está disponível.");
+    return client.auth.signInWithOAuth({
+      provider:"google",
+      options:{redirectTo:publicRedirectURL()}
+    });
   }
   async function resendConfirmation(client, email, redirectTo) {
     if (!emailValid(email)) return {error: {code: "invalid_email", message: "invalid email"}};
@@ -60,7 +76,7 @@
     return "⚠️ Não foi possível usar o link do e-mail. Ele pode ter expirado ou já ter sido usado. Tente fazer login e, se necessário, solicite outro e-mail de confirmação.";
   }
   window.portal8AuthHelp = Object.freeze({
-    emailValid, errorMessage, resendConfirmation, linkErrorMessage,
+    emailValid, errorMessage, resendConfirmation, linkErrorMessage, publicRedirectURL, signInWithGoogle,
     confirmationMessage: "📩 Cadastro recebido! Verifique sua caixa de entrada e o Spam, abra o e-mail de confirmação e clique no link. Depois, faça login. Se não receber, toque em Reenviar confirmação.",
   });
 })();
