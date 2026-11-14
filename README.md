@@ -216,6 +216,15 @@ Os arquivos são `assets/neo-lab.js` e `assets/neo-lab.css`; o cache offline foi
 - Os arquivos são `assets/neo-arcade.js` e `assets/neo-arcade.css`; o cache offline foi atualizado para `portal8-recursos-aprovados-v31`. As 30 áreas anteriores permanecem intactas, totalizando 31.
 - Os scripts passaram por validação de sintaxe e integração de arquivos. A jogabilidade, visual final e performance em aparelhos reais exigem teste no site publicado.
 
+## Versão 32 — Neo Mapas Inteligentes e nome correto do mascote
+
+- Corrigido o nome falado no balão do mascote: a saudação não contém mais **Pazinho** como texto fixo. O nome apresentado vem de `portal8_site_settings` (Supabase) e é guardado em cache local para funcionar na próxima abertura e offline. **Neo** é apenas o nome padrão; renomeações legítimas feitas em Modo Proprietário continuam prevalecendo. Também foram atualizados os rótulos de acessibilidade do mascote e adicionadas dicas nas abas Mapas, Arcade e Ateliê.
+- `assets/neo-mapas-mentais.js` foi recriado como **motor especializado local** (não é um modelo generativo nem um serviço ChatGPT) com seleção por relevância dos conteúdos existentes: capítulos/tópicos e cartões da própria matéria, além das anotações fornecidas pelo aluno. Ele não inventa conceitos quando não encontra correspondências.
+- Mapas SVG reorganizados em **duas colunas, tema central em destaque, ramificações em caixas de largura fixa, curvas de ligação e espaçamento estável**. Quatro paletas: Oceano Neo, Aurora, Natureza e Caderno. O mapa pode ser baixado em SVG ou copiado como esquema de texto. As opções de cards e favoritos anteriores permanecem no site.
+- `assets/neo-mapas-mentais.css` foi aprimorado para telas pequenas e espaços de prévia.
+- Cache offline atualizado para `portal8-recursos-aprovados-v32` e as referências dos arquivos receberam `?v=32` para evitar uso da versão antiga.
+- Validação: todas as 31 rotas preservadas e sem identificadores duplicados; scripts sintaticamente corretos; teste simulado gerou seis ramificações em posições sem sobreposição. A renderização real deve ser conferida após a publicação no GitHub Pages.
+
 ## Publicação
 
 Publicação atual pelo GitHub Pages: https://miguelhenriquecostaaraujo13-cmd.github.io/Missao-803/
