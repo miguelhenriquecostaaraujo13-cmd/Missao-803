@@ -84,3 +84,10 @@ html[data-portal-theme="papel"] #inicio .mp-overview-card{background:#fffefa}
 @media(prefers-reduced-motion:reduce){#inicio .mp-overview-card,#inicio .mp-horizon{animation:none!important} .mp-horizon-actions .mp-action{transition:none!important}}
 html[data-phase-motion="reduce"] #inicio .mp-overview-card,
 html[data-phase-motion="reduce"] #inicio .mp-horizon{animation:none!important}
+
+/* A imagem cartoon aprovada continua visível, agora como faixa editorial compacta. */
+.portal8-cover .portal8-cover-picture{height:clamp(150px,19vw,245px)}
+.portal8-cover .portal8-cover-picture img{object-position:center 46%}
+.portal8-cover{border-bottom:3px solid #f4be70;box-shadow:0 6px 17px rgba(3,51,89,.11)}
+.portal8-cover-bottom{padding-top:10px;padding-bottom:10px}
+@media(max-width:520px){.portal8-cover .portal8-cover-picture{height:160px}}
