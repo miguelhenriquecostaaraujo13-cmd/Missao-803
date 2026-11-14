@@ -1,8 +1,8 @@
-# Portal 803 🎓⚡
+# Portal 8º Ano Missão Paz 🎓💙
 
 **Conecte seu conhecimento. Evolua a cada missão!**
 
-Plataforma independente e gratuita de estudos para a turma 803.
+Plataforma independente e gratuita de estudos para as turmas **801, 802, 803 e 804 (manhã)** e **806 e 807 (tarde)** do 8º ano.
 
 ## Funcionalidades
 
@@ -43,22 +43,37 @@ Na aba **🔔 Lembretes**, o aluno escolhe voluntariamente lembrete diário (hor
 
 O botão **Permitir notificações** solicita autorização expressa do navegador; o site pode mostrar alertas do sistema quando a página estiver aberta, com suporte variando conforme sistema e navegador. O service worker também permite abrir a página ao tocar num aviso. **Não há Web Push com o site totalmente fechado**: isso dependeria de assinaturas de dispositivo, VAPID, servidor de envio e agendamento, ainda não implementados. Os lembretes não são garantidos em horário exato se o navegador suspender a página; são verificados ao abrir, ao voltar para a aba e periodicamente enquanto o site está em execução.
 
-## Evolução do Portal 803 — etapas
+## Evolução do Portal 8º Ano — etapas
 
 ### Etapa 1: organização e navegação (implementada)
 - Página inicial com pesquisa de ferramentas por nome ou categoria, inclusive com pesquisa sem acentos.
 - Atalhos rápidos para trilha, simulados, calendário, caderno, biblioteca e lembretes.
 - Ferramentas favoritas (até 12) e botão para retomar a última área utilizada.
 - Preferências guardadas **somente no navegador** em `portal803-favorite-tools-v1` e `portal803-last-tool-v1`.
-- Todas as 22 ferramentas e os três temas de visual preservados. As chaves de progresso e do Supabase não foram alteradas.
+- As 22 áreas originais e os três temas de visual foram preservados. As chaves de progresso e do Supabase não foram alteradas.
 
 ### Etapas 2, 3 e 4 (implementadas)
 - **Etapa 2:** níveis de compreensão por tópico (🟢 Entendi, 🔵 Quase entendi, 🩷 Preciso revisar), checklist por matéria e caderno privado de erros dos simulados na aba **Revisão para provas**.
 - **Etapa 3:** gráfico do histórico diário de acertos nos simulados a partir desta atualização, e calendário mensal mostrando tarefas locais, cronograma inicial e datas oficiais cadastradas no Supabase.
 - **Etapa 4:** controles locais de tamanho da fonte, alto contraste e animações, além de formulário opt-in de relatos privados de problemas/sugestões. O proprietário aprovado acessa esses relatos pelo Modo Proprietário.
-- O histórico, os checklists e os níveis de compreensão ficam apenas no armazenamento local do aluno. Os relatos enviados são armazenados no Supabase, protegidos por políticas RLS que limitam a leitura ao autor e aos administradores autorizados. Ações de exclusão e resolução de relatos não estão disponíveis na interface nesta versão.
-- As 26 áreas continuam usando o mesmo login, autenticação, dados de estudo e temas preexistentes. Testar no celular e em diferentes navegadores após publicação.
+- O histórico, os checklists e os níveis de compreensão ficam apenas no armazenamento local do aluno. Os relatos enviados são armazenados no Supabase, protegidos por políticas RLS que limitam a leitura ao autor e aos administradores autorizados. Relatos podem ser marcados como resolvidos pelo administrador autorizado.
+- A plataforma foi ampliada de 26 para 27 áreas, mantendo os temas e as chaves de armazenamento antigas da 803. Testar no celular e em diferentes navegadores após publicação.
 
+
+## Expansão para o 8º ano (novembro de 2026)
+
+- **Turmas da manhã:** 801, 802, 803, 804. **Turmas da tarde:** 806, 807.
+- O seletor de turma fica na capa e no topo do site. A escolha é autodeclarada e não comprova matrícula, identidade nem vínculo oficial.
+- Página de abertura com logomarca **alternativa, não oficial**, inspirada nas cores e na pomba da Missão Paz, em `assets/missao-paz-logo-portal.svg`.
+- Ilustração cartoon **genérica e não identificável** de estudantes com o uniforme azul e branco, em `assets/turmas-cartoon.svg`. Não publica fotografias reais de alunos.
+- Avisos, provas e biblioteca são apresentados para a turma escolhida e para o escopo `geral`. Publicações anteriores continuam vinculadas à 803.
+- Administradores autorizados escolhem a turma ou `geral` antes de publicar avisos e provas, e podem revisar materiais pendentes e relatos privados.
+- Progresso antigo da 803 permanece na chave `missao803-v1`; o estado básico de outras turmas usa `portal8-state-<turma>`. Preferências de estudo e histórico adicionais usam chaves separadas por turma, preservando a 803.
+- A trilha e os simulados inicialmente reaproveitam conteúdos da 803 como **material de estudo introdutório**. Não são roteiros oficiais das outras turmas; cada sala deve confirmar com seus professores o conteúdo e as datas.
+- A publicação das médias de notas exige ao menos cinco participantes para uma mesma prova e fica no agregado, sem lista pública de notas individuais. Os dados individuais são protegidos por RLS e exigem sessão autenticada (inclusive a anônima do Supabase, se estiver habilitada).
+- Missões semanais são voluntárias e por turma. O contador coletivo só aparece após pelo menos cinco participações; não existem rankings de alunos.
+- Novas turmas podem sincronizar contadores agregados sem acessar os dados individuais de outras sessões. A 803 preserva o painel histórico anterior.
+- **Limitação:** a seleção de turma no navegador não é autenticação de matrícula. A instituição não foi formalmente envolvida no projeto e não deve ser apresentada como autora ou responsável sem autorização.
 
 ## Publicação
 
@@ -68,7 +83,7 @@ Para publicar também no Netlify, entre em https://app.netlify.com, importe o re
 
 **Importante:** O histórico salvo no navegador sob o endereço do GitHub Pages não é automaticamente transferido para o novo domínio do Netlify. Exporte seus dados antes da mudança, quando possível.
 
-O repositório permanece com o nome `Missao-803`, mas o nome público da plataforma é **Portal 803**.
+O repositório permanece com o nome `Missao-803`, mas o nome público da plataforma é **Portal 8º Ano Missão Paz**.
 
 ## Gratuidade e limitações
 
