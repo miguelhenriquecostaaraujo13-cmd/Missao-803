@@ -441,6 +441,21 @@ html[data-portal8-other="true"] #portal803Schedule,html[data-portal8-other="true
 @media(prefers-reduced-motion:reduce){.portal8-welcome *, .portal8-welcome *:before,.portal8-welcome *:after{animation:none!important;transition:none!important;transform:none!important}.portal8-motion-track{animation:none!important}}
 html[data-phase-motion="reduce"] .portal8-welcome *,html[data-phase-motion="reduce"] .portal8-welcome *:before,html[data-phase-motion="reduce"] .portal8-welcome *:after{animation:none!important;transition:none!important;transform:none!important}
 html[data-phase-motion="reduce"] .portal8-motion-track{animation:none!important}
+
+/* Carrossel informativo com movimento opcional e controles explícitos. */
+.portal8-news{margin-bottom:18px!important;border-radius:20px!important;overflow:hidden;position:relative}
+.portal8-news:before{content:"";position:absolute;right:-55px;top:-75px;width:210px;height:210px;border-radius:50%;background:radial-gradient(circle,#37b5e52d,transparent 72%);pointer-events:none}
+.portal8-news-heading,.portal8-news-controls{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.portal8-news-heading h3{margin:0}
+.portal8-news-slide{position:relative;padding:19px 21px;margin:15px 0;background:var(--portal-panel);border:1px solid var(--line);border-left:5px solid #0788bf;border-radius:13px;min-height:108px}
+.portal8-news-slide b{display:block;color:var(--ink);font-size:1.04rem}
+.portal8-news-slide p{color:var(--muted);margin:8px 0 0;font-size:.9rem;line-height:1.6;white-space:pre-line;overflow-wrap:anywhere}
+.portal8-news-enter{animation:portal8NewsFade .48s ease both}
+.portal8-news-controls .btn{padding:9px 12px}
+@keyframes portal8NewsFade{from{opacity:.3;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+@media(max-width:570px){.portal8-news-controls{align-items:stretch;flex-direction:column}.portal8-news-controls .row{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}.portal8-news-controls .btn{font-size:.72rem;padding:9px 5px}}
+@media(prefers-reduced-motion:reduce){.portal8-news-enter{animation:none!important}}
+html[data-phase-motion="reduce"] .portal8-news-enter{animation:none!important}
 </style>
  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.105.0"></script>
 </head>
@@ -491,6 +506,22 @@ html[data-phase-motion="reduce"] .portal8-motion-track{animation:none!important}
   <div class="portal8-learning-step"><span>03</span><div><b>Revise e evolua</b><small>Volte aos erros e organize suas próximas provas.</small></div></div>
  </div>
  <p class="small muted">Projeto colaborativo independente, não oficial da escola. O conteúdo inicial da 803 é um roteiro de referência; cada turma deve confirmar suas datas com seus professores. Não há ranking pessoal de notas.</p>
+</section>
+<section class="portal8-news card" aria-label="Atualizações para sua turma">
+ <div class="portal8-news-heading"><h3>📣 Destaques e novidades</h3><span class="small muted">Avisos gerais e da sua turma</span></div>
+ <div class="portal8-news-slide" id="portal8NewsSlide">
+  <b id="portal8NewsTitle">Verificando comunicados…</b>
+  <p id="portal8NewsBody">As novidades publicadas pelo proprietário autorizado aparecem aqui.</p>
+ </div>
+ <div class="portal8-news-controls">
+  <span id="portal8NewsCounter" class="small muted">Atualizações</span>
+  <div class="row">
+   <button class="btn light" type="button" onclick="portal8CarouselMove(-1)" aria-label="Aviso anterior">← Anterior</button>
+   <button class="btn light" type="button" onclick="portal8CarouselToggle()" id="portal8CarouselPause" aria-label="Pausar rotação dos avisos">⏸ Pausar</button>
+   <button class="btn light" type="button" onclick="portal8CarouselMove(1)" aria-label="Próximo aviso">Próximo →</button>
+  </div>
+ </div>
+ <p class="small muted">As novidades são informativas; confirme as datas das avaliações com a escola.</p>
 </section>
 <div class="portal-smart card" aria-label="Central de acesso e ferramentas">
  <div class="portal-smart-head"><div class="portal-smart-glow" aria-hidden="true"></div>
@@ -1696,6 +1727,32 @@ async function portalOwnerRefresh(){
  }
  if(!root.childElementCount)root.textContent="Nenhuma publicação cadastrada ainda.";
 }
+
+/* Carrossel gratuito de informações públicas, filtrado por turma. */
+let portal8Slides=[],portal8SlideIndex=0,portal8CarouselPaused=false;
+function portal8CarouselRender(){
+ const title=document.getElementById("portal8NewsTitle"),body=document.getElementById("portal8NewsBody"),counter=document.getElementById("portal8NewsCounter"),box=document.getElementById("portal8NewsSlide");
+ if(!title||!body||!counter)return;
+ const slide=portal8Slides[portal8SlideIndex];
+ title.textContent=slide?.title||"📚 Tudo pronto para começar!";
+ body.textContent=slide?.body||"Nenhum comunicado novo para sua turma no momento. Confira o calendário e continue estudando!";
+ counter.textContent=slide?(portal8SlideIndex+1)+" de "+portal8Slides.length:"Nenhum comunicado";
+ if(box){box.classList.remove("portal8-news-enter");void box.offsetWidth;box.classList.add("portal8-news-enter")}
+ const pause=document.getElementById("portal8CarouselPause");
+ if(pause){pause.textContent=portal8CarouselPaused?"▶ Retomar":"⏸ Pausar";pause.setAttribute("aria-label",portal8CarouselPaused?"Retomar rotação dos avisos":"Pausar rotação dos avisos")}
+}
+function portal8CarouselMove(delta){
+ if(!portal8Slides.length)return;
+ portal8SlideIndex=(portal8SlideIndex+delta+portal8Slides.length)%portal8Slides.length;
+ portal8CarouselRender();
+}
+function portal8CarouselToggle(){portal8CarouselPaused=!portal8CarouselPaused;portal8CarouselRender()}
+setInterval(()=>{
+ if(portal8CarouselPaused||portal8Slides.length<2||document.hidden||!document.querySelector("#inicio.view.active"))return;
+ if(window.matchMedia?.("(prefers-reduced-motion: reduce)").matches||document.documentElement.dataset.phaseMotion==="reduce")return;
+ portal8CarouselMove(1);
+},8500);
+
 async function portalPublicRefresh(){
  const root=document.getElementById("portalPublicItems");if(!root)return;root.replaceChildren();
  try{
@@ -1704,9 +1761,10 @@ async function portalPublicRefresh(){
   if(a.error||b.error)throw new Error("Dados indisponíveis");
   portal8OfficialExams=b.data||[];portal8RenderExamOptions();if(portal8Turma!=="803")portal8GradeRefresh();
   const all=[...(a.data||[]).map(x=>({title:"📢 "+x.title,body:x.body})),...(b.data||[]).map(x=>({title:"📅 "+x.subject+" — "+x.exam_date.split("-").reverse().join("/"),body:x.topics}))];
+  portal8Slides=all;portal8SlideIndex=0;portal8CarouselRender();
   if(!all.length){root.textContent="Ainda não há publicações adicionais do proprietário. Consulte o cronograma inicial.";return}
   for(const x of all){const p=document.createElement("div");p.className="mission";const title=document.createElement("b");title.textContent=x.title;const body=document.createElement("p");body.textContent=x.body;p.append(title,body);root.append(p)}
- }catch(e){root.textContent="Avisos online indisponíveis. O restante do site continua funcionando."}
+ }catch(e){portal8Slides=[];portal8SlideIndex=0;portal8CarouselRender();root.textContent="Avisos online indisponíveis. O restante do site continua funcionando."}
 }
 portalPublicRefresh();
 portalOwnerCheck();
