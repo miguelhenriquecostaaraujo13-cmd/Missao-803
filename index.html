@@ -979,7 +979,8 @@ function updateDashboard(){
  $("answeredMetric").textContent=state.answered;$("correctMetric").textContent=state.correct;
  const ex=[["16/11","Matemática"],["17/11","Língua Portuguesa"],["18/11","Geografia + Educação Física"],["19/11","História + Inglês"],["23/11","Ciências + Arte"]];
  const now=new Date();now.setHours(0,0,0,0);let next=ex.find(x=>{const [d,m]=x[0].split("/").map(Number);return new Date(2026,m-1,d)>=now});
- $("nextExam").textContent=next?next[1]:"Missão concluída!";$("nextExamDate").textContent=next?next[0]+"/2026":"Parabéns pela dedicação!";
+ $("nextExam").textContent=portal8Turma==="803"?(next?next[1]:"Missão concluída!"):"Consultar avisos";
+ $("nextExamDate").textContent=portal8Turma==="803"?(next?next[0]+"/2026":"Parabéns pela dedicação!"):"Calendário da turma "+portal8Turma+" (aguardando confirmação)";
  const bars=subjects.map(s=>{let total=s.topics.reduce((a,g)=>a+g[1].length,0),done=s.topics.reduce((a,g)=>a+g[1].filter(t=>state.done.includes(s.name+"|"+t)).length,0);return `<div style="margin:12px 0"><div class="between"><b>${s.icon} ${s.name}</b><span class="small muted">${done}/${total}</span></div><div class="progress"><i style="width:${100*done/total}%"></i></div></div>`}).join("");
  $("subjectProgress").innerHTML=bars;
 }
@@ -1825,7 +1826,7 @@ function remindersTick(){
   const next=remindersTomorrow();
   const relevant=[...(portal8Turma==="803"?reminderBaseExams:[]),...reminderOfficialExams].filter(x=>x.date===next&&x.name);
   const names=[...new Set(relevant.map(x=>String(x.name).slice(0,80)))];
-  if(names.length)remindersDeliver("exam-"+next,"📝 Prova amanhã","Confira o cronograma e revise: "+names.join(", ")+".");
+  if(names.length)remindersDeliver("exam-"+portal8Turma+"-"+next,"📝 Prova amanhã","Confira o cronograma e revise: "+names.join(", ")+".");
  }
 }
 async function remindersCheckAnnouncements(){
@@ -1872,8 +1873,8 @@ window.addEventListener("focus",()=>remindersTick());
 
 /* Evolução do Portal 803. Os dados educativos desta seção permanecem neste navegador. */
 const PHASE_LEVEL_KEY="portal803-niveis-v1",PHASE_CHECK_KEY="portal803-checklist-v1",PHASE_ERRORS_KEY="portal803-erros-v1",PHASE_HISTORY_KEY="portal803-historico-v1",PHASE_ACCESS_KEY="portal803-acessibilidade-v1";
-function phaseRead(key,fallback){try{const value=JSON.parse(localStorage.getItem(key)||"null");return value===null?fallback:value}catch(e){return fallback}}
-function phaseWrite(key,value){try{localStorage.setItem(key,JSON.stringify(value))}catch(e){}}
+function phaseRead(key,fallback){try{const scoped=key===PHASE_ACCESS_KEY||portal8Turma==="803"?key:key+"-"+portal8Turma;const value=JSON.parse(localStorage.getItem(scoped)||"null");return value===null?fallback:value}catch(e){return fallback}}
+function phaseWrite(key,value){try{const scoped=key===PHASE_ACCESS_KEY||portal8Turma==="803"?key:key+"-"+portal8Turma;localStorage.setItem(scoped,JSON.stringify(value))}catch(e){}}
 let phaseLevels=phaseRead(PHASE_LEVEL_KEY,{}),phaseChecks=phaseRead(PHASE_CHECK_KEY,{}),phaseErrors=phaseRead(PHASE_ERRORS_KEY,[]),phaseHistory=phaseRead(PHASE_HISTORY_KEY,[]);
 if(!phaseLevels||typeof phaseLevels!=="object"||Array.isArray(phaseLevels))phaseLevels={};
 if(!phaseChecks||typeof phaseChecks!=="object"||Array.isArray(phaseChecks))phaseChecks={};
@@ -2051,7 +2052,8 @@ function portal8Choose(turma){
   if(!Array.isArray(phaseErrors))phaseErrors=[];if(!Array.isArray(phaseHistory))phaseHistory=[];
   if(!phaseLevels||typeof phaseLevels!=="object")phaseLevels={};
   if(!phaseChecks||typeof phaseChecks!=="object")phaseChecks={};
-  cloudUser=null;libraryItems=[];portal8OfficialExams=[];
+  cloudUser=null;libraryItems=[];portal8OfficialExams=[];reminderOfficialExams=[];
+  setCloudStatus("Turma alterada para "+turma+". Conecte-se novamente para participar do painel desta turma.","warn");
   renderTopics();updateDashboard();newQuestion();renderFlash();phaseRenderReview();phaseRenderEvolution();
   portal8RenderExamOptions();portalGradeRefresh();
   const r=document.getElementById("libItems");if(r)r.textContent="Conecte-se na aba da sua turma para consultar os materiais.";
