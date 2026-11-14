@@ -2176,7 +2176,7 @@ async function portalPublicRefresh(){
   for(const url of urls){
    try{
     const options={cache:"no-store"};
-    if(typeof AbortSignal?.timeout==="function")options.signal=AbortSignal.timeout(5000);
+    if(typeof AbortSignal!=="undefined"&&typeof AbortSignal.timeout==="function")options.signal=AbortSignal.timeout(5000);
     const response=await fetch(url,options);
     if(!response.ok)continue;
     const records=await response.json();
