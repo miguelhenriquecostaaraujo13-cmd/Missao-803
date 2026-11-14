@@ -511,6 +511,39 @@ html[data-phase-motion="reduce"] .portal8-news-enter{animation:none!important}
 html[data-phase-motion="reduce"] .portal8-cover,html[data-phase-motion="reduce"] .portal8-cover-picture img,html[data-phase-motion="reduce"] .portal8-cover-sheen,html[data-phase-motion="reduce"] .portal8-cover-float,html[data-phase-motion="reduce"] .portal8-live-dot{animation:none!important}
 html[data-phase-motion="reduce"].portal8-reveal-ready .portal8-reveal{opacity:1!important;transform:none!important}
 
+
+/* Interface 8º Ano: somente microtransições de entrada, sem movimento contínuo. */
+header::before, .portal-smart-glow, .school-diamond-band i, .school-orbit span,
+.portal8-art-frame::before, .portal8-art-frame .portal8-poster, .portal8-art-chip,
+.portal8-art-glow, .portal8-motion-track, .portal8-class-buttons button[aria-pressed="true"],
+.portal8-cover-picture img, .portal8-cover-sheen, .portal8-cover-float, .portal8-live-dot {
+ animation:none!important;
+}
+.portal8-motion-strip{overflow-x:auto;scrollbar-width:thin}
+.portal8-motion-track{width:max-content;transform:none!important}
+.portal8-cover{animation:portal8CoverReveal .65s ease-out both!important}
+.portal8-cover-picture img{animation:portal8StillEntrance .82s ease-out both!important;will-change:auto}
+.portal8-art-frame{animation:portal8ArtEnter .55s ease-out both}
+.portal8-cover-float{transform:none!important}
+.view.active.portal8-view-enter{animation:none!important}
+.view.active.portal8-view-enter > *{animation:portal8TabEntrance .52s cubic-bezier(.2,.8,.2,1) both!important}
+.view.active.portal8-view-enter > :nth-child(2){animation-delay:.06s!important}
+.view.active.portal8-view-enter > :nth-child(3){animation-delay:.12s!important}
+.view.active.portal8-view-enter > :nth-child(4){animation-delay:.15s!important}
+.view.active.portal8-view-enter > :nth-child(n+5){animation-delay:.18s!important}
+@keyframes portal8StillEntrance{from{opacity:.65;transform:translateY(8px) scale(.99)}to{opacity:1;transform:translateY(0) scale(1)}}
+@keyframes portal8TabEntrance{from{opacity:.25;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+@media(prefers-reduced-motion:reduce){
+ .portal8-cover,.portal8-cover-picture img,.portal8-art-frame,
+ .view.active.portal8-view-enter > *{animation:none!important;opacity:1!important;transform:none!important}
+}
+html[data-phase-motion="reduce"] .portal8-cover,
+html[data-phase-motion="reduce"] .portal8-cover-picture img,
+html[data-phase-motion="reduce"] .portal8-art-frame,
+html[data-phase-motion="reduce"] .view.active.portal8-view-enter > *{
+ animation:none!important;opacity:1!important;transform:none!important;
+}
+
 </style>
  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.105.0"></script>
 </head>
@@ -526,7 +559,7 @@ html[data-phase-motion="reduce"].portal8-reveal-ready .portal8-reveal{opacity:1!
    <span class="portal8-release-label"><span class="portal8-live-dot" aria-hidden="true"></span> NOVA VERSÃO VISUAL • 8º ANO</span>
    <div class="portal8-cover-actions">
     <button type="button" onclick="showView('trilha')">Começar a estudar <span aria-hidden="true">↗</span></button>
-    <button type="button" onclick="portal8ReplayCover()">✨ Reproduzir animação</button>
+    
     <button type="button" class="portal8-reload" onclick="portal8UpdateSite()">↻ Atualizar site</button>
    </div>
   </div>
@@ -534,7 +567,7 @@ html[data-phase-motion="reduce"].portal8-reveal-ready .portal8-reveal{opacity:1!
 <header class="school-hero"><div class="school-diamond-band" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><div class="school-orbit" aria-hidden="true"><span></span><span></span><span></span></div><div class="wrap">
   <div class="portal-top"><span class="portal-eyebrow">✦ PLATAFORMA DE ESTUDOS PARA TODO O 8º ANO</span><label class="portal-theme-label" for="portalThemeSelect">🎨 Estilo <select id="portalThemeSelect" aria-label="Escolha a aparência do Portal 8º Ano"><option value="aurora">🌈 Aurora</option><option value="noite">🌙 Noite</option><option value="papel">🌿 Papel</option></select></label></div>
   <div class="topline school-identity"><span class="school-mark school-logo-mark"><img src="./assets/missao-paz-logo-portal.svg" alt="Marca ilustrada Missão Paz" width="190" height="66"></span><span class="school-identity-text"><strong>INSTITUTO EDUCACIONAL MISSÃO PAZ</strong><small>Central de Estudos • 8º Ano • Manhã e tarde</small></span></div>
-  <h1>Portal <span class="school-hero-number">8º Ano</span><br><span class="school-hero-slogan">Aprenda. Evolua. Conquiste.</span></h1><div class="portal8-toolbar"><label for="portal8TopTurma">Minha turma</label><select id="portal8TopTurma" onchange="portal8Choose(this.value)"><option value="801">801 • manhã</option><option value="802">802 • manhã</option><option value="803">803 • manhã</option><option value="804">804 • manhã</option><option value="806">806 • tarde</option><option value="807">807 • tarde</option></select></div><div class="portal-hero-actions"><button type="button" class="portal-hero-primary" onclick="showView('trilha')">📚 Começar a estudar <span aria-hidden="true">↗</span></button><button type="button" class="portal-hero-secondary" onclick="showView('quiz')">🧠 Fazer simulado</button><button type="button" class="portal-motion-button" onclick="portalReplayMotion()" aria-label="Repetir animação da página">✨ Ver animação</button></div>
+  <h1>Portal <span class="school-hero-number">8º Ano</span><br><span class="school-hero-slogan">Aprenda. Evolua. Conquiste.</span></h1><div class="portal8-toolbar"><label for="portal8TopTurma">Minha turma</label><select id="portal8TopTurma" onchange="portal8Choose(this.value)"><option value="801">801 • manhã</option><option value="802">802 • manhã</option><option value="803">803 • manhã</option><option value="804">804 • manhã</option><option value="806">806 • tarde</option><option value="807">807 • tarde</option></select></div><div class="portal-hero-actions"><button type="button" class="portal-hero-primary" onclick="showView('trilha')">📚 Começar a estudar <span aria-hidden="true">↗</span></button><button type="button" class="portal-hero-secondary" onclick="showView('quiz')">🧠 Fazer simulado</button></div>
   <p>Um espaço de estudos feito para nossa turma, inspirado nas cores e nos elementos geométricos da escola.</p>
   <div class="exam-strip" id="portal8OriginalExamStrip">
     <span class="exam-pill">16/11 · Matemática</span><span class="exam-pill">17/11 · Português</span>
@@ -563,7 +596,7 @@ html[data-phase-motion="reduce"].portal8-reveal-ready .portal8-reveal{opacity:1!
   <div class="portal8-welcome-copy"><span class="portal-premium-kicker">🏫 INSTITUTO EDUCACIONAL MISSÃO PAZ</span><h2>Seis turmas. Um só lugar para aprender.</h2>
    <p>O espaço de estudo do 8º ano. Escolha sua turma para consultar provas, avisos e projetos sem misturar as informações de outras salas.</p>
    <div class="portal8-selected">Turma selecionada: <strong id="portal8CurrentClass">803 • Manhã</strong> <span class="small muted">Você pode trocar quando quiser.</span></div>
-   <div class="portal8-study-actions"><button class="btn orange" type="button" onclick="showView('trilha')">📚 Começar a estudar</button><button class="btn light" type="button" onclick="portalReplayMotion()">✨ Reproduzir animações</button></div>
+   <div class="portal8-study-actions"><button class="btn orange" type="button" onclick="showView('trilha')">📚 Começar a estudar</button></div>
   </div><div class="portal8-art-frame" id="portal8ArtFrame">
     <img class="portal8-cartoon portal8-poster" src="./assets/estudantes-cartoon-aprovado.png?rev=portal8-visual-v12" width="1672" height="941" alt="Ilustração cartoon aprovada do Portal 8º Ano Missão Paz, com estudantes usando uniformes azuis e brancos e estudando juntos" loading="eager" decoding="async" fetchpriority="high">
     <span class="portal8-art-chip portal8-chip-a" aria-hidden="true">📚</span>
@@ -1175,6 +1208,13 @@ function portalReplayMotion(){
 function showView(id){
  const target=document.getElementById(id);
  if(!target?.classList.contains("view"))return;
+ // Reinicia somente a animação curta de entrada ao abrir uma seção.
+ target.classList.remove("portal8-view-enter");
+ if(!window.matchMedia?.("(prefers-reduced-motion: reduce)").matches &&
+    document.documentElement.dataset.phaseMotion!=="reduce"){
+   void target.offsetWidth;
+   target.classList.add("portal8-view-enter");
+ }
  document.querySelectorAll(".view").forEach(v=>v.classList.toggle("active",v.id===id));
  document.querySelectorAll(".navbtn").forEach(b=>{
   const active=b.dataset.view===id;
@@ -2430,7 +2470,7 @@ async function portal8UpdateSite(){
    await Promise.all(regs.map(r=>r.update().catch(()=>null)));
   }
  }catch(e){}
- location.replace(location.pathname+"?versao=portal8-visual-v12&atualizacao="+Date.now());
+ location.replace(location.pathname+"?versao=portal8-transicoes-v13&atualizacao="+Date.now());
 }
 function portal8EnableScrollReveal(){
  if(window.matchMedia?.("(prefers-reduced-motion: reduce)").matches||document.documentElement.dataset.phaseMotion==="reduce")return;
@@ -2443,6 +2483,10 @@ function portal8EnableScrollReveal(){
   entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add("portal8-visible");observer.unobserve(entry.target)}});
  },{threshold:.08,rootMargin:"0px 0px 25px 0px"});
  els.forEach(x=>observer.observe(x));
+}
+const portal8InitialView=document.querySelector(".view.active");
+if(portal8InitialView&&!window.matchMedia?.("(prefers-reduced-motion: reduce)").matches){
+ portal8InitialView.classList.add("portal8-view-enter");
 }
 if(document.readyState==="complete")portal8EnableScrollReveal();
 else window.addEventListener("load",portal8EnableScrollReveal,{once:true});
