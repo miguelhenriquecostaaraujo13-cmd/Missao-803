@@ -2,7 +2,7 @@
 (() => {
 "use strict";
 const $=id=>document.getElementById(id);
-const base=()=>location.origin+location.pathname;
+const base=()=>window.portal8AuthHelp?.publicRedirectURL()||location.origin+location.pathname;
 const notice=window.portal8AuthLinkNotice||{};
 const root=document.createElement("div");
 root.id="p8RecoveryOverlay";root.hidden=true;
