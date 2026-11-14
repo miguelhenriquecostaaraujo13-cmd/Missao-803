@@ -5,7 +5,7 @@
  const BUCKET="portal8-avatars";
  const PLACEHOLDER="👤";
  const CLASSES=["801","802","803","804","806","807"];
- let client=null,user=null,profile=null,avatarObjectURL=null,busy=false,refreshCount=0;
+ let client=null,user=null,profile=null,avatarObjectURL=null,busy=false,refreshCount=0,isAdmin=false;
  function message(text){const node=$("p8ProfileStatus");if(node)node.textContent=text}
  function validUser(u){return !!(u?.id&&u.email&&u.is_anonymous!==true)}
  function getClient(){if(typeof ensureCloudClient!=="function")throw new Error("A conexão com o portal não está disponível.");client=ensureCloudClient();return client}
@@ -21,6 +21,9 @@
   for(const id of ["p8ProfileAvatar","p8HeaderAvatar"]){const img=$(id);if(img){img.src=url;img.hidden=false}}
   $("p8ProfileAvatarFallback").hidden=true;$("p8HeaderAvatarFallback").hidden=true;
  }
+ function showAdminAvatar(){
+  if(isAdmin&&validUser(user)&&!avatarObjectURL)showAvatar("./assets/avatar-administrador.svg?v=21");
+ }
  function levelText(){
   const progress=typeof state!=="undefined"?state:null;
   const xp=Math.min(100000,(progress?.done?.length||0)*15+(Number(progress?.correct)||0)*2);
@@ -33,21 +36,23 @@
   $("p8ProfileEditor").hidden=!logged;
   $("p8ProfilePrivate").hidden=!logged;
   $("p8ProfileGuest").hidden=logged;
-  $("p8HeaderText").textContent=logged?(profile?.display_name||"Meu perfil"):"Entrar / Criar conta";
-  $("p8ProfileNameView").textContent=logged?(profile?.display_name||"Estudante"):"Bem-vindo ao Portal!";
+  $("p8HeaderText").textContent=logged?(profile?.display_name||"Meu perfil")+(isAdmin?" 👑":""):"Entrar / Criar conta";
+  $("p8ProfileNameView").textContent=logged?(profile?.display_name||"Escolha seu nome"):"Bem-vindo ao Portal!";
   $("p8ProfileClassView").textContent=logged?(profile?.turma?"Turma "+profile.turma:"Escolha sua turma"):"Faça login para personalizar seu espaço.";
-  $("p8ProfileAccountType").textContent=logged?"Conta de estudante":"Visitante";
+  $("p8ProfileAccountType").textContent=logged?(isAdmin?"👑 Administrador autorizado":"Conta de estudante"):"Visitante";
+  $("p8ProfileAccountType").classList.toggle("p8-admin-role",logged&&isAdmin);
+  $("p8ProfileAdminOption").hidden=!(logged&&isAdmin);
   $("p8ProfileEmailView").textContent=logged?(user.email||"—"):"—";
   $("p8ProfileCreated").textContent=logged&&user.created_at?new Date(user.created_at).toLocaleDateString("pt-BR"):"—";
   $("p8ProfileProgressLevel").textContent=levelText();
   $("p8ProfileAvatarFallback").textContent=initials(profile?.display_name);
   $("p8HeaderAvatarFallback").textContent=logged?initials(profile?.display_name):PLACEHOLDER;
   if(logged){
-    $("p8ProfileName").value=profile?.display_name||"Estudante";
+    $("p8ProfileName").value=profile?.display_name||"";
     $("p8ProfileClass").value=profile?.turma||"";
     $("p8ProfileBio").value=profile?.bio||"";
     $("p8ProfileBioCount").textContent=($("p8ProfileBio").value.length)+" / 120";
-    $("p8ProfileRoleDescription").textContent="O acesso administrativo depende de autorização separada.";
+    $("p8ProfileRoleDescription").textContent=isAdmin?"Permissão de administrador confirmada pelo Supabase.":"O acesso administrativo depende de autorização separada.";
   }
  }
  async function loadAvatar(path,token){
@@ -67,12 +72,12 @@
     if(error)throw error;
     const next=data?.user||null;
     if(!validUser(next)){
-      user=null;profile=null;clearAvatar();render();
+      user=null;profile=null;isAdmin=false;clearAvatar();render();
       return;
     }
     const changed=user?.id!==next.id;
     user=next;
-    if(changed){profile=null;clearAvatar()}
+    if(changed){profile=null;isAdmin=false;clearAvatar()}
     const {data:p,error:loadError}=await c.from("portal8_profiles")
       .select("user_id,display_name,turma,bio,avatar_path,created_at")
       .eq("user_id",user.id).maybeSingle();
@@ -81,6 +86,7 @@
     profile=p||null;
     render();
     if(profile?.avatar_path&&(changed||!avatarObjectURL))await loadAvatar(profile.avatar_path,token);
+    if(isAdmin&&!avatarObjectURL)showAdminAvatar();
     if(changed&&typeof portalOwnerCheck==="function")portalOwnerCheck().catch(()=>{});
   }catch(e){
     if(token!==refreshCount)return;
@@ -118,7 +124,7 @@
   try{
     const {error}=await getClient().auth.signOut();
     if(error)throw error;
-    user=null;profile=null;clearAvatar();render();
+    user=null;profile=null;isAdmin=false;clearAvatar();render();
     if(typeof portalOwnerCheck==="function")portalOwnerCheck().catch(()=>{});
     message("Você saiu da conta neste navegador.");
   }catch(e){message("Não foi possível encerrar sua sessão. Tente novamente.");}
@@ -195,16 +201,33 @@
   finally{setBusy(false)}
  }
  async function checkRole(){
-  if(!validUser(user))return;
+  if(!validUser(user)){isAdmin=false;render();return}
+  const checkedId=user.id;
   try{
     const {data,error}=await getClient().from("portal803_admins")
-      .select("user_id").eq("user_id",user.id).maybeSingle();
+      .select("user_id").eq("user_id",checkedId).maybeSingle();
     if(error)throw error;
-    $("p8ProfileAccountType").textContent=data?"Proprietário autorizado":"Conta de estudante";
-    $("p8ProfileRoleDescription").textContent=data
-       ?"Sua conta tem autorização administrativa verificada pelo Supabase."
-       :"Sua conta é de estudante. Criar conta não concede permissão administrativa.";
-  }catch(_){$("p8ProfileAccountType").textContent="Conta de estudante"}
+    if(user?.id!==checkedId)return;
+    isAdmin=!!data;
+  }catch(_){
+    if(user?.id!==checkedId)return;
+    isAdmin=false;
+  }
+  render();
+  if(isAdmin&&!avatarObjectURL)showAdminAvatar();
+  else if(!isAdmin&&!avatarObjectURL)clearAvatar();
+ }
+ async function chooseAdminAvatar(){
+  if(busy||!validUser(user)||!isAdmin)return;
+  setBusy(true);message("Selecionando o emblema de administrador…");
+  try{
+    const oldPath=profile?.avatar_path;
+    if(oldPath)await writeProfile({avatar_path:null});
+    if(oldPath)await getClient().storage.from(BUCKET).remove([oldPath]);
+    clearAvatar();showAdminAvatar();
+    message("✅ Emblema de administrador ativado. Você ainda pode enviar uma foto personalizada!");
+  }catch(e){message("Não consegui trocar o avatar agora. Tente novamente.")}
+  finally{setBusy(false)}
  }
  function init(){
   if(!$("portal8Profile"))return;
@@ -213,6 +236,7 @@
   $("p8ProfileLogout").addEventListener("click",logout);
   $("p8ProfileSave").addEventListener("click",save);
   $("p8ProfileUpload").addEventListener("click",upload);
+  $("p8ProfileChooseAdmin").addEventListener("click",chooseAdminAvatar);
   $("p8ProfilePassword").addEventListener("keydown",e=>{if(e.key==="Enter")signAction("signin")});
   $("p8ProfileBio").addEventListener("input",()=>{$("p8ProfileBioCount").textContent=$("p8ProfileBio").value.length+" / 120"});
   document.addEventListener("portal8:viewchange",e=>{
