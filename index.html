@@ -636,7 +636,8 @@ html[data-phase-motion="reduce"] .view.active.portal8-enter-active{
 </style>
  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.105.0"></script>
 <link rel="stylesheet" href="./assets/portal8-expansao.css?v=18">
-<link rel="stylesheet" href="./assets/portal8-pazinho.css?v=19">
+<link rel="stylesheet" href="./assets/portal8-pazinho.css?v=20">
+<link rel="stylesheet" href="./assets/portal8-perfil.css?v=20">
 </head>
 <body>
 <div id="portal8RouteIndicator" class="portal8-route-indicator" aria-hidden="true"></div>
@@ -657,7 +658,7 @@ html[data-phase-motion="reduce"] .view.active.portal8-enter-active{
   </div>
 </section>
 <header class="school-hero"><div class="school-diamond-band" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><div class="school-orbit" aria-hidden="true"><span></span><span></span><span></span></div><div class="wrap">
-  <div class="portal-top"><span class="portal-eyebrow">✦ PLATAFORMA DE ESTUDOS PARA TODO O 8º ANO</span><label class="portal-theme-label" for="portalThemeSelect">🎨 Estilo <select id="portalThemeSelect" aria-label="Escolha a aparência do Portal 8º Ano"><option value="aurora">🌈 Aurora</option><option value="noite">🌙 Noite</option><option value="papel">🌿 Papel</option></select></label></div>
+  <div class="portal-top"><span class="portal-eyebrow">✦ PLATAFORMA DE ESTUDOS PARA TODO O 8º ANO</span><label class="portal-theme-label" for="portalThemeSelect">🎨 Estilo <select id="portalThemeSelect" aria-label="Escolha a aparência do Portal 8º Ano"><option value="aurora">🌈 Aurora</option><option value="noite">🌙 Noite</option><option value="papel">🌿 Papel</option></select></label><button type="button" class="p8-profile-shortcut" onclick="showView('perfil')" aria-label="Abrir meu perfil"><span class="p8-account-head"><span id="p8HeaderAvatarFallback">👤</span><img id="p8HeaderAvatar" alt="Minha foto" hidden></span><span id="p8HeaderText">Entrar / Criar conta</span></button></div>
   <div class="topline school-identity"><span class="school-mark school-logo-mark"><img src="./assets/missao-paz-logo-portal.svg" alt="Marca ilustrada Missão Paz" width="190" height="66"></span><span class="school-identity-text"><strong>INSTITUTO EDUCACIONAL MISSÃO PAZ</strong><small>Central de Estudos • 8º Ano • Manhã e tarde</small></span></div>
   <h1>Portal <span class="school-hero-number">8º Ano</span><br><span class="school-hero-slogan">Aprenda. Evolua. Conquiste.</span></h1><div class="portal8-toolbar"><label for="portal8TopTurma">Minha turma</label><select id="portal8TopTurma" onchange="portal8Choose(this.value)"><option value="801">801 • manhã</option><option value="802">802 • manhã</option><option value="803">803 • manhã</option><option value="804">804 • manhã</option><option value="806">806 • tarde</option><option value="807">807 • tarde</option></select></div><div class="portal-hero-actions"><button type="button" class="portal-hero-primary" onclick="showView('trilha')">📚 Começar a estudar <span aria-hidden="true">↗</span></button><button type="button" class="portal-hero-secondary" onclick="showView('quiz')">🧠 Fazer simulado</button></div>
   <p>Um espaço de estudos feito para nossa turma, inspirado nas cores e nos elementos geométricos da escola.</p>
@@ -666,13 +667,13 @@ html[data-phase-motion="reduce"] .view.active.portal8-enter-active{
     <span class="exam-pill">18/11 · Geografia + Ed. Física teórica</span><span class="exam-pill">19/11 · História + Inglês</span><span class="exam-pill">23/11 · Ciências + Arte</span>
   </div>
 </div></header>
-<nav aria-label="Navegação principal do Portal 8º Ano"><div class="navquick"><label for="nexoNavJump">🧭 Ir para ferramenta</label><select id="nexoNavJump" aria-label="Escolher uma ferramenta por categoria"></select></div><div class="navinner"><details class="navgroup" data-category="inicio" open><summary>🏠 Início<span class="navcount">1</span></summary><div class="navgroup-items"><button type="button" class="navbtn active" data-view="inicio" aria-current="page">🏁 Meu painel</button></div></details><details class="navgroup" data-category="aprender"><summary>📚 Aprender<span class="navcount">6</span></summary><div class="navgroup-items"><button type="button" class="navbtn" data-view="trilha">✅ Minha trilha</button><button type="button" class="navbtn" data-view="videoaulas">🎬 Videoaulas</button><button type="button" class="navbtn" data-view="cartoes">🗂️ Memorização</button><button type="button" class="navbtn" data-view="metodos">📚 Métodos de estudo</button><button type="button" class="navbtn" data-view="assistente">✨ Tutor grátis</button><button type="button" class="navbtn" data-view="revisoes">🎯 Missões e revisões</button></div></details><details class="navgroup" data-category="praticar"><summary>🧠 Praticar<span class="navcount">6</span></summary><div class="navgroup-items"><button type="button" class="navbtn" data-view="quiz">🧠 Simulados</button><button type="button" class="navbtn" data-view="gerador">⚡ Gerador de questões</button><button type="button" class="navbtn" data-view="laboratorio">🧪 Laboratório</button><button type="button" class="navbtn" data-view="arena">🎮 Arena 803</button><button type="button" class="navbtn" data-view="desempenho">📊 Desempenho</button><button type="button" class="navbtn" data-view="evolucao803">📈 Minha evolução</button></div></details><details class="navgroup" data-category="organizar"><summary>🗓️ Organizar<span class="navcount">6</span></summary><div class="navgroup-items"><button type="button" class="navbtn" data-view="metas803">📈 Minhas metas</button><button type="button" class="navbtn" data-view="revisao803">🗒️ Revisão para provas</button><button type="button" class="navbtn" data-view="calendario">📅 Calendário</button><button type="button" class="navbtn" data-view="foco">⏱️ Foco</button><button type="button" class="navbtn" data-view="caderno">📝 Meu caderno</button><button type="button" class="navbtn" data-view="lembretes">🔔 Lembretes</button></div></details><details class="navgroup" data-category="turma"><summary>🤝 Turma<span class="navcount">3</span></summary><div class="navgroup-items"><button type="button" class="navbtn" data-view="turma">🌐 Painel da turma</button><button type="button" class="navbtn" data-view="desafio8ano">🏆 Missões coletivas</button><button type="button" class="navbtn" data-view="biblioteca">🤝 Biblioteca 803</button></div></details><details class="navgroup" data-category="administracao"><summary>⚙️ Administração e ajuda<span class="navcount">5</span></summary><div class="navgroup-items"><button type="button" class="navbtn" data-view="professor">👩‍🏫 Professor</button><button type="button" class="navbtn" data-view="criador">🔒 Modo Proprietário</button><button type="button" class="navbtn" data-view="offline">📶 Modo offline</button><button type="button" class="navbtn" data-view="ajuda803">🛠️ Relatar problema</button><button type="button" class="navbtn" data-view="acessibilidade803">♿ Acessibilidade</button></div></details></div><p class="navhint">Escolha uma categoria para encontrar a ferramenta que precisa.</p></nav>
+<nav aria-label="Navegação principal do Portal 8º Ano"><div class="navquick"><label for="nexoNavJump">🧭 Ir para ferramenta</label><select id="nexoNavJump" aria-label="Escolher uma ferramenta por categoria"></select></div><div class="navinner"><details class="navgroup" data-category="inicio" open><summary>🏠 Início<span class="navcount">1</span></summary><div class="navgroup-items"><button type="button" class="navbtn active" data-view="inicio" aria-current="page">🏁 Meu painel</button></div></details><details class="navgroup" data-category="aprender"><summary>📚 Aprender<span class="navcount">6</span></summary><div class="navgroup-items"><button type="button" class="navbtn" data-view="trilha">✅ Minha trilha</button><button type="button" class="navbtn" data-view="videoaulas">🎬 Videoaulas</button><button type="button" class="navbtn" data-view="cartoes">🗂️ Memorização</button><button type="button" class="navbtn" data-view="metodos">📚 Métodos de estudo</button><button type="button" class="navbtn" data-view="assistente">✨ Tutor grátis</button><button type="button" class="navbtn" data-view="revisoes">🎯 Missões e revisões</button></div></details><details class="navgroup" data-category="praticar"><summary>🧠 Praticar<span class="navcount">6</span></summary><div class="navgroup-items"><button type="button" class="navbtn" data-view="quiz">🧠 Simulados</button><button type="button" class="navbtn" data-view="gerador">⚡ Gerador de questões</button><button type="button" class="navbtn" data-view="laboratorio">🧪 Laboratório</button><button type="button" class="navbtn" data-view="arena">🎮 Arena 803</button><button type="button" class="navbtn" data-view="desempenho">📊 Desempenho</button><button type="button" class="navbtn" data-view="evolucao803">📈 Minha evolução</button></div></details><details class="navgroup" data-category="organizar"><summary>🗓️ Organizar<span class="navcount">6</span></summary><div class="navgroup-items"><button type="button" class="navbtn" data-view="metas803">📈 Minhas metas</button><button type="button" class="navbtn" data-view="revisao803">🗒️ Revisão para provas</button><button type="button" class="navbtn" data-view="calendario">📅 Calendário</button><button type="button" class="navbtn" data-view="foco">⏱️ Foco</button><button type="button" class="navbtn" data-view="caderno">📝 Meu caderno</button><button type="button" class="navbtn" data-view="lembretes">🔔 Lembretes</button></div></details><details class="navgroup" data-category="turma"><summary>🤝 Turma<span class="navcount">3</span></summary><div class="navgroup-items"><button type="button" class="navbtn" data-view="turma">🌐 Painel da turma</button><button type="button" class="navbtn" data-view="desafio8ano">🏆 Missões coletivas</button><button type="button" class="navbtn" data-view="biblioteca">🤝 Biblioteca 803</button></div></details><details class="navgroup" data-category="conta"><summary>👤 Minha conta<span class="navcount">1</span></summary><div class="navgroup-items"><button type="button" class="navbtn" data-view="perfil">👤 Meu perfil</button></div></details><details class="navgroup" data-category="administracao"><summary>⚙️ Administração e ajuda<span class="navcount">5</span></summary><div class="navgroup-items"><button type="button" class="navbtn" data-view="professor">👩‍🏫 Professor</button><button type="button" class="navbtn" data-view="criador">🔒 Modo Proprietário</button><button type="button" class="navbtn" data-view="offline">📶 Modo offline</button><button type="button" class="navbtn" data-view="ajuda803">🛠️ Relatar problema</button><button type="button" class="navbtn" data-view="acessibilidade803">♿ Acessibilidade</button></div></details></div><p class="navhint">Escolha uma categoria para encontrar a ferramenta que precisa.</p></nav>
 <main>
 <section id="inicio" class="view active">
 <section class="portal8-pro-home" aria-label="Encontre sua ferramenta de estudos">
   <div class="portal8-pro-heading">
     <div><span class="portal8-pro-eyebrow">✦ EXPLORE O SEU PORTAL</span><h2>Escolha como aprender hoje</h2><p>As principais ferramentas organizadas para você estudar sem perder tempo.</p></div>
-    <span class="portal8-pro-counter">6 turmas • 27 ferramentas</span>
+    <span class="portal8-pro-counter">6 turmas • 28 ferramentas</span>
   </div>
   <div class="portal8-pro-grid">
     <button type="button" class="portal8-pro-card" onclick="showView('trilha')"><span class="portal8-pro-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M12 5v14m-5-11h3m4 0h3"/></svg></span><strong>Estudar</strong><small>Minha trilha e conteúdos</small><span class="portal8-pro-arrow">↗</span></button>
@@ -1115,6 +1116,50 @@ html[data-phase-motion="reduce"] .view.active.portal8-enter-active{
 <div class="grid"><div class="card span-6"><h3>Minha meta da semana</h3><label for="nexoGoal">Quantas sessões de estudo você quer concluir?</label><select class="study-field" id="nexoGoal"><option value="2">2 sessões</option><option value="3">3 sessões</option><option value="5">5 sessões</option><option value="7">7 sessões</option></select><button class="btn orange" onclick="saveNexoGoal()">Salvar meta</button><p class="small muted">Uma sessão pode ser uma revisão curta, uma atividade ou um simulado. Escolha uma meta confortável.</p></div>
 <div class="card span-6"><h3>Progresso semanal</h3><div class="metric" id="nexoSessions">0 / 3</div><div class="progress"><i id="nexoBar"></i></div><p class="small muted" id="nexoStatus">Comece quando quiser.</p><button class="btn orange" onclick="completeNexoSession()">✓ Concluí uma sessão</button><button class="btn light" onclick="undoNexoSession()">Desfazer última</button></div>
 <div class="card span-6"><h3>🏅 Conquistas pessoais</h3><div id="nexoBadges" class="mission"></div></div><div class="card span-6"><h3>💡 Próximo passo</h3><p id="nexoTip">Escolha uma matéria e faça um pequeno exercício.</p><button class="btn light" onclick="showView('arena')">Jogar Arena 803</button><button class="btn light" onclick="showView('assistente')">Abrir tutor grátis</button></div></div></section>
+
+<section id="perfil" class="view">
+ <h2>👤 Meu perfil</h2>
+ <p class="sub">Entre na conta para personalizar seu nome, turma e foto. Seu perfil é privado.</p>
+ <div class="p8-profile-lead">
+  <div class="p8-profile-picture" aria-hidden="true"><span id="p8ProfileAvatarFallback">👤</span><img id="p8ProfileAvatar" alt="" hidden></div>
+  <div class="p8-profile-lead-text">
+   <strong id="p8ProfileNameView">Bem-vindo ao Portal!</strong><p id="p8ProfileClassView">Entre na sua conta para personalizar seu espaço.</p>
+   <div style="margin-top:9px"><span class="p8-profile-role" id="p8ProfileAccountType">Visitante</span></div>
+  </div>
+ </div>
+ <div class="p8-profile-layout" id="portal8Profile">
+  <div class="p8-profile-panel" id="p8ProfileAuth">
+   <h3>🔐 Entrar ou criar conta</h3><p class="small muted">Use um e-mail seu. Não compartilhe a senha. O cadastro pode precisar de confirmação por e-mail.</p>
+   <label for="p8ProfileEmail">E-mail</label><input id="p8ProfileEmail" type="email" maxlength="254" autocomplete="email" placeholder="seuemail@exemplo.com">
+   <label for="p8ProfilePassword">Senha</label><input id="p8ProfilePassword" type="password" minlength="12" maxlength="128" autocomplete="current-password" placeholder="Mínimo de 12 caracteres">
+   <div class="p8-profile-action"><button class="btn orange" type="button" id="p8ProfileLogin" data-profile-action>Entrar</button><button class="btn light" type="button" id="p8ProfileSignup" data-profile-action>Criar conta</button></div>
+   <small>O login é opcional. Você continua podendo estudar sem conta. O cadastro não concede acesso administrativo.</small>
+  </div>
+  <div class="p8-profile-panel" id="p8ProfilePrivate" hidden>
+   <h3>🔒 Minha conta</h3><p class="small muted">Esses dados aparecem apenas no seu perfil, não em uma lista pública.</p>
+   <div class="p8-profile-info"><strong id="p8ProfileEmailView">—</strong><p>Conta criada em <span id="p8ProfileCreated">—</span></p><p id="p8ProfileRoleDescription">Conta de estudante.</p><p id="p8ProfileProgressLevel">Nível 1 de estudos</p></div>
+   <div class="p8-profile-action"><button class="btn light" id="p8ProfileLogout" type="button" data-profile-action>Sair da conta</button></div>
+   <small>O nível reflete os estudos neste dispositivo; não compara alunos nem é sincronizado com a conta.</small>
+  </div>
+  <div class="p8-profile-panel" id="p8ProfileEditor" hidden>
+   <h3>🎨 Personalizar perfil</h3>
+   <label for="p8ProfileFile">Minha foto ou avatar</label><input id="p8ProfileFile" type="file" accept="image/jpeg,image/png,image/webp">
+   <small>JPG, PNG ou WebP. Imagens são reduzidas para 320 px e mantidas em armazenamento privado. Se preferir, use um desenho.</small>
+   <div class="p8-profile-action"><button class="btn light" id="p8ProfileUpload" type="button" data-profile-action>📷 Salvar foto</button></div>
+   <label for="p8ProfileName">Nome de exibição</label><input id="p8ProfileName" maxlength="40" minlength="2" autocomplete="nickname" placeholder="Como deseja aparecer">
+   <label for="p8ProfileClass">Minha turma</label>
+   <select id="p8ProfileClass"><option value="">Escolha sua turma</option><option value="801">801 • manhã</option><option value="802">802 • manhã</option><option value="803">803 • manhã</option><option value="804">804 • manhã</option><option value="806">806 • tarde</option><option value="807">807 • tarde</option></select>
+   <label for="p8ProfileBio">Minha apresentação</label><textarea id="p8ProfileBio" maxlength="120" rows="3" placeholder="Ex.: gosto de Matemática e livros!"></textarea>
+   <div id="p8ProfileBioCount" class="p8-profile-fieldcount">0 / 120</div>
+   <div class="p8-profile-action"><button class="btn orange" type="button" id="p8ProfileSave" data-profile-action>💾 Salvar perfil</button></div>
+  </div>
+  <div class="p8-profile-panel" id="p8ProfileGuest">
+   <h3>💙 Seu espaço de estudos</h3><p>Com uma conta, você personaliza seu perfil e escolhe uma foto. Ninguém mais pode editar suas informações.</p>
+   <p class="small muted">Os dados de estudo já salvos neste navegador continuam locais. Criar conta não transfere automaticamente esse histórico para a nuvem.</p>
+  </div>
+ </div>
+ <p class="p8-profile-status" id="p8ProfileStatus" role="status" aria-live="polite">Entre ou crie uma conta para começar.</p>
+</section>
 </main>
 <footer><b>Portal 8º Ano Missão Paz · Projeto colaborativo independente</b><br>Organização, respeito, colaboração e aprendizagem. Um passo de cada vez!<br><span class="small">Material de apoio elaborado a partir do roteiro de estudos enviado pela turma. O mural coletivo depende de configuração do banco online pelo responsável.</span></footer>
 
@@ -2062,7 +2107,7 @@ async function portalOwnerRefresh(){
 
 /* Carrossel gratuito de informações públicas, filtrado por turma. */
 const portal8WelcomeSlides=[
- {title:"🚀 Conheça o novo Portal 8º Ano",body:"A nova capa mostra o cartoon dos estudantes, com animações e atalhos para as 27 ferramentas de estudos."},
+ {title:"🚀 Conheça o novo Portal 8º Ano",body:"A nova capa mostra o cartoon dos estudantes, com animações e atalhos para as 28 ferramentas de estudos."},
  {title:"📘 Estude do seu jeito",body:"Escolha uma matéria, faça questões, marque o que entendeu e acompanhe sua própria evolução."},
  {title:"🤝 Um portal para seis turmas",body:"Selecione 801, 802, 803, 804, 806 ou 807 para consultar avisos e materiais destinados à sua sala."}
 ];
@@ -2685,7 +2730,7 @@ async function portal8UpdateSite(){
    await Promise.all(regs.map(r=>r.update().catch(()=>null)));
   }
  }catch(e){}
- location.replace(location.pathname+"?versao=recursos-aprovados-v19&atualizacao="+Date.now());
+ location.replace(location.pathname+"?versao=recursos-aprovados-v20&atualizacao="+Date.now());
 }
 function portal8EnableScrollReveal(){
  if(window.matchMedia?.("(prefers-reduced-motion: reduce)").matches||document.documentElement.dataset.phaseMotion==="reduce")return;
@@ -2714,6 +2759,7 @@ init();renderNexo();
 <script src="./assets/portal8-estudos-v18.js?v=18"></script>
 <script src="./assets/portal8-turmas-v18.js?v=18"></script>
 <script src="./assets/portal8-duvidas-v18.js?v=18"></script>
-<script src="./assets/portal8-pazinho.js?v=19"></script>
+<script src="./assets/portal8-pazinho.js?v=20"></script>
+<script src="./assets/portal8-perfil.js?v=20"></script>
 </body>
 </html>
