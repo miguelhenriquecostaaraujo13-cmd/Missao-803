@@ -1,0 +1,18 @@
+/* Neo Aprendizagem Adaptativa v33: flashcards, rotas e Diretor de Jogos */
+.neo-smart-panel{margin-top:16px;padding:18px;border:1px solid var(--line);border-radius:18px 9px 18px 9px;background:var(--white);box-shadow:0 6px 18px rgba(12,61,103,.08)}
+.neo-smart-panel h3{margin:0 0 6px;color:var(--ink)}
+.neo-smart-panel p{color:var(--muted);font-size:.86rem;line-height:1.6}
+.neo-smart-panel :is(select,input){min-width:0;max-width:100%;border:1px solid #8dbcca;border-radius:11px;background:var(--white);color:var(--ink);padding:10px 12px;font:inherit}
+.neo-smart-panel label{font-weight:850;display:block;margin:11px 0 5px;color:var(--ink)}
+.neo-smart-options{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.neo-smart-options button{min-height:42px}
+.neo-smart-card{background:linear-gradient(120deg,#154e87,#1288a5);color:#fff;display:flex;align-items:center;justify-content:center;text-align:center;min-height:130px;border-radius:19px 8px 19px 8px;padding:20px;font-size:clamp(1rem,2.8vw,1.24rem);font-weight:850;margin:11px 0;white-space:pre-wrap;overflow-wrap:anywhere}
+.neo-smart-answer{background:#e5f7ef;border-left:4px solid #269574;border-radius:12px;color:#174d3f;padding:14px;white-space:pre-wrap;line-height:1.6}
+.neo-smart-answer[hidden],.neo-smart-options[hidden]{display:none!important}
+#neoBrainState{font-weight:900;letter-spacing:.01em;color:#206888}
+#neoBrainTip{min-height:40px;padding:10px 12px;border:1px solid var(--line);border-radius:12px;background:var(--portal-panel);color:var(--ink);font-size:.86rem}
+.neo-brain-controls{display:flex;align-items:center;flex-wrap:wrap;gap:9px;margin:12px 0}
+.neo-brain-controls select{border:1px solid #8dbdca;border-radius:10px;padding:8px;background:var(--white);color:var(--ink)}
+.neo-smart-stats{font-size:.82rem;color:var(--muted)}
+#neoRouteOutput{background:var(--portal-panel);border-radius:13px;padding:14px;white-space:pre-wrap;color:var(--ink);line-height:1.65;margin:12px 0}
+@media(max-width:650px){.neo-smart-panel{padding:14px}.neo-brain-controls{align-items:stretch}.neo-smart-options{gap:6px}.neo-smart-options button{flex:1}}
