@@ -147,6 +147,16 @@ O botão **Permitir notificações** solicita autorização expressa do navegado
 - Esses eventos aparecem na página inicial e na seção **Calendário e horários**, com cópia de segurança no script `assets/portal8-calendario-final2026.js` para uso offline. As provas existentes e os horários da 803 não foram removidos ou modificados.
 - Os registros são baseados na folha impressa fotografada; eventuais alterações devem ser confirmadas com a secretaria. Nada foi incluído retroativamente antes de 16/11.
 
+## Neo Tutor Local gratuito (versão 26)
+
+- O chat da seção **Tutor grátis** continua sendo uma das **28 ferramentas** e agora tem motor próprio em `assets/neo-tutor-local.js`. O nome Neo é o escolhido pelo administrador; a configuração de nome do mascote no Supabase permanece independente.
+- Funciona sem chave de API, sem assinatura e sem custo de inferência, após a primeira carga do site. Não é a API OpenAI/ChatGPT nem um modelo generativo treinado do zero. **Não promete respostas ilimitadas para todo conhecimento humano:** as capacidades são determinadas por regras e conteúdos escolares já registrados.
+- Agora oferece contexto de uma pergunta anterior, pedidos como **“mais simples”**, exemplos ligados ao resumo, **cartões de revisão com resposta** e operações matemáticas verificáveis (aritmética de dois números, percentuais e equações lineares de um único x).
+- O modo de perguntas sobre os cartões não dá nota a respostas abertas; a comparação é feita pelo estudante. Quando um assunto não existe no acervo, o tutor informa a limitação em vez de produzir fatos inventados.
+- O chat não usa `fetch`, não transmite as perguntas e não grava o histórico no banco nem no `localStorage`. O botão **Limpar conversa** apaga o histórico na tela e o contexto mantido na memória da aba.
+- Os simulados, cartões antigos, conteúdo aprovado, controle de acesso, perfis, dados armazenados e demais ferramentas foram preservados.
+- Atualização do cache: `portal8-recursos-aprovados-v26`.
+
 ## Publicação
 
 Publicação atual pelo GitHub Pages: https://miguelhenriquecostaaraujo13-cmd.github.io/Missao-803/
