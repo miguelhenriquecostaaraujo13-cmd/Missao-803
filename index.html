@@ -1814,7 +1814,12 @@ async function portalOwnerRefresh(){
 }
 
 /* Carrossel gratuito de informações públicas, filtrado por turma. */
-let portal8Slides=[],portal8SlideIndex=0,portal8CarouselPaused=false;
+const portal8WelcomeSlides=[
+ {title:"🚀 Conheça o novo Portal 8º Ano",body:"A nova capa mostra o cartoon dos estudantes, com animações e atalhos para as 27 ferramentas de estudos."},
+ {title:"📘 Estude do seu jeito",body:"Escolha uma matéria, faça questões, marque o que entendeu e acompanhe sua própria evolução."},
+ {title:"🤝 Um portal para seis turmas",body:"Selecione 801, 802, 803, 804, 806 ou 807 para consultar avisos e materiais destinados à sua sala."}
+];
+let portal8Slides=portal8WelcomeSlides.slice(),portal8SlideIndex=0,portal8CarouselPaused=false;
 function portal8CarouselRender(){
  const title=document.getElementById("portal8NewsTitle"),body=document.getElementById("portal8NewsBody"),counter=document.getElementById("portal8NewsCounter"),box=document.getElementById("portal8NewsSlide");
  if(!title||!body||!counter)return;
@@ -1836,7 +1841,7 @@ setInterval(()=>{
  if(portal8CarouselPaused||portal8Slides.length<2||document.hidden||!document.querySelector("#inicio.view.active"))return;
  if(window.matchMedia?.("(prefers-reduced-motion: reduce)").matches||document.documentElement.dataset.phaseMotion==="reduce")return;
  portal8CarouselMove(1);
-},8500);
+},6500);
 
 async function portalPublicRefresh(){
  const root=document.getElementById("portalPublicItems");if(!root)return;root.replaceChildren();
@@ -1846,10 +1851,10 @@ async function portalPublicRefresh(){
   if(a.error||b.error)throw new Error("Dados indisponíveis");
   portal8OfficialExams=b.data||[];portal8RenderExamOptions();if(portal8Turma!=="803")portal8GradeRefresh();
   const all=[...(a.data||[]).map(x=>({title:"📢 "+x.title,body:x.body})),...(b.data||[]).map(x=>({title:"📅 "+x.subject+" — "+x.exam_date.split("-").reverse().join("/"),body:x.topics}))];
-  portal8Slides=all;portal8SlideIndex=0;portal8CarouselRender();
+  portal8Slides=[...all,...portal8WelcomeSlides];portal8SlideIndex=0;portal8CarouselRender();
   if(!all.length){root.textContent="Ainda não há publicações adicionais do proprietário. Consulte o cronograma inicial.";return}
   for(const x of all){const p=document.createElement("div");p.className="mission";const title=document.createElement("b");title.textContent=x.title;const body=document.createElement("p");body.textContent=x.body;p.append(title,body);root.append(p)}
- }catch(e){portal8Slides=[];portal8SlideIndex=0;portal8CarouselRender();root.textContent="Avisos online indisponíveis. O restante do site continua funcionando."}
+ }catch(e){portal8Slides=portal8WelcomeSlides.slice();portal8SlideIndex=0;portal8CarouselRender();root.textContent="Avisos online indisponíveis. O restante do site continua funcionando."}
 }
 portalPublicRefresh();
 portalOwnerCheck();
@@ -2441,6 +2446,12 @@ function portal8EnableScrollReveal(){
 }
 if(document.readyState==="complete")portal8EnableScrollReveal();
 else window.addEventListener("load",portal8EnableScrollReveal,{once:true});
+window.addEventListener("load",()=>{
+ if(!("serviceWorker" in navigator))return;
+ navigator.serviceWorker.getRegistrations().then(regs=>{
+  regs.forEach(reg=>reg.update().catch(()=>{}));
+ }).catch(()=>{});
+},{once:true});
 
 init();renderNexo();
 </script>
