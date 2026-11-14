@@ -1,5 +1,12 @@
 [
   {
+    "id": "versao-53a45411cfae",
+    "title": "Neo ganha cards em 4 estilos, mapas avançados e 9 invenções no Ateliê",
+    "body": "Os alunos podem revisar mapas com cards, favoritos e desafios. Administradores testam novos jogos e ferramentas sem afetar as 30 áreas existentes.",
+    "date": "2026-11-14",
+    "important": true
+  },
+  {
     "id": "versao-25e4fe88d7e0",
     "title": "Mapas Mentais Neo para alunos e Ateliê privado do administrador",
     "body": "Nova aba de mapas com SVG e 12 protótipos de teste. O Ateliê exige conta administrativa; 29 ferramentas antigas preservadas.",
