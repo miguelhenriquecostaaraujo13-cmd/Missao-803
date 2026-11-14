@@ -968,23 +968,22 @@ html[data-phase-motion="reduce"] .view.active.portal8-enter-active{
 <section id="calendario" class="view"><h2>📅 Calendário e horários</h2><p class="sub">Veja o calendário comum de provas do 8º ano, organize suas tarefas e, na 803, consulte também os horários de cada aula.</p><section class="portal8-school-schedule portal8-803-only card" id="portal8Aulas803" aria-labelledby="portal8Aulas803Titulo">
  <div class="portal8-school-schedule-head">
   <div><span class="portal8-schedule-kicker">⏰ ROTINA ESCOLAR • 07h00 ÀS 11h30</span><h3 id="portal8Aulas803Titulo">Horário semanal de aulas — Turma 803</h3>
-  <p class="small muted">Aulas de segunda a sexta-feira, das <b>7h às 11h30</b>. O último horário <b>começa às 10h40</b> e termina às <b>11h30</b>. Professor de Matemática: <b>Anderson</b>.</p></div>
+  <p class="small muted">Aulas de segunda a sexta-feira, das <b>7h às 11h30</b>.</p></div>
   <span class="portal8-schedule-class">803 · Manhã</span>
  </div>
  <p class="small muted portal8-schedule-mobile-tip">No celular, deslize a tabela para o lado para ver todos os dias.</p>
  <div class="portal8-school-table-scroll" role="region" tabindex="0" aria-label="Tabela de aulas da turma 803, da segunda à sexta-feira">
-  <table class="portal8-school-table"><caption>Horário de aulas da 803, com matéria e professor em cada período</caption>
+  <table class="portal8-school-table"><caption>Horário semanal das matérias da turma 803</caption>
    <thead><tr><th scope="col">Horário</th><th scope="col">Segunda</th><th scope="col">Terça</th><th scope="col">Quarta</th><th scope="col">Quinta</th><th scope="col">Sexta</th></tr></thead>
    <tbody>
-   <tr><th scope="row">07h00</th><td><b>Arte</b><small>Rejiane</small></td><td><b>Língua Portuguesa</b><small>Gabriela</small></td><td><b>Língua Portuguesa</b><small>Gabriela</small></td><td><b>História</b><small>Danilo</small></td><td><b>Educação Física (prática)</b><small>Graziele Pardinho</small></td></tr>
-   <tr><th scope="row">07h50</th><td><b>Língua Portuguesa</b><small>Gabriela</small></td><td><b>Ciências</b><small>Richard</small></td><td><b>Matemática</b><small>Anderson</small></td><td><b>Língua Portuguesa</b><small>Gabriela</small></td><td><b>História</b><small>Danilo</small></td></tr>
-   <tr><th scope="row">08h40</th><td><b>Ciências</b><small>Richard</small></td><td><b>Educação Física (prática)</b><small>Graziele Pardinho</small></td><td><b>Inglês (A)</b><small>Maria Luiza</small></td><td><b>Matemática</b><small>Anderson</small></td><td><b>Geografia</b><small>Priscila Alves</small></td></tr>
-   <tr><th scope="row">09h50</th><td><b>Ciências</b><small>Richard</small></td><td><b>Matemática</b><small>Anderson</small></td><td><b>Inglês (A)</b><small>Maria Luiza</small></td><td><b>Matemática</b><small>Anderson</small></td><td><b>Geografia</b><small>Priscila Alves</small></td></tr>
-   <tr><th scope="row">10h40–11h30</th><td><b>História</b><small>Danilo</small></td><td><b>Matemática</b><small>Anderson</small></td><td><b>Jump</b><small>Wanderson</small></td><td><b>Língua Portuguesa</b><small>Gabriela</small></td><td><b>Língua Portuguesa</b><small>Gabriela</small></td></tr>
+   <tr><th scope="row">07h00</th><td><b>Arte</b></td><td><b>Língua Portuguesa</b></td><td><b>Língua Portuguesa</b></td><td><b>História</b></td><td><b>Educação Física (prática)</b></td></tr>
+   <tr><th scope="row">07h50</th><td><b>Língua Portuguesa</b></td><td><b>Ciências</b></td><td><b>Matemática</b></td><td><b>Língua Portuguesa</b></td><td><b>História</b></td></tr>
+   <tr><th scope="row">08h40</th><td><b>Ciências</b></td><td><b>Educação Física (prática)</b></td><td><b>Inglês (A)</b></td><td><b>Matemática</b></td><td><b>Geografia</b></td></tr>
+   <tr><th scope="row">09h50</th><td><b>Ciências</b></td><td><b>Matemática</b></td><td><b>Inglês (A)</b></td><td><b>Matemática</b></td><td><b>Geografia</b></td></tr>
+   <tr><th scope="row">10h40–11h30</th><td><b>História</b></td><td><b>Matemática</b></td><td><b>Jump</b></td><td><b>Língua Portuguesa</b></td><td><b>Língua Portuguesa</b></td></tr>
    </tbody>
   </table>
  </div>
- <p class="small muted">O expediente da turma 803 termina às <b>11h30</b>. Às 10h40 começa a quinta e última aula; 11h30 é o horário de saída, não de início de outra aula. As outras turmas terão seus próprios horários quando forem informados.</p>
 </section><div class="grid"><div class="card span-6"><h3>Meu compromisso</h3><label for="calendarDate">Data</label><input id="calendarDate" class="study-field" type="date"><label for="calendarTask">O que vou estudar?</label><input id="calendarTask" class="study-field" maxlength="140" placeholder="Ex.: revisar porcentagem"><button class="btn orange" onclick="addCalendarTask()">Adicionar lembrete</button><p class="small muted">As tarefas ficam neste navegador. Para receber lembretes de estudo e provas, configure a aba 🔔 Lembretes.</p></div><div class="card span-6"><h3>Próximas tarefas</h3><div id="calendarItems"></div></div><div class="card span-12"><p><button class="btn orange" type="button" onclick="showView('evolucao803')">📅 Abrir calendário visual e gráficos</button></p></div><div class="card span-12" id="portal8LegacyCalendar"><h3>📝 Calendário de provas — todas as turmas do 8º ano</h3>
  <p class="small muted">Datas da 3ª etapa informadas para as turmas 801, 802, 803, 804, 806 e 807. Confirme alterações com os professores.</p>
  <div class="portal8-exam-grid"><div><b>16/11/2026</b><span>Matemática</span></div><div><b>17/11/2026</b><span>Língua Portuguesa</span></div><div><b>18/11/2026</b><span>Geografia e Educação Física teórica</span></div><div><b>19/11/2026</b><span>História e Inglês</span></div><div><b>23/11/2026</b><span>Ciências e Arte</span></div></div>
