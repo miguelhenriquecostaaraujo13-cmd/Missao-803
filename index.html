@@ -30,6 +30,8 @@ html.p8-entry-check body>header,html.p8-entry-check body>nav,html.p8-entry-check
 #p8FirstVisit [role=status]{font-size:.88rem;min-height:1.5em;margin:12px 0 0;color:#375976}
 #p8FirstVisit [hidden],#p8ProfileResend[hidden]{display:none!important}
 #p8WelcomePasswordHelp{display:block;margin:3px 0 8px;color:#4d6478;font-size:.82rem;line-height:1.5}
+#p8ProfileAuth label{color:#eaf5ff!important;font-weight:800}
+#p8ProfileAuth>small,#p8ProfileAuth .small.muted{color:#d2e4f4!important}
 #p8ProfileResend{margin-top:11px;min-height:42px}
 
 </style>
@@ -783,6 +785,7 @@ html nav :is(summary,button,select):focus-visible{outline:3px solid #ffd781!impo
    <button type="button" onclick="showView('neoGames40')">🎮 Explorar games 3D</button>
    <button type="button" onclick="showView('trilha')">📚 Continuar estudando</button>
    <button type="button" onclick="showView('neoIAs40')">🤖 Conhecer o Neo</button>
+   <button type="button" onclick="window.portal8OpenWelcome?.('choices')">👤 Entrar ou criar conta</button>
   </div>
  </div>
  <div class="mp5-home-visual" aria-hidden="true">
@@ -3278,7 +3281,7 @@ async function portal8UpdateSite(){
    await Promise.all(regs.map(r=>r.update().catch(()=>null)));
   }
  }catch(e){}
- location.replace(location.pathname+"?versao=auth-confirmation-help-v1&atualizacao="+Date.now());
+ location.replace(location.pathname+"?versao=cadastro-entrada-v2&atualizacao="+Date.now());
 }
 function portal8EnableScrollReveal(){
  if(window.matchMedia?.("(prefers-reduced-motion: reduce)").matches||document.documentElement.dataset.phaseMotion==="reduce")return;
@@ -3336,10 +3339,10 @@ init();renderNexo();
   <div class="p8-welcome-card">
     <span class="p8-welcome-brand">✨ NEO · PORTAL MISSÃO PAZ</span>
     <h2 id="p8WelcomeTitle">Seu espaço de estudos começa aqui!</h2>
-    <p id="p8WelcomeIntro">Escolha como deseja acessar o portal. Você pode estudar sem criar uma conta.</p>
+    <p id="p8WelcomeIntro">Primeira vez aqui? Crie sua conta. Se já possui cadastro, entre com seu e-mail e senha. Você também pode estudar como visitante.</p>
     <div id="p8WelcomeChoices">
-      <button type="button" class="p8-welcome-primary" data-entry="signin">🔐 Fazer login</button>
-      <button type="button" data-entry="signup">✨ Criar uma conta</button>
+      <button type="button" class="p8-welcome-primary" data-entry="signup">✨ Criar uma conta</button>
+      <button type="button" data-entry="signin">🔐 Já tenho conta — Entrar</button>
       <button type="button" class="p8-welcome-guest" data-entry="guest">👋 Entrar como visitante</button>
     </div>
     <form id="p8WelcomeForm" hidden>
@@ -3360,11 +3363,11 @@ init();renderNexo();
 /* Portal Missão Paz — entrada opcional apenas para novos visitantes. */
 (() => {
   "use strict";
-  const key="portal8-boas-vindas-v1", $=id=>document.getElementById(id);
+  const $=id=>document.getElementById(id);
   const root=$("p8FirstVisit"),choices=$("p8WelcomeChoices"),form=$("p8WelcomeForm"),status=$("p8WelcomeStatus");
   let mode="signin",busy=false;
-  function saved(){try{return localStorage.getItem(key)==="guest"}catch(_){return false}}
-  function storeGuest(){try{localStorage.setItem(key,"guest")}catch(_){}}
+  // A escolha antiga de visitante não deve ocultar permanentemente o cadastro.
+  // Uma sessão autenticada, porém, continua entrando automaticamente.
   function hide(){root.hidden=true;document.documentElement.classList.remove("p8-entry-check")}
   function show(){root.hidden=false;document.documentElement.classList.remove("p8-entry-check");}
   function setMode(next){
@@ -3383,13 +3386,13 @@ init();renderNexo();
     form.hidden=true;choices.hidden=false;status.textContent="";
     $("p8WelcomeResend").hidden=true;
     $("p8WelcomeTitle").textContent="Seu espaço de estudos começa aqui!";
-    $("p8WelcomeIntro").textContent="Escolha como deseja acessar o portal. Você pode estudar sem criar uma conta.";
+    $("p8WelcomeIntro").textContent="Primeira vez aqui? Crie sua conta. Se já possui cadastro, entre com seu e-mail e senha. Você também pode estudar como visitante.";
   }
   function client(){return typeof ensureCloudClient==="function"?ensureCloudClient():null}
   choices.addEventListener("click",e=>{
     const target=e.target.closest("button[data-entry]");if(!target)return;
     const action=target.dataset.entry;
-    if(action==="guest"){storeGuest();hide();return}
+    if(action==="guest"){hide();return}
     setMode(action);
   });
   $("p8WelcomeBack").addEventListener("click",back);
@@ -3437,16 +3440,30 @@ init();renderNexo();
     }
     finally{busy=false;$("p8WelcomeSubmit").disabled=false}
   });
-  async function initialize(){
-    if(saved()){hide();return}
+  async function isAuthenticated(){
     try{
       const c=client();
-      if(c){
-        const {data,error}=await c.auth.getSession();
-        if(!error&&data?.session?.user?.email&&data.session.user.is_anonymous!==true){hide();return}
-      }
-    }catch(_){}
+      if(!c)return false;
+      const {data,error}=await c.auth.getSession();
+      return !error&&Boolean(data?.session?.user?.email)&&data.session.user.is_anonymous!==true;
+    }catch(_){return false}
+  }
+  window.portal8OpenWelcome=async function(next="choices"){
+    if(await isAuthenticated()){
+      hide();
+      if(typeof showView==="function")showView("perfil");
+      return;
+    }
     show();
+    if(next==="signin"||next==="signup")setMode(next);
+    else back();
+  };
+  async function initialize(){
+    if(await isAuthenticated()){hide();return}
+    show();
+    const params=new URLSearchParams(location.search);
+    if(params.get("cadastro")==="1")setMode("signup");
+    else if(params.get("entrar")==="1")setMode("signin");
   }
   initialize();
 })();
