@@ -930,7 +930,7 @@ html[data-portal-theme="noite"] .portal8-schedule-class{background:#153d5d;color
 <section id="evolucao803" class="view">
 <h2>📈 Minha evolução nos estudos</h2><p class="sub">Acompanhe a prática nos simulados ao longo do tempo. O histórico começa a ser registrado a partir desta atualização e fica no seu navegador.</p>
 <div class="card"><h3>Resultados recentes nos simulados</h3><div id="phaseEvolution"></div><p class="small muted">As barras mostram a proporção de acertos por dia, considerando apenas questões respondidas no Portal 8º Ano. Não são notas escolares nem comparação entre alunos.</p></div>
-<div class="card" style="margin-top:14px"><h3>📅 Calendário visual</h3><div class="row"><button type="button" class="btn light" onclick="phaseMonth(-1)">← Mês anterior</button><b id="phaseMonthLabel"></b><button type="button" class="btn light" onclick="phaseMonth(1)">Próximo mês →</button></div><div id="phaseMonthCalendar" class="phase-calendar"></div><div id="phaseMonthLegend" class="small muted" style="margin-top:10px"></div><p class="small muted">Mostra suas tarefas locais e as datas oficiais publicadas. O cronograma inicial de novembro de 2026 é indicativo: confirme sempre com a escola.</p></div>
+<div class="card" style="margin-top:14px"><h3>📅 Calendário visual</h3><div class="row"><button type="button" class="btn light" onclick="phaseMonth(-1)">← Mês anterior</button><b id="phaseMonthLabel"></b><button type="button" class="btn light" onclick="phaseMonth(1)">Próximo mês →</button></div><div id="phaseMonthCalendar" class="phase-calendar"></div><div id="phaseMonthLegend" class="small muted" style="margin-top:10px"></div><p class="small muted">As datas das provas da 3ª etapa são comuns às seis turmas; as tarefas pessoais continuam privadas. Confirme qualquer alteração com a escola.</p></div>
 </section>
 <section id="arena" class="view"><h2>🎮 Arena 803 — Desafio do conhecimento</h2><p class="sub">Jogue para aprender, sem ranking entre colegas. As perguntas são selecionadas dos simulados existentes.</p><div class="grid"><div class="card span-7"><h3 id="arenaTitle">Prepare-se para o desafio</h3><p id="arenaQuestion">Escolha uma matéria e comece uma rodada de cinco perguntas.</p><div id="arenaOptions" class="mission"></div><div class="row"><button class="btn orange" onclick="startArena()">▶ Nova rodada</button><button class="btn light" onclick="showView('quiz')">Abrir simulados</button></div><p class="small muted" id="arenaFeedback" role="status"></p></div><div class="card span-5"><h3>Minha rodada</h3><div class="metric" id="arenaScore">0 / 5</div><p class="small muted" id="arenaProgress">Nenhuma rodada iniciada.</p><label for="arenaSubject"><b>Matéria</b></label><select id="arenaSubject" class="study-field"><option value="Todas">Todas</option></select><p class="small muted">Sem competição pública, notas individuais ou pressão. O objetivo é praticar.</p></div></div></section>
 <section id="calendario" class="view"><h2>📅 Calendário e horários</h2><p class="sub">Veja o calendário comum de provas do 8º ano, organize suas tarefas e, na 803, consulte também os horários de cada aula.</p><section class="portal8-school-schedule portal8-803-only card" id="portal8Aulas803" aria-labelledby="portal8Aulas803Titulo">
@@ -1253,8 +1253,8 @@ function updateDashboard(){
  $("answeredMetric").textContent=state.answered;$("correctMetric").textContent=state.correct;
  const ex=[["16/11","Matemática"],["17/11","Língua Portuguesa"],["18/11","Geografia + Educação Física"],["19/11","História + Inglês"],["23/11","Ciências + Arte"]];
  const now=new Date();now.setHours(0,0,0,0);let next=ex.find(x=>{const [d,m]=x[0].split("/").map(Number);return new Date(2026,m-1,d)>=now});
- $("nextExam").textContent=portal8Turma==="803"?(next?next[1]:"Missão concluída!"):"Consultar avisos";
- $("nextExamDate").textContent=portal8Turma==="803"?(next?next[0]+"/2026":"Parabéns pela dedicação!"):"Calendário da turma "+portal8Turma+" (aguardando confirmação)";
+ $("nextExam").textContent=next?next[1]:"Etapa concluída";
+ $("nextExamDate").textContent=next?next[0]+"/2026 • Todas as turmas":"Consulte os próximos avisos";
  const bars=subjects.map(s=>{let total=s.topics.reduce((a,g)=>a+g[1].length,0),done=s.topics.reduce((a,g)=>a+g[1].filter(t=>state.done.includes(s.name+"|"+t)).length,0);return `<div style="margin:12px 0"><div class="between"><b>${s.icon} ${s.name}</b><span class="small muted">${done}/${total}</span></div><div class="progress"><i style="width:${100*done/total}%"></i></div></div>`}).join("");
  $("subjectProgress").innerHTML=bars;
 }
@@ -2169,7 +2169,7 @@ function remindersTick(){
  }
  if(reminderSettings.exams){
   const next=remindersTomorrow();
-  const relevant=[...(portal8Turma==="803"?reminderBaseExams:[]),...reminderOfficialExams].filter(x=>x.date===next&&x.name);
+  const relevant=[...reminderBaseExams,...reminderOfficialExams].filter(x=>x.date===next&&x.name);
   const names=[...new Set(relevant.map(x=>String(x.name).slice(0,80)))];
   if(names.length)remindersDeliver("exam-"+portal8Turma+"-"+next,"📝 Prova amanhã","Confira o cronograma e revise: "+names.join(", ")+".");
  }
@@ -2304,7 +2304,7 @@ function phaseRenderMonth(){
  const tasks=calendarLoad();
  for(let d=1;d<=last;d++){
   const date=[y,String(m+1).padStart(2,"0"),String(d).padStart(2,"0")].join("-");
-  const original=(portal8Turma==="803"?phaseInitialExams:[]).filter(x=>x[0]===date).map(x=>x[1]);
+  const original=phaseInitialExams.filter(x=>x[0]===date).map(x=>x[1]);
   const official=phaseOfficialExams.filter(x=>x.date===date).map(x=>x.name);
   const titles=[...new Set([...original,...official])],local=tasks.filter(x=>x.date===date);
   const cell=document.createElement("div");cell.className="day"+(titles.length?" exam":"")+(local.length?" task":"");
@@ -2416,7 +2416,7 @@ function portal8Choose(turma){
   const m=document.getElementById("libMine");if(m)m.textContent="Conecte-se para ver suas publicações.";
  }
  portal8UpdateLabels();
- if(turma!=="803"){document.getElementById("nextExam").textContent="Consultar avisos";document.getElementById("nextExamDate").textContent="Confira o calendário da turma "+turma;}
+ /* Todas as turmas compartilham as datas das provas; apenas as aulas semanais diferem. */
  if(changed){
   document.getElementById("portalPublicItems").textContent="Carregando avisos da turma "+turma+"…";
   portalPublicRefresh();phaseFetchOfficialExams();
