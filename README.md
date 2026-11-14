@@ -108,6 +108,15 @@ O botão **Permitir notificações** solicita autorização expressa do navegado
 - Os arquivos do recurso são `assets/portal8-perfil.css` e `assets/portal8-perfil.js`. O cache offline foi atualizado, mas cadastro, login e upload de imagem dependem de conexão.
 - Para proteção de menores, fotos e apresentações são **privadas**. Não há busca pública de alunos, chat nem lista de perfis.
 
+### Emblema de administrador e nome de exibição
+
+- O campo **Meu nome no portal** permite escrever nome ou apelido, independentemente do tipo da conta.
+- O nome fica separado do selo **👑 Administrador autorizado**, que só é exibido após consultar `portal803_admins` com a sessão autenticada (RLS).
+- Contas administrativas verificadas recebem, por padrão, o emblema azul/dourado `assets/avatar-administrador.svg` se ainda não tiverem foto própria.
+- O botão **Usar emblema de administrador** aparece somente para contas autorizadas; é possível continuar usando uma foto ou avatar pessoal, protegido pelo bucket privado.
+- O desenho do emblema é público como recurso visual do site; o selo visual **não concede permissões** nem modifica o Modo Proprietário.
+- Versão do cache offline: `portal8-recursos-aprovados-v21`.
+
 ## Publicação
 
 Publicação atual pelo GitHub Pages: https://miguelhenriquecostaaraujo13-cmd.github.io/Missao-803/
