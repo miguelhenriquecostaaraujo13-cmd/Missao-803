@@ -327,7 +327,9 @@ $("n4Pause").addEventListener("click",()=>pause());
 $("n4Classic").addEventListener("click",()=>{if(typeof showView==="function")showView("arcadeNeo")});
 $("n4Hint").addEventListener("click",()=>{
  const q=currentQuestion();
- status(q?"💡 Reflita sobre o tema da questão. "+q.explain:"Inicie uma partida para receber orientações.");
+ const subject=$("n4Subject").value;
+ const hint=/matemát/i.test(subject)?"Procure a operação, teste os valores e confira a unidade.":/português|língua|gramát/i.test(subject)?"Observe o sentido da frase, os conectivos e a função das palavras.":/ciênc/i.test(subject)?"Relacione cada conceito à sua função e elimine alternativas incompatíveis.":"Encontre as palavras-chave e elimine as opções que contradizem o enunciado.";
+ status(q?"💡 "+hint:"Inicie uma partida para receber orientações.");
 });
 $("n4Subject").addEventListener("change",()=>{if(game?.running)pause(true);root.style.setProperty("--n4-accent",pal().edge);draw();status("Matéria alterada. Reinicie a partida para usar as perguntas desta matéria.")});
 document.addEventListener("neo4:config",()=>{root.style.setProperty("--n4-accent",pal().edge);if(!raf)draw();if(game)hud()});
