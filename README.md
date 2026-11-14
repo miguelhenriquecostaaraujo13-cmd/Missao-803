@@ -183,6 +183,18 @@ Os arquivos são `assets/neo-lab.js` e `assets/neo-lab.css`; o cache offline foi
 - O novo CSS `assets/neo-acesso-rapido.css` destaca o recurso sem alterar as 29 áreas, a aparência do Neo, o login, as políticas do banco ou os estudos armazenados.
 - Cache offline atualizado para `portal8-recursos-aprovados-v28`. O ícone pode demorar a mudar em navegadores que mantenham um cache separado para favicons; uma aba nova ou recarregamento completo pode ajudar.
 
+## Versão 29 — Mapas Mentais Neo e Ateliê administrativo
+
+- **Nova aba pública 🧠 Mapas Mentais Neo**, na categoria Aprender: o aluno escolhe matéria, capítulo/assunto específico, acrescenta ramificações próprias e gera um diagrama SVG; pode baixar o mapa e copiar seu esquema textual. O gerador busca assuntos e cartões locais existentes, sem API ou custo, e não inventa explicações onde faltam dados.
+- **Ateliê Neo removido do destaque da página inicial** e do menu público. O botão **🧪 Ateliê Neo** aparece exclusivamente dentro do **Modo Proprietário**, após login autorizado. Existe também um item escondido sob Administração, revelado somente após consulta autenticada à tabela `portal803_admins` no Supabase.
+- **Bloqueio direto de navegação:** a função `showView('neoLab')` recusa a abertura sem autorização confirmada e redireciona para Modo Proprietário, inclusive quando é chamada por um endereço antigo. Mudanças de autenticação removem o acesso quando a sessão é encerrada.
+- **Importante sobre segurança:** GitHub Pages é um serviço estático e seus arquivos JavaScript são publicamente acessíveis; esconder a interface e validar o login **não mantém o código-fonte dos protótipos secreto**. Nenhum dado administrativo secreto foi incluído no Ateliê. Qualquer dado administrativo real continua protegido pelas regras RLS do Supabase.
+- **12 ideias adicionadas como protótipos experimentais:** banco de questões por dificuldade, revisão por matéria com referência a provas, backup local (simulação de sincronização), opções de acessibilidade, exemplos resolvidos do acervo, cartões personalizados locais, apresentação de resumos, trilha de recuperação, temas decorativos, animação do Neo, cartaz imprimível e atalhos favoritos. Não são funcionalidades publicadas aos alunos. A sincronização real na nuvem **não está ativada**.
+- **Novas ideias derivadas do mapa mental:** gerar perguntas a partir de ramificações, comparar mapas, histórico de mapas, ligações entre conceitos e apresentação animada. Estão registradas apenas como sugestões futuras.
+- **Todos os 29 destinos anteriores permanecem no código**; a aba Mapas Mentais Neo é a 30ª. Login, calendário, provas, avatar, nome do Neo, tutoria e seis turmas mantidos.
+- Arquivos: `assets/neo-mapas-mentais.js`, `assets/neo-mapas-mentais.css`, `assets/neo-prototipos-admin.js` e `assets/neo-admin-gate.js`. O cache offline foi renovado para `portal8-recursos-aprovados-v29`.
+- Testes estáticos: 30 rotas verificadas; referências DOM resolvidas; sem IDs duplicados; sintaxe de JavaScript validada. O uso no navegador publicado e um login real de administrador ainda precisam ser conferidos depois do deploy.
+
 ## Publicação
 
 Publicação atual pelo GitHub Pages: https://miguelhenriquecostaaraujo13-cmd.github.io/Missao-803/
