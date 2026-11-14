@@ -1,4 +1,4 @@
-/* Neo Ideias — mapa mental ampliado e cards de revisão, grátis e locais. */
+/* Neo Ideias — mapa mental ampliado e cards públicos de revisão, grátis e locais. */
 (() => {
 "use strict";
 const $=id=>document.getElementById(id);
