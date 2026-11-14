@@ -1,0 +1,40 @@
+/* Neo Ideias v30 — cards, comparações, mapas e laboratório de experimentos */
+.neo-ideas-panel{margin-top:20px;padding:20px;background:var(--white);border:1px solid var(--line);border-radius:20px 9px 20px 9px;box-shadow:0 8px 22px #0a47730d;color:var(--ink)}
+.neo-ideas-panel h3{margin:0 0 8px;color:var(--ink)}
+.neo-ideas-panel p{color:var(--muted);line-height:1.6;font-size:.88rem}
+.neo-ideas-tabs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px}
+.neo-ideas-tool{padding:16px;border:1px solid var(--line);background:var(--portal-panel);border-radius:16px 7px 16px 7px;min-width:0}
+.neo-ideas-tool h4{margin:0 0 7px;font-size:1.02rem}
+.neo-ideas-tool :is(input,select,textarea){display:block;width:100%;min-width:0;margin:8px 0;padding:10px;border-radius:10px;border:1px solid #9ec5d3;color:var(--ink);background:var(--white);font:inherit}
+.neo-ideas-tool :is(button,input,select,textarea):focus-visible{outline:3px solid #edbb6e;outline-offset:2px}
+.neo-ideas-tool .btn{margin:6px 6px 4px 0}
+.neo-idea-flashcard{width:100%;min-height:165px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;text-align:center;border:2px solid #69bad0;border-radius:18px;padding:20px;margin:10px 0;color:#fff;background:linear-gradient(135deg,#104d8a,#118ca4);cursor:pointer;white-space:pre-wrap;overflow-wrap:anywhere;box-shadow:0 10px 20px #0d4b7d18}
+.neo-idea-flashcard small{color:inherit;opacity:.85;font-size:.73rem}
+.neo-idea-flashcard strong{font-size:clamp(.95rem,1.7vw,1.2rem);line-height:1.45}
+.neo-card-menta{color:#18475a!important;background:linear-gradient(120deg,#b3edf0,#eaffeb)!important;border-color:#4d9d98!important}
+.neo-card-dourado{color:#6c420b!important;background:linear-gradient(120deg,#ffe3a1,#fff8d9)!important;border-color:#c89943!important}
+.neo-card-caderno{color:#163957!important;background:repeating-linear-gradient(180deg,#fcfdff,#fcfdff 28px,#dce9f3 29px,#fcfdff 30px)!important;border-color:#8baac1!important}
+.neo-ideas-output{padding:12px;border-radius:12px;background:var(--white);border:1px dashed var(--line);min-height:70px;white-space:pre-wrap;overflow-wrap:anywhere}
+.neo-idea-saved{display:flex;gap:5px;flex-wrap:wrap;margin:6px 0}
+.neo-idea-saved button:first-child{flex:1;text-align:left}
+.neo-idea-comparison{background:var(--white);border:1px solid var(--line);padding:12px;border-radius:12px;flex:1;min-width:145px}
+.neo-idea-comparison strong{font-size:1rem}
+#neoIdeasCompareOutput{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}
+#neoIdeasRelations{display:flex;gap:10px;align-items:center;justify-content:center;flex-wrap:wrap;min-height:72px}
+.neo-rel-node{border:2px solid #55a9ba;background:#e1f5f7;border-radius:12px;padding:10px 14px;color:#14526a;font-weight:800}
+.neo-rel-arrow{color:var(--muted);font-weight:750}
+#neoIdeasSlides{background:linear-gradient(115deg,#154b81,#118fa1);color:#fff;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;gap:10px;min-height:130px;border-radius:14px;padding:12px}
+#neoIdeasSlides strong{font-size:1.24rem}
+#neoIdeasSlides p,#neoIdeasSlides small{color:#eef9ff}
+.neo-idea-check{display:flex;gap:9px;align-items:center;margin:6px 0;line-height:1.4}
+.neo-idea-check input{width:18px;accent-color:#157d9b}
+.neo-studio-columns{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px}
+.neo-studio-column{padding:9px;border:1px solid var(--line);border-radius:12px;background:var(--white);min-width:0}
+.neo-studio-item{display:flex;gap:5px;align-items:center;flex-wrap:wrap;margin:6px 0!important;overflow-wrap:anywhere}
+.neo-studio-item .btn{font-size:.7rem;padding:5px}
+.neo-studio-bingo{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;margin:12px 0}
+.neo-studio-bingo .btn{margin:0;min-height:70px;white-space:normal;font-size:.77rem;line-height:1.3}
+.neo-studio-bingo .neo-selected{background:#d7f6eb!important;color:#145744!important}
+@media(max-width:800px){.neo-ideas-tabs{grid-template-columns:1fr}.neo-ideas-panel{padding:14px}.neo-studio-columns{grid-template-columns:1fr}}
+@media(max-width:430px){.neo-studio-bingo{grid-template-columns:repeat(2,1fr)}}
+@media(prefers-reduced-motion:reduce){.neo-idea-flashcard{transition:none!important}}
