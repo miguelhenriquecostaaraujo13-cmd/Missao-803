@@ -390,7 +390,7 @@ html[data-portal-theme="noite"] .portal8-class-buttons button[aria-pressed="true
 .portal8-toolbar select{border:0;border-radius:9px;padding:9px 12px;background:#fff;color:#093a64;font-weight:850;min-width:130px}
 #portal8ChallengeList{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px;margin-top:15px}
 #portal8ChallengeList .mission{margin:0}
-html[data-portal8-other="true"] #portal803Schedule,html[data-portal8-other="true"] #portal8OriginalExamStrip,html[data-portal8-other="true"] #portal8LegacyCalendar{display:none!important}
+html[data-portal8-other="true"] .portal8-803-only{display:none!important}
 @media(max-width:790px){.portal8-welcome-top{grid-template-columns:1fr}.portal8-cartoon{max-width:600px;justify-self:center}.portal8-class-columns{grid-template-columns:1fr}.school-logo-mark{width:142px;height:55px}}
 @media(max-width:450px){.portal8-welcome{padding:13px}.portal8-class-buttons{grid-template-columns:repeat(4,minmax(0,1fr))}.school-logo-mark{width:110px;height:46px}.portal8-toolbar{width:100%}}
 @media(prefers-reduced-motion:reduce){.portal8-class-buttons button{transition:none!important}.portal8-class-buttons button:hover{transform:none!important}}
@@ -555,6 +555,33 @@ html[data-phase-motion="reduce"] .view.active.portal8-fallback-enter{animation:n
 .portal8-pro-icon svg{display:block;width:29px;height:29px;color:#096ca5}
 html[data-portal-theme="noite"] .portal8-pro-icon{background:#d5f0ff}
 @media(max-width:520px){.portal8-pro-icon svg{width:24px;height:24px}}
+
+/* Grade de aulas acessível e específica da turma 803. */
+.portal8-school-schedule{margin:14px 0 19px;padding:20px;overflow:hidden}
+.portal8-school-schedule-head{display:flex;justify-content:space-between;gap:12px;align-items:start;flex-wrap:wrap}
+.portal8-school-schedule-head h3{margin:4px 0 8px;font-size:clamp(1.08rem,2.3vw,1.5rem);color:var(--ink)}
+.portal8-schedule-kicker{font-size:.73rem;font-weight:900;letter-spacing:.1em;color:var(--teal)}
+.portal8-schedule-class{border-radius:999px;background:#d5edff;border:1px solid #8fc8ef;color:#074a79;padding:8px 13px;font-size:.85rem;font-weight:900;white-space:nowrap}
+.portal8-school-table-scroll{width:100%;overflow:auto;margin:15px 0 12px;border:1px solid var(--line);border-radius:14px}
+.portal8-school-table{border-collapse:separate;border-spacing:0;width:100%;min-width:810px;font-size:.86rem;color:var(--ink)}
+.portal8-school-table caption{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}
+.portal8-school-table th,.portal8-school-table td{padding:13px 10px;text-align:left;vertical-align:top;border-bottom:1px solid var(--line);border-right:1px solid var(--line);min-width:135px;line-height:1.35}
+.portal8-school-table th:last-child,.portal8-school-table td:last-child{border-right:0}
+.portal8-school-table tbody tr:last-child th,.portal8-school-table tbody tr:last-child td{border-bottom:0}
+.portal8-school-table thead th{background:#075f9d;color:#fff;font-weight:850;white-space:nowrap}
+.portal8-school-table thead th:first-child{min-width:92px;position:sticky;left:0;z-index:2;background:#064e82}
+.portal8-school-table tbody th{position:sticky;left:0;z-index:1;min-width:92px;font-variant-numeric:tabular-nums;font-weight:850;background:var(--portal-panel)}
+.portal8-school-table tbody tr:nth-child(even) td{background:var(--portal-panel)}
+.portal8-school-table td b{display:block;color:var(--ink);font-size:.85rem}
+.portal8-school-table td small{display:block;color:var(--muted);font-size:.78rem;font-weight:650;margin-top:3px}
+.portal8-schedule-mobile-tip{margin:5px 0 0}
+.portal8-exam-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(155px,1fr));gap:10px;margin:12px 0}
+.portal8-exam-grid>div{display:flex;flex-direction:column;gap:5px;padding:13px;border-radius:12px;background:var(--portal-panel);color:var(--ink);border:1px solid var(--line)}
+.portal8-exam-grid b{color:var(--teal)}
+.portal8-exam-grid span{font-size:.88rem}
+@media(min-width:1000px){.portal8-schedule-mobile-tip{display:none}}
+@media(max-width:560px){.portal8-school-schedule{padding:14px}.portal8-school-table th,.portal8-school-table td{padding:10px 9px}.portal8-school-table{font-size:.81rem}.portal8-school-table td b{font-size:.8rem}}
+html[data-portal-theme="noite"] .portal8-schedule-class{background:#153d5d;color:#d9f7ff;border-color:#47799f}
 </style>
  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.105.0"></script>
 </head>
@@ -580,7 +607,7 @@ html[data-portal-theme="noite"] .portal8-pro-icon{background:#d5f0ff}
   <div class="topline school-identity"><span class="school-mark school-logo-mark"><img src="./assets/missao-paz-logo-portal.svg" alt="Marca ilustrada Missão Paz" width="190" height="66"></span><span class="school-identity-text"><strong>INSTITUTO EDUCACIONAL MISSÃO PAZ</strong><small>Central de Estudos • 8º Ano • Manhã e tarde</small></span></div>
   <h1>Portal <span class="school-hero-number">8º Ano</span><br><span class="school-hero-slogan">Aprenda. Evolua. Conquiste.</span></h1><div class="portal8-toolbar"><label for="portal8TopTurma">Minha turma</label><select id="portal8TopTurma" onchange="portal8Choose(this.value)"><option value="801">801 • manhã</option><option value="802">802 • manhã</option><option value="803">803 • manhã</option><option value="804">804 • manhã</option><option value="806">806 • tarde</option><option value="807">807 • tarde</option></select></div><div class="portal-hero-actions"><button type="button" class="portal-hero-primary" onclick="showView('trilha')">📚 Começar a estudar <span aria-hidden="true">↗</span></button><button type="button" class="portal-hero-secondary" onclick="showView('quiz')">🧠 Fazer simulado</button></div>
   <p>Um espaço de estudos feito para nossa turma, inspirado nas cores e nos elementos geométricos da escola.</p>
-  <div class="exam-strip" id="portal8OriginalExamStrip">
+  <div class="exam-strip" id="portal8OriginalExamStrip" aria-label="Datas de prova comuns às seis turmas">
     <span class="exam-pill">16/11 · Matemática</span><span class="exam-pill">17/11 · Português</span>
     <span class="exam-pill">18/11 · Geografia + Ed. Física teórica</span><span class="exam-pill">19/11 · História + Inglês</span><span class="exam-pill">23/11 · Ciências + Arte</span>
   </div>
@@ -607,7 +634,7 @@ html[data-portal-theme="noite"] .portal8-pro-icon{background:#d5f0ff}
   <div class="portal8-welcome-copy"><span class="portal-premium-kicker">🏫 INSTITUTO EDUCACIONAL MISSÃO PAZ</span><h2>Seis turmas. Um só lugar para aprender.</h2>
    <p>O espaço de estudo do 8º ano. Escolha sua turma para consultar provas, avisos e projetos sem misturar as informações de outras salas.</p>
    <div class="portal8-selected">Turma selecionada: <strong id="portal8CurrentClass">803 • Manhã</strong> <span class="small muted">Você pode trocar quando quiser.</span></div>
-   <div class="portal8-study-actions"><button class="btn orange" type="button" onclick="showView('trilha')">📚 Começar a estudar</button></div>
+   <div class="portal8-study-actions"><button class="btn orange" type="button" onclick="showView('trilha')">📚 Começar a estudar</button><button class="btn light portal8-803-only" type="button" onclick="showView('calendario')">⏰ Ver horário da 803</button></div>
   </div><div class="portal8-art-frame" id="portal8ArtFrame">
     <img class="portal8-cartoon portal8-poster" src="./assets/estudantes-cartoon-aprovado.png?rev=portal8-visual-v12" width="1672" height="941" alt="Ilustração cartoon aprovada do Portal 8º Ano Missão Paz, com estudantes usando uniformes azuis e brancos e estudando juntos" loading="eager" decoding="async" fetchpriority="high">
     <span class="portal8-art-chip portal8-chip-a" aria-hidden="true">📚</span>
@@ -679,7 +706,7 @@ html[data-portal-theme="noite"] .portal8-pro-icon{background:#d5f0ff}
     <div class="card span-3"><div class="muted small">Questões respondidas</div><div class="metric" id="answeredMetric">0</div><div class="small muted">Pratique e confira as explicações.</div></div>
     <div class="card span-3"><div class="muted small">Acertos</div><div class="metric" id="correctMetric">0</div><div class="small muted">Cada erro é uma pista do que revisar.</div></div>
     <div class="card span-3"><div class="muted small">Próxima etapa</div><div class="metric" style="font-size:1.2rem" id="nextExam">Matemática</div><div class="small muted" id="nextExamDate">16 de novembro</div></div>
-    <div class="card span-7" id="portal803Schedule"><h3>Cronograma inicial da 803 — confira atualizações nos avisos</h3><table><thead><tr><th>Data</th><th>Avaliações</th><th>Preparação sugerida</th></tr></thead><tbody>
+    <div class="card span-7" id="portal803Schedule"><h3>Calendário comum de provas do 8º ano — 3ª etapa</h3><table><thead><tr><th>Data</th><th>Avaliações</th><th>Preparação sugerida</th></tr></thead><tbody>
       <tr><td><b>16/11</b></td><td>Matemática</td><td>Estatística, gráficos, acréscimos, descontos e inflação.</td></tr>
       <tr><td><b>17/11</b></td><td>Língua Portuguesa</td><td>Gêneros, argumentação, coesão, regência e crase.</td></tr>
       <tr><td><b>18/11</b></td><td>Geografia + Educação Física (teórica)</td><td>América/África, regiões polares, saúde e atletismo.</td></tr>
@@ -906,7 +933,30 @@ html[data-portal-theme="noite"] .portal8-pro-icon{background:#d5f0ff}
 <div class="card" style="margin-top:14px"><h3>📅 Calendário visual</h3><div class="row"><button type="button" class="btn light" onclick="phaseMonth(-1)">← Mês anterior</button><b id="phaseMonthLabel"></b><button type="button" class="btn light" onclick="phaseMonth(1)">Próximo mês →</button></div><div id="phaseMonthCalendar" class="phase-calendar"></div><div id="phaseMonthLegend" class="small muted" style="margin-top:10px"></div><p class="small muted">Mostra suas tarefas locais e as datas oficiais publicadas. O cronograma inicial de novembro de 2026 é indicativo: confirme sempre com a escola.</p></div>
 </section>
 <section id="arena" class="view"><h2>🎮 Arena 803 — Desafio do conhecimento</h2><p class="sub">Jogue para aprender, sem ranking entre colegas. As perguntas são selecionadas dos simulados existentes.</p><div class="grid"><div class="card span-7"><h3 id="arenaTitle">Prepare-se para o desafio</h3><p id="arenaQuestion">Escolha uma matéria e comece uma rodada de cinco perguntas.</p><div id="arenaOptions" class="mission"></div><div class="row"><button class="btn orange" onclick="startArena()">▶ Nova rodada</button><button class="btn light" onclick="showView('quiz')">Abrir simulados</button></div><p class="small muted" id="arenaFeedback" role="status"></p></div><div class="card span-5"><h3>Minha rodada</h3><div class="metric" id="arenaScore">0 / 5</div><p class="small muted" id="arenaProgress">Nenhuma rodada iniciada.</p><label for="arenaSubject"><b>Matéria</b></label><select id="arenaSubject" class="study-field"><option value="Todas">Todas</option></select><p class="small muted">Sem competição pública, notas individuais ou pressão. O objetivo é praticar.</p></div></div></section>
-<section id="calendario" class="view"><h2>📅 Calendário de estudos</h2><p class="sub">Organize suas tarefas e acompanhe as provas. Datas do roteiro original de novembro de 2026: confirme com o professor caso o calendário mude.</p><div class="grid"><div class="card span-6"><h3>Meu compromisso</h3><label for="calendarDate">Data</label><input id="calendarDate" class="study-field" type="date"><label for="calendarTask">O que vou estudar?</label><input id="calendarTask" class="study-field" maxlength="140" placeholder="Ex.: revisar porcentagem"><button class="btn orange" onclick="addCalendarTask()">Adicionar lembrete</button><p class="small muted">As tarefas ficam neste navegador. Para receber lembretes de estudo e provas, configure a aba 🔔 Lembretes.</p></div><div class="card span-6"><h3>Próximas tarefas</h3><div id="calendarItems"></div></div><div class="card span-12"><p><button class="btn orange" type="button" onclick="showView('evolucao803')">📅 Abrir calendário visual e gráficos</button></p></div><div class="card span-12" id="portal8LegacyCalendar"><h3>Semana de provas da Turma 803</h3><p>📚 Período previsto no roteiro: <b>16 a 23 de novembro de 2026</b>. Consulte o cronograma oficial da turma para saber qual prova acontece em cada dia.</p><p class="small muted" id="calendarCountdown"></p></div></div></section>
+<section id="calendario" class="view"><h2>📅 Calendário e horários</h2><p class="sub">Veja o calendário comum de provas do 8º ano, organize suas tarefas e, na 803, consulte também os horários de cada aula.</p><section class="portal8-school-schedule portal8-803-only card" id="portal8Aulas803" aria-labelledby="portal8Aulas803Titulo">
+ <div class="portal8-school-schedule-head">
+  <div><span class="portal8-schedule-kicker">⏰ ROTINA ESCOLAR • MANHÃ</span><h3 id="portal8Aulas803Titulo">Horário semanal de aulas — Turma 803</h3>
+  <p class="small muted">Segunda a sexta-feira, conforme o quadro de horários da sala. Professor de Matemática atualizado para <b>Anderson</b>.</p></div>
+  <span class="portal8-schedule-class">803 · Manhã</span>
+ </div>
+ <p class="small muted portal8-schedule-mobile-tip">No celular, deslize a tabela para o lado para ver todos os dias.</p>
+ <div class="portal8-school-table-scroll" role="region" tabindex="0" aria-label="Tabela de aulas da turma 803, da segunda à sexta-feira">
+  <table class="portal8-school-table"><caption>Horário de aulas da 803, com matéria e professor em cada período</caption>
+   <thead><tr><th scope="col">Horário</th><th scope="col">Segunda</th><th scope="col">Terça</th><th scope="col">Quarta</th><th scope="col">Quinta</th><th scope="col">Sexta</th></tr></thead>
+   <tbody>
+   <tr><th scope="row">07h00</th><td><b>Arte</b><small>Rejiane</small></td><td><b>Língua Portuguesa</b><small>Gabriela</small></td><td><b>Língua Portuguesa</b><small>Gabriela</small></td><td><b>História</b><small>Danilo</small></td><td><b>Educação Física (prática)</b><small>Graziele Pardinho</small></td></tr>
+   <tr><th scope="row">07h50</th><td><b>Língua Portuguesa</b><small>Gabriela</small></td><td><b>Ciências</b><small>Richard</small></td><td><b>Matemática</b><small>Anderson</small></td><td><b>Língua Portuguesa</b><small>Gabriela</small></td><td><b>História</b><small>Danilo</small></td></tr>
+   <tr><th scope="row">08h40</th><td><b>Ciências</b><small>Richard</small></td><td><b>Educação Física (prática)</b><small>Graziele Pardinho</small></td><td><b>Inglês (A)</b><small>Maria Luiza</small></td><td><b>Matemática</b><small>Anderson</small></td><td><b>Geografia</b><small>Priscila Alves</small></td></tr>
+   <tr><th scope="row">09h50</th><td><b>Ciências</b><small>Richard</small></td><td><b>Matemática</b><small>Anderson</small></td><td><b>Inglês (A)</b><small>Maria Luiza</small></td><td><b>Matemática</b><small>Anderson</small></td><td><b>Geografia</b><small>Priscila Alves</small></td></tr>
+   <tr><th scope="row">10h40</th><td><b>História</b><small>Danilo</small></td><td><b>Matemática</b><small>Anderson</small></td><td><b>Jump</b><small>Wanderson</small></td><td><b>Língua Portuguesa</b><small>Gabriela</small></td><td><b>Língua Portuguesa</b><small>Gabriela</small></td></tr>
+   </tbody>
+  </table>
+ </div>
+ <p class="small muted">O quadro enviado não indica aulas às 11h30. Assim que você trouxer o horário das outras turmas, cada uma poderá receber sua própria tabela.</p>
+</section><div class="grid"><div class="card span-6"><h3>Meu compromisso</h3><label for="calendarDate">Data</label><input id="calendarDate" class="study-field" type="date"><label for="calendarTask">O que vou estudar?</label><input id="calendarTask" class="study-field" maxlength="140" placeholder="Ex.: revisar porcentagem"><button class="btn orange" onclick="addCalendarTask()">Adicionar lembrete</button><p class="small muted">As tarefas ficam neste navegador. Para receber lembretes de estudo e provas, configure a aba 🔔 Lembretes.</p></div><div class="card span-6"><h3>Próximas tarefas</h3><div id="calendarItems"></div></div><div class="card span-12"><p><button class="btn orange" type="button" onclick="showView('evolucao803')">📅 Abrir calendário visual e gráficos</button></p></div><div class="card span-12" id="portal8LegacyCalendar"><h3>📝 Calendário de provas — todas as turmas do 8º ano</h3>
+ <p class="small muted">Datas da 3ª etapa informadas para as turmas 801, 802, 803, 804, 806 e 807. Confirme alterações com os professores.</p>
+ <div class="portal8-exam-grid"><div><b>16/11/2026</b><span>Matemática</span></div><div><b>17/11/2026</b><span>Língua Portuguesa</span></div><div><b>18/11/2026</b><span>Geografia e Educação Física teórica</span></div><div><b>19/11/2026</b><span>História e Inglês</span></div><div><b>23/11/2026</b><span>Ciências e Arte</span></div></div>
+ <p class="small muted" id="calendarCountdown"></p></div></div></section>
 <section id="lembretes" class="view">
 <h2>🔔 Central de lembretes</h2><p class="sub">Estude no seu ritmo: escolha quais lembretes quer receber. Nada é ativado sem sua escolha.</p>
 <div class="callout" style="margin-bottom:15px"><b>Como funciona:</b> lembretes dentro do site quando você o abre e alertas do sistema enquanto a página está aberta (mesmo em outra aba, quando o navegador permitir). <b>Com o site totalmente fechado, não há envio push automático nesta versão.</b> As preferências e o histórico ficam no seu navegador.</div>
