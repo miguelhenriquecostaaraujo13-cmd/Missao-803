@@ -1,0 +1,36 @@
+/* Identidade de conta: dados pessoais visíveis somente ao dono autenticado. */
+.p8-profile-shortcut{display:flex;align-items:center;gap:8px;border:1px solid #91d6fa;background:#fff;color:#124872;border-radius:999px;padding:5px 12px 5px 5px;cursor:pointer;font:inherit;font-weight:800;font-size:.85rem;max-width:210px;min-height:41px;box-shadow:0 4px 12px rgba(0,51,96,.13)}
+.p8-profile-shortcut .p8-account-head{display:grid;place-items:center;width:30px;height:30px;flex:0 0 30px;overflow:hidden;border-radius:50%;background:#d6eefa;color:#125483}
+.p8-profile-shortcut img{width:100%;height:100%;border-radius:50%;object-fit:cover}
+.p8-profile-shortcut span:last-child{display:block;text-overflow:ellipsis;white-space:nowrap;overflow:hidden}
+.p8-profile-shortcut:focus-visible{outline:3px solid #ffb450;outline-offset:3px}
+.p8-profile-lead{display:flex;align-items:center;gap:17px;flex-wrap:wrap;padding:20px 22px;border:1px solid #b8ddeb;border-radius:22px;background:linear-gradient(120deg,#e8f7ff,#fff9ef)}
+.p8-profile-lead .p8-profile-picture{width:104px;height:104px;display:grid;place-items:center;border-radius:50%;background:linear-gradient(135deg,#068bc7,#194c8f);color:white;font-size:2.7rem;font-weight:900;border:4px solid white;box-shadow:0 4px 22px #12487d33;overflow:hidden;flex:0 0 104px}
+.p8-profile-picture img{width:100%;height:100%;object-fit:cover}
+.p8-profile-lead-text{flex:1;min-width:150px}
+.p8-profile-lead-text strong{display:block;font-size:1.25rem;color:#123e60;overflow-wrap:anywhere}
+.p8-profile-lead-text p{margin:4px 0 0;color:#416780}
+.p8-profile-role{display:inline-flex;gap:6px;align-items:center;font-weight:800;font-size:.78rem;color:#115e92;border:1px solid #b6ddea;border-radius:99px;background:#effaff;padding:5px 9px}
+.p8-profile-layout{display:grid;grid-template-columns:minmax(250px,1fr) minmax(300px,1.4fr);gap:16px;margin-top:18px}
+.p8-profile-panel{background:var(--portal-panel,#fff);border:1px solid var(--line,#dce5ec);border-radius:18px;padding:20px;min-width:0}
+.p8-profile-panel h3{margin:0 0 10px}
+.p8-profile-panel label{display:block;font-weight:800;margin:13px 0 5px}
+.p8-profile-panel input:not([type=file]),.p8-profile-panel textarea,.p8-profile-panel select{width:100%;padding:12px;border:1px solid #a4c5d8;border-radius:12px;background:var(--portal-panel,#fff);color:var(--ink,#17324a);font:inherit}
+.p8-profile-panel input[type=file]{width:100%;font:inherit;max-width:100%}
+.p8-profile-panel textarea{min-height:82px;resize:vertical}
+.p8-profile-panel .p8-profile-action{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
+.p8-profile-panel .p8-profile-action button{border-radius:13px}
+.p8-profile-panel input:focus-visible,.p8-profile-panel textarea:focus-visible,.p8-profile-panel select:focus-visible{outline:3px solid #84c5f5;outline-offset:1px}
+.p8-profile-panel small{display:block;color:var(--muted,#637487);margin-top:7px}
+.p8-profile-status{min-height:1.6em;margin-top:12px;color:var(--muted,#637487);font-size:.88rem;overflow-wrap:anywhere}
+.p8-profile-info{border-radius:13px;padding:13px;background:#e9f5fc;color:#164a73;font-size:.86rem;line-height:1.6}
+.p8-profile-info strong{font-size:.96rem}
+.p8-profile-fieldcount{text-align:right;color:var(--muted,#637487);font-size:.75rem;font-weight:700}
+#portal8Profile [hidden],.p8-profile-shortcut [hidden]{display:none!important}
+html[data-portal-theme="noite"] .p8-profile-lead{background:#183d60;border-color:#397b9c}
+html[data-portal-theme="noite"] .p8-profile-lead-text strong{color:#effaff}
+html[data-portal-theme="noite"] .p8-profile-lead-text p{color:#bbd6e9}
+html[data-portal-theme="noite"] .p8-profile-panel{background:#143b59}
+html[data-portal-theme="noite"] .p8-profile-info{background:#1a4569;color:#e3f5ff}
+@media(max-width:760px){.p8-profile-layout{grid-template-columns:1fr}.p8-profile-lead{padding:16px}.p8-profile-shortcut{font-size:.75rem;max-width:170px}}
+@media(max-width:410px){.p8-profile-shortcut{padding-right:7px;max-width:138px}.p8-profile-lead .p8-profile-picture{width:80px;height:80px;flex-basis:80px;font-size:2rem}}
