@@ -117,6 +117,16 @@ O botão **Permitir notificações** solicita autorização expressa do navegado
 - O desenho do emblema é público como recurso visual do site; o selo visual **não concede permissões** nem modifica o Modo Proprietário.
 - Versão do cache offline: `portal8-recursos-aprovados-v21`.
 
+## Novidades automáticas e nome do mascote
+
+- **Entrada do mascote corrigida:** a função `showView` chama `window.portal8MascotNavigate` diretamente depois de exibir cada ferramenta. O livro aparece com movimento curto no centro e depois permanece no canto com seu balão.
+- **Teste da animação:** na área Acessibilidade há um botão **▶ Testar animação do mascote**. O comportamento respeita a preferência de redução de movimento do sistema e a configuração de transições do portal.
+- **Renomear para toda a escola:** um administrador aprovado acessa **Modo Proprietário → Renomear o mascote do portal** e escolhe um nome com 2–24 caracteres. A configuração fica na tabela `public.portal8_site_settings`; RLS só permite a edição pela conta presente em `public.portal803_admins`. Até que seja alterado, o nome continua `Pazinho`.
+- **Mural de novidades:** `assets/portal8-updates.json` mostra mudanças importantes do **site** no quadro **Avisos e provas** e no carrossel da página inicial, claramente separadas dos comunicados oficiais no Supabase.
+- **Registro automático:** o workflow `.github/workflows/publicar-atualizacoes.yml` publica no JSON quando a alteração enviada ao GitHub na branch `main` tem `[importante]` na mensagem do commit. Ele usa apenas o `GITHUB_TOKEN` do repositório, sem chaves do Supabase. Modificações pequenas sem essa marcação não são anunciadas.
+- Esta regra não consegue avaliar sozinha o significado de toda mudança; **é quem publica que marca as versões relevantes**. A publicação na web depende da conclusão do GitHub Pages.
+- Nenhum aviso é inserido automaticamente na tabela de comunicados oficiais da escola, e a alteração do nome do mascote não muda permissões dos alunos.
+
 ## Publicação
 
 Publicação atual pelo GitHub Pages: https://miguelhenriquecostaaraujo13-cmd.github.io/Missao-803/
