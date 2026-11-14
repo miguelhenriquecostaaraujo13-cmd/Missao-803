@@ -138,6 +138,15 @@ O botão **Permitir notificações** solicita autorização expressa do navegado
 - Arquivos dedicados: `assets/portal8-horizonte.css` e `assets/portal8-horizonte.js`. Cache offline atualizado para `portal8-recursos-aprovados-v23`; o novo painel funciona com dados locais e não exige login.
 - Testado por verificação estática das 28 rotas, IDs únicos, existência de todos os indicadores, sintaxe dos scripts e referências dos novos arquivos. A validação visual no navegador deve ser feita após GitHub Pages concluir o deploy.
 
+## Menu harmonizado e calendário escolar restante de 2026 (versão 25)
+
+- A correção de paleta passou a ser aplicada **depois dos estilos anteriores, em todos os temas (Aurora, Noite e Papel)**, com azul-marinho, azul médio, turquesa suave e seleção azul-claro. A alteração é estritamente visual; os 28 destinos de navegação permanecem inalterados.
+- A foto enviada pelo usuário mostra o **Calendário 2026 do Instituto Educacional Missão Paz**, incluindo legenda de feriados, sábado letivo, término do ano letivo, planejamento e recesso.
+- Apenas marcações **a partir de segunda-feira, 16/11/2026**, foram transcritas para `assets/calendario-escolar-2026-restante.json`.
+- Eventos incluídos: **20/11** feriado (Consciência Negra); **28/11** sábado letivo; **07/12** recesso; **08/12** feriado (Aniversário de Belo Horizonte); **14/12** fim da 3ª etapa; **15/12** término do ano letivo; **16–18/12** e **21–23/12** planejamento; **25/12** Natal; **28–31/12** recesso.
+- Esses eventos aparecem na página inicial e na seção **Calendário e horários**, com cópia de segurança no script `assets/portal8-calendario-final2026.js` para uso offline. As provas existentes e os horários da 803 não foram removidos ou modificados.
+- Os registros são baseados na folha impressa fotografada; eventuais alterações devem ser confirmadas com a secretaria. Nada foi incluído retroativamente antes de 16/11.
+
 ## Publicação
 
 Publicação atual pelo GitHub Pages: https://miguelhenriquecostaaraujo13-cmd.github.io/Missao-803/
