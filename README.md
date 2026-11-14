@@ -235,6 +235,15 @@ Os arquivos são `assets/neo-lab.js` e `assets/neo-lab.css`; o cache offline foi
 - Arquivos novos: `assets/neo-study-brain.js`, `assets/neo-game-brain.js`, `assets/neo-inteligencia.css`, `assets/neo-inovacoes-v33.js`. `assets/neo-arcade.js` recebeu os pontos de integração. Cache offline: `portal8-recursos-aprovados-v33`.
 - Todas as **31 ferramentas** anteriores, o login Supabase, o mascote Neo, os mapas mentais e dados de aulas foram preservados. Testes estáticos e simulação dos flashcards e da lógica adaptativa foram realizados; a verificação visual em dispositivos reais requer validação após a publicação.
 
+## Versão 34 — Ateliê separado e upgrade das 31 ferramentas
+
+- **Separação do Ateliê:** a bancada de experiências com mapas mentais e cards avançados (`neoIdeasPanel`) foi movida para dentro de `neoLab`, que já é protegido na interface por autenticação administrativa do Supabase. A aba pública **Mapas Mentais Neo** agora mantém o gerador de mapas, sem o laboratório experimental. Os flashcards escolares aprovados continuam públicos em **Aprender → Memorização**. Ferramentas experimentais não foram apagadas.
+- **Upgrade transversal de interface:** todas as 31 áreas receberam barra de ações contextual, busca rápida de ferramentas, favoritos locais, atalho de retorno ao painel e cópia de link direto. Use **Ctrl+K** ou **⌘+K** para encontrar ferramentas pelo nome ou categoria.
+- A busca e os links só oferecem ferramentas que podem ser abertas no menu: o Ateliê exige permissão administrativa verificada e não é liberado pela nova busca. Os links de áreas públicas usam `?ferramenta=<id>`; a checagem de `neoLab` segue exclusiva do Modo Proprietário.
+- **Acessibilidade e layout geral:** foco visível com teclado, alvos maiores de toque, tratamento de textos longos, campos responsivos e suporte a preferências de movimento reduzido. Não foram modificados os registros escolares, as 31 rotas, o login Supabase ou as fórmulas das ferramentas.
+- Novos arquivos `assets/portal-ux-v34.css` e `assets/portal-ux-v34.js`. Cache offline alterado para `portal8-recursos-aprovados-v34`.
+- Validação estática: 31 ferramentas presentes, identificadores HTML exclusivos, scripts com sintaxe correta e bancada experimental confirmada fora da área pública de mapas. A usabilidade e o visual precisam de teste real no navegador depois da publicação.
+
 ## Publicação
 
 Publicação atual pelo GitHub Pages: https://miguelhenriquecostaaraujo13-cmd.github.io/Missao-803/
