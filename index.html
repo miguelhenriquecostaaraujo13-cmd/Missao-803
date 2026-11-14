@@ -389,7 +389,7 @@ html[data-portal-theme="noite"] .portal8-class-buttons button[aria-pressed="true
 .portal8-toolbar select{border:0;border-radius:9px;padding:9px 12px;background:#fff;color:#093a64;font-weight:850;min-width:130px}
 #portal8ChallengeList{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px;margin-top:15px}
 #portal8ChallengeList .mission{margin:0}
-html[data-portal8-other="true"] #portal803Schedule,html[data-portal8-other="true"] #portal8OriginalExamStrip{display:none!important}
+html[data-portal8-other="true"] #portal803Schedule,html[data-portal8-other="true"] #portal8OriginalExamStrip,html[data-portal8-other="true"] #portal8LegacyCalendar{display:none!important}
 @media(max-width:790px){.portal8-welcome-top{grid-template-columns:1fr}.portal8-cartoon{max-width:600px;justify-self:center}.portal8-class-columns{grid-template-columns:1fr}.school-logo-mark{width:142px;height:55px}}
 @media(max-width:450px){.portal8-welcome{padding:13px}.portal8-class-buttons{grid-template-columns:repeat(4,minmax(0,1fr))}.school-logo-mark{width:110px;height:46px}.portal8-toolbar{width:100%}}
 @media(prefers-reduced-motion:reduce){.portal8-class-buttons button{transition:none!important}.portal8-class-buttons button:hover{transform:none!important}}
@@ -472,7 +472,7 @@ html[data-portal8-other="true"] #portal803Schedule,html[data-portal8-other="true
 </section>
 
 <section id="trilha" class="view">
-  <h2>Minha trilha de aprendizagem</h2><p class="sub">Marque cada tópico ao terminar. Use o campo de filtro para encontrar uma matéria rapidamente.</p>
+  <h2>Minha trilha de aprendizagem</h2><p class="sub">Marque cada tópico ao terminar. Use o campo de filtro para encontrar uma matéria rapidamente.</p><p class="callout small" id="portal8TopicNote">O roteiro inicial foi elaborado com base nos estudos da 803. Para outras turmas, confira com seu professor quais capítulos serão cobrados.</p>
   <div class="row" style="margin-bottom:14px"><select id="subjectFilter" aria-label="Filtrar por matéria"><option value="Todas">Todas as matérias</option></select><button class="btn light" onclick="exportProgress()">⬇ Exportar meu progresso</button><label class="btn light" style="cursor:pointer">⬆ Importar progresso<input type="file" id="importFile" accept="application/json" hidden></label></div>
   <div id="topicArea"></div>
   <div class="callout small" style="margin-top:14px">O arquivo exportado permite levar seu progresso para outro dispositivo. Cada aluno mantém seu próprio registro; esta página não cria um placar compartilhado da turma.</div>
@@ -683,7 +683,7 @@ html[data-portal8-other="true"] #portal803Schedule,html[data-portal8-other="true
 <div class="card" style="margin-top:14px"><h3>📅 Calendário visual</h3><div class="row"><button type="button" class="btn light" onclick="phaseMonth(-1)">← Mês anterior</button><b id="phaseMonthLabel"></b><button type="button" class="btn light" onclick="phaseMonth(1)">Próximo mês →</button></div><div id="phaseMonthCalendar" class="phase-calendar"></div><div id="phaseMonthLegend" class="small muted" style="margin-top:10px"></div><p class="small muted">Mostra suas tarefas locais e as datas oficiais publicadas. O cronograma inicial de novembro de 2026 é indicativo: confirme sempre com a escola.</p></div>
 </section>
 <section id="arena" class="view"><h2>🎮 Arena 803 — Desafio do conhecimento</h2><p class="sub">Jogue para aprender, sem ranking entre colegas. As perguntas são selecionadas dos simulados existentes.</p><div class="grid"><div class="card span-7"><h3 id="arenaTitle">Prepare-se para o desafio</h3><p id="arenaQuestion">Escolha uma matéria e comece uma rodada de cinco perguntas.</p><div id="arenaOptions" class="mission"></div><div class="row"><button class="btn orange" onclick="startArena()">▶ Nova rodada</button><button class="btn light" onclick="showView('quiz')">Abrir simulados</button></div><p class="small muted" id="arenaFeedback" role="status"></p></div><div class="card span-5"><h3>Minha rodada</h3><div class="metric" id="arenaScore">0 / 5</div><p class="small muted" id="arenaProgress">Nenhuma rodada iniciada.</p><label for="arenaSubject"><b>Matéria</b></label><select id="arenaSubject" class="study-field"><option value="Todas">Todas</option></select><p class="small muted">Sem competição pública, notas individuais ou pressão. O objetivo é praticar.</p></div></div></section>
-<section id="calendario" class="view"><h2>📅 Calendário de estudos</h2><p class="sub">Organize suas tarefas e acompanhe as provas. Datas do roteiro original de novembro de 2026: confirme com o professor caso o calendário mude.</p><div class="grid"><div class="card span-6"><h3>Meu compromisso</h3><label for="calendarDate">Data</label><input id="calendarDate" class="study-field" type="date"><label for="calendarTask">O que vou estudar?</label><input id="calendarTask" class="study-field" maxlength="140" placeholder="Ex.: revisar porcentagem"><button class="btn orange" onclick="addCalendarTask()">Adicionar lembrete</button><p class="small muted">As tarefas ficam neste navegador. Para receber lembretes de estudo e provas, configure a aba 🔔 Lembretes.</p></div><div class="card span-6"><h3>Próximas tarefas</h3><div id="calendarItems"></div></div><div class="card span-12"><p><button class="btn orange" type="button" onclick="showView('evolucao803')">📅 Abrir calendário visual e gráficos</button></p></div><div class="card span-12"><h3>Semana de provas</h3><p>📚 Período previsto no roteiro: <b>16 a 23 de novembro de 2026</b>. Consulte o cronograma oficial da turma para saber qual prova acontece em cada dia.</p><p class="small muted" id="calendarCountdown"></p></div></div></section>
+<section id="calendario" class="view"><h2>📅 Calendário de estudos</h2><p class="sub">Organize suas tarefas e acompanhe as provas. Datas do roteiro original de novembro de 2026: confirme com o professor caso o calendário mude.</p><div class="grid"><div class="card span-6"><h3>Meu compromisso</h3><label for="calendarDate">Data</label><input id="calendarDate" class="study-field" type="date"><label for="calendarTask">O que vou estudar?</label><input id="calendarTask" class="study-field" maxlength="140" placeholder="Ex.: revisar porcentagem"><button class="btn orange" onclick="addCalendarTask()">Adicionar lembrete</button><p class="small muted">As tarefas ficam neste navegador. Para receber lembretes de estudo e provas, configure a aba 🔔 Lembretes.</p></div><div class="card span-6"><h3>Próximas tarefas</h3><div id="calendarItems"></div></div><div class="card span-12"><p><button class="btn orange" type="button" onclick="showView('evolucao803')">📅 Abrir calendário visual e gráficos</button></p></div><div class="card span-12" id="portal8LegacyCalendar"><h3>Semana de provas da Turma 803</h3><p>📚 Período previsto no roteiro: <b>16 a 23 de novembro de 2026</b>. Consulte o cronograma oficial da turma para saber qual prova acontece em cada dia.</p><p class="small muted" id="calendarCountdown"></p></div></div></section>
 <section id="lembretes" class="view">
 <h2>🔔 Central de lembretes</h2><p class="sub">Estude no seu ritmo: escolha quais lembretes quer receber. Nada é ativado sem sua escolha.</p>
 <div class="callout" style="margin-bottom:15px"><b>Como funciona:</b> lembretes dentro do site quando você o abre e alertas do sistema enquanto a página está aberta (mesmo em outra aba, quando o navegador permitir). <b>Com o site totalmente fechado, não há envio push automático nesta versão.</b> As preferências e o histórico ficam no seu navegador.</div>
@@ -805,7 +805,7 @@ async function connectClassBoard(){
     await refreshLibrary();
     setCloudStatus("Conectado e sincronizado! Seus tópicos e questões já entram nos totais da 803.","ok");
   }catch(err){
-    console.error("Missão 803 Supabase:",err);
+    console.error("Portal 8º Ano Supabase:",err);
     const message=String(err?.message||err);
     if(/anonymous|signup|disabled|not enabled/i.test(message)){
       setCloudStatus("O banco está conectado, mas o login anônimo ainda não está habilitado. O responsável precisa ativar Authentication → Sign In / Providers → Anonymous Sign-Ins.","err");
@@ -1249,7 +1249,7 @@ function copyNoteToLibrary(){
  libraryMessage("Anotação copiada. Revise o texto e marque a autorização antes de enviar.");
 }
 async function submitLibraryItem(){
- if(!libraryConnected()){libraryMessage("Primeiro conecte-se na aba Turma 803.");return}
+ if(!libraryConnected()){libraryMessage("Primeiro conecte-se na aba da sua turma.");return}
  const materia=$("libSubject").value,titulo=$("libTitle").value.trim(),conteudo=$("libBody").value.trim(),link=$("libLink").value.trim();
  if(titulo.length<4||conteudo.length<20){libraryMessage("Informe um título com 4 caracteres e um resumo com pelo menos 20 caracteres.");return}
  if(link && (!safeNoteLink(link)||!link.startsWith("https://"))){libraryMessage("Use somente links começando com https://");return}
@@ -1264,7 +1264,7 @@ async function submitLibraryItem(){
  }catch(e){console.error(e);libraryMessage("Não foi possível enviar. Verifique a conexão e tente novamente.")}
 }
 async function refreshLibrary(){
- if(!libraryConnected()){libraryMessage("Conecte-se na aba Turma 803 para abrir a biblioteca.");return}
+ if(!libraryConnected()){libraryMessage("Conecte-se na aba da sua turma para abrir a biblioteca.");return}
  try{
   const {data,error}=await cloudClient.from("missao803_biblioteca").select("id,autor_id,materia,titulo,conteudo,link,status,criado_em,turma").in("turma",["geral",portal8Turma]).order("criado_em",{ascending:false}).limit(150);
   if(error)throw error;
@@ -1683,7 +1683,7 @@ async function portalGradeSave(){
   document.getElementById("portalGradeValue").value="";
   portalGradeMsg("✅ Nota salva com privacidade. Você pode substituí-la ou excluí-la depois.");
   await portalGradeRefresh();
- }catch(e){portalGradeMsg("Não foi possível salvar a nota. Para contribuir sem conta, o login anônimo precisa estar habilitado no Supabase. Tente conectar na aba Turma 803.")}
+ }catch(e){portalGradeMsg("Não foi possível salvar a nota. Para contribuir sem conta, o login anônimo precisa estar habilitado no Supabase. Tente conectar na aba da sua turma.")}
 }
 async function portalGradeDelete(){
  if(portal8Turma!=="803")return portal8GradeDelete();
@@ -1821,7 +1821,7 @@ function remindersTick(){
  if(!reminderSettings.enabled)return;
  const now=new Date(),today=remindersDay(now),time=String(now.getHours()).padStart(2,"0")+":"+String(now.getMinutes()).padStart(2,"0");
  if(reminderSettings.daily&&time>=reminderSettings.time&&time<"23:00"){
-  remindersDeliver("study-"+today,"📚 Hora de estudar!","Portal 803: que tal revisar uma matéria e fazer algumas questões?");
+  remindersDeliver("study-"+today,"📚 Hora de estudar!","Portal 8º Ano: que tal revisar uma matéria e fazer algumas questões?");
  }
  if(reminderSettings.exams){
   const next=remindersTomorrow();
@@ -1845,14 +1845,14 @@ async function remindersCheckAnnouncements(){
   if(!Array.isArray(saved)){reminderStore(REMINDER_ANNOUNCEMENT_KEY,newest.map(x=>x.id));reminderAnnouncementsReady=true;remindersTick();return}
   const known=new Set(saved);
   for(const n of newest.slice().reverse()){
-   if(!known.has(n.id))remindersDeliver("announcement-"+n.id,"📢 Novo aviso da turma","Confira os comunicados oficiais na página inicial do Portal 803.");
+   if(!known.has(n.id))remindersDeliver("announcement-"+n.id,"📢 Novo aviso da turma","Confira os comunicados oficiais na página inicial do Portal 8º Ano.");
   }
   reminderStore(REMINDER_ANNOUNCEMENT_KEY,[...new Set([...newest.map(x=>x.id),...saved])].slice(0,120));
   reminderAnnouncementsReady=true;remindersTick();
  }catch(e){/* Se não houver internet, mantém os avisos locais. */}
 }
 function remindersTest(){
- const title="🔔 Teste do Portal 803",body="Seu lembrete de demonstração está funcionando dentro do site!";
+ const title="🔔 Teste do Portal 8º Ano",body="Seu lembrete de demonstração está funcionando dentro do site!";
  reminderInbox.unshift({title,body,at:new Date().toISOString()});reminderInbox=reminderInbox.slice(0,35);
  reminderStore(REMINDER_INBOX_KEY,reminderInbox);remindersRenderInbox();remindersBanner(title,body);
  remindersSystemNotify(title,body,"test-"+Date.now());
@@ -2061,7 +2061,7 @@ function portal8Choose(turma){
   const m=document.getElementById("libMine");if(m)m.textContent="Conecte-se para ver suas publicações.";
  }
  portal8UpdateLabels();
- if(turma!=="803"){document.getElementById("nextExam").textContent="Consultar avisos";document.getElementById("nextExamDate").textContent="Datas da turma "+turma+" aguardando confirmação";}
+ if(turma!=="803"){document.getElementById("nextExam").textContent="Consultar avisos";document.getElementById("nextExamDate").textContent="Confira o calendário da turma "+turma;}
  if(changed){
   document.getElementById("portalPublicItems").textContent="Carregando avisos da turma "+turma+"…";
   portalPublicRefresh();phaseFetchOfficialExams();
