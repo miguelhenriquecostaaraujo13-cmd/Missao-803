@@ -2167,13 +2167,24 @@ async function portalPublicRefresh(){
  const updatesRoot=document.getElementById("portal8AutoUpdateNews");
  let siteUpdates=[];
  try{
-  const response=await fetch("./assets/portal8-updates.json?rev=22",{cache:"no-store"});
-  if(response.ok){
-   const records=await response.json();
-   if(Array.isArray(records)){
+  // RAW recebe as novidades do workflow mesmo quando o GitHub Pages ainda não fez novo deploy.
+  // Em caso de falha, usa a cópia publicada no site (também disponível offline).
+  const urls=[
+   "https://raw.githubusercontent.com/miguelhenriquecostaaraujo13-cmd/Missao-803/main/assets/portal8-updates.json?fresh="+Math.floor(Date.now()/60000),
+   "./assets/portal8-updates.json?rev=22"
+  ];
+  for(const url of urls){
+   try{
+    const options={cache:"no-store"};
+    if(typeof AbortSignal?.timeout==="function")options.signal=AbortSignal.timeout(5000);
+    const response=await fetch(url,options);
+    if(!response.ok)continue;
+    const records=await response.json();
+    if(!Array.isArray(records))continue;
     siteUpdates=records.filter(x=>x&&x.important===true&&typeof x.title==="string"&&typeof x.body==="string")
       .slice(0,8).map(x=>({title:"✨ "+x.title.slice(0,110),body:x.body.slice(0,520),date:typeof x.date==="string"?x.date:""}));
-   }
+    break;
+   }catch(e){/* A próxima origem pode estar disponível. */}
   }
  }catch(e){/* Offline ou sem rede: os comunicados oficiais continuam independentes. */}
  if(updatesRoot){
