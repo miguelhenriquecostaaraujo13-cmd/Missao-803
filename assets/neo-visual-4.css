@@ -84,3 +84,8 @@ html body{font-feature-settings:"kern";-webkit-font-smoothing:antialiased}
 html .view.active{scroll-margin-top:135px}
 html .navgroup>summary{cursor:pointer}
 html .btn:focus-visible,html .navbtn:focus-visible{outline:3px solid #f4aa42;outline-offset:2px}
+
+/* Indicação de pistas na cena 3D, visível sem depender apenas da cor. */
+#neoGames40 .n4-lane-labels{position:absolute;left:12%;right:12%;bottom:10%;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px;pointer-events:none}
+#neoGames40 .n4-lane-labels span{text-align:center;display:block;padding:7px 3px;background:#112a57cb;border:1px solid #b3eeff7d;color:#f0fdff;border-radius:8px;box-shadow:0 5px 14px #0004;font-size:clamp(.55rem,1.6vw,.83rem);font-weight:950;letter-spacing:.04em}
+@media(max-width:500px){#neoGames40 .n4-lane-labels{left:5%;right:5%;bottom:5%;gap:3px}#neoGames40 .n4-lane-labels span{padding:3px 1px;font-size:.52rem}}
