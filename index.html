@@ -996,16 +996,16 @@ html nav :is(summary,button,select):focus-visible{outline:3px solid #ffd781!impo
 
 
 <section id="assistente" class="view">
- <h2>🧠 Tutor gratuito do Portal 8º Ano</h2>
- <p class="sub">Tire dúvidas usando os resumos, tópicos e cartões da turma. Funciona no navegador, sem API paga e sem limite de perguntas.</p>
- <div class="callout small" style="margin-bottom:15px"><b>100% gratuito:</b> suas perguntas não são enviadas à OpenAI nem ao Supabase. O tutor local pesquisa conteúdos previamente preparados, por isso não é uma IA generativa e pode não encontrar todas as respostas. Não informe dados pessoais; confira explicações com o professor.</div>
+ <h2>📘 Neo — Tutor de estudos gratuito</h2>
+ <p class="sub">Converse com o Neo para revisar matérias do 8º ano, estudar com questões guiadas e resolver contas simples. Sem custos, assinatura ou conta obrigatória.</p>
+ <div class="callout small" style="margin-bottom:15px"><b>Motor de estudos local, 100% gratuito:</b> o Neo utiliza os materiais do portal e cálculos programados, sem API paga, sem enviar suas perguntas à OpenAI ou ao Supabase e sem limite de uso. <b>Não é o ChatGPT nem uma IA generativa:</b> pode não entender questões abertas ou assuntos ainda não cadastrados. Não compartilhe dados pessoais e confira conteúdos com o professor.</div>
  <div class="grid"><div class="card span-8">
  <div id="assistantChat" class="assistant-chat" role="log" aria-live="polite"></div>
  <label for="assistantSubject"><b>Matéria</b></label><select id="assistantSubject" class="study-field"><option value="Todas">Todas</option></select>
  <label for="assistantInput"><b>Sua dúvida</b></label><textarea id="assistantInput" class="study-field" rows="3" maxlength="1200" placeholder="Ex.: Qual a diferença entre população e amostra?"></textarea>
- <div class="row"><button id="askTutorButton" class="btn orange" onclick="askTutor()">🔎 Buscar explicação</button><button class="btn light" onclick="tutorSuggestion()">💡 Sugerir revisão</button><button class="btn light" onclick="tutorQuiz()">🧠 Praticar uma questão</button></div>
- <div class="row" style="margin-top:10px"><button class="btn light" onclick="quickTutor('O que é população e amostra?')">📊 População e amostra</button><button class="btn light" onclick="quickTutor('Como calcular porcentagem?')">➗ Porcentagem</button><button class="btn light" onclick="quickTutor('O que é tese?')">✍️ Tese</button></div>
- </div><div class="card span-4"><h3>Como estudar com o tutor?</h3><p>📚 Localiza conceitos dos resumos da turma.</p><p>🗂️ Encontra respostas dos cartões de memorização.</p><p>🎯 Recomenda exercícios e matérias que precisam de revisão.</p><p>🔒 As perguntas permanecem no navegador.</p><p class="small muted">Sem assinatura, cartão, créditos ou acesso obrigatório à internet para o tutor. A biblioteca compartilhada e o painel coletivo continuam precisando de conexão.</p></div></div>
+ <div class="row"><button id="askTutorButton" class="btn orange" onclick="askTutor()">💬 Enviar ao Neo</button><button class="btn light" onclick="tutorSuggestion()">💡 Sugerir revisão</button><button class="btn light" onclick="tutorQuiz()">🧠 Praticar uma questão</button></div>
+ <div class="row" style="margin-top:10px"><button type="button" class="btn light" onclick="neoTutorQuestion()">🧠 Nova pergunta</button><button type="button" class="btn light" onclick="neoTutorExample()">✏️ Pedir exemplo</button><button type="button" class="btn light" onclick="neoTutorReset()">🧹 Limpar conversa</button></div><p class="small muted">Pressione Enter para enviar ou Shift + Enter para quebrar linha. A conversa é mantida somente enquanto esta página está aberta.</p><div class="row" style="margin-top:10px"><button class="btn light" onclick="quickTutor('O que é população e amostra?')">📊 População e amostra</button><button class="btn light" onclick="quickTutor('Como calcular porcentagem?')">➗ Porcentagem</button><button class="btn light" onclick="quickTutor('O que é tese?')">✍️ Tese</button></div>
+ </div><div class="card span-4"><h3>Como estudar com o Neo?</h3><p>💬 Peça explicações e continue com perguntas como “mais simples”.</p><p>➗ Experimente “20% de 150” ou “2x + 4 = 14”.</p><p>📚 Localiza conceitos dos resumos da turma.</p><p>🗂️ Encontra respostas dos cartões de memorização.</p><p>🎯 Recomenda exercícios e matérias que precisam de revisão.</p><p>🔒 As perguntas permanecem no navegador.</p><p class="small muted">Sem assinatura, cartão, créditos ou acesso obrigatório à internet para o tutor. A biblioteca compartilhada e o painel coletivo continuam precisando de conexão.</p></div></div>
 </section>
 <section id="revisoes" class="view">
  <h2>🎯 Missões e revisões inteligentes</h2>
@@ -2866,7 +2866,7 @@ async function portal8UpdateSite(){
    await Promise.all(regs.map(r=>r.update().catch(()=>null)));
   }
  }catch(e){}
- location.replace(location.pathname+"?versao=recursos-aprovados-v25&atualizacao="+Date.now());
+ location.replace(location.pathname+"?versao=recursos-aprovados-v26&atualizacao="+Date.now());
 }
 function portal8EnableScrollReveal(){
  if(window.matchMedia?.("(prefers-reduced-motion: reduce)").matches||document.documentElement.dataset.phaseMotion==="reduce")return;
@@ -2898,6 +2898,7 @@ init();renderNexo();
 <script src="./assets/portal8-pazinho.js?v=23"></script>
 <script src="./assets/portal8-horizonte.js?v=23"></script>
 <script src="./assets/portal8-calendario-final2026.js?v=25"></script>
+<script src="./assets/neo-tutor-local.js?v=26"></script>
 <script src="./assets/portal8-perfil.js?v=21"></script>
 </body>
 </html>
