@@ -85,6 +85,16 @@ O botão **Permitir notificações** solicita autorização expressa do navegado
 - O service worker contém o cartoon no cache offline da versão `portal8-missao-paz-animado-v9` para acesso após a primeira visita online.
 - Preservadas as 27 seções e os registros locais existentes, inclusive os resultados históricos da 803.
 
+## Pazinho — mascote interativo
+
+- Ao trocar entre as **27 ferramentas**, o Pazinho aparece no canto inferior direito e mostra um **balão de fala com dica específica** da área aberta.
+- Cada área tem duas frases que se alternam. Clique no mascote ou no botão **✨ Outra dica** para ver mais uma. O balão fecha automaticamente após cerca de 5 segundos ou pelo botão ×.
+- A primeira visita da sessão também mostra uma saudação. O mascote continua disponível no cantinho, sem bloquear o uso da página.
+- Em **Acessibilidade** há a opção **Mostrar o Pazinho e suas dicas ao abrir ferramentas**. Ela pode ser desativada e a escolha fica apenas no dispositivo (`portal8-pazinho-enabled-v1`).
+- A entrada tem movimento suave e respeita as preferências de redução de movimento. Não há voz, rastreamento, cookies adicionais nem API paga.
+- A ilustração de estudantes cartoon aprovada permanece **inalterada**. O mascote usa uma nova pombinha azul inspirada nas cores da identidade alternativa do próprio portal, em `assets/pazinho.svg`.
+- Componentes independentes: `assets/portal8-pazinho.css` e `assets/portal8-pazinho.js`; a função `showView` emite `portal8:viewchange` após a navegação.
+
 ## Publicação
 
 Publicação atual pelo GitHub Pages: https://miguelhenriquecostaaraujo13-cmd.github.io/Missao-803/
