@@ -9,7 +9,23 @@
 <link rel="shortcut icon" type="image/svg+xml" href="./assets/icone-portal-missao-paz.svg?v=28">
 <meta name="application-name" content="Portal 8º Ano Missão Paz">
 <link rel="preload" as="image" href="./assets/estudantes-cartoon-aprovado.png?rev=portal8-visual-v12" fetchpriority="high">
-<script>document.documentElement.classList.add("p8-entry-check");</script>
+<script>
+/* Captura apenas o tipo/erro do retorno do e-mail, nunca tokens ou senhas. */
+(function(){
+ try{
+  var q=new URLSearchParams(location.search),h=new URLSearchParams(location.hash.replace(/^#/,""));
+  var errorCode=(h.get("error_code")||q.get("error_code")||"").slice(0,90);
+  var error=(h.get("error")||q.get("error")||"").slice(0,90);
+  window.portal8AuthLinkNotice={
+    errorCode:errorCode,
+    errorType:error,
+    callback: h.has("access_token")||q.has("code"),
+    recovery:h.get("type")==="recovery"||q.get("type")==="recovery"
+  };
+ }catch(e){window.portal8AuthLinkNotice={}}
+ document.documentElement.classList.add("p8-entry-check");
+})();
+</script>
 <style>
 html.p8-entry-check body>header,html.p8-entry-check body>nav,html.p8-entry-check body>main,html.p8-entry-check body>footer{visibility:hidden}
 #p8FirstVisit[hidden]{display:none!important}
@@ -1633,7 +1649,7 @@ html nav :is(summary,button,select):focus-visible{outline:3px solid #ffd781!impo
    <h3>🔐 Entrar ou criar conta</h3><p class="small muted">Use um e-mail seu. Não compartilhe a senha. O cadastro pode precisar de confirmação por e-mail.</p>
    <label for="p8ProfileEmail">E-mail</label><input id="p8ProfileEmail" type="email" maxlength="254" autocomplete="email" placeholder="seuemail@exemplo.com">
    <label for="p8ProfilePassword">Senha (12 caracteres para nova conta)</label><input id="p8ProfilePassword" type="password" minlength="1" maxlength="128" autocomplete="current-password" placeholder="Use sua senha; no cadastro, mínimo de 12">
-   <div class="p8-profile-action"><button class="btn orange" type="button" id="p8ProfileLogin" data-profile-action>Entrar</button><button class="btn light" type="button" id="p8ProfileSignup" data-profile-action>Criar conta</button></div><button class="btn light" type="button" id="p8ProfileResend" data-profile-action hidden>📩 Reenviar e-mail de confirmação</button>
+   <div class="p8-profile-action"><button class="btn orange" type="button" id="p8ProfileLogin" data-profile-action>Entrar</button><button class="btn light" type="button" id="p8ProfileSignup" data-profile-action>Criar conta</button></div><button class="btn light" type="button" id="p8ProfileResend" data-profile-action hidden>📩 Reenviar e-mail de confirmação</button><button class="btn light" type="button" id="p8ProfileForgot" data-profile-action>🔑 Esqueci minha senha</button>
    <small>O login é opcional. Você continua podendo estudar sem conta. O cadastro não concede acesso administrativo.</small>
   </div>
   <div class="p8-profile-panel" id="p8ProfilePrivate" hidden>
@@ -1691,7 +1707,7 @@ function setCloudStatus(message,kind="warn"){
 function ensureCloudClient(){
   if(!cloudConfigured()) throw new Error("A biblioteca de conexão não carregou. Verifique sua internet e atualize a página.");
   if(!cloudClient) cloudClient=window.supabase.createClient(SUPABASE_URL,SUPABASE_ANON_KEY,{
-    auth:{autoRefreshToken:true,persistSession:true,detectSessionInUrl:false}
+    auth:{autoRefreshToken:true,persistSession:true,detectSessionInUrl:true,flowType:"implicit"}
   });
   return cloudClient;
 }
@@ -3281,7 +3297,7 @@ async function portal8UpdateSite(){
    await Promise.all(regs.map(r=>r.update().catch(()=>null)));
   }
  }catch(e){}
- location.replace(location.pathname+"?versao=perfil-automatico-v3&atualizacao="+Date.now());
+ location.replace(location.pathname+"?versao=links-email-recuperacao-v1&atualizacao="+Date.now());
 }
 function portal8EnableScrollReveal(){
  if(window.matchMedia?.("(prefers-reduced-motion: reduce)").matches||document.documentElement.dataset.phaseMotion==="reduce")return;
@@ -3329,7 +3345,7 @@ init();renderNexo();
 <script src="./assets/neo-arcade-arte-v38.js?v=38"></script>
 <script src="./assets/neo-arcade.js?v=38"></script>
 <script src="./assets/neo-admin-gate.js?v=29"></script>
-<script src="./assets/portal8-auth-help-v1.js?v=1"></script>
+<script src="./assets/portal8-auth-help-v1.js?v=2"></script>
 <script src="./assets/portal8-perfil.js?v=23"></script>
 <script src="./assets/neo-central-3.js?v=2"></script>
 <script src="./assets/neo-agents-4.js?v=1"></script>
@@ -3353,6 +3369,7 @@ init();renderNexo();
       <small id="p8WelcomePasswordHelp">Para criar uma conta, use pelo menos 12 caracteres.</small>
       <button id="p8WelcomeSubmit" type="submit" class="p8-welcome-primary">Entrar</button>
       <button type="button" class="p8-welcome-back" id="p8WelcomeResend" hidden>📩 Reenviar confirmação de e-mail</button>
+      <button type="button" class="p8-welcome-back" id="p8WelcomeForgot">🔑 Esqueci minha senha</button>
       <button type="button" class="p8-welcome-back" id="p8WelcomeBack">← Voltar às opções</button>
     </form>
     <p role="status" aria-live="polite" id="p8WelcomeStatus"></p>
@@ -3380,11 +3397,13 @@ init();renderNexo();
     $("p8WelcomePasswordLabel").textContent=next==="signup"?"Crie uma senha (12 caracteres ou mais)":"Senha da sua conta";
     $("p8WelcomePasswordHelp").textContent=next==="signup"?"Use pelo menos 12 caracteres. Não compartilhe sua senha.":"Para entrar, use a senha que cadastrou. Se a conta for nova, confirme o e-mail antes.";
     $("p8WelcomeResend").hidden=true;
+    $("p8WelcomeForgot").hidden=next==="signup";
     $("p8WelcomeEmail").focus();
   }
   function back(){
     form.hidden=true;choices.hidden=false;status.textContent="";
     $("p8WelcomeResend").hidden=true;
+    $("p8WelcomeForgot").hidden=false;
     $("p8WelcomeTitle").textContent="Seu espaço de estudos começa aqui!";
     $("p8WelcomeIntro").textContent="Primeira vez aqui? Crie sua conta. Se já possui cadastro, entre com seu e-mail e senha. Você também pode estudar como visitante.";
   }
@@ -3459,16 +3478,24 @@ init();renderNexo();
     else back();
   };
   async function initialize(){
-    if(await isAuthenticated()){hide();return}
+    const notice=window.portal8AuthLinkNotice||{};
+    const isValid=await isAuthenticated();
+    if(isValid){hide();return}
     show();
     const params=new URLSearchParams(location.search);
-    if(params.get("cadastro")==="1")setMode("signup");
+    if(notice.errorCode||notice.errorType){
+      setMode("signin");
+      status.textContent=window.portal8AuthHelp?.linkErrorMessage(notice)||
+        "O link de verificação está inválido ou expirou. Confira se a conta já foi confirmada e tente entrar. Se necessário, peça outro e-mail.";
+      $("p8WelcomeResend").hidden=false;
+    }else if(params.get("cadastro")==="1")setMode("signup");
     else if(params.get("entrar")==="1")setMode("signin");
   }
   initialize();
 })();
 </script>
 <script src="./assets/neo-puzzle-5.js?v=2"></script>
+<script src="./assets/portal8-recovery-v1.js?v=1"></script>
 <script src="./assets/portal-design-5.js?v=1"></script>
 </body>
 </html>
