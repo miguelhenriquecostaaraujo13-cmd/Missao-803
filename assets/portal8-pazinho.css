@@ -40,7 +40,9 @@ html[data-phase-contrast="on"] .pazinho-balao{outline:2px solid currentColor}
   .pazinho-fala{font-size:.83rem}
 }
 @media(prefers-reduced-motion:reduce){
-  #portal8Pazinho *,#portal8Pazinho *::before,#portal8Pazinho *::after{animation:none!important;transition:none!important}
+  #portal8Pazinho:not(.pazinho-motion-override) *,
+  #portal8Pazinho:not(.pazinho-motion-override) *::before,
+  #portal8Pazinho:not(.pazinho-motion-override) *::after{animation:none!important;transition:none!important}
 }
 html[data-phase-motion="reduce"] #portal8Pazinho *,html[data-phase-motion="reduce"] #portal8Pazinho *::before,html[data-phase-motion="reduce"] #portal8Pazinho *::after,
 #portal8Pazinho.pazinho-sem-movimento *,#portal8Pazinho.pazinho-sem-movimento *::before,#portal8Pazinho.pazinho-sem-movimento *::after{animation:none!important;transition:none!important}
@@ -66,5 +68,5 @@ html[data-phase-motion="reduce"] #portal8Pazinho *,html[data-phase-motion="reduc
  100%{opacity:0;transform:translate(-50%,-24px) scale(.92)}
 }
 @media(max-width:560px){.pazinho-scene{top:16vh;padding:8px 14px 8px 7px;gap:7px}.pazinho-scene img{width:58px;height:64px;flex-basis:58px}}
-@media(prefers-reduced-motion:reduce){.pazinho-scene.pazinho-scene-play{animation:none!important;display:none!important}}
+@media(prefers-reduced-motion:reduce){.pazinho-scene:not(.pazinho-motion-override).pazinho-scene-play{animation:none!important;display:none!important}}
 html[data-phase-motion="reduce"] .pazinho-scene.pazinho-scene-play{animation:none!important;display:none!important}
