@@ -3281,7 +3281,7 @@ async function portal8UpdateSite(){
    await Promise.all(regs.map(r=>r.update().catch(()=>null)));
   }
  }catch(e){}
- location.replace(location.pathname+"?versao=cadastro-entrada-v2&atualizacao="+Date.now());
+ location.replace(location.pathname+"?versao=perfil-automatico-v3&atualizacao="+Date.now());
 }
 function portal8EnableScrollReveal(){
  if(window.matchMedia?.("(prefers-reduced-motion: reduce)").matches||document.documentElement.dataset.phaseMotion==="reduce")return;
@@ -3330,7 +3330,7 @@ init();renderNexo();
 <script src="./assets/neo-arcade.js?v=38"></script>
 <script src="./assets/neo-admin-gate.js?v=29"></script>
 <script src="./assets/portal8-auth-help-v1.js?v=1"></script>
-<script src="./assets/portal8-perfil.js?v=22"></script>
+<script src="./assets/portal8-perfil.js?v=23"></script>
 <script src="./assets/neo-central-3.js?v=2"></script>
 <script src="./assets/neo-agents-4.js?v=1"></script>
 <script src="./assets/neo-world-render-5.js?v=1"></script>
