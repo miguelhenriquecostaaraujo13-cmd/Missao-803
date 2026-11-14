@@ -157,6 +157,24 @@ O botão **Permitir notificações** solicita autorização expressa do navegado
 - Os simulados, cartões antigos, conteúdo aprovado, controle de acesso, perfis, dados armazenados e demais ferramentas foram preservados.
 - Atualização do cache: `portal8-recursos-aprovados-v26`.
 
+## Ateliê Neo e nove melhorias complementares (versão 27)
+
+A lista original de 20 propostas não foi preservada integralmente nas fontes recuperáveis. O autor do portal havia selecionado 11 funcionalidades: **01, 05, 06, 07, 08, 10, 12, 13, 15, 16 e 19**, que continuam implementadas. Os números não selecionados eram **02, 03, 04, 09, 11, 14, 17, 18 e 20**, mas seus títulos originais não foram verificados. Os nove recursos abaixo são **melhorias novas e complementares** usando esses identificadores como organização; não são apresentados como reconstrução literal da proposta antiga.
+
+- **02 Planejador semanal:** campos para todos os dias com salvamento local por turma
+- **03 Checklist de materiais:** marcações privadas e botão de reiniciar
+- **04 Glossário escolar:** busca entre definições curtas de várias matérias
+- **09 Calculadora de média:** valores de exemplo de 0 a 12, sem alterar boletim
+- **11 Mapa de ideias:** tema central e quatro ramificações, com opção de copiar
+- **14 Pergunta-surpresa:** perguntas de revisão, filtradas por matéria, com resposta para conferir
+- **17 Leitura em voz alta:** síntese de voz fornecida pelo navegador, sem upload do texto
+- **18 Busca de ferramentas:** pesquisa entre as opções existentes do menu
+- **20 Microplano de revisão:** proposta curta com três blocos flexíveis
+
+Uma nova área **🧰 Ferramentas extras → ⭐ Ateliê Neo** foi adicionada ao menu sem excluir ou alterar os 28 destinos anteriores; agora são 29 áreas navegáveis. O painel inclui também uma lista **nova** de 12 ideias futuras, com ⭐⭐⭐ prioridade alta, ⭐⭐ média e ⭐ opcional, e checkboxes que registram as preferências neste navegador. Marcar ideias **não** cria, publica ou instala funcionalidades.
+
+Os arquivos são `assets/neo-lab.js` e `assets/neo-lab.css`; o cache offline foi atualizado para `portal8-recursos-aprovados-v27`. Não há novas tabelas, APIs pagas, exigência de login ou coleta de dados nesta versão. O histórico de outras áreas, permissões Supabase, dados escolares e o mascote Neo foram preservados.
+
 ## Publicação
 
 Publicação atual pelo GitHub Pages: https://miguelhenriquecostaaraujo13-cmd.github.io/Missao-803/
