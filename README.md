@@ -52,11 +52,13 @@ O botão **Permitir notificações** solicita autorização expressa do navegado
 - Preferências guardadas **somente no navegador** em `portal803-favorite-tools-v1` e `portal803-last-tool-v1`.
 - Todas as 22 ferramentas e os três temas de visual preservados. As chaves de progresso e do Supabase não foram alteradas.
 
-### Etapas seguintes (planejadas, não implementadas)
-- **Etapa 2 — estudo personalizado:** marcações de compreensão por cores, checklist por prova e caderno de erros individual.
-- **Etapa 3 — acompanhamento:** gráficos de evolução e calendário visual com eventos oficiais atualizados.
-- **Etapa 4 — colaboração e acessibilidade:** melhorias do painel proprietário, recebimento privado de relatos de problemas e controles de leitura.
-- Antes de qualquer recurso que envie dados de estudantes para a nuvem, revisar consentimento, segurança, políticas de acesso e privacidade.
+### Etapas 2, 3 e 4 (implementadas)
+- **Etapa 2:** níveis de compreensão por tópico (🟢 Entendi, 🔵 Quase entendi, 🩷 Preciso revisar), checklist por matéria e caderno privado de erros dos simulados na aba **Revisão para provas**.
+- **Etapa 3:** gráfico do histórico diário de acertos nos simulados a partir desta atualização, e calendário mensal mostrando tarefas locais, cronograma inicial e datas oficiais cadastradas no Supabase.
+- **Etapa 4:** controles locais de tamanho da fonte, alto contraste e animações, além de formulário opt-in de relatos privados de problemas/sugestões. O proprietário aprovado acessa esses relatos pelo Modo Proprietário.
+- O histórico, os checklists e os níveis de compreensão ficam apenas no armazenamento local do aluno. Os relatos enviados são armazenados no Supabase, protegidos por políticas RLS que limitam a leitura ao autor e aos administradores autorizados. Ações de exclusão e resolução de relatos não estão disponíveis na interface nesta versão.
+- As 26 áreas continuam usando o mesmo login, autenticação, dados de estudo e temas preexistentes. Testar no celular e em diferentes navegadores após publicação.
+
 
 ## Publicação
 
