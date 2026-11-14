@@ -128,7 +128,7 @@
   try{
     const c=getClient();
     const result=mode==="signup"
-     ?await c.auth.signUp({email,password,options:{emailRedirectTo:location.origin+location.pathname}})
+     ?await c.auth.signUp({email,password,options:{emailRedirectTo:window.portal8AuthHelp?.publicRedirectURL()||location.origin+location.pathname}})
      :await c.auth.signInWithPassword({email,password});
     $("p8ProfilePassword").value="";
     if(result.error)throw result.error;
@@ -154,7 +154,7 @@
   setBusy(true);message("Solicitando novo e-mail de confirmação…");
   try{
     const c=getClient();
-    const {error}=await window.portal8AuthHelp.resendConfirmation(c,email,location.origin+location.pathname);
+    const {error}=await window.portal8AuthHelp.resendConfirmation(c,email,window.portal8AuthHelp.publicRedirectURL());
     if(error)throw error;
     message("📩 Se houver um cadastro pendente, um novo e-mail de confirmação será enviado. Confira também o Spam.");
   }catch(e){message(window.portal8AuthHelp?.errorMessage(e,"resend")||"Não foi possível reenviar agora.");}
@@ -276,6 +276,16 @@
   $("p8ProfileLogin").addEventListener("click",()=>signAction("signin"));
   $("p8ProfileSignup").addEventListener("click",()=>signAction("signup"));
   $("p8ProfileResend").addEventListener("click",resendSignupConfirmation);
+  $("p8ProfileGoogle").addEventListener("click",async()=>{
+    if(busy)return;
+    setBusy(true);message("Redirecionando para o login seguro do Google…");
+    try{
+      const response=await window.portal8AuthHelp.signInWithGoogle(getClient());
+      if(response.error)throw response.error;
+    }catch(err){
+      message(window.portal8AuthHelp?.errorMessage(err,"google")||"Não foi possível iniciar o login com Google.");
+    }finally{setBusy(false)}
+  });
   $("p8ProfileLogout").addEventListener("click",logout);
   $("p8ProfileSave").addEventListener("click",save);
   $("p8ProfileUpload").addEventListener("click",upload);
