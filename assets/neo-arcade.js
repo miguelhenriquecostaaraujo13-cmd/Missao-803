@@ -54,6 +54,7 @@ function status(msg){
 function setActive(name){
  if(!games[name])return;
  active=name;game=create(name);paused=false;finished=false;clearKeys();prev=0;
+ window.neoGameBrain?.start(name);
  $("neoArcadePause").textContent="⏸ Pausar";
  $("neoArcadeTitle").textContent=games[name].name;
  $("neoArcadeInstructions").textContent=games[name].help+" "+games[name].keys;
@@ -136,17 +137,17 @@ class Fractions{
     p.y=platform.y-p.h;p.vy=0;
    }
   }
-  if(p.y>H){this.p.x=45;this.p.y=405;this.p.vy=0;this.lives--;this.inv=1;if(this.lives<=0)end(false,"Faltaram corações.");}
+  if(p.y>H){this.p.x=45;this.p.y=405;this.p.vy=0;this.lives--;this.inv=1;window.neoGameBrain?.miss();if(this.lives<=0)end(false,"Faltaram corações.");}
   for(const orb of this.orbs){
    if(orb.used||this.inv>0)continue;
    if(hit(p.x,p.y,p.w,p.h,orb.x,orb.y,21)){
     orb.used=true;this.inv=.42;
     if(orb.correct){
-     this.done++;this.score+=10;
+     this.done++;this.score+=10;window.neoGameBrain?.good();
      status("✅ Fração equivalente! "+this.done+" de 6 acertos.");
      if(this.done>=6){this.won=true;end(true,"Você dominou as equivalências de frações!");return}
      this.next();
-    }else{this.lives--;status("Essa fração não é equivalente a "+this.round.goal+". Experimente outra.");
+    }else{this.lives--;window.neoGameBrain?.miss();status("Essa fração não é equivalente a "+this.round.goal+". Experimente outra.");
      if(this.lives<=0)end(false,"Revise equivalências e tente novamente.");
     }
    }
@@ -184,9 +185,9 @@ class Cell{
   if(!this.moveCollide(this.p.x+dx,this.p.y))this.p.x+=dx;
   if(!this.moveCollide(this.p.x,this.p.y+dy))this.p.y+=dy;
   for(const v of this.viruses){
-   v.y+=v.dy*dt;if(v.y<125||v.y>435)v.dy*=-1;
+   v.y+=v.dy*dt*(window.neoGameBrain?.multiplier()||1);if(v.y<125||v.y>435)v.dy*=-1;
    if(this.inv<=0&&distance(v.x,v.y,this.p.x,this.p.y)<30){
-    this.lives--;this.inv=1.4;status("⚠️ Vírus encontrado! Desvie e continue o transporte.");
+    this.lives--;this.inv=1.4;window.neoGameBrain?.miss();status("⚠️ Vírus encontrado! Desvie e continue o transporte.");
     if(this.lives<=0){end(false,"Sua célula precisa de proteção.");return}
    }
   }
@@ -197,7 +198,7 @@ class Cell{
   }else{
    for(const station of this.stations)if(distance(770,station.y,this.p.x,this.p.y)<64){
     if(this.carry.role===station.role){
-     this.carry.done=true;this.score+=20;this.delivered++;
+     this.carry.done=true;this.score+=20;this.delivered++;window.neoGameBrain?.good();
      status("✅ "+this.carry.name+" entregue! "+this.delivered+"/3.");
      this.carry=null;
      if(this.delivered===3){this.won=true;end(true,"Você organizou a célula!");return}
@@ -246,17 +247,17 @@ class Words{
   if(keys.right&&!this.prevR){this.lane=clamp(this.lane+1,0,2)}
   this.prevL=keys.left;this.prevR=keys.right;
   this.clock+=dt;this.tick+=dt;
-  if(this.clock>Math.max(.67,1.2-this.caught*.03)){this.clock=0;this.spawn()}
-  const speed=135+Math.min(115,this.caught*9);
+  if(this.clock>Math.max(.67,1.2-this.caught*.03)/(window.neoGameBrain?.multiplier()||1)){this.clock=0;this.spawn()}
+  const speed=(135+Math.min(115,this.caught*9))*(window.neoGameBrain?.multiplier()||1);
   for(const o of this.falling){
    o.y+=dt*speed;
    if(!o.passed&&o.y>418){o.passed=true;
     if(o.lane===this.lane){
      if(o.category===this.target.name){
-      this.score+=10;this.caught++;status("✅ Boa combinação! "+this.caught+"/10 conectivos.");
+      this.score+=10;this.caught++;window.neoGameBrain?.good();status("✅ Boa combinação! "+this.caught+"/10 conectivos.");
       if(this.caught>=10){this.won=true;end(true,"Você dominou os conectivos em movimento!");return}
       this.nextTarget();
-     }else{this.lives--;status("O conectivo '"+o.word+"' não expressa "+this.target.name+".");
+     }else{this.lives--;window.neoGameBrain?.miss();status("O conectivo '"+o.word+"' não expressa "+this.target.name+".");
       if(this.lives<=0){end(false,"Continue treinando os tipos de conectivos.");return}}
     }else if(o.category===this.target.name&&this.caught>0){/* outros objetos não punem o jogador */ }
    }
