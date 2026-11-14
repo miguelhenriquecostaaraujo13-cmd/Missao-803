@@ -44,3 +44,27 @@ html[data-phase-contrast="on"] .pazinho-balao{outline:2px solid currentColor}
 }
 html[data-phase-motion="reduce"] #portal8Pazinho *,html[data-phase-motion="reduce"] #portal8Pazinho *::before,html[data-phase-motion="reduce"] #portal8Pazinho *::after,
 #portal8Pazinho.pazinho-sem-movimento *,#portal8Pazinho.pazinho-sem-movimento *::before,#portal8Pazinho.pazinho-sem-movimento *::after{animation:none!important;transition:none!important}
+
+/* Transição perceptível: o livrinho surge durante a mudança de ferramenta. */
+#portal8MascotTransition[hidden]{display:none!important}
+.pazinho-scene{
+ position:fixed;left:50%;top:min(24vh,220px);z-index:9700;transform:translateX(-50%);
+ display:flex;align-items:center;gap:14px;width:max-content;max-width:calc(100vw - 24px);
+ background:linear-gradient(125deg,rgba(236,248,255,.98),rgba(255,255,255,.98));
+ padding:13px 22px 13px 12px;border:2px solid #63bfea;border-radius:20px;
+ box-shadow:0 20px 48px rgba(16,65,118,.28);color:#114f82;
+ font-weight:900;font-size:clamp(.95rem,2.4vw,1.18rem);pointer-events:none;opacity:0;
+}
+.pazinho-scene img{display:block;width:82px;height:88px;object-fit:contain;flex:0 0 82px}
+.pazinho-scene-label{line-height:1.35;overflow-wrap:anywhere}
+.pazinho-scene.pazinho-scene-play{animation:pazinhoSceneEntrance 1.5s cubic-bezier(.18,.77,.25,1) both}
+@keyframes pazinhoSceneEntrance{
+ 0%{opacity:0;transform:translate(-50%,48px) scale(.73)}
+ 22%{opacity:1;transform:translate(-50%,-9px) scale(1.06)}
+ 40%{opacity:1;transform:translate(-50%,0) scale(1)}
+ 72%{opacity:1;transform:translate(-50%,0) scale(1)}
+ 100%{opacity:0;transform:translate(-50%,-24px) scale(.92)}
+}
+@media(max-width:560px){.pazinho-scene{top:16vh;padding:8px 14px 8px 7px;gap:7px}.pazinho-scene img{width:58px;height:64px;flex-basis:58px}}
+@media(prefers-reduced-motion:reduce){.pazinho-scene.pazinho-scene-play{animation:none!important;display:none!important}}
+html[data-phase-motion="reduce"] .pazinho-scene.pazinho-scene-play{animation:none!important;display:none!important}
