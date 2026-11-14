@@ -92,7 +92,7 @@
    label.append(input,span);node.append(label);
   });
   set("neoBagStatus",stored.size+" de "+bag.length+" itens conferidos.");
-  $("neoBagReset")?.addEventListener("click",()=>{save("bag",[]);initBag()});
+
  }
  function showGlossary(){
   const q=normal($("neoGlossaryInput")?.value).trim();
@@ -183,6 +183,7 @@
  function init(){
   if(!$("neoLab"))return;
   initPlan();initBag();showGlossary();initPriority();
+  $("neoBagReset")?.addEventListener("click",()=>{save("bag",[]);initBag()});
   $("neoGlossaryInput")?.addEventListener("input",showGlossary);
   $("neoGradeButton")?.addEventListener("click",gradeCalculator);
   $("neoMindButton")?.addEventListener("click",mindMap);
