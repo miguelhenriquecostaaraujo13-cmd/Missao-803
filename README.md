@@ -225,6 +225,16 @@ Os arquivos são `assets/neo-lab.js` e `assets/neo-lab.css`; o cache offline foi
 - Cache offline atualizado para `portal8-recursos-aprovados-v32` e as referências dos arquivos receberam `?v=32` para evitar uso da versão antiga.
 - Validação: todas as 31 rotas preservadas e sem identificadores duplicados; scripts sintaticamente corretos; teste simulado gerou seis ramificações em posições sem sobreposição. A renderização real deve ser conferida após a publicação no GitHub Pages.
 
+## Versão 33 — Diretor Neo, flashcards inteligentes e ideias inovadoras
+
+- A ferramenta **Aprender → Memorização** já continha flashcards com pergunta e resposta por matéria. Eles foram mantidos, e ganharam uma seção de **revisão inteligente**, com indicação de facilidade para lembrar, seleção de cartões devidos, revisão espaçada, modo de treino livre e botão de limpar o histórico da matéria. O estado é mantido somente no navegador. Não há correção automática de respostas abertas.
+- A página inicial ganhou **Neo recomenda: meu próximo estudo**, um roteiro de leitura, cartões, mapas mentais e prática formado a partir do acervo disponível e de cartões que o aluno escolheu para revisar. Trata-se de sugestão flexível; não atribui notas nem impõe metas.
+- O **Diretor de Desafios Neo** em `assets/neo-game-brain.js` acompanha acertos e erros *durante a partida atual* e ajusta suavemente a velocidade nos jogos Ciências e Português, além de oferecer ajuda ao salto em Matemática após dificuldades. Oferece dicas de conteúdo já preparadas e controles para adaptação equilibrada, leve ou desativada. Os dados de partida não são enviados nem gravados em servidor. Também foi aumentada a frequência de conectivos corretos para tornar o minijogo mais justo.
+- Estes sistemas são **motores de regras adaptativas locais**, sem LLM ou API generativa. Não devem ser apresentados aos alunos como ChatGPT ou como sistemas capazes de compreender qualquer resposta.
+- O **Ateliê Neo administrativo** ganhou mais quatro protótipos: missões interdisciplinares com tópicos do currículo, radar de revisão escolhido pelo estudante, cápsula de aprendizagem para comparar anotações, e campanhas de cartões em três etapas. São testes locais e não estão liberados ao público.
+- Arquivos novos: `assets/neo-study-brain.js`, `assets/neo-game-brain.js`, `assets/neo-inteligencia.css`, `assets/neo-inovacoes-v33.js`. `assets/neo-arcade.js` recebeu os pontos de integração. Cache offline: `portal8-recursos-aprovados-v33`.
+- Todas as **31 ferramentas** anteriores, o login Supabase, o mascote Neo, os mapas mentais e dados de aulas foram preservados. Testes estáticos e simulação dos flashcards e da lógica adaptativa foram realizados; a verificação visual em dispositivos reais requer validação após a publicação.
+
 ## Publicação
 
 Publicação atual pelo GitHub Pages: https://miguelhenriquecostaaraujo13-cmd.github.io/Missao-803/
