@@ -4,8 +4,9 @@
 const $ = id => document.getElementById(id);
 const canStudy = typeof subjects !== "undefined" && typeof quizzes !== "undefined" && typeof flashcards !== "undefined";
 if (!canStudy || !$("neoCentral30")) return;
-const turma = typeof portal8Turma !== "undefined" ? portal8Turma : "803";
-const KEY = "neo-central-3-v1-" + turma;
+const classNow = () => typeof portal8Turma !== "undefined" ? portal8Turma : "803";
+let loadedClass = classNow();
+const key = () => "neo-central-3-v1-" + loadedClass;
 const DAY = () => {
  const d = new Date();
  return [d.getFullYear(),String(d.getMonth()+1).padStart(2,"0"),String(d.getDate()).padStart(2,"0")].join("-");
@@ -13,13 +14,13 @@ const DAY = () => {
 const escapeText = v => String(v ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 function load(){
  try{
-  const raw=JSON.parse(localStorage.getItem(KEY)||"{}");
+  const raw=JSON.parse(localStorage.getItem(key())||"{}");
   if(!raw||typeof raw!=="object"||Array.isArray(raw))return {};
   return raw;
  }catch(_){return {}}
 }
 let data=load();
-const write=()=>{try{localStorage.setItem(KEY,JSON.stringify(data))}catch(_){msg("O navegador não conseguiu guardar a alteração. Verifique o armazenamento disponível.")}};
+const write=()=>{try{localStorage.setItem(key(),JSON.stringify(data))}catch(_){msg("O navegador não conseguiu guardar a alteração. Verifique o armazenamento disponível.")}};
 const safeArray=v=>Array.isArray(v)?v:[];
 const safeMap=v=>v&&typeof v==="object"&&!Array.isArray(v)?v:{};
 const msg=s=>{const n=$("n3Message");if(n)n.textContent=s};
@@ -274,6 +275,7 @@ function randomStudy(){
 }
 function refresh(){
  if(!$("neoCentral30"))return;
+ if(classNow()!==loadedClass){loadedClass=classNow();data=load();chosenSubject=subjects[0].name;boss={questions:[],position:0,correct:0,answered:false,active:false};$("n3BossAnswers").replaceChildren();$("n3BossTitle").textContent="O Guardião dos Desafios aguarda!";$("n3BossQuestion").textContent="Inicie uma batalha para esta matéria.";$("n3BossNext").hidden=true;$("n3BossFeedback").textContent="";$("n3BossBar").style.width="100%";$("n3Monster").textContent="🐉";}
  renderStats();renderWorlds();renderRoute();renderMission();renderRadar();renderNotes();renderCity();renderBadges();
 }
 $("neoCentral30").addEventListener("click",e=>{
