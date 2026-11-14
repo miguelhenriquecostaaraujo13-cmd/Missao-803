@@ -158,3 +158,31 @@ html #neoGames40 .n4-game-picture{height:185px}
  html #inicio #n4QuickBar button{flex-direction:column;align-items:start}
 }
 @media(prefers-reduced-motion:reduce){#inicio .mp5-world-gate{animation:none!important}#inicio .mp5-home-ctas button:hover,#inicio .portal8-pro-card:hover{transform:none}}
+
+/* Labirinto dos Cristais — terceira mecânica do Studio: explorar em vez de correr ou atirar */
+html #neoGames40 .mp5-puzzle{margin:24px 0 5px;overflow:hidden;border-radius:24px;border:1px solid #cfdcf3;background:linear-gradient(140deg,#f2f5ff,#f0fbff);box-shadow:0 20px 45px #10294a22}
+html #neoGames40 .mp5-puzzle-header{padding:24px;display:flex;justify-content:space-between;align-items:center;gap:20px;background:radial-gradient(circle at 96% 0,#9177e74d,transparent 40%),linear-gradient(130deg,#1a2b57,#2b4a79);color:#fff}
+html #neoGames40 .mp5-puzzle-header h3{margin:9px 0 7px;font-size:clamp(1.35rem,3vw,1.8rem);color:#fff!important}
+html #neoGames40 .mp5-puzzle-header p{color:#dce9ff;font-size:.93rem;max-width:690px;line-height:1.6;margin:0}
+html #neoGames40 .mp5-puzzle-tag{font-size:.73rem;color:#ffedae;letter-spacing:.09em;font-weight:900}
+html #neoGames40 .mp5-puzzle-main{border:0;background:linear-gradient(120deg,#ffce6f,#ffaa64);color:#25365b;border-radius:13px;font:900 .93rem Inter,system-ui,sans-serif;padding:13px 19px;min-height:48px;white-space:nowrap;box-shadow:0 5px 0 #ac7540;cursor:pointer}
+html #neoGames40 .mp5-puzzle-shell{padding:18px;max-width:750px;margin:auto}
+html #neoGames40 .mp5-puzzle-hud{display:flex;flex-wrap:wrap;justify-content:space-between;gap:9px;margin-bottom:9px;align-items:center}
+html #neoGames40 .mp5-puzzle-hud>*{background:#e1e9fa;color:#244b78;font-weight:850;padding:7px 10px;border-radius:9px;font-size:.82rem}
+html #neoGames40 #mp5PuzzleCanvas{width:100%;height:auto;aspect-ratio:16 / 10;display:block;border:7px solid #1e3258;border-radius:12px;background:#153359;image-rendering:pixelated;image-rendering:crisp-edges;box-shadow:0 14px 25px #09254f34;touch-action:manipulation}
+html #neoGames40 .mp5-puzzle-question{border:1px solid #aed9e8;background:#eaf9ff;padding:17px;margin-top:13px;border-radius:15px}
+html #neoGames40 .mp5-puzzle-question strong{display:block;margin:0 0 12px;color:#1b4777}
+html #neoGames40 .mp5-puzzle-answers{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+html #neoGames40 .mp5-puzzle-answers button{border:1px solid #c4d8ef;background:#fff;color:#23476c;padding:12px;border-radius:10px;min-height:43px;font:750 .88rem Inter,system-ui,sans-serif;cursor:pointer;text-align:left}
+html #neoGames40 .mp5-puzzle-answers button:hover{background:#dbf7ff;border-color:#58a9ba}
+html #neoGames40 .mp5-puzzle-message{border:1px solid #dce7f4;background:#fff;border-radius:11px;min-height:46px;padding:12px 14px;margin-top:11px;color:#355f80;font-size:.89rem;line-height:1.5}
+html #neoGames40 .mp5-puzzle-controls{display:grid;justify-content:center;gap:3px;margin:12px 0}
+html #neoGames40 .mp5-puzzle-controls>div{display:flex;justify-content:center;gap:6px}
+html #neoGames40 .mp5-puzzle-controls button{min-height:45px;min-width:55px;border:1px solid #9ec1e6;background:#dbe9ff;color:#19436f;border-radius:11px;cursor:pointer;font:900 1.1rem system-ui;box-shadow:0 4px 0 #a6bde0}
+html #neoGames40 .mp5-puzzle-shell>small{display:block;margin:13px 0 3px;color:#617d95;font-size:.79rem;line-height:1.6}
+@media(max-width:600px){
+ html #neoGames40 .mp5-puzzle-header{flex-direction:column;align-items:start;padding:18px}
+ html #neoGames40 .mp5-puzzle-main{width:100%}
+ html #neoGames40 .mp5-puzzle-shell{padding:10px}
+ html #neoGames40 .mp5-puzzle-answers{grid-template-columns:1fr}
+}
