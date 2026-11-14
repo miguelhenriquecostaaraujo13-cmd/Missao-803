@@ -1,5 +1,12 @@
 [
   {
+    "id": "versao-219a0bbbbc3e",
+    "title": "Ateliê Neo adiciona 9 recursos locais e quadro de prioridades",
+    "body": "Nove novas melhorias de estudo e doze sugestões com estrelas; todas as 28 ferramentas anteriores foram preservadas.",
+    "date": "2026-11-14",
+    "important": true
+  },
+  {
     "id": "versao-132d5ab154f9",
     "title": "Neo Tutor local e gratuito ganhou conversa guiada e matemática",
     "body": "O chat do Neo agora tem contexto, exercícios, resumos e contas passo a passo sem API paga. As 28 ferramentas permanecem intactas.",
