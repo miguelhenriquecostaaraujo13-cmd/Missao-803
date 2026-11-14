@@ -34,3 +34,14 @@ html[data-portal-theme="noite"] .p8-profile-panel{background:#143b59}
 html[data-portal-theme="noite"] .p8-profile-info{background:#1a4569;color:#e3f5ff}
 @media(max-width:760px){.p8-profile-layout{grid-template-columns:1fr}.p8-profile-lead{padding:16px}.p8-profile-shortcut{font-size:.75rem;max-width:170px}}
 @media(max-width:410px){.p8-profile-shortcut{padding-right:7px;max-width:138px}.p8-profile-lead .p8-profile-picture{width:80px;height:80px;flex-basis:80px;font-size:2rem}}
+
+/* Selo administrativo: nome editável separado do nível de permissão verificado. */
+.p8-profile-role.p8-admin-role{color:#6b4300;border-color:#d3a443;background:linear-gradient(120deg,#fff5ca,#ffe5a1);box-shadow:0 3px 9px rgba(139,91,0,.12)}
+.p8-profile-admin-choice{display:flex;align-items:center;gap:13px;padding:12px;margin:16px 0 8px;border:1px solid #dfbe74;border-radius:16px;background:linear-gradient(130deg,#fff6da,#f1f8ff);color:#153d61}
+.p8-profile-admin-choice img{width:74px;height:74px;flex:0 0 74px;object-fit:contain;border-radius:50%;filter:drop-shadow(0 4px 8px #1c3c6660)}
+.p8-profile-admin-choice strong{font-weight:900}
+.p8-profile-admin-choice .small{margin:5px 0 10px;color:#4c6177}
+.p8-profile-admin-choice .btn{font-size:.83rem}
+html[data-portal-theme="noite"] .p8-profile-admin-choice{background:#254967;border-color:#d8ac58;color:#fff}
+html[data-portal-theme="noite"] .p8-profile-admin-choice .small{color:#d9eaf2}
+@media(max-width:460px){.p8-profile-admin-choice{align-items:flex-start}.p8-profile-admin-choice img{width:59px;height:59px;flex-basis:59px}}
