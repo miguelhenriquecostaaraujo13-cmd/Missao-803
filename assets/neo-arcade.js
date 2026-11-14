@@ -129,7 +129,7 @@ class Fractions{
   const p=this.p;
   p.vx=(Number(keys.right)-Number(keys.left))*252;
   const grounded=this.platforms.some(q=>Math.abs(p.y+p.h-q.y)<3&&p.x+p.w>q.x&&p.x<q.x+q.w);
-  if(keys.jump&&grounded){p.vy=-565;keys.jump=false}
+  if(keys.jump&&grounded){p.vy=-565*((window.neoGameBrain?.multiplier()||1)<1?1.08:1);keys.jump=false}
   const oldY=p.y,oldBottom=p.y+p.h;
   p.x=clamp(p.x+p.vx*dt,5,W-p.w-5);p.vy+=1450*dt;p.y+=p.vy*dt;
   for(const platform of this.platforms){
@@ -238,7 +238,7 @@ class Words{
  }
  nextTarget(){this.target=this.categories[Math.floor(this.caught/3)%this.categories.length]}
  spawn(){
-  const category=this.categories[Math.floor(rand(0,3))];
+  const category=Math.random()<.58?this.target:this.categories[Math.floor(rand(0,3))];
   const word=category.words[Math.floor(rand(0,category.words.length))];
   this.falling.push({lane:Math.floor(rand(0,3)),y:120,word,category:category.name,passed:false});
  }
