@@ -75,6 +75,15 @@ O botão **Permitir notificações** solicita autorização expressa do navegado
 - Novas turmas podem sincronizar contadores agregados sem acessar os dados individuais de outras sessões. A 803 preserva o painel histórico anterior.
 - **Limitação:** a seleção de turma no navegador não é autenticação de matrícula. A instituição não foi formalmente envolvida no projeto e não deve ser apresentada como autora ou responsável sem autorização.
 
+## Identidade visual animada e ilustração aprovada
+
+- A página inicial utiliza a ilustração cartoon aprovada pelo criador, em `assets/estudantes-cartoon-aprovado.png` (imagem criada a partir da referência fornecida).
+- Novo banner panorâmico com **animação automática de entrada**, efeito de brilho, leve aproximação da imagem e ícones flutuantes; letreiro de ferramentas com movimento contínuo.
+- Há um botão **“✨ Reproduzir animações”**, além de três passos claros para começar: escolha uma matéria, pratique questões e revise.
+- As animações são CSS leves (sem vídeos, APIs pagas nem rastreamento). Respeitam `prefers-reduced-motion` e a preferência **Reduzir animações** do aluno.
+- O service worker contém o cartoon no cache offline da versão `portal8-missao-paz-animado-v8` para acesso após a primeira visita online.
+- Preservadas as 27 seções e os registros locais existentes, inclusive os resultados históricos da 803.
+
 ## Publicação
 
 Publicação atual pelo GitHub Pages: https://miguelhenriquecostaaraujo13-cmd.github.io/Missao-803/
