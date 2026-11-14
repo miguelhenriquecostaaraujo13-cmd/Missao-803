@@ -205,6 +205,17 @@ Os arquivos são `assets/neo-lab.js` e `assets/neo-lab.css`; o cache offline foi
 - As **30 áreas existentes** e a infraestrutura do Supabase permaneceram sem alterações. Novo cache offline `portal8-recursos-aprovados-v30`.
 - Verificação estática: 30 rotas de navegação, IDs únicos, referências de DOM, presença dos arquivos e sintaxe de todos os scripts atualizados. O comportamento visual e a autenticação em navegador real ainda precisam de teste após publicação.
 
+## Versão 31 — Arcade Educativo Neo: minijogos reais
+
+- Nova aba **🕹️ Arcade Educativo Neo** em **Praticar**: três jogos completos em Canvas, com movimento, colisões, objetivos, vidas, pontuação, reinício, pausa, feedback e controles para teclado e celular. Não são perguntas com botões decorativos.
+- **🏃 Corrida das Frações (Matemática):** jogo de plataformas com velocidade horizontal, gravidade, pulo, plataformas em diferentes alturas, coleta de frações equivalentes, erros que descontam corações e missão de seis coletas corretas.
+- **🧬 Missão Célula (Ciências):** exploração de um cenário com obstáculos, deslocamento em duas dimensões, transporte de organelas até setores funcionais (mitocôndria/energia, ribossomo/proteínas e núcleo/comando), obstáculos móveis e vitória ao completar as três entregas.
+- **📝 Ritmo dos Conectivos (Português):** jogo de reflexos com três pistas, movimento lateral, palavras em queda, seleção de conectivos de oposição, adição e conclusão, progressão de velocidade e dez acertos para concluir.
+- **Gratuito e privado:** não utiliza API, serviço pago, contas externas, anúncios ou ranking público. Salva apenas os recordes no `localStorage` deste dispositivo. Não altera pontuação das provas ou notas escolares.
+- **Responsividade:** canvas em proporção 9:5, setas digitais e controle de pulo para dispositivos de toque. Pausa ao sair da ferramenta ou colocar a página em segundo plano.
+- Os arquivos são `assets/neo-arcade.js` e `assets/neo-arcade.css`; o cache offline foi atualizado para `portal8-recursos-aprovados-v31`. As 30 áreas anteriores permanecem intactas, totalizando 31.
+- Os scripts passaram por validação de sintaxe e integração de arquivos. A jogabilidade, visual final e performance em aparelhos reais exigem teste no site publicado.
+
 ## Publicação
 
 Publicação atual pelo GitHub Pages: https://miguelhenriquecostaaraujo13-cmd.github.io/Missao-803/
