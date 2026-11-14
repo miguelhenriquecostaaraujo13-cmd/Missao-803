@@ -665,6 +665,7 @@ html[data-phase-motion="reduce"] .view.active.portal8-enter-active{
 <link rel="stylesheet" href="./assets/neo-oficina-v35.css?v=35">
 <link rel="stylesheet" href="./assets/portal-tres-pontinhos-v37.css?v=37">
 <link rel="stylesheet" href="./assets/neo-arcade-missoes-v37.css?v=37">
+<link rel="stylesheet" href="./assets/neo-arcade-arte-v38.css?v=38">
 <style id="mpMenuCalendarV25">
 /* Menu v25 — correção em TODOS os temas; carregada após todos os CSS antigos. */
 html nav{background:#103755!important;color:#effaff!important}
@@ -1013,7 +1014,20 @@ html nav :is(summary,button,select):focus-visible{outline:3px solid #ffd781!impo
   </div>
   <div id="neoBrainTip" role="status">Escolha um jogo e peça uma dica quando precisar.</div>
  </section>
- <div class="neo-arcade-stage-picker">
+ <section class="neo-arcade-visual-choice" aria-label="Testar a nova aparência dos jogos">
+  <label for="neoArcadeLook">🎨 Aparência dos minijogos</label>
+  <select id="neoArcadeLook">
+    <option value="enhanced" selected>✨ Visual 2.0 — personagens e cenários (TESTE)</option>
+    <option value="classic">⚪ Visual clássico — versão anterior</option>
+  </select>
+  <p>Compare os dois visuais sem perder os minijogos. O modo 2.0 traz personagens desenhados, cenários temáticos, itens ilustrados e efeitos. As regras, as matérias e os recordes continuam funcionando.</p>
+</section>
+<div class="neo-arcade-visual-compare" aria-label="O que mudou nos jogos">
+ <div><span class="neo-visual-icon" aria-hidden="true">🏃</span><div><strong>Matemática: aventureiro</strong><p>Corre e salta por plataformas com cartas de frações.</p></div></div>
+ <div><span class="neo-visual-icon" aria-hidden="true">🧑‍🔬</span><div><strong>Ciências: explorador</strong><p>Transporta organelas desenhadas em um laboratório celular.</p></div></div>
+ <div><span class="neo-visual-icon" aria-hidden="true">🛹</span><div><strong>Português: corredor</strong><p>Percorre pistas e coleta placas com palavras.</p></div></div>
+</div>
+<div class="neo-arcade-stage-picker">
  <label for="neoArcadeChallenge">🎯 Fase da missão</label>
  <select id="neoArcadeChallenge" aria-label="Escolher dificuldade e objetivos da missão">
   <option value="explorador">🌱 Explorador — começar com calma</option>
@@ -3179,7 +3193,7 @@ async function portal8UpdateSite(){
    await Promise.all(regs.map(r=>r.update().catch(()=>null)));
   }
  }catch(e){}
- location.replace(location.pathname+"?versao=recursos-aprovados-v37&atualizacao="+Date.now());
+ location.replace(location.pathname+"?versao=recursos-aprovados-v38&atualizacao="+Date.now());
 }
 function portal8EnableScrollReveal(){
  if(window.matchMedia?.("(prefers-reduced-motion: reduce)").matches||document.documentElement.dataset.phaseMotion==="reduce")return;
@@ -3223,7 +3237,8 @@ init();renderNexo();
 <script src="./assets/portal-tres-pontinhos-v37.js?v=37"></script>
 <script src="./assets/neo-game-brain.js?v=33"></script>
 <script src="./assets/neo-study-brain.js?v=33"></script>
-<script src="./assets/neo-arcade.js?v=37"></script>
+<script src="./assets/neo-arcade-arte-v38.js?v=38"></script>
+<script src="./assets/neo-arcade.js?v=38"></script>
 <script src="./assets/neo-admin-gate.js?v=29"></script>
 <script src="./assets/portal8-perfil.js?v=21"></script>
 </body>
