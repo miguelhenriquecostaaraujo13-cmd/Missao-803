@@ -316,15 +316,65 @@ html[data-portal-theme="papel"] .portal-smart-glow{background:radial-gradient(ci
 }
 html[data-phase-motion="reduce"] .view.active,html[data-phase-motion="reduce"] .navgroup[open] .navgroup-items,html[data-phase-motion="reduce"] header::before,html[data-phase-motion="reduce"] .portal-smart-glow{animation:none!important}
 html[data-phase-motion="reduce"] .portal-tool-tile:hover,html[data-phase-motion="reduce"] #inicio>.grid>.card:hover,html[data-phase-motion="reduce"] .btn:not(:disabled):hover,html[data-phase-motion="reduce"] .portal-hero-actions button:hover{transform:none!important}
+
+/* Identidade visual do Instituto Educacional Missão Paz: fachada em azul e losangos.
+   Desenhos estilizados; fotos de estudantes não são incluídas por privacidade. */
+html[data-portal-theme="aurora"]{--portal-hero1:#064f99;--portal-hero2:#04a5d4;--portal-sidebar:#063a6b;--navy:#07518d;--navy2:#029bc5;--teal:#077ab8;--portal-soft:#eaf7ff}
+html[data-portal-theme="papel"]{--portal-hero1:#0a648c;--portal-hero2:#169fc4;--portal-sidebar:#0e4e72;--navy:#075f7d;--teal:#067fa3}
+html[data-portal-theme="noite"]{--portal-hero1:#073a67;--portal-hero2:#036d93;--portal-sidebar:#071a30}
+.school-hero{position:relative;min-height:318px;overflow:hidden;background:linear-gradient(115deg,var(--portal-hero1) 6%,#027bb4 57%,var(--portal-hero2));border:1px solid #d6f5ff60}
+.school-hero:after{content:"";position:absolute;right:5%;top:15%;pointer-events:none;color:#ffffff0e}
+.school-hero .wrap{z-index:3;position:relative}
+.school-identity{color:#fff;display:flex;align-items:center;gap:13px;flex-wrap:nowrap;letter-spacing:0;text-transform:none}
+.school-mark{display:flex;align-items:center;justify-content:center;border-radius:16px;background:#fff;padding:5px;width:60px;height:60px;box-shadow:0 8px 26px #003c7e50;flex:none}
+.school-mark svg{width:51px;height:51px}
+.school-identity-text{display:flex;flex-direction:column;gap:3px}
+.school-identity-text strong{font-size:clamp(.7rem,1.65vw,1.04rem);font-weight:900;line-height:1.25;letter-spacing:.03em;color:#fff}
+.school-identity-text small{font-size:.78rem;font-weight:650;letter-spacing:.025em;color:#def5ff}
+.school-hero-number{color:#b8f2ff}
+.school-hero-slogan{color:#fff!important;font-size:.72em;letter-spacing:-.035em}
+.school-diamond-band{position:absolute;z-index:1;right:-30px;bottom:-61px;display:flex;gap:19px;width:95%;justify-content:flex-end;pointer-events:none;opacity:.32;transform:skewX(-6deg)}
+.school-diamond-band i{display:block;flex:none;width:77px;height:77px;transform:rotate(45deg);background:linear-gradient(135deg,#a4ebff,#ffffff29);border:2px solid #b5f6ff;animation:schoolDiamond 3.2s ease-in-out infinite alternate;box-shadow:0 0 30px #94dfff35}
+.school-diamond-band i:nth-child(even){animation-delay:-1.4s}
+.school-diamond-band i:nth-child(3n){animation-delay:-2.7s}
+.school-orbit{position:absolute;z-index:1;right:8%;top:22%;width:190px;height:170px;pointer-events:none;opacity:.67}
+.school-orbit span{position:absolute;display:block;border:2px solid #c3f6ff;border-radius:18px;transform:rotate(45deg);background:#ffffff14;box-shadow:0 0 40px #b7f6ff30;animation:schoolFloat 3s ease-in-out infinite alternate}
+.school-orbit span:nth-child(1){width:85px;height:85px;right:20px;top:15px}
+.school-orbit span:nth-child(2){width:55px;height:55px;right:116px;top:74px;animation-delay:-1.4s}
+.school-orbit span:nth-child(3){width:31px;height:31px;right:2px;top:120px;animation-delay:-.8s}
+.school-hero .portal-hero-actions{margin-top:18px}
+.school-hero .portal-hero-primary{background:#fff;color:#07508e;border-color:#fff}
+.school-hero .portal-hero-secondary,.portal-motion-button{background:#004e8499;color:#fff;border:1px solid #b1eaffb0}
+.portal-motion-button{border-radius:13px;padding:12px 15px;font:inherit;font-weight:800;font-size:.9rem;cursor:pointer;transition:transform .2s,background .2s}
+.portal-motion-button:hover{transform:translateY(-3px);background:#ffffff30}
+.school-hero .exam-pill{background:#003e7277;border:1px solid #b2ebff75;color:#fff}
+.school-hero .portal-eyebrow{color:#e4f9ff}
+.school-hero .portal-theme-label{color:#fff}
+.school-hero .portal-hero-actions button{position:relative;z-index:3}
+.school-hero:not(.school-motion-pause) .school-identity{animation:schoolEntrance .85s both}
+.school-hero:not(.school-motion-pause) h1{animation:schoolEntrance 1.2s both}
+.school-hero:not(.school-motion-pause) .portal-hero-actions{animation:schoolEntrance 1.45s both}
+.school-hero:not(.school-motion-pause) .school-diamond-band{animation:schoolSweep 2.1s both}
+.school-hero.school-motion-replay{animation:schoolFlash 1.5s ease}
+.school-hero.school-motion-replay .school-orbit span{animation-duration:.9s}
+@keyframes schoolDiamond{0%{translate:0 0;opacity:.58}100%{translate:0 -19px;opacity:1}}
+@keyframes schoolFloat{0%{translate:0 12px;rotate:-9deg;opacity:.35}100%{translate:0 -12px;rotate:9deg;opacity:1}}
+@keyframes schoolEntrance{0%{opacity:0;transform:translateY(32px)}100%{opacity:1;transform:translateY(0)}}
+@keyframes schoolSweep{0%{opacity:0;transform:translateX(130px)}100%{opacity:.32;transform:translateX(0)}}
+@keyframes schoolFlash{0%,100%{filter:saturate(1)}45%{filter:saturate(1.7) brightness(1.16)}}
+@media(max-width:820px){.school-hero{min-height:0}.school-orbit{right:-25px;top:43%;opacity:.22}.school-diamond-band{bottom:-74px;opacity:.24}.school-hero .portal-hero-actions button{min-width:0;flex:1 1 140px}}
+@media(max-width:480px){.school-mark{width:46px;height:46px;border-radius:12px}.school-mark svg{width:40px;height:40px}.school-identity-text strong{font-size:.69rem;line-height:1.25}.school-identity-text small{font-size:.69rem}.school-hero .portal-hero-actions button{font-size:.81rem;padding:10px 9px}.school-hero .portal-hero-actions{gap:8px}.school-orbit{display:none}}
+@media(prefers-reduced-motion:reduce){.school-hero *, .school-hero::before,.school-hero::after{animation:none!important;transition:none!important}.school-hero .portal-hero-actions button:hover{transform:none}}
+html[data-phase-motion="reduce"] .school-hero *,html[data-phase-motion="reduce"] .school-hero::before,html[data-phase-motion="reduce"] .school-hero::after{animation:none!important;transition:none!important}
 </style>
  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.105.0"></script>
 </head>
 <body>
-<header><div class="wrap">
+<header class="school-hero"><div class="school-diamond-band" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><div class="school-orbit" aria-hidden="true"><span></span><span></span><span></span></div><div class="wrap">
   <div class="portal-top"><span class="portal-eyebrow">✦ PLATAFORMA DE ESTUDOS DA TURMA 803</span><label class="portal-theme-label" for="portalThemeSelect">🎨 Estilo <select id="portalThemeSelect" aria-label="Escolha a aparência do Portal 803"><option value="aurora">🌈 Aurora</option><option value="noite">🌙 Noite</option><option value="papel">🌿 Papel</option></select></label></div>
-  <div class="topline"><span class="logo">803</span> Instituto Educacional Missão Paz <span>•</span> Central de Estudos</div>
-  <h1>Portal 803<br><span style="color:#ffb45f">Conecte seu conhecimento</span></h1><div class="portal-hero-actions"><button type="button" class="portal-hero-primary" onclick="showView('trilha')">📚 Começar a estudar <span aria-hidden="true">↗</span></button><button type="button" class="portal-hero-secondary" onclick="showView('quiz')">🧠 Fazer simulado</button></div>
-  <p>Evolua a cada missão! Uma plataforma gratuita de estudos, metas, desafios e conquistas da turma 803.</p>
+  <div class="topline school-identity"><span class="school-mark" aria-hidden="true"><svg viewBox="0 0 64 64" focusable="false"><path fill="#04a9e1" d="M3 29C16 11 35 9 57 22L45 40 32 27 21 46z"/><path d="M37 17l8 9m-11-7 9 10m-7 4c5-4 11-4 13-9" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round"/></svg></span><span class="school-identity-text"><strong>INSTITUTO EDUCACIONAL MISSÃO PAZ</strong><small>Central de Estudos • Turma 803</small></span></div>
+  <h1>Portal <span class="school-hero-number">803</span><br><span class="school-hero-slogan">Aprenda. Evolua. Conquiste.</span></h1><div class="portal-hero-actions"><button type="button" class="portal-hero-primary" onclick="showView('trilha')">📚 Começar a estudar <span aria-hidden="true">↗</span></button><button type="button" class="portal-hero-secondary" onclick="showView('quiz')">🧠 Fazer simulado</button><button type="button" class="portal-motion-button" onclick="portalReplayMotion()" aria-label="Repetir animação da página">✨ Ver animação</button></div>
+  <p>Um espaço de estudos feito para nossa turma, inspirado nas cores e nos elementos geométricos da escola.</p>
   <div class="exam-strip">
     <span class="exam-pill">16/11 · Matemática</span><span class="exam-pill">17/11 · Português</span>
     <span class="exam-pill">18/11 · Geografia + Ed. Física teórica</span><span class="exam-pill">19/11 · História + Inglês</span><span class="exam-pill">23/11 · Ciências + Arte</span>
@@ -335,7 +385,7 @@ html[data-phase-motion="reduce"] .portal-tool-tile:hover,html[data-phase-motion=
 <section id="inicio" class="view active">
 <div class="portal-smart card" aria-label="Central de acesso e ferramentas">
  <div class="portal-smart-head"><div class="portal-smart-glow" aria-hidden="true"></div>
-  <div><span class="portal-premium-kicker">✦ SEU ESPAÇO DE APRENDIZAGEM</span><h2>Seu próximo passo começa aqui<span class="portal-heading-dot">.</span></h2><p class="small muted">Uma central de estudos para você aprender no seu ritmo, com tudo organizado em um só lugar.</p></div>
+  <div><span class="portal-premium-kicker">✦ INSTITUTO EDUCACIONAL MISSÃO PAZ</span><h2>Seu próximo passo começa aqui<span class="portal-heading-dot">.</span></h2><p class="small muted">Uma central de estudos para você aprender no seu ritmo, com tudo organizado em um só lugar.</p></div>
   <button class="btn light" type="button" id="portalContinue" onclick="portalContinueLearning()">▶ Continuar estudando</button>
  </div>
  <label for="portalToolSearch"><b>🔎 Encontrar ferramenta</b></label>
@@ -873,6 +923,17 @@ function updateDashboard(){
  $("nextExam").textContent=next?next[1]:"Missão concluída!";$("nextExamDate").textContent=next?next[0]+"/2026":"Parabéns pela dedicação!";
  const bars=subjects.map(s=>{let total=s.topics.reduce((a,g)=>a+g[1].length,0),done=s.topics.reduce((a,g)=>a+g[1].filter(t=>state.done.includes(s.name+"|"+t)).length,0);return `<div style="margin:12px 0"><div class="between"><b>${s.icon} ${s.name}</b><span class="small muted">${done}/${total}</span></div><div class="progress"><i style="width:${100*done/total}%"></i></div></div>`}).join("");
  $("subjectProgress").innerHTML=bars;
+}
+function portalReplayMotion(){
+ const hero=document.querySelector(".school-hero");if(!hero)return;
+ if(window.matchMedia?.("(prefers-reduced-motion: reduce)").matches||document.documentElement.dataset.phaseMotion==="reduce"){
+  const label=hero.querySelector(".portal-motion-button");if(label)label.textContent="♿ Animações reduzidas nas preferências";
+  return;
+ }
+ hero.classList.remove("school-motion-replay");void hero.offsetWidth;hero.classList.add("school-motion-replay");
+ const elems=hero.querySelectorAll(".school-identity,h1,.portal-hero-actions,.school-diamond-band");
+ for(const el of elems){el.style.animation="none";void el.offsetWidth;el.style.animation=""}
+ hero.addEventListener("animationend",function end(e){if(e.target===hero){hero.classList.remove("school-motion-replay");hero.removeEventListener("animationend",end)}});
 }
 function showView(id){
  const target=document.getElementById(id);
