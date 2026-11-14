@@ -97,8 +97,12 @@
   if(busy)return;
   const email=$("p8ProfileEmail").value.trim();
   const password=$("p8ProfilePassword").value;
-  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)||password.length<12){
-    message("Informe um e-mail válido e uma senha de pelo menos 12 caracteres.");return;
+  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){
+    message("Informe um e-mail válido.");return;
+  }
+  if(!password.length){message("Digite sua senha para continuar.");return}
+  if(mode==="signup"&&password.length<12){
+    message("Para criar uma conta, escolha uma senha com pelo menos 12 caracteres.");return;
   }
   setBusy(true);message(mode==="signup"?"Criando conta…":"Entrando…");
   try{
@@ -109,14 +113,31 @@
     $("p8ProfilePassword").value="";
     if(result.error)throw result.error;
     if(mode==="signup"&&!result.data?.session){
-      message("Cadastro solicitado! Confira seu e-mail para confirmar a conta. Depois, volte e clique em Entrar.");
+      $("p8ProfileResend").hidden=false;
+      message(window.portal8AuthHelp?.confirmationMessage||"Confira seu e-mail e confirme o cadastro antes de entrar.");
     }else{
+      $("p8ProfileResend").hidden=true;
       await refresh();message("✅ Conta conectada! Agora você pode personalizar seu perfil.");
     }
   }catch(e){
     $("p8ProfilePassword").value="";
-    message("Não foi possível "+(mode==="signup"?"criar a conta":"entrar")+". Confira os dados e a confirmação do e-mail.");
+    const errcode=String(e?.code||"");
+    if(errcode==="email_not_confirmed"||/email not confirmed/i.test(String(e?.message||"")))$("p8ProfileResend").hidden=false;
+    message(window.portal8AuthHelp?.errorMessage(e,mode)||"Não foi possível autenticar. Verifique e-mail, senha e confirmação.");
   }finally{setBusy(false)}
+ }
+ async function resendSignupConfirmation(){
+  if(busy)return;
+  const email=$("p8ProfileEmail").value.trim();
+  if(!window.portal8AuthHelp?.emailValid(email)){message("Informe seu e-mail para reenviar a confirmação.");return}
+  setBusy(true);message("Solicitando novo e-mail de confirmação…");
+  try{
+    const c=getClient();
+    const {error}=await window.portal8AuthHelp.resendConfirmation(c,email,location.origin+location.pathname);
+    if(error)throw error;
+    message("📩 Se houver um cadastro pendente, um novo e-mail de confirmação será enviado. Confira também o Spam.");
+  }catch(e){message(window.portal8AuthHelp?.errorMessage(e,"resend")||"Não foi possível reenviar agora.");}
+  finally{setBusy(false)}
  }
  async function logout(){
   if(busy)return;
@@ -233,6 +254,7 @@
   if(!$("portal8Profile"))return;
   $("p8ProfileLogin").addEventListener("click",()=>signAction("signin"));
   $("p8ProfileSignup").addEventListener("click",()=>signAction("signup"));
+  $("p8ProfileResend").addEventListener("click",resendSignupConfirmation);
   $("p8ProfileLogout").addEventListener("click",logout);
   $("p8ProfileSave").addEventListener("click",save);
   $("p8ProfileUpload").addEventListener("click",upload);
