@@ -30,6 +30,6 @@
 .neo-search-foot{margin-top:12px;font-size:.78rem;color:var(--muted)}
 .neo-bar-feedback{font-size:.77rem;color:var(--muted);margin-left:auto;min-height:1em}
 .view :is(table,pre,code){max-width:100%}
-.view table{display:block;overflow-x:auto}
+.view table{max-width:100%}
 @media(max-width:720px){.neo-global-bar{padding:10px;gap:6px}.neo-global-bar .neo-tool-heading{flex-basis:100%}.neo-global-bar .neo-bar-action{flex:1;padding:9px 7px;font-size:.75rem}.neo-tool-search{padding:13px}.view :is(.card,.neo-tool){max-width:100%}}
 @media(prefers-reduced-motion:reduce){.neo-global-bar *, .neo-tool-search *{transition:none!important;animation:none!important} .view{scroll-behavior:auto}}
