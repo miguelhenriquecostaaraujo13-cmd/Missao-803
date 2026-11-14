@@ -30,7 +30,8 @@
   criador:["Esta área administrativa exige autorização. Tudo bem!","As publicações oficiais precisam de uma conta autorizada!"],
   offline:["Confira os recursos que funcionam sem conexão!","Para preparar o modo offline, abra o portal com internet!"],
   ajuda803:["Encontrou algum problema? Conte por aqui!","Seu relato pode ajudar a melhorar a plataforma!"],
-  acessibilidade803:["Ajuste a leitura e as animações ao seu gosto!","Aqui você pode ativar ou desativar minhas dicas!"]
+  acessibilidade803:["Ajuste a leitura e as animações ao seu gosto!","Aqui você pode ativar ou desativar minhas dicas!"],
+  perfil:["Olá! Aqui você pode criar sua conta e escolher seu avatar!","Seu perfil é privado. Personalize seu livrinho de estudos!"]
  };
  let widget,balao,fala,avatar,close,again,setting,hideTimer,entryTimer,wiggleTimer;
  let enabled=true,activeId=document.querySelector(".view.active")?.id||"inicio";
@@ -88,7 +89,7 @@
   if(document.getElementById("portal8Pazinho"))return;
   enabled=readEnabled();
   widget=document.createElement("aside");
-  widget.id="portal8Pazinho";widget.setAttribute("aria-label","Pazinho, mascote do Portal 8º Ano");
+  widget.id="portal8Pazinho";widget.setAttribute("aria-label","Pazinho, o livrinho mascote do Portal 8º Ano");
   widget.innerHTML=`
     <div class="pazinho-balao" id="portal8PazinhoBalao" hidden>
       <div class="pazinho-topo"><span>💙 Dica do Pazinho</span><button type="button" class="pazinho-close" aria-label="Fechar dica do Pazinho" title="Fechar dica">×</button></div>
@@ -96,7 +97,7 @@
       <button class="pazinho-again" type="button" title="Mostrar outra dica">✨ Outra dica</button>
     </div>
     <button type="button" class="pazinho-avatar" title="Pazinho: mostrar uma dica" aria-label="Pazinho: mostrar dica da ferramenta">
-      <img src="./assets/pazinho.svg?v=19" alt="" aria-hidden="true" width="98" height="98" decoding="async">
+      <img src="./assets/pazinho.svg?v=20" alt="" aria-hidden="true" width="98" height="98" decoding="async">
     </button>`;
   document.body.append(widget);
   balao=widget.querySelector(".pazinho-balao");
@@ -126,7 +127,7 @@
   setMotionMode();
   document.addEventListener("portal8:viewchange",event=>{
    const id=event.detail?.id;
-   if(typeof id==="string"&&id!==event.detail?.previousId)show(id,280);
+   if(typeof id==="string"&&id!==event.detail?.previousId)show(id,165);
   });
   // Saudação uma vez por sessão; outras aparições ocorrem ao trocar de ferramenta.
   if(enabled){
