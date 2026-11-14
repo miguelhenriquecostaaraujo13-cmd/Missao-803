@@ -3315,7 +3315,7 @@ async function portal8UpdateSite(){
    await Promise.all(regs.map(r=>r.update().catch(()=>null)));
   }
  }catch(e){}
- location.replace(location.pathname+"?versao=links-email-recuperacao-v1&atualizacao="+Date.now());
+ location.replace(location.pathname+"?versao=auth-google-publico-2026&atualizacao="+Date.now());
 }
 function portal8EnableScrollReveal(){
  if(window.matchMedia?.("(prefers-reduced-motion: reduce)").matches||document.documentElement.dataset.phaseMotion==="reduce")return;
@@ -3364,7 +3364,7 @@ init();renderNexo();
 <script src="./assets/neo-arcade.js?v=38"></script>
 <script src="./assets/neo-admin-gate.js?v=29"></script>
 <script src="./assets/portal8-auth-help-v1.js?v=3"></script>
-<script src="./assets/portal8-perfil.js?v=23"></script>
+<script src="./assets/portal8-perfil.js?v=24"></script>
 <script src="./assets/neo-central-3.js?v=2"></script>
 <script src="./assets/neo-agents-4.js?v=1"></script>
 <script src="./assets/neo-world-render-5.js?v=1"></script>
@@ -3525,7 +3525,7 @@ init();renderNexo();
 })();
 </script>
 <script src="./assets/neo-puzzle-5.js?v=2"></script>
-<script src="./assets/portal8-recovery-v1.js?v=1"></script>
+<script src="./assets/portal8-recovery-v1.js?v=2"></script>
 <script src="./assets/portal-design-5.js?v=1"></script>
 </body>
 </html>
