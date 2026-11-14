@@ -32,7 +32,10 @@
   offline:["Confira os recursos que funcionam sem conexão!","Para preparar o modo offline, abra o portal com internet!"],
   ajuda803:["Encontrou algum problema? Conte por aqui!","Seu relato pode ajudar a melhorar a plataforma!"],
   acessibilidade803:["Ajuste a leitura e as animações ao seu gosto!","Aqui você pode ativar ou desativar minhas dicas!"],
-  perfil:["Olá! Aqui você pode criar sua conta e escolher seu avatar!","Seu perfil é privado. Personalize seu livrinho de estudos!"]
+  perfil:["Olá! Aqui você pode criar sua conta e escolher seu avatar!","Seu perfil é privado. Personalize seu livrinho de estudos!"],
+  mapasNeo:["Eu sou o {mascote}! Vou ajudar a organizar seu mapa mental!","Escolha a matéria, um tema e sua paleta de cores favorita!"],
+  arcadeNeo:["Vamos nos divertir aprendendo com os minijogos!","No Arcade, cada desafio exige movimento e atenção!"],
+  neoLab:["Hora de testar novas experiências no Ateliê!","Aqui o administrador avalia ideias antes de publicá-las!"]
  };
  let widget,balao,fala,avatar,close,again,setting,hideTimer,entryTimer,wiggleTimer;
  let enabled=true,activeId=document.querySelector(".view.active")?.id||"inicio";
