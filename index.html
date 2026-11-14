@@ -613,6 +613,26 @@ html[data-phase-motion="reduce"] .view.active.portal8-enter-prepared,
 html[data-phase-motion="reduce"] .view.active.portal8-enter-active{
  animation:none!important;transition:none!important;opacity:1!important;transform:none!important;filter:none!important;
 }
+
+/* Comunicados gerais legíveis, com parágrafos e listas preservados. */
+#portalPublicItems .mission p {
+ white-space:pre-line;
+ overflow-wrap:anywhere;
+ line-height:1.7;
+ margin:10px 0 0;
+}
+#portalPublicItems .mission {
+ border:1px solid var(--line);
+ background:var(--portal-panel);
+ padding:15px 17px;
+ border-radius:14px;
+ margin:11px 0;
+}
+#portalPublicItems .mission b {
+ display:block;
+ color:var(--ink);
+ font-size:1.04rem;
+}
 </style>
  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.105.0"></script>
 </head>
