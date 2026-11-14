@@ -637,7 +637,7 @@ html[data-phase-motion="reduce"] .view.active.portal8-enter-active{
  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.105.0"></script>
 <link rel="stylesheet" href="./assets/portal8-expansao.css?v=18">
 <link rel="stylesheet" href="./assets/portal8-pazinho.css?v=20">
-<link rel="stylesheet" href="./assets/portal8-perfil.css?v=20">
+<link rel="stylesheet" href="./assets/portal8-perfil.css?v=21">
 </head>
 <body>
 <div id="portal8RouteIndicator" class="portal8-route-indicator" aria-hidden="true"></div>
@@ -1146,7 +1146,12 @@ html[data-phase-motion="reduce"] .view.active.portal8-enter-active{
    <label for="p8ProfileFile">Minha foto ou avatar</label><input id="p8ProfileFile" type="file" accept="image/jpeg,image/png,image/webp">
    <small>JPG, PNG ou WebP. Imagens são reduzidas para 320 px e mantidas em armazenamento privado. Se preferir, use um desenho.</small>
    <div class="p8-profile-action"><button class="btn light" id="p8ProfileUpload" type="button" data-profile-action>📷 Salvar foto</button></div>
-   <label for="p8ProfileName">Nome de exibição</label><input id="p8ProfileName" maxlength="40" minlength="2" autocomplete="nickname" placeholder="Como deseja aparecer">
+   <div class="p8-profile-admin-choice" id="p8ProfileAdminOption" hidden>
+    <img src="./assets/avatar-administrador.svg?v=21" alt="Emblema de administrador azul e dourado com livro e coroa" width="74" height="74">
+    <div><strong>👑 Emblema de administrador</strong><p class="small muted">Disponível apenas quando a autorização da conta for confirmada. Você também pode usar a imagem de administrador personalizada que criamos.</p>
+    <button class="btn light" type="button" id="p8ProfileChooseAdmin" data-profile-action>Usar emblema de administrador</button></div>
+   </div>
+   <label for="p8ProfileName">Meu nome no portal</label><p class="small muted">Escolha seu nome ou apelido. Ele aparecerá no topo e no perfil, independentemente de você ser estudante ou administrador.</p><input id="p8ProfileName" maxlength="40" minlength="2" autocomplete="nickname" placeholder="Como deseja aparecer">
    <label for="p8ProfileClass">Minha turma</label>
    <select id="p8ProfileClass"><option value="">Escolha sua turma</option><option value="801">801 • manhã</option><option value="802">802 • manhã</option><option value="803">803 • manhã</option><option value="804">804 • manhã</option><option value="806">806 • tarde</option><option value="807">807 • tarde</option></select>
    <label for="p8ProfileBio">Minha apresentação</label><textarea id="p8ProfileBio" maxlength="120" rows="3" placeholder="Ex.: gosto de Matemática e livros!"></textarea>
@@ -2730,7 +2735,7 @@ async function portal8UpdateSite(){
    await Promise.all(regs.map(r=>r.update().catch(()=>null)));
   }
  }catch(e){}
- location.replace(location.pathname+"?versao=recursos-aprovados-v20&atualizacao="+Date.now());
+ location.replace(location.pathname+"?versao=recursos-aprovados-v21&atualizacao="+Date.now());
 }
 function portal8EnableScrollReveal(){
  if(window.matchMedia?.("(prefers-reduced-motion: reduce)").matches||document.documentElement.dataset.phaseMotion==="reduce")return;
@@ -2760,6 +2765,6 @@ init();renderNexo();
 <script src="./assets/portal8-turmas-v18.js?v=18"></script>
 <script src="./assets/portal8-duvidas-v18.js?v=18"></script>
 <script src="./assets/portal8-pazinho.js?v=20"></script>
-<script src="./assets/portal8-perfil.js?v=20"></script>
+<script src="./assets/portal8-perfil.js?v=21"></script>
 </body>
 </html>
