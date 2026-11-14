@@ -1,22 +1,16 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 180" role="img" aria-labelledby="pazinhoTitle pazinhoDesc">
-<title id="pazinhoTitle">Pazinho, o mascote de estudos</title>
-<desc id="pazinhoDesc">Pombinha azul simpática com olhos expressivos, segurando um livro, nas cores do portal</desc>
-<defs><linearGradient id="pazBlue" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#69dbef"/><stop offset=".55" stop-color="#188ed1"/><stop offset="1" stop-color="#175a9b"/></linearGradient><linearGradient id="pazBook" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#ffca73"/><stop offset="1" stop-color="#f2943a"/></linearGradient></defs>
-<ellipse cx="89" cy="166" rx="61" ry="8" fill="#112f58" opacity=".13"/>
-<path d="M35 72c-13-19-10-39 4-41 13-1 30 14 41 33" fill="#4ac8e6"/>
-<path d="M128 72c18-19 30-19 35-9 7 17-13 33-32 37" fill="#277ab8"/>
-<path d="M45 75c0-40 28-64 61-62 32 2 53 27 49 64-3 34-28 68-63 68-31 0-52-31-47-70Z" fill="url(#pazBlue)" stroke="#0e5c98" stroke-width="3"/>
-<path d="M54 99c9 18 27 28 44 24 18-4 30-15 39-32-2 30-18 47-42 47-20 0-35-16-41-39Z" fill="#dff8fd" opacity=".84"/>
-<path d="M38 85c-15-12-25-11-29-2 0 11 10 22 29 24" fill="#1a8cc6"/>
-<ellipse cx="79" cy="66" rx="12" ry="15" fill="white"/><ellipse cx="121" cy="66" rx="12" ry="15" fill="white"/>
-<circle cx="82" cy="68" r="6" fill="#153950"/><circle cx="118" cy="68" r="6" fill="#153950"/>
-<circle cx="84" cy="65" r="2.2" fill="white"/><circle cx="120" cy="65" r="2.2" fill="white"/>
-<path d="M94 77q6 6 12 0l-6 12Z" fill="#ffb44f" stroke="#dd8428" stroke-width="1.5"/>
-<path d="M87 96q13 11 27 0" fill="none" stroke="#12537d" stroke-width="3" stroke-linecap="round"/>
-<path d="M23 115q32-10 66 8l2 32q-35-19-68-9Z" fill="url(#pazBook)" stroke="#af6329" stroke-width="3" stroke-linejoin="round"/>
-<path d="M91 123q34-19 68-8v31q-33-10-68 9Z" fill="#43a9d5" stroke="#125d99" stroke-width="3" stroke-linejoin="round"/>
-<path d="M91 122v33" stroke="#fff8dd" stroke-width="4" stroke-linecap="round"/>
-<path d="M36 126q20-2 39 6M106 132q17-7 41-6" stroke="#fff" stroke-opacity=".68" stroke-width="2.7" stroke-linecap="round" fill="none"/>
-<path d="M43 117q-5-14 1-20M146 115q4-11-1-19" fill="none" stroke="#0b5e9c" stroke-width="8" stroke-linecap="round"/>
-<path d="m20 43 3 7 7 3-7 3-3 7-3-7-7-3 7-3ZM151 25l3 7 7 3-7 3-3 7-3-7-7-3 7-3Z" fill="#ffbd59"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 136" role="img" aria-labelledby="title desc">
+<title id="title">Pazinho, o livrinho azul</title>
+<desc id="desc">Livro aberto azul com olhos, sorriso, braços, pernas e uma estrelinha dourada</desc>
+<path d="M13 17 16 25 24 28 16 31 13 39 10 31 2 28 10 25Z" fill="#f6b448"/>
+<g fill="none" stroke="#0065a6" stroke-width="5" stroke-linecap="round" stroke-linejoin="round">
+<path d="M31 75 8 64"/><path d="m98 75 22-11"/>
+<path d="m48 114-5 17"/><path d="m81 114 6 17"/>
+</g>
+<path d="M65 35Q41 18 18 29V102Q45 90 65 107Q88 90 112 103V30Q88 19 65 35Z" fill="#1579bd" stroke="#003f78" stroke-width="5" stroke-linejoin="round"/>
+<path d="M65 41Q45 26 26 35V95Q47 87 65 100Z" fill="#a1def8" stroke="#145789" stroke-width="2"/>
+<path d="M65 41Q86 27 104 35V95Q83 87 65 100Z" fill="#a1def8" stroke="#145789" stroke-width="2"/>
+<path d="M65 41V103" fill="none" stroke="#003f78" stroke-width="5" stroke-linecap="round"/>
+<g fill="#003f78"><circle cx="45" cy="66" r="3.8"/><circle cx="84" cy="66" r="3.8"/></g>
+<path d="M53 83Q64 94 77 83" fill="none" stroke="#003f78" stroke-width="3.7" stroke-linecap="round"/>
+<path d="M20 102Q41 91 63 108M68 108Q89 91 111 102" fill="none" stroke="#005a99" stroke-width="2" stroke-linecap="round" opacity=".75"/>
 </svg>
