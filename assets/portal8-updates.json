@@ -1,5 +1,12 @@
 [
   {
+    "id": "versao-132d5ab154f9",
+    "title": "Neo Tutor local e gratuito ganhou conversa guiada e matemática",
+    "body": "O chat do Neo agora tem contexto, exercícios, resumos e contas passo a passo sem API paga. As 28 ferramentas permanecem intactas.",
+    "date": "2026-11-14",
+    "important": true
+  },
+  {
     "id": "versao-6f12c778be15",
     "title": "Calendário escolar restante de 2026 e correção definitiva das cores do menu",
     "body": "Novo calendário da escola a partir de 16/11 e paleta azul/turquesa unificada em todos os temas, sem mexer nas 28 ferramentas.",
