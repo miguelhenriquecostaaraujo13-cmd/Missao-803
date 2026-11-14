@@ -50,8 +50,17 @@
       options: {emailRedirectTo: redirectTo}
     });
   }
+  function linkErrorMessage(info) {
+    const code=String(info?.errorCode||"").toLowerCase();
+    const error=String(info?.errorType||"").toLowerCase();
+    if(code==="otp_expired"||code==="otp_disabled"||code==="token_expired"||
+       error==="access_denied"||code==="invalid_token") {
+      return "⚠️ Este link de verificação expirou ou já foi utilizado. Primeiro tente Entrar com seu e-mail e senha: a conta talvez já esteja confirmada. Se ainda precisar, solicite um novo e-mail e abra somente o link mais recente. Não compartilhe esse link.";
+    }
+    return "⚠️ Não foi possível usar o link do e-mail. Ele pode ter expirado ou já ter sido usado. Tente fazer login e, se necessário, solicite outro e-mail de confirmação.";
+  }
   window.portal8AuthHelp = Object.freeze({
-    emailValid, errorMessage, resendConfirmation,
+    emailValid, errorMessage, resendConfirmation, linkErrorMessage,
     confirmationMessage: "📩 Cadastro recebido! Verifique sua caixa de entrada e o Spam, abra o e-mail de confirmação e clique no link. Depois, faça login. Se não receber, toque em Reenviar confirmação.",
   });
 })();
