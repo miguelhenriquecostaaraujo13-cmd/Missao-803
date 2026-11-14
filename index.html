@@ -623,7 +623,8 @@ html[data-portal8-other="true"] #portal803Schedule,html[data-portal8-other="true
 <section id="desafio8ano" class="view"><h2>🏆 Missões coletivas do 8º ano</h2>
 <p class="sub">Uma maneira de acompanhar a participação voluntária das turmas, sem ranking de alunos, notas individuais ou competição obrigatória.</p>
 <div class="card"><h3>🌟 A turma evolui junta</h3><p class="small muted">Indicadores só aparecem quando pelo menos 5 participantes de uma turma autorizam a sincronização. As turmas são autodeclaradas, então estes números não são uma classificação oficial da escola.</p>
-<div class="row"><button type="button" class="btn orange" onclick="portal8RefreshChallenge()">↻ Atualizar metas coletivas</button></div><div id="portal8ChallengeList"></div></div>
+<div class="row"><button type="button" class="btn orange" onclick="portal8RefreshChallenge()">↻ Atualizar metas coletivas</button><button type="button" class="btn light" onclick="portal8MissionSubmit(true)">✅ Concluir missão semanal</button><button type="button" class="btn light" onclick="portal8MissionSubmit(false)">↺ Desmarcar minha missão</button></div>
+<p id="portal8MissionStatus" role="status" class="small muted">Missão voluntária: revise uma matéria e faça algumas questões durante a semana. Você pode marcar ou desmarcar sua conclusão.</p><div id="portal8ChallengeList"></div></div>
 </section>
 <section id="turma" class="view">
   <h2 id="portal8ClassPanelTitle">Painel coletivo da Turma 803</h2>
@@ -733,7 +734,7 @@ html[data-portal8-other="true"] #portal803Schedule,html[data-portal8-other="true
   <p id="portalOwnerStatus" role="status" class="small muted">Aguardando login. A conta proprietária precisa ser aprovada pelo administrador do projeto.</p>
   <div id="portalOwnerSetup" hidden><p class="small muted">Seu identificador de usuário no Supabase (não é uma senha). Apenas quem administra o banco pode liberar esse identificador:</p><code id="portalOwnerUid" style="display:block;overflow-wrap:anywhere"></code><button class="btn light" type="button" onclick="portalOwnerCopyUid()">Copiar meu identificador</button><p class="small muted">No Supabase → SQL Editor, o responsável pelo projeto deve adicionar esse identificador à tabela <code>public.portal803_admins</code>. Nenhuma conta é promovida automaticamente.</p></div>
  </div>
- <div id="portalOwnerPrivate" hidden><div class="card" style="margin-top:14px"><label for="portal8AdminScope"><b>📍 Público do novo aviso ou prova</b></label><select id="portal8AdminScope" class="study-field"><option value="geral">Todo o 8º ano (aviso geral)</option><option value="801">Turma 801</option><option value="802">Turma 802</option><option value="803" selected>Turma 803</option><option value="804">Turma 804</option><option value="806">Turma 806</option><option value="807">Turma 807</option></select><p class="small muted">Selecione a turma antes de publicar. Publicações antigas permanecem na 803.</p></div><div class="card" style="margin:14px 0"><div class="between"><h3>🛠️ Relatos privados enviados à equipe</h3><button class="btn light" type="button" onclick="phaseOwnerReports()">↻ Atualizar relatos</button></div><p class="small muted">Somente proprietários autorizados conseguem consultar a fila. Não compartilhe relatos dos alunos.</p><div id="phaseOwnerReports"></div></div>
+ <div id="portalOwnerPrivate" hidden><div class="card" style="margin-top:14px"><label for="portal8AdminScope"><b>📍 Público do novo aviso ou prova</b></label><select id="portal8AdminScope" class="study-field"><option value="geral">Todo o 8º ano (aviso geral)</option><option value="801">Turma 801</option><option value="802">Turma 802</option><option value="803" selected>Turma 803</option><option value="804">Turma 804</option><option value="806">Turma 806</option><option value="807">Turma 807</option></select><p class="small muted">Selecione a turma antes de publicar. Publicações antigas permanecem na 803.</p></div><div class="card" style="margin:14px 0"><div class="between"><h3>📚 Biblioteca — aprovação de materiais</h3><button class="btn light" type="button" onclick="portal8ModerateLibrary()">↻ Ver pendentes</button></div><p class="small muted">Reveja os materiais antes de autorizar uma publicação, sem divulgar identificações dos estudantes.</p><div id="portal8PendingLibrary"></div></div><div class="card" style="margin:14px 0"><div class="between"><h3>🛠️ Relatos privados enviados à equipe</h3><button class="btn light" type="button" onclick="phaseOwnerReports()">↻ Atualizar relatos</button></div><p class="small muted">Somente proprietários autorizados conseguem consultar a fila. Não compartilhe relatos dos alunos.</p><div id="phaseOwnerReports"></div></div>
   <div class="callout" style="margin:15px 0">✅ Acesso autorizado. As publicações abaixo são gravadas no Supabase e aparecem para a turma. Revise datas e textos antes de publicar.</div>
   <div class="grid">
    <div class="card span-6"><h3>📢 Publicar aviso oficial</h3><label for="portalOfficialTitle">Título</label><input id="portalOfficialTitle" class="study-field" maxlength="90"><label for="portalOfficialBody">Aviso</label><textarea id="portalOfficialBody" class="study-field" maxlength="1200" rows="5"></textarea><button class="btn orange" onclick="portalPublishNotice()">Publicar para a turma</button></div>
@@ -1573,7 +1574,7 @@ async function portalOwnerCheck(){
   portalIsOwner=!!data;
   document.getElementById("portalOwnerPrivate").hidden=!portalIsOwner;
   portalOwnerStatus(portalIsOwner?"✅ Proprietário autenticado. Você pode publicar avisos e provas.":"Conta autenticada, mas ainda não autorizada como proprietária. Copie seu identificador para cadastrar no Supabase.");
-  if(portalIsOwner){await portalOwnerRefresh();await phaseOwnerReports()}
+  if(portalIsOwner){await portalOwnerRefresh();await phaseOwnerReports();await portal8ModerateLibrary()}
  }catch(e){portalIsOwner=false;document.getElementById("portalOwnerPrivate").hidden=true;portalOwnerStatus("Não consegui verificar suas permissões. Confira a conexão com o Supabase.")}
 }
 async function portalOwnerAuth(action){
@@ -1986,13 +1987,13 @@ async function phaseOwnerReports(){
  const root=document.getElementById("phaseOwnerReports");if(!root)return;root.replaceChildren();
  if(!portalIsOwner){root.textContent="Faça login como proprietário autorizado.";return}
  try{
-  const {data,error}=await portalOwnerClient().from("portal803_relatorios").select("id,categoria,mensagem,estado,criado_em").order("criado_em",{ascending:false}).limit(60);
+  const {data,error}=await portalOwnerClient().from("portal803_relatorios").select("id,categoria,mensagem,estado,criado_em,turma").order("criado_em",{ascending:false}).limit(60);
   if(error)throw error;
   if(!data?.length){root.textContent="Nenhum relato recebido.";return}
   for(const report of data){
    const wrap=document.createElement("div");wrap.className="mission";
-   const header=document.createElement("b");header.textContent=report.categoria+" • "+new Date(report.criado_em).toLocaleDateString("pt-BR")+" • "+report.estado;
-   const body=document.createElement("p");body.textContent=report.mensagem;wrap.append(header,body);root.append(wrap);
+   const header=document.createElement("b");header.textContent="Turma "+(report.turma||"803")+" • "+report.categoria+" • "+new Date(report.criado_em).toLocaleDateString("pt-BR")+" • "+report.estado;
+   const body=document.createElement("p");body.textContent=report.mensagem;wrap.append(header,body);const resolved=document.createElement("button");resolved.className="btn light";resolved.type="button";resolved.textContent=report.estado==="resolvido"?"✅ Resolvido":"Marcar como resolvido";resolved.disabled=report.estado==="resolvido";resolved.onclick=async()=>{if(!portalIsOwner)return;const {error}=await portalOwnerClient().from("portal803_relatorios").update({estado:"resolvido"}).eq("id",report.id);if(error){alert("Não foi possível atualizar o relato.");return}await phaseOwnerReports()};wrap.append(resolved);root.append(wrap);
   }
  }catch(e){root.textContent="Não foi possível consultar os relatos. Confirme as permissões no Supabase."}
 }
@@ -2138,8 +2139,54 @@ async function portal8GradeRefresh(){
  }
  }catch(e){root.textContent="Não foi possível carregar as médias. Tente novamente."}
 }
+
+function portal8WeekStart(){
+ const d=new Date();d.setHours(12,0,0,0);d.setDate(d.getDate()-((d.getDay()+6)%7));
+ return remindersDay(d);
+}
+async function portal8MissionSubmit(done){
+ const target=document.getElementById("portal8MissionStatus");
+ target.textContent=done?"Registrando sua missão…":"Atualizando participação…";
+ try{
+  const {client,user}=await portalGradeSession();
+  const week=portal8WeekStart();
+  if(done){const {error}=await client.from("portal8_missoes_semana").upsert({usuario_id:user.id,turma:portal8Turma,semana:week,concluida:true},{onConflict:"usuario_id,turma,semana"});if(error)throw error}
+  else{const {error}=await client.from("portal8_missoes_semana").delete().eq("usuario_id",user.id).eq("turma",portal8Turma).eq("semana",week);if(error)throw error}
+  target.textContent=done?"✅ Missão desta semana registrada para a turma "+portal8Turma+".":"Registro da missão removido desta semana.";
+  await portal8RefreshChallenge();
+ }catch(e){target.textContent="Não foi possível atualizar a missão. Confira a sessão e a conexão."}
+}
+async function portal8ModerateLibrary(){
+ const root=document.getElementById("portal8PendingLibrary");if(!root)return;root.replaceChildren();
+ if(!portalIsOwner){root.textContent="Disponível somente ao proprietário autorizado.";return}
+ try{
+  const {data,error}=await portalOwnerClient().from("missao803_biblioteca").select("id,turma,materia,titulo,conteudo,link,status").eq("status","pendente").order("criado_em",{ascending:true}).limit(50);
+  if(error)throw error;
+  if(!data?.length){root.textContent="Nenhum material pendente de aprovação.";return}
+  for(const item of data){
+   const card=document.createElement("article");card.className="mission";
+   const title=document.createElement("h3");title.textContent="Turma "+(item.turma||"803")+" • "+item.materia+" — "+item.titulo;
+   const body=document.createElement("p");body.textContent=item.conteudo;
+   card.append(title,body);
+   if(item.link){const a=document.createElement("a");a.href=item.link;a.textContent="Ver link complementar";a.target="_blank";a.rel="noopener noreferrer nofollow";card.append(a)}
+   const actions=document.createElement("div");actions.className="row";
+   for(const [name,status] of [["✅ Aprovar","aprovado"],["✖ Recusar","recusado"]]){
+    const btn=document.createElement("button");btn.className="btn light";btn.type="button";btn.textContent=name;
+    btn.onclick=async()=>{
+     if(!portalIsOwner||!confirm(name+" este material?"))return;
+     const {error:e}=await portalOwnerClient().from("missao803_biblioteca").update({status}).eq("id",item.id);
+     if(e){alert("Não foi possível atualizar o material.");return}
+     await portal8ModerateLibrary();
+     if(cloudUser)await refreshLibrary();
+    };actions.append(btn);
+   }
+   card.append(actions);root.append(card);
+  }
+ }catch(e){root.textContent="A fila de moderação está indisponível. Verifique suas permissões."}
+}
 async function portal8RefreshChallenge(){
  const root=document.getElementById("portal8ChallengeList");if(!root)return;root.replaceChildren();
+ let weekly=new Map();try{const {data,error}=await ensureCloudClient().rpc("portal8_missoes_resumo",{p_semana:portal8WeekStart()});if(!error)weekly=new Map((data||[]).map(x=>[x.turma,x.concluintes]))}catch(e){}
  for(const turma of portal8ValidTurmas){
   const card=document.createElement("div");card.className="mission";const title=document.createElement("h3");title.textContent="Turma "+turma;card.append(title);
   const body=document.createElement("p");body.className="small muted";
@@ -2147,7 +2194,9 @@ async function portal8RefreshChallenge(){
    if(turma==="803"){body.textContent="Acompanhe os totais da 803 no painel coletivo existente."}
    else{const {data,error}=await ensureCloudClient().rpc("portal8_painel_turma",{p_turma:turma});if(error)throw error;const x=(data||[])[0];body.textContent=x?x.participantes+" participantes • "+x.questoes_respondidas+" questões registradas":"Aguardando pelo menos 5 participantes."}
   }catch(e){body.textContent="Ainda não há indicadores online disponíveis."}
-  card.append(body);root.append(card);
+  card.append(body);
+  const mission=document.createElement("p");mission.className="small muted";mission.textContent=weekly.has(turma)?"🌟 "+weekly.get(turma)+" missões semanais concluídas (participação voluntária).":"🌟 Missão semanal: aguardando 5 conclusões voluntárias.";
+  card.append(mission);root.append(card);
  }
 }
 portal8UpdateLabels();
