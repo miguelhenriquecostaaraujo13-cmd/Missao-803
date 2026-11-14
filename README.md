@@ -20,9 +20,9 @@ Plataforma independente e gratuita de estudos para as turmas **801, 802, 803 e 8
 A aba **🔒 Modo Proprietário** agora usa **Supabase Auth** para login por e-mail e senha. A autorização real é verificada no **PostgreSQL por RLS**, não por uma senha escrita no HTML.
 
 - Usuários comuns e sessões anônimas não podem publicar, alterar ou excluir avisos/provas oficiais.
-- O administrador pode criar ou excluir anúncios e provas; o mural da página inicial mostra as publicações para todos.
+- O administrador pode criar ou excluir anúncios e provas, escolhendo uma turma específica ou o 8º ano inteiro; o mural mostra as publicações pertinentes à turma selecionada.
 - As três tabelas são `public.portal803_admins`, `public.portal803_announcements` e `public.portal803_exams`.
-- A tabela de proprietários começa **vazia**; ninguém vira dono apenas por se cadastrar.
+- Ninguém vira proprietário apenas por se cadastrar; o acesso depende da aprovação segura da conta no Supabase.
 - Para habilitar o proprietário, a pessoa cria uma conta (e confirma o e-mail, se necessário), entra no site e copia o UUID exibido. O administrador do projeto pode então autorizar o UUID com:
 
 ```sql
@@ -79,7 +79,7 @@ O botão **Permitir notificações** solicita autorização expressa do navegado
 
 Publicação atual pelo GitHub Pages: https://miguelhenriquecostaaraujo13-cmd.github.io/Missao-803/
 
-Para publicar também no Netlify, entre em https://app.netlify.com, importe o repositório `miguelhenriquecostaaraujo13-cmd/Missao-803`, use a branch `main`, deixe o comando de build vazio e o diretório de publicação como `.` (raiz). Escolha o nome do projeto `portal803` se estiver disponível. A URL `portal803.netlify.app` só pode ser confirmada no painel Netlify, após criá-la. Não é necessário plano pago.
+Para publicar também no Netlify, entre em https://app.netlify.com, importe o repositório `miguelhenriquecostaaraujo13-cmd/Missao-803`, use a branch `main`, deixe o comando de build vazio e o diretório de publicação como `.` (raiz). Escolha um nome relacionado ao Portal 8º Ano se estiver disponível. A URL `portal803.netlify.app` só pode ser confirmada no painel Netlify, após criá-la. Não é necessário plano pago.
 
 **Importante:** O histórico salvo no navegador sob o endereço do GitHub Pages não é automaticamente transferido para o novo domínio do Netlify. Exporte seus dados antes da mudança, quando possível.
 
