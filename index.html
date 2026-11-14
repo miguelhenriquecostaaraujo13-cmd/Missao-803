@@ -2302,11 +2302,22 @@ function phaseLoadAccessUI(){
  document.getElementById("phaseFontSize").value=phaseAccess.font||"normal";
  document.getElementById("phaseHighContrast").checked=!!phaseAccess.contrast;
  document.getElementById("phaseReduceMotion").checked=!!phaseAccess.motion;
+ portal8ExplainMotionSetting();
+}
+function portal8ExplainMotionSetting(){
+ const status=document.getElementById("phaseAccessStatus");if(!status)return;
+ if(window.matchMedia?.("(prefers-reduced-motion: reduce)").matches){
+  status.textContent="⚠️ O seu dispositivo pede movimento reduzido: transições de entrada desativadas. Você pode alterar isso nas configurações de acessibilidade do sistema.";
+ }else if(phaseAccess.motion){
+  status.textContent="⚠️ A opção Reduzir animações está ativada neste navegador. Desmarque-a para ver as transições curtas ao abrir cada ferramenta.";
+ }else{
+  status.textContent="✅ Transições curtas de entrada ativadas. Elas acontecem ao abrir cada ferramenta e não se repetem continuamente.";
+ }
 }
 function phaseSaveAccess(){
  phaseAccess={font:document.getElementById("phaseFontSize").value,contrast:document.getElementById("phaseHighContrast").checked,motion:document.getElementById("phaseReduceMotion").checked};
  phaseWrite(PHASE_ACCESS_KEY,phaseAccess);phaseApplyAccess();
- document.getElementById("phaseAccessStatus").textContent="✅ Suas preferências de leitura foram salvas neste navegador.";
+ portal8ExplainMotionSetting();
 }
 function phaseResetAccess(){phaseAccess={font:"normal",contrast:false,motion:false};phaseWrite(PHASE_ACCESS_KEY,phaseAccess);phaseApplyAccess();phaseLoadAccessUI()}
 for(const s of subjects){const op=document.createElement("option");op.value=s.name;op.textContent=s.name;document.getElementById("phaseSubject").append(op)}
@@ -2516,7 +2527,7 @@ async function portal8UpdateSite(){
    await Promise.all(regs.map(r=>r.update().catch(()=>null)));
   }
  }catch(e){}
- location.replace(location.pathname+"?versao=portal8-transicoes-v13&atualizacao="+Date.now());
+ location.replace(location.pathname+"?versao=portal8-entrada-v14&atualizacao="+Date.now());
 }
 function portal8EnableScrollReveal(){
  if(window.matchMedia?.("(prefers-reduced-motion: reduce)").matches||document.documentElement.dataset.phaseMotion==="reduce")return;
