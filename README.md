@@ -85,12 +85,12 @@ O botão **Permitir notificações** solicita autorização expressa do navegado
 - O service worker contém o cartoon e os recursos atuais no cache offline atualizado para acesso após a primeira visita online.
 - Preservadas as 27 seções e os registros locais existentes, inclusive os resultados históricos da 803.
 
-## Pazinho — livrinho interativo
+## Neo — livrinho interativo
 
-- Ao trocar entre as **27 ferramentas**, o Pazinho aparece no canto inferior direito e mostra um **balão de fala com dica específica** da área aberta.
+- Ao trocar entre as **27 ferramentas**, o Neo aparece no canto inferior direito e mostra um **balão de fala com dica específica** da área aberta.
 - Cada área tem duas frases que se alternam. Clique no mascote ou no botão **✨ Outra dica** para ver mais uma. O balão fecha automaticamente após cerca de 5 segundos ou pelo botão ×.
 - A primeira visita da sessão também mostra uma saudação. O mascote continua disponível no cantinho, sem bloquear o uso da página.
-- Em **Acessibilidade** há a opção **Mostrar o Pazinho e suas dicas ao abrir ferramentas**. Ela pode ser desativada e a escolha fica apenas no dispositivo (`portal8-pazinho-enabled-v1`).
+- Em **Acessibilidade** há a opção **Mostrar o Neo e suas dicas ao abrir ferramentas**. Ela pode ser desativada e a escolha fica apenas no dispositivo (`portal8-pazinho-enabled-v1`).
 - A entrada tem movimento suave e respeita as preferências de redução de movimento. Não há voz, rastreamento, cookies adicionais nem API paga.
 - A ilustração de estudantes cartoon aprovada permanece **inalterada**. O mascote agora é o livrinho azul com braços, pernas, olhos e sorriso, fiel ao desenho enviado pelo criador, em `assets/pazinho.svg`.
 - Componentes independentes: `assets/portal8-pazinho.css` e `assets/portal8-pazinho.js`; a função `showView` emite `portal8:viewchange` após a navegação.
@@ -121,7 +121,7 @@ O botão **Permitir notificações** solicita autorização expressa do navegado
 
 - **Entrada do mascote corrigida:** a função `showView` chama `window.portal8MascotNavigate` diretamente depois de exibir cada ferramenta. O livro aparece com movimento curto no centro e depois permanece no canto com seu balão.
 - **Teste da animação:** na área Acessibilidade há um botão **▶ Testar animação do mascote**. O comportamento respeita a preferência de redução de movimento do sistema e a configuração de transições do portal.
-- **Renomear para toda a escola:** um administrador aprovado acessa **Modo Proprietário → Renomear o mascote do portal** e escolhe um nome com 2–24 caracteres. A configuração fica na tabela `public.portal8_site_settings`; RLS só permite a edição pela conta presente em `public.portal803_admins`. Até que seja alterado, o nome continua `Pazinho`.
+- **Renomear para toda a escola:** um administrador aprovado acessa **Modo Proprietário → Renomear o mascote do portal** e escolhe um nome com 2–24 caracteres. A configuração fica na tabela `public.portal8_site_settings`; RLS só permite a edição pela conta presente em `public.portal803_admins`. O nome padrão do mascote atualmente é **Neo**, e o administrador pode personalizá-lo.
 - **Mural de novidades:** `assets/portal8-updates.json` mostra mudanças importantes do **site** no quadro **Avisos e provas** e no carrossel da página inicial, claramente separadas dos comunicados oficiais no Supabase.
 - **Registro automático:** o workflow `.github/workflows/publicar-atualizacoes.yml` publica no JSON quando a alteração enviada ao GitHub na branch `main` tem `[importante]` na mensagem do commit. Ele usa apenas o `GITHUB_TOKEN` do repositório, sem chaves do Supabase. Modificações pequenas sem essa marcação não são anunciadas.
 - Esta regra não consegue avaliar sozinha o significado de toda mudança; **é quem publica que marca as versões relevantes**. A publicação na web depende da conclusão do GitHub Pages.
@@ -218,7 +218,7 @@ Os arquivos são `assets/neo-lab.js` e `assets/neo-lab.css`; o cache offline foi
 
 ## Versão 32 — Neo Mapas Inteligentes e nome correto do mascote
 
-- Corrigido o nome falado no balão do mascote: a saudação não contém mais **Pazinho** como texto fixo. O nome apresentado vem de `portal8_site_settings` (Supabase) e é guardado em cache local para funcionar na próxima abertura e offline. **Neo** é apenas o nome padrão; renomeações legítimas feitas em Modo Proprietário continuam prevalecendo. Também foram atualizados os rótulos de acessibilidade do mascote e adicionadas dicas nas abas Mapas, Arcade e Ateliê.
+- Corrigido o nome falado no balão do mascote: a saudação não contém mais o nome antigo como texto fixo. O nome apresentado vem de `portal8_site_settings` (Supabase) e é guardado em cache local para funcionar na próxima abertura e offline. **Neo** é apenas o nome padrão; renomeações legítimas feitas em Modo Proprietário continuam prevalecendo. Também foram atualizados os rótulos de acessibilidade do mascote e adicionadas dicas nas abas Mapas, Arcade e Ateliê.
 - `assets/neo-mapas-mentais.js` foi recriado como **motor especializado local** (não é um modelo generativo nem um serviço ChatGPT) com seleção por relevância dos conteúdos existentes: capítulos/tópicos e cartões da própria matéria, além das anotações fornecidas pelo aluno. Ele não inventa conceitos quando não encontra correspondências.
 - Mapas SVG reorganizados em **duas colunas, tema central em destaque, ramificações em caixas de largura fixa, curvas de ligação e espaçamento estável**. Quatro paletas: Oceano Neo, Aurora, Natureza e Caderno. O mapa pode ser baixado em SVG ou copiado como esquema de texto. As opções de cards e favoritos anteriores permanecem no site.
 - `assets/neo-mapas-mentais.css` foi aprimorado para telas pequenas e espaços de prévia.
@@ -254,6 +254,14 @@ Os arquivos são `assets/neo-lab.js` e `assets/neo-lab.css`; o cache offline foi
 - Os textos das experiências publicadas foram atualizados para explicar se são atividades, protótipos ou funções locais. Nenhuma opção de demonstração é anunciada como serviço completo, e nenhuma nova política de acesso ao Supabase foi criada.
 - Novo arquivo `assets/neo-oficina-v35.css` e cache `portal8-recursos-aprovados-v35`. Scripts das experiências receberam versão `?v=35` para expirar cache antigo.
 - Testes estáticos: scripts atualizados compilam, 32 rotas se correspondem, IDs não duplicados, todos os grupos e bancadas estão na Oficina, e navegação para Ateliê continua sob validação administrativa. Verificação visual e funcional de cada experiência em aparelho real ainda é recomendada depois do deploy.
+
+## Versão 36 — nome Neo em todas as apresentações do mascote
+
+- Corrigidos textos históricos ainda exibidos em recursos de estudo, inclusive a seção de mascote experimental, que agora se apresenta como **Neo**.
+- Atualizados os títulos acessíveis do SVG do mascote e do avatar administrativo para usar **Neo**.
+- O texto do balão utiliza o nome cadastrado em `portal8_site_settings`, com **Neo** como nome padrão. A configuração do administrador foi preservada.
+- Os nomes de arquivos antigos, classes CSS e identificadores internos permanecem inalterados para garantir compatibilidade com o site, caches e progressos já salvos. Esses identificadores técnicos não aparecem nos textos para alunos.
+- Cache offline `portal8-recursos-aprovados-v36` com nova versão de imagem e scripts para os navegadores carregarem a correção.
 
 ## Publicação
 
