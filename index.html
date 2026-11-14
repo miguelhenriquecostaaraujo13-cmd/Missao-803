@@ -28,6 +28,10 @@ html.p8-entry-check body>header,html.p8-entry-check body>nav,html.p8-entry-check
 #p8FirstVisit .p8-welcome-back{background:transparent;color:#365571;padding:9px}
 #p8FirstVisit .p8-welcome-note{font-size:.8rem;margin:17px 0 0;line-height:1.5}
 #p8FirstVisit [role=status]{font-size:.88rem;min-height:1.5em;margin:12px 0 0;color:#375976}
+#p8FirstVisit [hidden],#p8ProfileResend[hidden]{display:none!important}
+#p8WelcomePasswordHelp{display:block;margin:3px 0 8px;color:#4d6478;font-size:.82rem;line-height:1.5}
+#p8ProfileResend{margin-top:11px;min-height:42px}
+
 </style>
 <style>
 :root{--navy:#10283f;--navy2:#173d5c;--orange:#ff9b37;--teal:#36a6a0;--paper:#f4f7fa;--ink:#172b3c;--muted:#637487;--line:#dce5ec;--white:#fff;--green:#18845d;--red:#b84642;--shadow:0 14px 34px rgba(16,40,63,.10)}
@@ -3274,7 +3278,7 @@ async function portal8UpdateSite(){
    await Promise.all(regs.map(r=>r.update().catch(()=>null)));
   }
  }catch(e){}
- location.replace(location.pathname+"?versao=mp5-redesign-3d-labirinto&atualizacao="+Date.now());
+ location.replace(location.pathname+"?versao=auth-confirmation-help-v1&atualizacao="+Date.now());
 }
 function portal8EnableScrollReveal(){
  if(window.matchMedia?.("(prefers-reduced-motion: reduce)").matches||document.documentElement.dataset.phaseMotion==="reduce")return;
