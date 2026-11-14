@@ -658,6 +658,7 @@ html[data-phase-motion="reduce"] .view.active.portal8-enter-active{
 <link rel="stylesheet" href="./assets/neo-lab.css?v=27">
 <link rel="stylesheet" href="./assets/neo-acesso-rapido.css?v=28">
 <link rel="stylesheet" href="./assets/neo-mapas-mentais.css?v=29">
+<link rel="stylesheet" href="./assets/neo-ideias.css?v=30">
 <style id="mpMenuCalendarV25">
 /* Menu v25 — correção em TODOS os temas; carregada após todos os CSS antigos. */
 html nav{background:#103755!important;color:#effaff!important}
@@ -958,6 +959,55 @@ html nav :is(summary,button,select):focus-visible{outline:3px solid #ffd781!impo
   <p class="small muted">O arquivo SVG pode ser aberto e impresso. Verifique os dados da matéria com seus professores.</p>
  </div>
  </div>
+<section class="neo-ideas-panel" id="neoIdeasPanel" aria-label="Ideias criativas e cards dos mapas mentais">
+  <h3>✨ Laboratório de ideias do meu mapa</h3>
+  <p>Transforme o mapa em cards, compare assuntos, ligue conceitos e revise passo a passo. Todas as ferramentas desta área funcionam no seu navegador, sem API paga. O material gerado automaticamente é um roteiro de estudo: confira as respostas com suas aulas.</p>
+  <p id="neoIdeasStatus" role="status" aria-live="polite" class="small muted">Gere um mapa mental acima para experimentar as ideias.</p>
+  <div class="neo-ideas-tabs">
+   <div class="neo-ideas-tool">
+    <h4>⭐⭐⭐ Cards em quatro estilos</h4><p>Cards de perguntas e respostas usando os cartões escolares relacionados e suas próprias ramificações.</p>
+    <label for="neoIdeasCardStyle">Estilo dos cards</label><select id="neoIdeasCardStyle"><option value="azul">Azul Neo</option><option value="menta">Menta</option><option value="dourado">Dourado</option><option value="caderno">Caderno</option></select>
+    <button id="neoIdeasMakeCards" type="button" class="btn orange">🗂️ Gerar meus cards</button>
+    <button type="button" class="neo-idea-flashcard neo-card-azul" id="neoIdeasFlashcard" aria-label="Virar cartão de estudo">Crie cards a partir do assunto.</button>
+    <button class="btn light" type="button" id="neoIdeasPrevCard">Anterior</button><button class="btn light" type="button" id="neoIdeasNextCard">Próximo</button><button class="btn light" type="button" id="neoIdeasExportCards">Salvar cards TXT</button>
+   </div>
+   <div class="neo-ideas-tool">
+    <h4>⭐⭐⭐ Guardar mapas favoritos</h4><p>Guarde seus esquemas neste dispositivo e abra-os novamente. Não são enviados ao Supabase.</p>
+    <button type="button" class="btn orange" id="neoIdeasSave">⭐ Guardar mapa atual</button><div class="neo-ideas-output" id="neoIdeasSaved"></div>
+   </div>
+   <div class="neo-ideas-tool">
+    <h4>⭐⭐⭐ Comparar dois assuntos</h4><p>Compare o mapa atual com outro tema da mesma matéria.</p>
+    <label for="neoIdeasCompareTopic">Segundo assunto</label><input id="neoIdeasCompareTopic" maxlength="95" placeholder="Ex.: porcentagem e probabilidade">
+    <button type="button" class="btn orange" id="neoIdeasCompare">🔍 Comparar assuntos</button>
+    <div id="neoIdeasCompareOutput" aria-live="polite"></div>
+   </div>
+   <div class="neo-ideas-tool">
+    <h4>⭐⭐ Conectar conceitos</h4><p>Monte uma relação entre dois assuntos, definindo você mesmo a conexão.</p>
+    <label for="neoIdeasRelationA">Conceito A</label><input id="neoIdeasRelationA" maxlength="95" placeholder="Ex.: meio ambiente">
+    <label for="neoIdeasRelationType">Tipo de relação</label><select id="neoIdeasRelationType"><option>relaciona-se a</option><option>pode influenciar</option><option>é exemplo de</option><option>contrasta com</option><option>faz parte de</option></select>
+    <label for="neoIdeasRelationB">Conceito B</label><input id="neoIdeasRelationB" maxlength="95" placeholder="Ex.: biodiversidade">
+    <button type="button" class="btn orange" id="neoIdeasLink">🔗 Ligar conceitos</button><div id="neoIdeasRelations" class="neo-ideas-output"></div>
+   </div>
+   <div class="neo-ideas-tool">
+    <h4>⭐⭐ Apresentação por etapas</h4><p>Mostre o assunto principal e depois uma ramificação de cada vez.</p>
+    <button type="button" class="btn orange" id="neoIdeasPresentation">▶ Criar apresentação</button>
+    <div id="neoIdeasSlides" aria-live="polite">Seu conteúdo aparecerá por etapas.</div>
+    <button type="button" class="btn light" id="neoIdeasSlidePrev">Anterior</button><button type="button" class="btn light" id="neoIdeasSlideNext">Próxima</button>
+   </div>
+   <div class="neo-ideas-tool">
+    <h4>⭐⭐ Desafio de recordação</h4><p>Gere uma pergunta aberta a partir das ramificações, sem correção automática.</p>
+    <button type="button" class="btn orange" id="neoIdeasChallengeNew">🧠 Nova pergunta</button><div id="neoIdeasChallenge" class="neo-ideas-output"></div>
+   </div>
+   <div class="neo-ideas-tool">
+    <h4>⭐ Checklist do mapa</h4><p>Marque os conceitos que você já conseguiu explicar com suas palavras.</p>
+    <button type="button" class="btn orange" id="neoIdeasChecklistNew">✓ Criar checklist</button><div id="neoIdeasChecklist" class="neo-ideas-output"></div>
+   </div>
+   <div class="neo-ideas-tool">
+    <h4>⭐ Exportar esquema em texto</h4><p>Leve a estrutura do mapa para suas anotações, sem dados pessoais.</p>
+    <button type="button" class="btn orange" id="neoIdeasOutlineExport">⬇ Salvar esquema TXT</button>
+   </div>
+  </div>
+</section>
 </section>
 <section id="metodos" class="view">
   <h2>Estratégias que funcionam</h2><p class="sub">Combine métodos. Não basta reler: é importante puxar a informação da memória e usá-la.</p>
@@ -1314,7 +1364,7 @@ html nav :is(summary,button,select):focus-visible{outline:3px solid #ffd781!impo
     <button type="button" class="btn orange" id="neoMicroButton">Criar microplano</button><div id="neoMicroOutput" class="neo-output" aria-live="polite">Escolha a matéria e clique no botão.</div>
    </section>
   </div>
-  <div id="neoExperimentPrototypes"></div><section class="neo-priority-board" aria-labelledby="neoFutureHeading">
+  <div id="neoExperimentPrototypes"></div><div id="neoCreativePrototypes" class="neo-priority-board"></div><section class="neo-priority-board" aria-labelledby="neoFutureHeading">
    <h3 id="neoFutureHeading">⭐ Selecionar protótipos para avaliar</h3>
    <p class="small muted">As 12 ideias desta lista já têm protótipos locais para teste acima. Marque quais merecem uma versão definitiva para os alunos: ⭐⭐⭐ alta, ⭐⭐ média, ⭐ opcional. Marcar não publica nenhuma função.</p>
    <div id="neoPriorityList"></div><button class="btn orange" type="button" id="neoPrioritySave">Salvar minhas escolhas</button>
@@ -2986,7 +3036,7 @@ async function portal8UpdateSite(){
    await Promise.all(regs.map(r=>r.update().catch(()=>null)));
   }
  }catch(e){}
- location.replace(location.pathname+"?versao=recursos-aprovados-v29&atualizacao="+Date.now());
+ location.replace(location.pathname+"?versao=recursos-aprovados-v30&atualizacao="+Date.now());
 }
 function portal8EnableScrollReveal(){
  if(window.matchMedia?.("(prefers-reduced-motion: reduce)").matches||document.documentElement.dataset.phaseMotion==="reduce")return;
@@ -3023,6 +3073,8 @@ init();renderNexo();
 <script src="./assets/neo-acesso-rapido.js?v=28"></script>
 <script src="./assets/neo-mapas-mentais.js?v=29"></script>
 <script src="./assets/neo-prototipos-admin.js?v=29"></script>
+<script src="./assets/neo-ideias-mapas.js?v=30"></script>
+<script src="./assets/neo-estudio-inovacoes.js?v=30"></script>
 <script src="./assets/neo-admin-gate.js?v=29"></script>
 <script src="./assets/portal8-perfil.js?v=21"></script>
 </body>
