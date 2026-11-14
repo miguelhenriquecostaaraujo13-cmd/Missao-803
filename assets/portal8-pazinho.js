@@ -88,7 +88,7 @@
   transitionOverlay.hidden=true;
   transitionOverlay.setAttribute("aria-hidden","true");
   const img=document.createElement("img");
-  img.src="./assets/pazinho.svg?v=22";img.alt="";img.width=86;img.height=92;
+  img.src="./assets/pazinho.svg?v=23";img.alt="";img.width=86;img.height=92;
   const words=document.createElement("span");words.className="pazinho-scene-label";
   transitionOverlay.append(img,words);
   document.body.append(transitionOverlay);
@@ -182,7 +182,7 @@
       <button class="pazinho-again" type="button" title="Mostrar outra dica">✨ Outra dica</button>
     </div>
     <button type="button" class="pazinho-avatar" title="Pazinho: mostrar uma dica" aria-label="Pazinho: mostrar dica da ferramenta">
-      <img src="./assets/pazinho.svg?v=22" alt="" aria-hidden="true" width="98" height="98" decoding="async">
+      <img src="./assets/pazinho.svg?v=23" alt="" aria-hidden="true" width="98" height="98" decoding="async">
     </button>`;
   document.body.append(widget);
   balao=widget.querySelector(".pazinho-balao");
