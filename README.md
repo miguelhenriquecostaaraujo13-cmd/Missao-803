@@ -244,6 +244,17 @@ Os arquivos são `assets/neo-lab.js` e `assets/neo-lab.css`; o cache offline foi
 - Novos arquivos `assets/portal-ux-v34.css` e `assets/portal-ux-v34.js`. Cache offline alterado para `portal8-recursos-aprovados-v34`.
 - Validação estática: 31 ferramentas presentes, identificadores HTML exclusivos, scripts com sintaxe correta e bancada experimental confirmada fora da área pública de mapas. A usabilidade e o visual precisam de teste real no navegador depois da publicação.
 
+## Versão 35 — experiências aprovadas disponíveis a todos na Oficina Criativa Neo
+
+- O usuário aprovou todas as ideias que estavam no Ateliê. Para não expor o painel administrativo, o conteúdo funcional foi promovido para uma nova **área pública separada**, `neoOficina`, acessível em **🎨 Criar e explorar → ✨ Oficina Criativa Neo**. A página inicial ganhou botão direto.
+- A Oficina reúne os **9 utilitários A–I** (planejamento, checklist, glossário, média, mapas de ideias em texto, pergunta-surpresa, leitura em voz alta, pesquisa de ferramentas, microplano); os **8 recursos de mapas e cards** (cards em estilos, favoritos locais, comparação, conexões, apresentação, perguntas, checklist, exportação); os **12 protótipos de revisão/organização**; os **9 experimentos de criação e jogos**; e as **4 inovações interdisciplinares**. São **42 experiências/controles** agrupados, com recursos de escopo variado. Muitas são atividades guiadas e outras são prévias locais, não produtos generativos completos.
+- Recursos já públicos como Flashcards em Memorização, Arcade, Mapas Mentais e Tutor foram preservados e não duplicados como novas rotas. A Oficina é a 32ª área do portal; as 31 anteriores continuam no menu.
+- O **Ateliê Neo** permanece no **Modo Proprietário** com autenticação administrativa e agora se destina a decidir futuras melhorias e acompanhar ideias. A remoção do conteúdo experimental foi feita sem apagá-lo: os mesmos elementos e IDs estão na Oficina pública.
+- O antigo botão de “sincronização opcional” foi renomeado para **Backup local de preferências**. Exporta/importa dados locais do planejador e checklist, corrigindo o armazenamento usado pelo botão. **Não há sincronização na nuvem**, nem backup de contas Supabase. Conteúdos dos alunos continuam no próprio dispositivo, a menos que outra ferramenta previamente existente já utilize banco de dados.
+- Os textos das experiências publicadas foram atualizados para explicar se são atividades, protótipos ou funções locais. Nenhuma opção de demonstração é anunciada como serviço completo, e nenhuma nova política de acesso ao Supabase foi criada.
+- Novo arquivo `assets/neo-oficina-v35.css` e cache `portal8-recursos-aprovados-v35`. Scripts das experiências receberam versão `?v=35` para expirar cache antigo.
+- Testes estáticos: scripts atualizados compilam, 32 rotas se correspondem, IDs não duplicados, todos os grupos e bancadas estão na Oficina, e navegação para Ateliê continua sob validação administrativa. Verificação visual e funcional de cada experiência em aparelho real ainda é recomendada depois do deploy.
+
 ## Publicação
 
 Publicação atual pelo GitHub Pages: https://miguelhenriquecostaaraujo13-cmd.github.io/Missao-803/
