@@ -1,4 +1,4 @@
-/* Ateliê Neo: quatro invenções pedagógicas prototipadas, sem API ou dados externos. */
+/* Oficina Criativa Neo: quatro invenções pedagógicas locais, sem API ou dados externos. */
 (() => {
 "use strict";
 const $=id=>document.getElementById(id);
@@ -84,7 +84,7 @@ function miniCampaign(root){
 function init(){
  const target=$("neoNewExperiments");if(!target)return;
  mk("h3",target,"🚀 Ideias inovadoras do Neo — novos protótipos");
- mk("p",target,"Quatro experiências de organização e revisão para avaliar antes de liberar aos alunos. Elas não enviam respostas à nuvem.");
+ mk("p",target,"Quatro atividades de organização e revisão disponíveis aos alunos. Elas não enviam suas respostas à nuvem.");
  const grid=mk("div",target,undefined,"neo-lab-grid");
  [interdisciplinary,knowledge,memoryCapsule,miniCampaign].forEach(x=>x(grid));
 }
