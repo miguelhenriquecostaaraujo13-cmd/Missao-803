@@ -2150,16 +2150,40 @@ function portal8CarouselToggle(){portal8CarouselPaused=!portal8CarouselPaused;po
 
 async function portalPublicRefresh(){
  const root=document.getElementById("portalPublicItems");if(!root)return;root.replaceChildren();
+ // Avisos de atualizações do SITE: separados dos comunicados oficiais da escola.
+ const updatesRoot=document.getElementById("portal8AutoUpdateNews");
+ let siteUpdates=[];
+ try{
+  const response=await fetch("./assets/portal8-updates.json?rev=22",{cache:"no-store"});
+  if(response.ok){
+   const records=await response.json();
+   if(Array.isArray(records)){
+    siteUpdates=records.filter(x=>x&&x.important===true&&typeof x.title==="string"&&typeof x.body==="string")
+      .slice(0,8).map(x=>({title:"✨ "+x.title.slice(0,110),body:x.body.slice(0,520),date:typeof x.date==="string"?x.date:""}));
+   }
+  }
+ }catch(e){/* Offline ou sem rede: os comunicados oficiais continuam independentes. */}
+ if(updatesRoot){
+  updatesRoot.replaceChildren();updatesRoot.hidden=siteUpdates.length===0;
+  for(const x of siteUpdates){
+   const node=document.createElement("article");node.className="portal8-site-update mission";
+   const title=document.createElement("b");title.textContent=x.title;
+   const date=document.createElement("small");
+   date.textContent=x.date?"📘 Atualização do portal · "+x.date.split("-").reverse().join("/"):"📘 Atualização do portal";
+   const body=document.createElement("p");body.textContent=x.body;
+   node.append(title,date,body);updatesRoot.append(node);
+  }
+ }
  try{
   const c=portalOwnerClient();
   const [a,b]=await Promise.all([c.from("portal803_announcements").select("id,title,body,created_at,turma").eq("published",true).in("turma",["geral",portal8Turma]).order("created_at",{ascending:false}).limit(10),c.from("portal803_exams").select("id,subject,exam_date,topics,turma").eq("published",true).in("turma",["geral",portal8Turma]).order("exam_date",{ascending:true}).limit(30)]);
   if(a.error||b.error)throw new Error("Dados indisponíveis");
   portal8OfficialExams=b.data||[];portal8RenderExamOptions();if(portal8Turma!=="803")portal8GradeRefresh();
-  const all=[...(a.data||[]).map(x=>({title:"📢 "+x.title,body:x.body})),...(b.data||[]).map(x=>({title:"📅 "+x.subject+" — "+x.exam_date.split("-").reverse().join("/"),body:x.topics}))];
+  const all=[...siteUpdates,...(a.data||[]).map(x=>({title:"📢 "+x.title,body:x.body})),...(b.data||[]).map(x=>({title:"📅 "+x.subject+" — "+x.exam_date.split("-").reverse().join("/"),body:x.topics}))];
   portal8Slides=[...all,...portal8WelcomeSlides];portal8SlideIndex=0;portal8CarouselRender();
   if(!all.length){root.textContent="Ainda não há publicações adicionais do proprietário. Consulte o cronograma inicial.";return}
-  for(const x of all){const p=document.createElement("div");p.className="mission";const title=document.createElement("b");title.textContent=x.title;const body=document.createElement("p");body.textContent=x.body;p.append(title,body);root.append(p)}
- }catch(e){portal8Slides=portal8WelcomeSlides.slice();portal8SlideIndex=0;portal8CarouselRender();root.textContent="Avisos online indisponíveis. O restante do site continua funcionando."}
+  for(const x of all.slice(siteUpdates.length)){const p=document.createElement("div");p.className="mission";const title=document.createElement("b");title.textContent=x.title;const body=document.createElement("p");body.textContent=x.body;p.append(title,body);root.append(p)}
+ }catch(e){portal8Slides=[...siteUpdates,...portal8WelcomeSlides];portal8SlideIndex=0;portal8CarouselRender();root.textContent="Avisos oficiais online indisponíveis. As atualizações do portal continuam visíveis acima, se houver."}
 }
 portalPublicRefresh();
 portalOwnerCheck();
