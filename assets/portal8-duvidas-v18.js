@@ -90,7 +90,7 @@ function init(){
  const choose=window.portal8Choose;
  window.portal8Choose=function(v){const r=choose(v);published();return r;};
  const show=window.showView;
- window.showView=function(v){const r=show(v);if(v==="biblioteca")published();if(v==="admin"||v==="painel")if(portalIsOwner)pending();return r;};
+ window.showView=function(v){const r=show(v);if(v==="biblioteca")published();if(v==="criador"&&portalIsOwner)pending();return r;};
  const check=window.portalOwnerCheck;
  window.portalOwnerCheck=async function(){const r=await check();if(portalIsOwner)await pending();return r;};
 }
