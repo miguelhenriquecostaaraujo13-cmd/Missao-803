@@ -1,0 +1,25 @@
+/* v37 — menu de três pontinhos do Daniel, leve e acessível. */
+.neo-global-bar{position:relative;justify-content:space-between;padding:9px 12px;min-height:53px}
+.neo-global-bar .neo-tool-heading{flex:1;min-width:100px}
+.neo-global-bar .neo-tool-heading small{font-size:.72rem}
+.neo-more{position:relative;margin:0 0 0 auto;flex:0 0 auto;min-width:40px;z-index:45}
+.neo-more-trigger{display:grid;place-items:center;list-style:none;cursor:pointer;user-select:none;width:42px;min-height:42px;border:1px solid #93bdcc;border-radius:12px;background:var(--portal-panel);color:var(--ink);font-family:system-ui,sans-serif;font-size:1.65rem;line-height:1;font-weight:900}
+.neo-more-trigger::-webkit-details-marker{display:none}
+.neo-more-trigger:hover,.neo-more[open]>.neo-more-trigger{background:#d9f4f9;color:#164564;border-color:#50a8c1}
+.neo-more-trigger:focus-visible,.neo-more-item:focus-visible{outline:3px solid #f0be6b!important;outline-offset:3px}
+.neo-more-panel{display:grid;position:absolute;top:calc(100% + 7px);right:0;min-width:210px;max-width:min(330px,calc(100vw - 30px));padding:7px;gap:3px;border-radius:16px;border:1px solid #75adbf;background:var(--white);color:var(--ink);box-shadow:0 17px 32px rgba(2,39,68,.2);z-index:300}
+.neo-more:not([open])>.neo-more-panel{display:none}
+.neo-more-item{display:flex;justify-content:flex-start;align-items:center;width:100%;min-height:42px;border:0;border-radius:10px;padding:10px 12px;text-align:left;font:inherit;font-weight:730;font-size:.86rem;background:transparent;color:var(--ink);cursor:pointer}
+.neo-more-item:hover{background:var(--portal-panel)}
+.neo-more-item[aria-pressed="true"]{background:#fff2cf;color:#815513}
+.neo-more-panel .neo-bar-feedback{padding:3px 9px;font-size:.72rem;color:var(--muted)}
+.neo-more-hint{margin:3px 8px 6px;font-size:.73rem;font-weight:730;color:var(--muted);border-bottom:1px solid var(--line);padding-bottom:8px}
+nav .navquick{display:flex!important;align-items:center!important;flex-wrap:wrap!important;gap:8px!important}
+nav .navquick>select{flex:1;min-width:140px}
+nav .navquick .neo-more-nav{margin-left:auto;z-index:200}
+nav .navquick .neo-more-trigger{border-color:#91c5d9;background:#245779;color:#fff}
+nav .navquick .neo-more-trigger:hover,nav .navquick .neo-more-nav[open]>.neo-more-trigger{background:#2a829e;color:#fff}
+nav .navquick .neo-more-panel{background:var(--white)!important;color:var(--ink)!important;right:0}
+nav .navquick .neo-more-panel button{color:var(--ink)!important}
+@media(max-width:660px){nav .navquick>label{flex-basis:100%}.neo-global-bar{margin-bottom:12px}.neo-global-bar .neo-tool-heading small{display:none}.neo-more-panel{min-width:195px}}
+@media(prefers-reduced-motion:reduce){.neo-more *{animation:none!important;transition:none!important}}
