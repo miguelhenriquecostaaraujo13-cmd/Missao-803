@@ -46,6 +46,8 @@ html.p8-entry-check body>header,html.p8-entry-check body>nav,html.p8-entry-check
 #p8FirstVisit [role=status]{font-size:.88rem;min-height:1.5em;margin:12px 0 0;color:#375976}
 #p8FirstVisit [hidden],#p8ProfileResend[hidden]{display:none!important}
 #p8WelcomePasswordHelp{display:block;margin:3px 0 8px;color:#4d6478;font-size:.82rem;line-height:1.5}
+#p8FirstVisit .p8-welcome-google{background:#f4f7fd;color:#17446f;border:1px solid #b4c8df}
+#p8ProfileGoogle{margin-top:9px;background:#f5f9ff;color:#203f66;border:1px solid #aacde6}
 #p8ProfileAuth label{color:#eaf5ff!important;font-weight:800}
 #p8ProfileAuth>small,#p8ProfileAuth .small.muted{color:#d2e4f4!important}
 #p8ProfileResend{margin-top:11px;min-height:42px}
@@ -1665,7 +1667,7 @@ html nav :is(summary,button,select):focus-visible{outline:3px solid #ffd781!impo
    <h3>🔐 Entrar ou criar conta</h3><p class="small muted">Use um e-mail seu. Não compartilhe a senha. O cadastro pode precisar de confirmação por e-mail.</p>
    <label for="p8ProfileEmail">E-mail</label><input id="p8ProfileEmail" type="email" maxlength="254" autocomplete="email" placeholder="seuemail@exemplo.com">
    <label for="p8ProfilePassword">Senha (12 caracteres para nova conta)</label><input id="p8ProfilePassword" type="password" minlength="1" maxlength="128" autocomplete="current-password" placeholder="Use sua senha; no cadastro, mínimo de 12">
-   <div class="p8-profile-action"><button class="btn orange" type="button" id="p8ProfileLogin" data-profile-action>Entrar</button><button class="btn light" type="button" id="p8ProfileSignup" data-profile-action>Criar conta</button></div><button class="btn light" type="button" id="p8ProfileResend" data-profile-action hidden>📩 Reenviar e-mail de confirmação</button><button class="btn light" type="button" id="p8ProfileForgot" data-profile-action>🔑 Esqueci minha senha</button>
+   <div class="p8-profile-action"><button class="btn orange" type="button" id="p8ProfileLogin" data-profile-action>Entrar</button><button class="btn light" type="button" id="p8ProfileSignup" data-profile-action>Criar conta</button></div><button class="btn light" type="button" id="p8ProfileGoogle" data-profile-action>🌐 Entrar com Google (se habilitado)</button><button class="btn light" type="button" id="p8ProfileResend" data-profile-action hidden>📩 Reenviar e-mail de confirmação</button><button class="btn light" type="button" id="p8ProfileForgot" data-profile-action>🔑 Esqueci minha senha</button>
    <small>O login é opcional. Você continua podendo estudar sem conta. O cadastro não concede acesso administrativo.</small>
   </div>
   <div class="p8-profile-panel" id="p8ProfilePrivate" hidden>
@@ -2599,7 +2601,7 @@ async function portalOwnerAuth(action){
  try{
   const c=portalOwnerClient();
   portalOwnerStatus(action==="register"?"Criando a conta...":"Verificando login...");
-  const res=action==="register"?await c.auth.signUp({email,password,options:{emailRedirectTo:location.origin+location.pathname}}):await c.auth.signInWithPassword({email,password});
+  const res=action==="register"?await c.auth.signUp({email,password,options:{emailRedirectTo:window.portal8AuthHelp?.publicRedirectURL()||location.origin+location.pathname}}):await c.auth.signInWithPassword({email,password});
   document.getElementById("portalOwnerPassword").value="";
   if(res.error)throw res.error;
   if(action==="register"&&!res.data?.session){portalOwnerStatus("Cadastro solicitado. Confira seu e-mail para confirmar a conta. Se o link redirecionar incorretamente, configure a URL do GitHub Pages em Supabase → Authentication → URL Configuration.");return}
@@ -3361,7 +3363,7 @@ init();renderNexo();
 <script src="./assets/neo-arcade-arte-v38.js?v=38"></script>
 <script src="./assets/neo-arcade.js?v=38"></script>
 <script src="./assets/neo-admin-gate.js?v=29"></script>
-<script src="./assets/portal8-auth-help-v1.js?v=2"></script>
+<script src="./assets/portal8-auth-help-v1.js?v=3"></script>
 <script src="./assets/portal8-perfil.js?v=23"></script>
 <script src="./assets/neo-central-3.js?v=2"></script>
 <script src="./assets/neo-agents-4.js?v=1"></script>
@@ -3375,6 +3377,7 @@ init();renderNexo();
     <div id="p8WelcomeChoices">
       <button type="button" class="p8-welcome-primary" data-entry="signup">✨ Criar uma conta</button>
       <button type="button" data-entry="signin">🔐 Já tenho conta — Entrar</button>
+      <button type="button" class="p8-welcome-google" data-google-login>🌐 Entrar com Google (se habilitado)</button>
       <button type="button" class="p8-welcome-guest" data-entry="guest">👋 Entrar como visitante</button>
     </div>
     <form id="p8WelcomeForm" hidden>
@@ -3384,6 +3387,7 @@ init();renderNexo();
       <input id="p8WelcomePassword" type="password" minlength="1" maxlength="128" autocomplete="current-password" required>
       <small id="p8WelcomePasswordHelp">Para criar uma conta, use pelo menos 12 caracteres.</small>
       <button id="p8WelcomeSubmit" type="submit" class="p8-welcome-primary">Entrar</button>
+      <button type="button" class="p8-welcome-google" data-google-login>🌐 Ou entrar com Google</button>
       <button type="button" class="p8-welcome-back" id="p8WelcomeResend" hidden>📩 Reenviar confirmação de e-mail</button>
       <button type="button" class="p8-welcome-back" id="p8WelcomeForgot">🔑 Esqueci minha senha</button>
       <button type="button" class="p8-welcome-back" id="p8WelcomeBack">← Voltar às opções</button>
@@ -3406,7 +3410,7 @@ init();renderNexo();
   function setMode(next){
     mode=next;choices.hidden=true;form.hidden=false;status.textContent="";
     $("p8WelcomeTitle").textContent=next==="signup"?"Crie sua conta":"Entre na sua conta";
-    $("p8WelcomeIntro").textContent=next==="signup"?"Salve seu perfil pessoal para acessar depois.":"Bem-vindo de volta! Use seu e-mail e senha.";
+    $("p8WelcomeIntro").textContent=next==="signup"?"Cadastre-se com e-mail e senha. Caso o servidor exija confirmação, o site avisará.":"Bem-vindo de volta! Para entrar com uma conta confirmada, use e-mail e senha, sem receber códigos.";
     $("p8WelcomeSubmit").textContent=next==="signup"?"Criar conta":"Fazer login";
     $("p8WelcomePassword").autocomplete=next==="signup"?"new-password":"current-password";
     $("p8WelcomePassword").minLength=next==="signup"?12:1;
@@ -3431,6 +3435,16 @@ init();renderNexo();
     setMode(action);
   });
   $("p8WelcomeBack").addEventListener("click",back);
+  root.addEventListener("click",async e=>{
+    if(!e.target.closest("[data-google-login]")||busy)return;
+    busy=true;status.textContent="Abrindo login do Google…";
+    try{
+      const c=client();if(!c)throw new Error("Conexão indisponível.");
+      const {error}=await window.portal8AuthHelp.signInWithGoogle(c);
+      if(error)throw error;
+    }catch(err){status.textContent=window.portal8AuthHelp?.errorMessage(err,"google")||"Não foi possível abrir o login com Google."}
+    finally{busy=false}
+  });
   $("p8WelcomeResend").addEventListener("click",async()=>{
     if(busy)return;
     const email=$("p8WelcomeEmail").value.trim();
@@ -3439,7 +3453,7 @@ init();renderNexo();
     status.textContent="Solicitando novo e-mail de confirmação…";
     try{
       const c=client();if(!c)throw Error("Sem conexão");
-      const {error}=await window.portal8AuthHelp.resendConfirmation(c,email,location.origin+location.pathname);
+      const {error}=await window.portal8AuthHelp.resendConfirmation(c,email,window.portal8AuthHelp.publicRedirectURL());
       if(error)throw error;
       status.textContent="📩 Se houver uma conta pendente, o e-mail de confirmação será enviado. Confira também o Spam.";
     }catch(err){
@@ -3453,18 +3467,18 @@ init();renderNexo();
     if(!password){status.textContent="Digite sua senha.";return}
     if(mode==="signup"&&password.length<12){status.textContent="Para criar uma conta, use uma senha de pelo menos 12 caracteres.";return}
     busy=true;$("p8WelcomeSubmit").disabled=true;
-    status.textContent=mode==="signup"?"Criando sua conta…":"Verificando sua conta…";
+    status.textContent=mode==="signup"?"Criando conta e verificando a confirmação exigida pelo servidor…":"Conferindo e-mail e senha no servidor…";
     try{
       const c=client();if(!c)throw Error("Sem conexão");
       const result=mode==="signup"
-        ?await c.auth.signUp({email,password,options:{emailRedirectTo:location.origin+location.pathname}})
+        ?await c.auth.signUp({email,password,options:{emailRedirectTo:window.portal8AuthHelp?.publicRedirectURL()||location.origin+location.pathname}})
         :await c.auth.signInWithPassword({email,password});
       if(result.error)throw result.error;
       $("p8WelcomePassword").value="";
-      if(result.data?.session?.user?.email&&result.data.session.user.is_anonymous!==true){hide();return}
+      if(result.data?.session?.user?.email&&result.data.session.user.is_anonymous!==true){status.textContent=mode==="signup"?"✅ Conta criada e sessão salva!":"✅ Login confirmado e sessão salva!";hide();return}
       if(mode==="signup"){
         $("p8WelcomeResend").hidden=false;
-        status.textContent=window.portal8AuthHelp?.confirmationMessage||"Confira seu e-mail e confirme o cadastro antes de entrar.";
+        status.textContent="📩 O servidor ainda exige confirmação por e-mail. Verifique sua caixa de entrada; se o link abrir localhost, a URL do Supabase precisa ser corrigida pelo responsável.";
       }else{
         status.textContent="Para entrar, confirme seu e-mail, caso tenha recebido uma mensagem do portal.";
       }
