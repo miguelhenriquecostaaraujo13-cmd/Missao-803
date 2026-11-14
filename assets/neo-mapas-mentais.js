@@ -93,7 +93,10 @@ function buildSvg(d){
  return svg;
 }
 function generate(){
- const subject=$("neoMapSubject")?.value,topic=$("neoMapTopic")?.value||$("neoMapCustom")?.value?.trim();
+ const subject=$("neoMapSubject")?.value;
+ const manual=($("neoMapCustom")?.value||"").trim();
+ const chosen=$("neoMapTopic")?.value||"";
+ const topic=manual||(chosen!=="__custom__"?chosen:"");
  if(!subject||!topic){$("neoMapStatus").textContent="Escolha a matéria e um assunto ou digite um assunto específico.";return}
  last=compute(subject,topic,$("neoMapBranches")?.value||"");
  const root=$("neoMapCanvas");root.replaceChildren(buildSvg(last));
