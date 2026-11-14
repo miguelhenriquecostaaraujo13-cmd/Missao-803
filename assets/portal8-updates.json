@@ -1,5 +1,12 @@
 [
   {
+    "id": "versao-50344a6903cf",
+    "title": "Ateliê Neo separado dos mapas e melhorias em todas as 31 ferramentas",
+    "body": "Busca rápida Ctrl+K, atalhos, favoritos e visual responsivo; testes de mapas agora somente no painel do administrador.",
+    "date": "2026-11-14",
+    "important": true
+  },
+  {
     "id": "versao-f3a8c790d9c9",
     "title": "Diretor Neo adapta minijogos e flashcards ganham revisão inteligente",
     "body": "Nova IA de regras gratuita acompanha partidas, sugere dicas e roteiros, enquanto Ateliê recebe 4 experimentos educacionais.",
