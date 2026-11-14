@@ -28,13 +28,15 @@ const key=(x,y)=>x+"|"+y;
 function inRock(x,y){return levels[level].rocks.some(p=>p[0]===x&&p[1]===y)}
 function subjectsQuestions(){
  const s=$("n4Subject")?.value||"Matemática",bank=typeof quizzes!=="undefined"?quizzes:[];
- return bank.filter(q=>q.s===s&&Array.isArray(q.o)&&Number.isInteger(q.a)&&q.a>=0&&q.a<q.o.length);
+ const valid=bank.filter(q=>Array.isArray(q.o)&&Number.isInteger(q.a)&&q.a>=0&&q.a<q.o.length);
+ const chosen=valid.filter(q=>q.s===s);
+ return chosen.length?chosen:valid.filter(q=>q.s==="Matemática").length?valid.filter(q=>q.s==="Matemática"):valid;
 }
 function selectQuestion(){
  const bank=subjectsQuestions();
  if(!bank.length){question=null;status("Esta matéria ainda não tem perguntas cadastradas. Escolha outra no Studio ou tente a questão de Matemática.");return}
  question=bank[(level*3+score)%bank.length];
- $("mp5PuzzleQuestion").hidden=false;$("mp5PuzzlePrompt").textContent="🔮 Enigma do portal: "+question.q;
+ $("mp5PuzzleQuestion").hidden=false;$("mp5PuzzlePrompt").textContent="🔮 Enigma do portal • "+question.s+": "+question.q;
  const target=$("mp5PuzzleAnswers");target.replaceChildren();
  question.o.forEach((option,index)=>{
   const b=document.createElement("button");b.type="button";b.textContent=String.fromCharCode(65+index)+". "+option;
@@ -49,7 +51,7 @@ function selectQuestion(){
    }
   });target.append(b);
  });
- status("🔮 Três cristais coletados! Responda ao enigma para liberar a porta.");
+ status("🔮 Três cristais coletados! "+(question.s!==($("n4Subject")?.value||"Matemática")?"Não havia questões disponíveis da matéria escolhida; este enigma usa "+question.s+". ":"")+"Responda para liberar a porta.");
 }
 function setup(n){
  level=n;player={x:1,y:1};gems=new Set();unlocked=false;question=null;
