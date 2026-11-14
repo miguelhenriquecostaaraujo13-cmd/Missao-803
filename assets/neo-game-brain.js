@@ -35,10 +35,10 @@ const api={
  start(name){game=profiles[name]?name:null;successes=0;errors=0;streak=0;lastHint="";firstTip=true;publish();announce("O Diretor Neo observa apenas esta partida. Use 'Pedir dica' quando quiser.");},
  good(){successes++;streak++;publish();if(streak===3){announce("⭐ Três acertos seguidos! Você está pegando o jeito.")}},
  miss(){errors++;streak=0;publish();if(assist!=="desligado"&&errors%2===0)announce("💡 "+hint());},
- multiplier(){return assist==="desligado"?1:classify()},
+ multiplier(){const factor=classify();return assist==="desligado"?1:assist==="leve"?1+(factor-1)*.45:factor},
  get mode(){return assist},
  setMode(value){assist=["equilibrado","leve","desligado"].includes(value)?value:"equilibrado";publish();announce(assist==="desligado"?"Adaptação automática desativada. Você ainda pode pedir dicas.":assist==="leve"?"Adaptação suave ativada.":"Adaptação automática equilibrada ativada.");},
- speed(base){const factor=api.multiplier();return base*(assist==="leve"?1+(factor-1)*.45:factor)},
+ speed(base){return base*api.multiplier()},
  hint(){const result=hint();announce("💡 "+result);return result;},
  get snapshot(){return {game,successes,errors,streak,mode:assist,multiplier:api.multiplier()}}
 };
