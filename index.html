@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#10283f">
-<title>Portal 803 | Missões e progresso de estudos</title>
+<title>Portal 8º Ano Missão Paz | Estudos para todas as turmas</title>
 <style>
 :root{--navy:#10283f;--navy2:#173d5c;--orange:#ff9b37;--teal:#36a6a0;--paper:#f4f7fa;--ink:#172b3c;--muted:#637487;--line:#dce5ec;--white:#fff;--green:#18845d;--red:#b84642;--shadow:0 14px 34px rgba(16,40,63,.10)}
 *{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,Arial,sans-serif;line-height:1.5}
@@ -366,23 +366,69 @@ html[data-portal-theme="noite"]{--portal-hero1:#073a67;--portal-hero2:#036d93;--
 @media(max-width:480px){.school-mark{width:46px;height:46px;border-radius:12px}.school-mark svg{width:40px;height:40px}.school-identity-text strong{font-size:.69rem;line-height:1.25}.school-identity-text small{font-size:.69rem}.school-hero .portal-hero-actions button{font-size:.81rem;padding:10px 9px}.school-hero .portal-hero-actions{gap:8px}.school-orbit{display:none}}
 @media(prefers-reduced-motion:reduce){.school-hero *, .school-hero::before,.school-hero::after{animation:none!important;transition:none!important}.school-hero .portal-hero-actions button:hover{transform:none}}
 html[data-phase-motion="reduce"] .school-hero *,html[data-phase-motion="reduce"] .school-hero::before,html[data-phase-motion="reduce"] .school-hero::after{animation:none!important;transition:none!important}
+
+/* Portal 8º Ano: visual azul e branco, seletor de turmas e cartão de boas-vindas. */
+.school-logo-mark{width:184px;height:66px;background:#fff;border-radius:16px;padding:6px}
+.school-logo-mark img{width:100%;height:100%;object-fit:contain}
+.portal8-welcome{overflow:hidden;margin-bottom:18px;border:1px solid var(--line);border-radius:24px;box-shadow:0 18px 50px #0a57931b}
+.portal8-welcome-top{display:grid;grid-template-columns:minmax(0,1fr) minmax(250px,.9fr);gap:22px;align-items:center}
+.portal8-welcome-copy h2{font-size:clamp(1.35rem,2.65vw,2.2rem);line-height:1.14;letter-spacing:-.035em;color:var(--ink);margin:10px 0}
+.portal8-welcome-copy p{color:var(--muted);line-height:1.65}
+.portal8-cartoon{width:100%;height:auto;border-radius:20px;display:block;background:var(--portal-panel)}
+.portal8-selected{margin:14px 0 5px;padding:12px 15px;background:var(--portal-panel);border-radius:12px;color:var(--ink)}
+.portal8-selected strong{color:var(--navy)}
+.portal8-class-columns{display:grid;grid-template-columns:2fr 1fr;gap:14px;margin-top:19px}
+.portal8-class-columns>div{background:var(--portal-panel);padding:16px;border-radius:16px;border:1px solid var(--line)}
+.portal8-class-buttons{display:grid;grid-template-columns:repeat(auto-fit,minmax(72px,1fr));gap:8px;margin-top:10px}
+.portal8-class-buttons button{border:2px solid var(--line);border-radius:13px;background:var(--white);color:var(--ink);font-weight:900;font-size:1.1rem;padding:13px 8px;cursor:pointer;transition:transform .2s,border-color .2s,background .2s}
+.portal8-class-buttons button:hover{transform:translateY(-3px);border-color:var(--navy)}
+.portal8-class-buttons button[aria-pressed="true"]{background:var(--navy);border-color:var(--navy);color:#fff;box-shadow:0 8px 24px #1c7daa33}
+html[data-portal-theme="noite"] .portal8-class-buttons button[aria-pressed="true"]{color:#071b30}
+.portal8-toolbar{margin:8px 0;padding:7px 12px;border-radius:12px;background:#ffffff24;border:1px solid #ffffff55;display:flex;gap:10px;align-items:center;flex-wrap:wrap;max-width:440px}
+.portal8-toolbar label{font-weight:800;font-size:.85rem;color:#fff}
+.portal8-toolbar select{border:0;border-radius:9px;padding:9px 12px;background:#fff;color:#093a64;font-weight:850;min-width:130px}
+#portal8ChallengeList{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px;margin-top:15px}
+#portal8ChallengeList .mission{margin:0}
+html[data-portal8-other="true"] #portal803Schedule,html[data-portal8-other="true"] #portal8OriginalExamStrip{display:none!important}
+@media(max-width:790px){.portal8-welcome-top{grid-template-columns:1fr}.portal8-cartoon{max-width:600px;justify-self:center}.portal8-class-columns{grid-template-columns:1fr}.school-logo-mark{width:142px;height:55px}}
+@media(max-width:450px){.portal8-welcome{padding:13px}.portal8-class-buttons{grid-template-columns:repeat(4,minmax(0,1fr))}.school-logo-mark{width:110px;height:46px}.portal8-toolbar{width:100%}}
+@media(prefers-reduced-motion:reduce){.portal8-class-buttons button{transition:none!important}.portal8-class-buttons button:hover{transform:none!important}}
 </style>
  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.105.0"></script>
 </head>
 <body>
 <header class="school-hero"><div class="school-diamond-band" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><div class="school-orbit" aria-hidden="true"><span></span><span></span><span></span></div><div class="wrap">
-  <div class="portal-top"><span class="portal-eyebrow">✦ PLATAFORMA DE ESTUDOS DA TURMA 803</span><label class="portal-theme-label" for="portalThemeSelect">🎨 Estilo <select id="portalThemeSelect" aria-label="Escolha a aparência do Portal 803"><option value="aurora">🌈 Aurora</option><option value="noite">🌙 Noite</option><option value="papel">🌿 Papel</option></select></label></div>
-  <div class="topline school-identity"><span class="school-mark" aria-hidden="true"><svg viewBox="0 0 64 64" focusable="false"><path fill="#04a9e1" d="M3 29C16 11 35 9 57 22L45 40 32 27 21 46z"/><path d="M37 17l8 9m-11-7 9 10m-7 4c5-4 11-4 13-9" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round"/></svg></span><span class="school-identity-text"><strong>INSTITUTO EDUCACIONAL MISSÃO PAZ</strong><small>Central de Estudos • Turma 803</small></span></div>
-  <h1>Portal <span class="school-hero-number">803</span><br><span class="school-hero-slogan">Aprenda. Evolua. Conquiste.</span></h1><div class="portal-hero-actions"><button type="button" class="portal-hero-primary" onclick="showView('trilha')">📚 Começar a estudar <span aria-hidden="true">↗</span></button><button type="button" class="portal-hero-secondary" onclick="showView('quiz')">🧠 Fazer simulado</button><button type="button" class="portal-motion-button" onclick="portalReplayMotion()" aria-label="Repetir animação da página">✨ Ver animação</button></div>
+  <div class="portal-top"><span class="portal-eyebrow">✦ PLATAFORMA DE ESTUDOS PARA TODO O 8º ANO</span><label class="portal-theme-label" for="portalThemeSelect">🎨 Estilo <select id="portalThemeSelect" aria-label="Escolha a aparência do Portal 803"><option value="aurora">🌈 Aurora</option><option value="noite">🌙 Noite</option><option value="papel">🌿 Papel</option></select></label></div>
+  <div class="topline school-identity"><span class="school-mark school-logo-mark"><img src="./assets/missao-paz-logo-portal.svg" alt="Marca ilustrada Missão Paz" width="190" height="66"></span><span class="school-identity-text"><strong>INSTITUTO EDUCACIONAL MISSÃO PAZ</strong><small>Central de Estudos • 8º Ano • Manhã e tarde</small></span></div>
+  <h1>Portal <span class="school-hero-number">8º Ano</span><br><span class="school-hero-slogan">Aprenda. Evolua. Conquiste.</span></h1><div class="portal8-toolbar"><label for="portal8TopTurma">Minha turma</label><select id="portal8TopTurma" onchange="portal8Choose(this.value)"><option value="801">801 • manhã</option><option value="802">802 • manhã</option><option value="803">803 • manhã</option><option value="804">804 • manhã</option><option value="806">806 • tarde</option><option value="807">807 • tarde</option></select></div><div class="portal-hero-actions"><button type="button" class="portal-hero-primary" onclick="showView('trilha')">📚 Começar a estudar <span aria-hidden="true">↗</span></button><button type="button" class="portal-hero-secondary" onclick="showView('quiz')">🧠 Fazer simulado</button><button type="button" class="portal-motion-button" onclick="portalReplayMotion()" aria-label="Repetir animação da página">✨ Ver animação</button></div>
   <p>Um espaço de estudos feito para nossa turma, inspirado nas cores e nos elementos geométricos da escola.</p>
-  <div class="exam-strip">
+  <div class="exam-strip" id="portal8OriginalExamStrip">
     <span class="exam-pill">16/11 · Matemática</span><span class="exam-pill">17/11 · Português</span>
     <span class="exam-pill">18/11 · Geografia + Ed. Física teórica</span><span class="exam-pill">19/11 · História + Inglês</span><span class="exam-pill">23/11 · Ciências + Arte</span>
   </div>
 </div></header>
-<nav aria-label="Navegação principal do Portal 803"><div class="navquick"><label for="nexoNavJump">🧭 Ir para ferramenta</label><select id="nexoNavJump" aria-label="Escolher uma ferramenta por categoria"></select></div><div class="navinner"><details class="navgroup" data-category="inicio" open><summary>🏠 Início<span class="navcount">1</span></summary><div class="navgroup-items"><button type="button" class="navbtn active" data-view="inicio" aria-current="page">🏁 Meu painel</button></div></details><details class="navgroup" data-category="aprender"><summary>📚 Aprender<span class="navcount">6</span></summary><div class="navgroup-items"><button type="button" class="navbtn" data-view="trilha">✅ Minha trilha</button><button type="button" class="navbtn" data-view="videoaulas">🎬 Videoaulas</button><button type="button" class="navbtn" data-view="cartoes">🗂️ Memorização</button><button type="button" class="navbtn" data-view="metodos">📚 Métodos de estudo</button><button type="button" class="navbtn" data-view="assistente">✨ Tutor grátis</button><button type="button" class="navbtn" data-view="revisoes">🎯 Missões e revisões</button></div></details><details class="navgroup" data-category="praticar"><summary>🧠 Praticar<span class="navcount">6</span></summary><div class="navgroup-items"><button type="button" class="navbtn" data-view="quiz">🧠 Simulados</button><button type="button" class="navbtn" data-view="gerador">⚡ Gerador de questões</button><button type="button" class="navbtn" data-view="laboratorio">🧪 Laboratório</button><button type="button" class="navbtn" data-view="arena">🎮 Arena 803</button><button type="button" class="navbtn" data-view="desempenho">📊 Desempenho</button><button type="button" class="navbtn" data-view="evolucao803">📈 Minha evolução</button></div></details><details class="navgroup" data-category="organizar"><summary>🗓️ Organizar<span class="navcount">6</span></summary><div class="navgroup-items"><button type="button" class="navbtn" data-view="metas803">📈 Minhas metas</button><button type="button" class="navbtn" data-view="revisao803">🗒️ Revisão para provas</button><button type="button" class="navbtn" data-view="calendario">📅 Calendário</button><button type="button" class="navbtn" data-view="foco">⏱️ Foco</button><button type="button" class="navbtn" data-view="caderno">📝 Meu caderno</button><button type="button" class="navbtn" data-view="lembretes">🔔 Lembretes</button></div></details><details class="navgroup" data-category="turma"><summary>🤝 Turma<span class="navcount">2</span></summary><div class="navgroup-items"><button type="button" class="navbtn" data-view="turma">🌐 Painel da turma</button><button type="button" class="navbtn" data-view="biblioteca">🤝 Biblioteca 803</button></div></details><details class="navgroup" data-category="administracao"><summary>⚙️ Administração e ajuda<span class="navcount">5</span></summary><div class="navgroup-items"><button type="button" class="navbtn" data-view="professor">👩‍🏫 Professor</button><button type="button" class="navbtn" data-view="criador">🔒 Modo Proprietário</button><button type="button" class="navbtn" data-view="offline">📶 Modo offline</button><button type="button" class="navbtn" data-view="ajuda803">🛠️ Relatar problema</button><button type="button" class="navbtn" data-view="acessibilidade803">♿ Acessibilidade</button></div></details></div><p class="navhint">Escolha uma categoria para encontrar a ferramenta que precisa.</p></nav>
+<nav aria-label="Navegação principal do Portal 803"><div class="navquick"><label for="nexoNavJump">🧭 Ir para ferramenta</label><select id="nexoNavJump" aria-label="Escolher uma ferramenta por categoria"></select></div><div class="navinner"><details class="navgroup" data-category="inicio" open><summary>🏠 Início<span class="navcount">1</span></summary><div class="navgroup-items"><button type="button" class="navbtn active" data-view="inicio" aria-current="page">🏁 Meu painel</button></div></details><details class="navgroup" data-category="aprender"><summary>📚 Aprender<span class="navcount">6</span></summary><div class="navgroup-items"><button type="button" class="navbtn" data-view="trilha">✅ Minha trilha</button><button type="button" class="navbtn" data-view="videoaulas">🎬 Videoaulas</button><button type="button" class="navbtn" data-view="cartoes">🗂️ Memorização</button><button type="button" class="navbtn" data-view="metodos">📚 Métodos de estudo</button><button type="button" class="navbtn" data-view="assistente">✨ Tutor grátis</button><button type="button" class="navbtn" data-view="revisoes">🎯 Missões e revisões</button></div></details><details class="navgroup" data-category="praticar"><summary>🧠 Praticar<span class="navcount">6</span></summary><div class="navgroup-items"><button type="button" class="navbtn" data-view="quiz">🧠 Simulados</button><button type="button" class="navbtn" data-view="gerador">⚡ Gerador de questões</button><button type="button" class="navbtn" data-view="laboratorio">🧪 Laboratório</button><button type="button" class="navbtn" data-view="arena">🎮 Arena 803</button><button type="button" class="navbtn" data-view="desempenho">📊 Desempenho</button><button type="button" class="navbtn" data-view="evolucao803">📈 Minha evolução</button></div></details><details class="navgroup" data-category="organizar"><summary>🗓️ Organizar<span class="navcount">6</span></summary><div class="navgroup-items"><button type="button" class="navbtn" data-view="metas803">📈 Minhas metas</button><button type="button" class="navbtn" data-view="revisao803">🗒️ Revisão para provas</button><button type="button" class="navbtn" data-view="calendario">📅 Calendário</button><button type="button" class="navbtn" data-view="foco">⏱️ Foco</button><button type="button" class="navbtn" data-view="caderno">📝 Meu caderno</button><button type="button" class="navbtn" data-view="lembretes">🔔 Lembretes</button></div></details><details class="navgroup" data-category="turma"><summary>🤝 Turma<span class="navcount">3</span></summary><div class="navgroup-items"><button type="button" class="navbtn" data-view="turma">🌐 Painel da turma</button><button type="button" class="navbtn" data-view="desafio8ano">🏆 Missões coletivas</button><button type="button" class="navbtn" data-view="biblioteca">🤝 Biblioteca 803</button></div></details><details class="navgroup" data-category="administracao"><summary>⚙️ Administração e ajuda<span class="navcount">5</span></summary><div class="navgroup-items"><button type="button" class="navbtn" data-view="professor">👩‍🏫 Professor</button><button type="button" class="navbtn" data-view="criador">🔒 Modo Proprietário</button><button type="button" class="navbtn" data-view="offline">📶 Modo offline</button><button type="button" class="navbtn" data-view="ajuda803">🛠️ Relatar problema</button><button type="button" class="navbtn" data-view="acessibilidade803">♿ Acessibilidade</button></div></details></div><p class="navhint">Escolha uma categoria para encontrar a ferramenta que precisa.</p></nav>
 <main>
 <section id="inicio" class="view active">
+<section class="portal8-welcome card" aria-label="Portal das turmas do oitavo ano">
+ <div class="portal8-welcome-top">
+  <div class="portal8-welcome-copy"><span class="portal-premium-kicker">🏫 INSTITUTO EDUCACIONAL MISSÃO PAZ</span><h2>Seis turmas. Um só lugar para aprender.</h2>
+   <p>O espaço de estudo do 8º ano. Escolha sua turma para consultar provas, avisos e projetos sem misturar as informações de outras salas.</p>
+   <div class="portal8-selected">Turma selecionada: <strong id="portal8CurrentClass">803 • Manhã</strong> <span class="small muted">Você pode trocar quando quiser.</span></div>
+  </div><img class="portal8-cartoon" src="./assets/turmas-cartoon.svg" width="550" height="275" alt="Ilustração cartoon genérica de estudantes usando uniforme azul e branco, com fundo inspirado na fachada da escola" loading="eager">
+ </div>
+ <div class="portal8-class-columns">
+ <div><h3>☀️ Turmas da manhã</h3><div class="portal8-class-buttons" id="portal8Morning">
+  <button type="button" data-turma="801" onclick="portal8Choose('801')">801</button>
+  <button type="button" data-turma="802" onclick="portal8Choose('802')">802</button>
+  <button type="button" data-turma="803" onclick="portal8Choose('803')">803</button>
+  <button type="button" data-turma="804" onclick="portal8Choose('804')">804</button></div></div>
+ <div><h3>🌤️ Turmas da tarde</h3><div class="portal8-class-buttons" id="portal8Afternoon">
+  <button type="button" data-turma="806" onclick="portal8Choose('806')">806</button>
+  <button type="button" data-turma="807" onclick="portal8Choose('807')">807</button></div></div>
+ </div>
+ <p class="small muted">Projeto colaborativo independente, não oficial da escola. O conteúdo inicial da 803 é um roteiro de referência; cada turma deve confirmar suas datas com seus professores. Não há ranking pessoal de notas.</p>
+</section>
 <div class="portal-smart card" aria-label="Central de acesso e ferramentas">
  <div class="portal-smart-head"><div class="portal-smart-glow" aria-hidden="true"></div>
   <div><span class="portal-premium-kicker">✦ INSTITUTO EDUCACIONAL MISSÃO PAZ</span><h2>Seu próximo passo começa aqui<span class="portal-heading-dot">.</span></h2><p class="small muted">Uma central de estudos para você aprender no seu ritmo, com tudo organizado em um só lugar.</p></div>
@@ -410,7 +456,7 @@ html[data-phase-motion="reduce"] .school-hero *,html[data-phase-motion="reduce"]
     <div class="card span-3"><div class="muted small">Questões respondidas</div><div class="metric" id="answeredMetric">0</div><div class="small muted">Pratique e confira as explicações.</div></div>
     <div class="card span-3"><div class="muted small">Acertos</div><div class="metric" id="correctMetric">0</div><div class="small muted">Cada erro é uma pista do que revisar.</div></div>
     <div class="card span-3"><div class="muted small">Próxima etapa</div><div class="metric" style="font-size:1.2rem" id="nextExam">Matemática</div><div class="small muted" id="nextExamDate">16 de novembro</div></div>
-    <div class="card span-7"><h3>Cronograma inicial de provas — confira atualizações nos avisos</h3><table><thead><tr><th>Data</th><th>Avaliações</th><th>Preparação sugerida</th></tr></thead><tbody>
+    <div class="card span-7" id="portal803Schedule"><h3>Cronograma inicial da 803 — confira atualizações nos avisos</h3><table><thead><tr><th>Data</th><th>Avaliações</th><th>Preparação sugerida</th></tr></thead><tbody>
       <tr><td><b>16/11</b></td><td>Matemática</td><td>Estatística, gráficos, acréscimos, descontos e inflação.</td></tr>
       <tr><td><b>17/11</b></td><td>Língua Portuguesa</td><td>Gêneros, argumentação, coesão, regência e crase.</td></tr>
       <tr><td><b>18/11</b></td><td>Geografia + Educação Física (teórica)</td><td>América/África, regiões polares, saúde e atletismo.</td></tr>
@@ -524,7 +570,7 @@ html[data-phase-motion="reduce"] .school-hero *,html[data-phase-motion="reduce"]
 
 
 <section id="biblioteca" class="view">
-  <h2>🤝 Biblioteca Colaborativa 803</h2>
+  <h2 id="portal8LibTitle">🤝 Biblioteca Colaborativa — Turma 803</h2>
   <p class="sub">Compartilhe voluntariamente resumos de estudo com a turma. Um professor ou responsável precisa aprovar o material antes que ele apareça para os colegas.</p>
   <div class="callout small" style="margin-bottom:14px">🛡️ Segurança: publique apenas conteúdo escolar escrito por você. Não inclua nomes completos, fotos de pessoas, telefones, endereços, conversas privadas ou dados pessoais. Não envie respostas de provas em andamento. Materiais publicados podem ser lidos pelos participantes da plataforma.</div>
   <div class="grid">
@@ -574,8 +620,13 @@ html[data-phase-motion="reduce"] .school-hero *,html[data-phase-motion="reduce"]
  <div class="card span-12"><h3>Repetição espaçada</h3><p class="small muted">Depois de revisar um conteúdo, agende a próxima revisão. O intervalo aumenta aos poucos: 1, 3, 7 e 14 dias.</p><div class="row"><label for="reviewSubject"><b>Matéria</b></label><select id="reviewSubject"></select><button class="btn orange" onclick="scheduleReview()">📅 Revisei hoje</button></div><div id="reviewList" style="margin-top:14px"></div></div></div>
 </section>
 
+<section id="desafio8ano" class="view"><h2>🏆 Missões coletivas do 8º ano</h2>
+<p class="sub">Uma maneira de acompanhar a participação voluntária das turmas, sem ranking de alunos, notas individuais ou competição obrigatória.</p>
+<div class="card"><h3>🌟 A turma evolui junta</h3><p class="small muted">Indicadores só aparecem quando pelo menos 5 participantes de uma turma autorizam a sincronização. As turmas são autodeclaradas, então estes números não são uma classificação oficial da escola.</p>
+<div class="row"><button type="button" class="btn orange" onclick="portal8RefreshChallenge()">↻ Atualizar metas coletivas</button></div><div id="portal8ChallengeList"></div></div>
+</section>
 <section id="turma" class="view">
-  <h2>Painel coletivo da Turma 803</h2>
+  <h2 id="portal8ClassPanelTitle">Painel coletivo da Turma 803</h2>
   <p class="sub">Entre com uma sessão anônima para contar sua participação no progresso coletivo. Não pedimos nome, e-mail ou telefone.</p>
   <div class="grid">
     <div class="card span-12">
@@ -672,7 +723,7 @@ html[data-phase-motion="reduce"] .school-hero *,html[data-phase-motion="reduce"]
 <p class="small muted" id="phaseAccessStatus" role="status">Preferências locais. Os temas Aurora, Noite e Papel permanecem disponíveis.</p></div></section>
 <section id="professor" class="view"><h2>👩‍🏫 Espaço do professor</h2><p class="sub">Materiais e instruções para docentes e responsáveis, sem expor dados dos estudantes.</p><div class="grid"><div class="card span-6"><h3>Como aprovar materiais da biblioteca</h3><p>As publicações enviadas pelos alunos ficam pendentes até revisão no painel administrativo do Supabase. Somente responsáveis autorizados devem ter acesso ao painel.</p><p class="small muted">Esta página é informativa; não concede permissões de administrador. A aprovação precisa ser feita com acesso administrativo separado.</p></div><div class="card span-6"><h3>Atividade sugerida</h3><p>Peça que os alunos criem um resumo com suas palavras, respondam uma questão e comparem a explicação com o material da aula. Incentive a checagem de fontes.</p><button class="btn light" onclick="showView('biblioteca')">Abrir biblioteca</button></div></div></section>
 <section id="criador" class="view">
- <h2>🔒 Modo Proprietário — Portal 803</h2><p class="sub">Administração protegida por login do Supabase e permissões do banco de dados. Nenhuma senha fica no código do site.</p>
+ <h2>🔒 Modo Proprietário — Portal 8º Ano</h2><p class="sub">Administração protegida por login do Supabase e permissões do banco de dados. Nenhuma senha fica no código do site.</p>
  <div id="portalOwnerLogin" class="card" style="max-width:680px">
   <h3>Entrar como proprietário</h3>
   <p class="small muted">Use seu próprio e-mail e senha. Criar uma conta não dá privilégios de proprietário automaticamente: o acesso precisa ser autorizado no Supabase.</p>
@@ -682,7 +733,7 @@ html[data-phase-motion="reduce"] .school-hero *,html[data-phase-motion="reduce"]
   <p id="portalOwnerStatus" role="status" class="small muted">Aguardando login. A conta proprietária precisa ser aprovada pelo administrador do projeto.</p>
   <div id="portalOwnerSetup" hidden><p class="small muted">Seu identificador de usuário no Supabase (não é uma senha). Apenas quem administra o banco pode liberar esse identificador:</p><code id="portalOwnerUid" style="display:block;overflow-wrap:anywhere"></code><button class="btn light" type="button" onclick="portalOwnerCopyUid()">Copiar meu identificador</button><p class="small muted">No Supabase → SQL Editor, o responsável pelo projeto deve adicionar esse identificador à tabela <code>public.portal803_admins</code>. Nenhuma conta é promovida automaticamente.</p></div>
  </div>
- <div id="portalOwnerPrivate" hidden><div class="card" style="margin:14px 0"><div class="between"><h3>🛠️ Relatos privados enviados à equipe</h3><button class="btn light" type="button" onclick="phaseOwnerReports()">↻ Atualizar relatos</button></div><p class="small muted">Somente proprietários autorizados conseguem consultar a fila. Não compartilhe relatos dos alunos.</p><div id="phaseOwnerReports"></div></div>
+ <div id="portalOwnerPrivate" hidden><div class="card" style="margin-top:14px"><label for="portal8AdminScope"><b>📍 Público do novo aviso ou prova</b></label><select id="portal8AdminScope" class="study-field"><option value="geral">Todo o 8º ano (aviso geral)</option><option value="801">Turma 801</option><option value="802">Turma 802</option><option value="803" selected>Turma 803</option><option value="804">Turma 804</option><option value="806">Turma 806</option><option value="807">Turma 807</option></select><p class="small muted">Selecione a turma antes de publicar. Publicações antigas permanecem na 803.</p></div><div class="card" style="margin:14px 0"><div class="between"><h3>🛠️ Relatos privados enviados à equipe</h3><button class="btn light" type="button" onclick="phaseOwnerReports()">↻ Atualizar relatos</button></div><p class="small muted">Somente proprietários autorizados conseguem consultar a fila. Não compartilhe relatos dos alunos.</p><div id="phaseOwnerReports"></div></div>
   <div class="callout" style="margin:15px 0">✅ Acesso autorizado. As publicações abaixo são gravadas no Supabase e aparecem para a turma. Revise datas e textos antes de publicar.</div>
   <div class="grid">
    <div class="card span-6"><h3>📢 Publicar aviso oficial</h3><label for="portalOfficialTitle">Título</label><input id="portalOfficialTitle" class="study-field" maxlength="90"><label for="portalOfficialBody">Aviso</label><textarea id="portalOfficialBody" class="study-field" maxlength="1200" rows="5"></textarea><button class="btn orange" onclick="portalPublishNotice()">Publicar para a turma</button></div>
@@ -724,6 +775,7 @@ function ensureCloudClient(){
   return cloudClient;
 }
 async function connectClassBoard(){
+  if(portal8Turma!=="803")return portal8ConnectPanel();
   try{
     ensureCloudClient();
     setCloudStatus("Conectando com segurança ao painel da turma…","warn");
@@ -772,6 +824,7 @@ function queueCloudSync(){
 }
 async function syncToCloud(){
   if(!cloudClient || !cloudUser)return;
+  if(portal8Turma!=="803")return portal8SyncParticipation();
   if(cloudSyncBusy){queueCloudSync();return;}
   cloudSyncBusy=true;
   try{
@@ -794,6 +847,7 @@ async function manualRefreshClassBoard(){
   catch(err){console.error(err);setCloudStatus("Não foi possível atualizar: "+String(err?.message||err),"err");}
 }
 async function refreshClassBoard(){
+  if(portal8Turma!=="803")return portal8RefreshPanel();
   if(!cloudClient)throw new Error("A conexão ainda não foi iniciada.");
   const {data,error}=await cloudClient.from("missao803_painel_coletivo")
     .select("participantes,ativos,topicos_marcados,questoes_respondidas,atualizado_em")
@@ -811,6 +865,7 @@ async function refreshClassBoard(){
   $("classWall").textContent="Nenhum dado individual é exibido. O painel compartilha apenas os totais gerais da turma.";
 }
 async function loadOwnCloudRecord(){
+  if(portal8Turma!=="803"){setCloudStatus("Se desejar participar dos totais da sua turma, conecte-se voluntariamente.","warn");return}
   if(!cloudConfigured())return;
   try{
     ensureCloudClient();
@@ -905,7 +960,11 @@ const flashcards = {
  "Arte":[["O que caracteriza o Modernismo?","Experimentação e ruptura com padrões artísticos tradicionais."],["O que é performance?","Linguagem artística em que a ação do artista e sua presença podem compor a obra."],["Como a arte pode ser política?","Pode expressar críticas, identidades, reivindicações e reflexões sociais."]]
 };
 
-const storageKey="missao803-v1";
+const PORTAL8_CLASS_KEY="portal8-turma-escolhida-v1";
+const portal8ValidTurmas=["801","802","803","804","806","807"];
+function portal8ReadTurma(){try{const t=localStorage.getItem(PORTAL8_CLASS_KEY);return portal8ValidTurmas.includes(t)?t:"803"}catch(e){return "803"}}
+let portal8Turma=portal8ReadTurma();
+let storageKey=portal8Turma==="803"?"missao803-v1":"portal8-state-"+portal8Turma;
 let state={done:[],answered:0,correct:0,scoreBySubject:{},seenQuiz:[],flashIndex:0};
 try{state={...state,...JSON.parse(localStorage.getItem(storageKey)||"{}")}}catch(e){}
 let quizRoundSubject=null,quizRoundAnswered=new Set(),quizRoundCorrect=0;
@@ -949,6 +1008,8 @@ function showView(id){
  const quick=document.getElementById("nexoNavJump");if(quick)quick.value=id;
  portalRememberTool(id);
  if(id==="desempenho")renderNexoPerformance();
+ if(id==="turma")portal8UpdateLabels();
+ if(id==="desafio8ano")portal8RefreshChallenge();
  if(id==="revisao803")phaseRenderReview();
  if(id==="evolucao803")phaseRenderEvolution();
  if(id==="acessibilidade803")phaseLoadAccessUI();
@@ -1193,7 +1254,7 @@ async function submitLibraryItem(){
  if(!$("libConsent").checked){libraryMessage("Marque a autorização voluntária para publicar.");return}
  libraryMessage("Enviando para a fila de revisão…");
  try{
-  const {error}=await cloudClient.from("missao803_biblioteca").insert({autor_id:cloudUser.id,materia,titulo,conteudo,link:link||null,status:"pendente"});
+  const {error}=await cloudClient.from("missao803_biblioteca").insert({autor_id:cloudUser.id,materia,titulo,conteudo,link:link||null,status:"pendente",turma:portal8Turma});
   if(error)throw error;
   $("libTitle").value="";$("libBody").value="";$("libLink").value="";$("libConsent").checked=false;
   libraryMessage("Material enviado! Ele ficará visível para a turma após aprovação do responsável.");
@@ -1203,7 +1264,7 @@ async function submitLibraryItem(){
 async function refreshLibrary(){
  if(!libraryConnected()){libraryMessage("Conecte-se na aba Turma 803 para abrir a biblioteca.");return}
  try{
-  const {data,error}=await cloudClient.from("missao803_biblioteca").select("id,autor_id,materia,titulo,conteudo,link,status,criado_em").order("criado_em",{ascending:false}).limit(150);
+  const {data,error}=await cloudClient.from("missao803_biblioteca").select("id,autor_id,materia,titulo,conteudo,link,status,criado_em,turma").in("turma",["geral",portal8Turma]).order("criado_em",{ascending:false}).limit(150);
   if(error)throw error;
   libraryItems=data||[];renderLibrary();
  }catch(e){console.error(e);libraryMessage("Não foi possível atualizar a biblioteca. Confira a conexão.")}
@@ -1539,7 +1600,7 @@ async function portalPublishNotice(){
  if(!portalIsOwner)return;
  const title=document.getElementById("portalOfficialTitle").value.trim(),body=document.getElementById("portalOfficialBody").value.trim();
  if(title.length<4||body.length<10){portalOwnerStatus("Preencha o título e o aviso.");return}
- try{const {error}=await portalOwnerClient().from("portal803_announcements").insert({title,body,published:true});if(error)throw error;
+ try{const {error}=await portalOwnerClient().from("portal803_announcements").insert({title,body,published:true,turma:document.getElementById("portal8AdminScope").value});if(error)throw error;
  document.getElementById("portalOfficialTitle").value="";document.getElementById("portalOfficialBody").value="";
  portalOwnerStatus("✅ Aviso publicado no banco de dados.");await portalOwnerRefresh();await portalPublicRefresh();
  }catch(e){portalOwnerStatus("Não foi possível publicar. Verifique sua autorização e tente novamente.")}
@@ -1548,7 +1609,7 @@ async function portalPublishExam(){
  if(!portalIsOwner)return;
  const subject=document.getElementById("portalOfficialSubject").value.trim(),exam_date=document.getElementById("portalOfficialDate").value,topics=document.getElementById("portalOfficialTopics").value.trim();
  if(subject.length<2||!/^\d{4}-\d{2}-\d{2}$/.test(exam_date)){portalOwnerStatus("Informe matéria e data válidas.");return}
- try{const {error}=await portalOwnerClient().from("portal803_exams").insert({subject,exam_date,topics,published:true});if(error)throw error;
+ try{const {error}=await portalOwnerClient().from("portal803_exams").insert({subject,exam_date,topics,published:true,turma:document.getElementById("portal8AdminScope").value});if(error)throw error;
  document.getElementById("portalOfficialSubject").value="";document.getElementById("portalOfficialDate").value="";document.getElementById("portalOfficialTopics").value="";
  portalOwnerStatus("✅ Prova publicada no banco de dados.");await portalOwnerRefresh();await portalPublicRefresh();
  }catch(e){portalOwnerStatus("Não foi possível publicar. Verifique sua autorização e tente novamente.")}
@@ -1561,7 +1622,7 @@ async function portalOwnerRefresh(){
   if(error){portalOwnerStatus("Não foi possível carregar as publicações.");continue}
   for(const item of data||[]){
    const card=document.createElement("div");card.className="mission";
-   const title=document.createElement("b");title.textContent=description==="aviso"?"📢 "+item.title:"📅 "+item.subject+" — "+item.exam_date;
+   const title=document.createElement("b");title.textContent=description==="aviso"?"📢 ["+(item.turma||"803")+"] "+item.title:"📅 ["+(item.turma||"803")+"] "+item.subject+" — "+item.exam_date;
    const body=document.createElement("p");body.textContent=description==="aviso"?item.body:item.topics;
    const btn=document.createElement("button");btn.className="btn light";btn.textContent="Excluir publicação";btn.onclick=async()=>{
     if(!portalIsOwner||!confirm("Excluir esta publicação oficial?"))return;
@@ -1577,8 +1638,9 @@ async function portalPublicRefresh(){
  const root=document.getElementById("portalPublicItems");if(!root)return;root.replaceChildren();
  try{
   const c=portalOwnerClient();
-  const [a,b]=await Promise.all([c.from("portal803_announcements").select("title,body,created_at").eq("published",true).order("created_at",{ascending:false}).limit(8),c.from("portal803_exams").select("subject,exam_date,topics").eq("published",true).order("exam_date",{ascending:true}).limit(8)]);
+  const [a,b]=await Promise.all([c.from("portal803_announcements").select("id,title,body,created_at,turma").eq("published",true).in("turma",["geral",portal8Turma]).order("created_at",{ascending:false}).limit(10),c.from("portal803_exams").select("id,subject,exam_date,topics,turma").eq("published",true).in("turma",["geral",portal8Turma]).order("exam_date",{ascending:true}).limit(30)]);
   if(a.error||b.error)throw new Error("Dados indisponíveis");
+  portal8OfficialExams=b.data||[];portal8RenderExamOptions();
   const all=[...(a.data||[]).map(x=>({title:"📢 "+x.title,body:x.body})),...(b.data||[]).map(x=>({title:"📅 "+x.subject+" — "+x.exam_date.split("-").reverse().join("/"),body:x.topics}))];
   if(!all.length){root.textContent="Ainda não há publicações adicionais do proprietário. Consulte o cronograma inicial.";return}
   for(const x of all){const p=document.createElement("div");p.className="mission";const title=document.createElement("b");title.textContent=x.title;const body=document.createElement("p");body.textContent=x.body;p.append(title,body);root.append(p)}
@@ -1605,6 +1667,7 @@ async function portalGradeSession(){
  return {client,user:session.user};
 }
 async function portalGradeSave(){
+ if(portal8Turma!=="803")return portal8GradeSave();
  const prova=document.getElementById("portalGradeExam").value;
  const raw=document.getElementById("portalGradeValue").value.replace(",",".");
  const nota=Number(raw);
@@ -1621,6 +1684,7 @@ async function portalGradeSave(){
  }catch(e){portalGradeMsg("Não foi possível salvar a nota. Para contribuir sem conta, o login anônimo precisa estar habilitado no Supabase. Tente conectar na aba Turma 803.")}
 }
 async function portalGradeDelete(){
+ if(portal8Turma!=="803")return portal8GradeDelete();
  const prova=document.getElementById("portalGradeExam").value;
  if(!Object.hasOwn(portalGradeNames,prova)||!confirm("Excluir sua nota desta prova, se houver alguma?"))return;
  try{
@@ -1632,6 +1696,7 @@ async function portalGradeDelete(){
  }catch(e){portalGradeMsg("Não foi possível excluir a nota agora. Verifique a conexão com o Supabase.")}
 }
 async function portalGradeRefresh(){
+ if(portal8Turma!=="803")return portal8GradeRefresh();
  const root=document.getElementById("portalGradeAverages");if(!root)return;
  root.replaceChildren();
  try{
@@ -1758,7 +1823,7 @@ function remindersTick(){
  }
  if(reminderSettings.exams){
   const next=remindersTomorrow();
-  const relevant=[...reminderBaseExams,...reminderOfficialExams].filter(x=>x.date===next&&x.name);
+  const relevant=[...(portal8Turma==="803"?reminderBaseExams:[]),...reminderOfficialExams].filter(x=>x.date===next&&x.name);
   const names=[...new Set(relevant.map(x=>String(x.name).slice(0,80)))];
   if(names.length)remindersDeliver("exam-"+next,"📝 Prova amanhã","Confira o cronograma e revise: "+names.join(", ")+".");
  }
@@ -1768,8 +1833,8 @@ async function remindersCheckAnnouncements(){
  try{
   const client=ensureCloudClient();
   const [notices,exams]=await Promise.all([
-   client.from("portal803_announcements").select("id,title,created_at").eq("published",true).order("created_at",{ascending:false}).limit(25),
-   client.from("portal803_exams").select("subject,exam_date").eq("published",true).gte("exam_date",remindersDay(new Date())).limit(30)
+   client.from("portal803_announcements").select("id,title,created_at").eq("published",true).in("turma",["geral",portal8Turma]).order("created_at",{ascending:false}).limit(25),
+   client.from("portal803_exams").select("subject,exam_date").eq("published",true).in("turma",["geral",portal8Turma]).gte("exam_date",remindersDay(new Date())).limit(30)
   ]);
   if(!exams.error)reminderOfficialExams=(exams.data||[]).map(x=>({name:x.subject,date:x.exam_date})).filter(x=>x.name&&x.date);
   if(notices.error)throw notices.error;
@@ -1881,7 +1946,7 @@ function phaseMonth(offset){phaseMonthCursor.setMonth(phaseMonthCursor.getMonth(
 const phaseInitialExams=[["2026-11-16","Matemática"],["2026-11-17","Português"],["2026-11-18","Geografia / Ed. Física"],["2026-11-19","História / Inglês"],["2026-11-23","Ciências / Arte"]];
 let phaseOfficialExams=[];
 async function phaseFetchOfficialExams(){
- try{const {data,error}=await ensureCloudClient().from("portal803_exams").select("subject,exam_date").eq("published",true).limit(100);if(error)throw error;phaseOfficialExams=(data||[]).filter(x=>/^\d{4}-\d{2}-\d{2}$/.test(x.exam_date)).map(x=>({date:x.exam_date,name:String(x.subject).slice(0,65)}));phaseRenderMonth()}catch(e){}
+ try{const {data,error}=await ensureCloudClient().from("portal803_exams").select("subject,exam_date").eq("published",true).in("turma",["geral",portal8Turma]).limit(100);if(error)throw error;phaseOfficialExams=(data||[]).filter(x=>/^\d{4}-\d{2}-\d{2}$/.test(x.exam_date)).map(x=>({date:x.exam_date,name:String(x.subject).slice(0,65)}));phaseRenderMonth()}catch(e){}
 }
 function phaseRenderMonth(){
  const root=document.getElementById("phaseMonthCalendar"),label=document.getElementById("phaseMonthLabel"),legend=document.getElementById("phaseMonthLegend");if(!root)return;
@@ -1893,7 +1958,7 @@ function phaseRenderMonth(){
  const tasks=calendarLoad();
  for(let d=1;d<=last;d++){
   const date=[y,String(m+1).padStart(2,"0"),String(d).padStart(2,"0")].join("-");
-  const original=phaseInitialExams.filter(x=>x[0]===date).map(x=>x[1]);
+  const original=(portal8Turma==="803"?phaseInitialExams:[]).filter(x=>x[0]===date).map(x=>x[1]);
   const official=phaseOfficialExams.filter(x=>x.date===date).map(x=>x.name);
   const titles=[...new Set([...original,...official])],local=tasks.filter(x=>x.date===date);
   const cell=document.createElement("div");cell.className="day"+(titles.length?" exam":"")+(local.length?" task":"");
@@ -1911,7 +1976,7 @@ async function phaseSendReport(){
  status.textContent="Enviando com acesso protegido…";
  try{
   const {client,user}=await portalGradeSession();
-  const {error}=await client.from("portal803_relatorios").insert({autor_id:user.id,categoria:cat,mensagem:message});
+  const {error}=await client.from("portal803_relatorios").insert({autor_id:user.id,categoria:cat,mensagem:message,turma:portal8Turma});
   if(error)throw error;
   field.value="";status.textContent="✅ Relato enviado! Ele ficará visível apenas a você e à administração autorizada.";
  }catch(e){status.textContent="Não foi possível enviar. Verifique a conexão e se o acesso anônimo está habilitado."}
@@ -1950,6 +2015,141 @@ function phaseSaveAccess(){
 function phaseResetAccess(){phaseAccess={font:"normal",contrast:false,motion:false};phaseWrite(PHASE_ACCESS_KEY,phaseAccess);phaseApplyAccess();phaseLoadAccessUI()}
 for(const s of subjects){const op=document.createElement("option");op.value=s.name;op.textContent=s.name;document.getElementById("phaseSubject").append(op)}
 phaseApplyAccess();phaseLoadAccessUI();phaseRenderReview();phaseRenderEvolution();phaseFetchOfficialExams();
+
+
+/* Portal 8º Ano: seleção local, preservando os registros históricos da 803. */
+const portal8OriginalGradeOptions=document.getElementById("portalGradeExam").innerHTML;
+let portal8OfficialExams=[];
+function portal8UpdateLabels(){
+ const turma=portal8Turma,turno=["801","802","803","804"].includes(turma)?"Manhã":"Tarde";
+ document.documentElement.dataset.portal8Other=String(turma!=="803");
+ const select=document.getElementById("portal8TopTurma");if(select)select.value=turma;
+ const display=document.getElementById("portal8CurrentClass");if(display)display.textContent=turma+" • "+turno;
+ const p=document.getElementById("portal8ClassPanelTitle");if(p)p.textContent="Painel coletivo da Turma "+turma;
+ const lib=document.getElementById("portal8LibTitle");if(lib)lib.textContent="🤝 Biblioteca Colaborativa — Turma "+turma;
+ const bulletin=document.querySelector("#portalPublicBulletin h3");if(bulletin)bulletin.textContent="📢 Avisos e provas • Turma "+turma;
+ const sub=document.querySelector("#portalPublicBulletin .muted");if(sub)sub.textContent="Publicações gerais e específicas da turma "+turma+" cadastradas por um administrador autorizado.";
+ document.querySelectorAll(".portal8-class-buttons button").forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.turma===turma)));
+ if(turma!=="803"){
+  const fields=["classParticipants","classActive","classTopics","classQuestions"];fields.forEach(id=>{const el=document.getElementById(id);if(el)el.textContent="—"});
+  document.getElementById("classProgressBar").style.width="0%";
+  document.getElementById("classProgressLabel").textContent="Métricas coletivas só são publicadas com pelo menos cinco participantes.";
+  document.getElementById("classWall").textContent="Dados individuais ficam privados. Cada turma acompanha apenas os próprios totais quando atingir o mínimo de participantes.";
+ }
+}
+function portal8Choose(turma){
+ if(!portal8ValidTurmas.includes(turma))return;
+ const changed=turma!==portal8Turma;
+ if(changed){
+  saveLocalOnly();
+  portal8Turma=turma;storageKey=turma==="803"?"missao803-v1":"portal8-state-"+turma;
+  try{localStorage.setItem(PORTAL8_CLASS_KEY,turma)}catch(e){}
+  const empty={done:[],answered:0,correct:0,scoreBySubject:{},seenQuiz:[],flashIndex:0};
+  try{const old=JSON.parse(localStorage.getItem(storageKey)||"null");state={...empty,...(old&&typeof old==="object"?old:{})}}catch(e){state=empty}
+  quizRoundSubject=null;quizRoundAnswered=new Set();quizRoundCorrect=0;currentQuiz=null;answeredCurrent=false;
+  phaseLevels=phaseRead(PHASE_LEVEL_KEY,{});phaseChecks=phaseRead(PHASE_CHECK_KEY,{});phaseErrors=phaseRead(PHASE_ERRORS_KEY,[]);phaseHistory=phaseRead(PHASE_HISTORY_KEY,[]);
+  if(!Array.isArray(phaseErrors))phaseErrors=[];if(!Array.isArray(phaseHistory))phaseHistory=[];
+  if(!phaseLevels||typeof phaseLevels!=="object")phaseLevels={};
+  if(!phaseChecks||typeof phaseChecks!=="object")phaseChecks={};
+  cloudUser=null;libraryItems=[];portal8OfficialExams=[];
+  renderTopics();updateDashboard();newQuestion();renderFlash();phaseRenderReview();phaseRenderEvolution();
+  portal8RenderExamOptions();portalGradeRefresh();
+  const r=document.getElementById("libItems");if(r)r.textContent="Conecte-se na aba da sua turma para consultar os materiais.";
+  const m=document.getElementById("libMine");if(m)m.textContent="Conecte-se para ver suas publicações.";
+ }
+ portal8UpdateLabels();
+ if(turma!=="803"){document.getElementById("nextExam").textContent="Consultar avisos";document.getElementById("nextExamDate").textContent="Datas da turma "+turma+" aguardando confirmação";}
+ if(changed){
+  document.getElementById("portalPublicItems").textContent="Carregando avisos da turma "+turma+"…";
+  portalPublicRefresh();phaseFetchOfficialExams();
+  if(reminderSettings.announcements)remindersCheckAnnouncements();
+ }
+ if(document.querySelector("#inicio.view.active"))window.scrollTo({top:0,behavior:"smooth"});
+}
+async function portal8ConnectPanel(){
+ try{
+  const client=ensureCloudClient();
+  let {data,error}=await client.auth.getSession();if(error)throw error;
+  if(!data.session){const res=await client.auth.signInAnonymously();if(res.error)throw res.error;data.session=res.data.session}
+  if(!data.session?.user?.id)throw new Error("Sessão indisponível");
+  cloudUser=data.session.user;
+  await portal8SyncParticipation();await refreshLibrary();
+  setCloudStatus("Conectado à turma "+portal8Turma+". Somente totais de grupos com cinco ou mais participantes são exibidos.","ok");
+ }catch(e){setCloudStatus("Não foi possível conectar. Confira a internet e o login anônimo no Supabase.","err")}
+}
+async function portal8SyncParticipation(){
+ if(!cloudClient||!cloudUser||portal8Turma==="803")return;
+ const payload={usuario_id:cloudUser.id,turma:portal8Turma,topicos:Math.min(2000,state.done.length),questoes:Math.min(1000000,Math.max(0,Number(state.answered)||0)),acertos:Math.min(1000000,Math.max(0,Number(state.correct)||0),Math.max(0,Number(state.answered)||0)),atualizado_em:new Date().toISOString()};
+ const {error}=await cloudClient.from("portal8_participacoes").upsert(payload,{onConflict:"usuario_id,turma"});if(error)throw error;
+ await portal8RefreshPanel();
+}
+async function portal8RefreshPanel(){
+ if(!cloudClient)throw new Error("Conecte-se antes.");
+ const {data,error}=await cloudClient.rpc("portal8_painel_turma",{p_turma:portal8Turma});if(error)throw error;
+ const row=Array.isArray(data)?data[0]:null;
+ document.getElementById("classParticipants").textContent=row?.participantes??"—";
+ document.getElementById("classActive").textContent=row?.ativos??"—";
+ document.getElementById("classTopics").textContent=row?.topicos_marcados??"—";
+ document.getElementById("classQuestions").textContent=row?.questoes_respondidas??"—";
+ const total=row?.participantes?row.participantes*allTopics().length:0;
+ const percent=total?Math.min(100,Math.round(100*row.topicos_marcados/total)):0;
+ document.getElementById("classProgressBar").style.width=percent+"%";
+ document.getElementById("classProgressLabel").textContent=total?percent+"% dos tópicos possíveis foram marcados por participantes voluntários.":"Aguardando pelo menos cinco participantes voluntários.";
+ document.getElementById("classWall").textContent="Sem nomes, notas ou ranking individual. Escolher uma turma não comprova matrícula nela.";
+}
+function portal8RenderExamOptions(){
+ const select=document.getElementById("portalGradeExam");
+ if(portal8Turma==="803"){select.innerHTML=portal8OriginalGradeOptions;document.querySelector('label[for="portalGradeExam"]').textContent="Escolha a prova";return}
+ select.replaceChildren();
+ const classExams=portal8OfficialExams.filter(e=>e.turma===portal8Turma&&e.id&&e.published!==false);
+ for(const exam of classExams){
+  const op=document.createElement("option");op.value=exam.id;op.textContent=exam.subject+" — "+exam.exam_date.split("-").reverse().join("/");select.append(op);
+ }
+ if(!classExams.length){const op=document.createElement("option");op.value="";op.textContent="Aguardando provas publicadas para a turma "+portal8Turma;select.append(op)}
+ document.querySelector('label[for="portalGradeExam"]').textContent="Prova publicada da turma "+portal8Turma;
+}
+async function portal8GradeSave(){
+ const prova_id=document.getElementById("portalGradeExam").value,raw=document.getElementById("portalGradeValue").value.replace(",",".").trim(),nota=Number(raw);
+ if(!portal8OfficialExams.some(e=>e.id===prova_id&&e.turma===portal8Turma)||!raw||!Number.isFinite(nota)||nota<0||nota>12||nota*2!==Math.round(nota*2)){portalGradeMsg("Selecione uma prova da sua turma e uma nota de 0 a 12 (intervalos de 0,5).");return}
+ if(!confirm("Enviar sua nota voluntariamente? A média só aparece após cinco contribuições para a mesma prova."))return;
+ try{const {client,user}=await portalGradeSession();const {error}=await client.from("portal8_notas").upsert({usuario_id:user.id,prova_id,nota},{onConflict:"usuario_id,prova_id"});if(error)throw error;
+ document.getElementById("portalGradeValue").value="";portalGradeMsg("Nota salva com privacidade. Você pode substituir ou excluir.");await portal8GradeRefresh();
+ }catch(e){portalGradeMsg("Não foi possível salvar a nota. Confira sua conexão com o Supabase.")}
+}
+async function portal8GradeDelete(){
+ const prova_id=document.getElementById("portalGradeExam").value;if(!prova_id||!confirm("Excluir sua nota desta prova?"))return;
+ try{const {client,user}=await portalGradeSession();const {error}=await client.from("portal8_notas").delete().eq("usuario_id",user.id).eq("prova_id",prova_id);if(error)throw error;
+ portalGradeMsg("Nota excluída, se estava cadastrada.");await portal8GradeRefresh();
+ }catch(e){portalGradeMsg("Não foi possível excluir a nota agora.")}
+}
+async function portal8GradeRefresh(){
+ const root=document.getElementById("portalGradeAverages");root.replaceChildren();
+ try{const {data,error}=await ensureCloudClient().rpc("portal8_medias_turma",{p_turma:portal8Turma});if(error)throw error;
+ const medias=new Map((data||[]).map(x=>[x.prova_id,x.media]));
+ const exams=portal8OfficialExams.filter(e=>e.turma===portal8Turma);
+ if(!exams.length){root.textContent="Aguardando o calendário de provas específico da turma "+portal8Turma+".";return}
+ for(const exam of exams){
+  const line=document.createElement("div");line.className="between mission";
+  const label=document.createElement("span");label.textContent=exam.subject+" ("+exam.exam_date.split("-").reverse().join("/")+")";
+  const m=document.createElement("b");m.textContent=medias.has(exam.id)?Number(medias.get(exam.id)).toFixed(1).replace(".",",")+" / 12":"Aguardando 5 notas";
+  line.append(label,m);root.append(line);
+ }
+ }catch(e){root.textContent="Não foi possível carregar as médias. Tente novamente."}
+}
+async function portal8RefreshChallenge(){
+ const root=document.getElementById("portal8ChallengeList");if(!root)return;root.replaceChildren();
+ for(const turma of portal8ValidTurmas){
+  const card=document.createElement("div");card.className="mission";const title=document.createElement("h3");title.textContent="Turma "+turma;card.append(title);
+  const body=document.createElement("p");body.className="small muted";
+  try{
+   if(turma==="803"){body.textContent="Acompanhe os totais da 803 no painel coletivo existente."}
+   else{const {data,error}=await ensureCloudClient().rpc("portal8_painel_turma",{p_turma:turma});if(error)throw error;const x=(data||[])[0];body.textContent=x?x.participantes+" participantes • "+x.questoes_respondidas+" questões registradas":"Aguardando pelo menos 5 participantes."}
+  }catch(e){body.textContent="Ainda não há indicadores online disponíveis."}
+  card.append(body);root.append(card);
+ }
+}
+portal8UpdateLabels();
+if(portal8Turma!=="803"){portal8RenderExamOptions();portal8GradeRefresh();}
 
 init();renderNexo();
 </script>
