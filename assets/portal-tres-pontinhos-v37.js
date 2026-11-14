@@ -1,4 +1,4 @@
-/* Portal 8º Ano Missão Paz v37 — menus compactos sugeridos por Daniel.
+/* Portal 8º Ano Missão Paz v37 — menus compactos do portal.
  * Três pontinhos acessíveis por ferramenta e na barra de navegação.
  * Não altera autorizações, pontuação, conteúdo ou armazenamento escolar.
  */
