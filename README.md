@@ -195,6 +195,16 @@ Os arquivos são `assets/neo-lab.js` e `assets/neo-lab.css`; o cache offline foi
 - Arquivos: `assets/neo-mapas-mentais.js`, `assets/neo-mapas-mentais.css`, `assets/neo-prototipos-admin.js` e `assets/neo-admin-gate.js`. O cache offline foi renovado para `portal8-recursos-aprovados-v29`.
 - Testes estáticos: 30 rotas verificadas; referências DOM resolvidas; sem IDs duplicados; sintaxe de JavaScript validada. O uso no navegador publicado e um login real de administrador ainda precisam ser conferidos depois do deploy.
 
+## Versão 30 — Cards, mapas avançados e invenções no Ateliê Neo
+
+- **Mapas Mentais Neo** mantém sua aba pública na área Aprender e passa a incluir: (1) cards de estudo com quatro visuais (Azul Neo, Menta, Dourado e Caderno), (2) cartões derivados do acervo e das próprias ideias com aviso claro quando a resposta não foi verificada, (3) mapas favoritos locais, (4) comparação lado a lado de dois assuntos, (5) conexões criadas entre conceitos, (6) apresentação sequencial de ramos, (7) desafios de recordação e (8) checklist e exportação de esquema em texto. Arquivos novos: `assets/neo-ideias-mapas.js` e `assets/neo-ideias.css`.
+- **Ateliê Neo** continua apenas na área de administração, com interface disponível somente após login autorizado via `portal803_admins` e bloqueio de navegação. Os arquivos-fonte do site estático permanecem publicamente acessíveis; não há dados secretos no laboratório. O nome e as permissões do Neo não foram alterados.
+- Foram adicionados **nove novos protótipos interativos** no Ateliê: linha do tempo ordenada, quadro Kanban de tarefas, roleta de assuntos cadastrados, jogo de associação com flashcards, bingo pessoal de revisão, estúdio de cards com quatro temas, criador de roteiros de perguntas, painel de revisão e diário local de descobertas. Arquivo novo: `assets/neo-estudio-inovacoes.js`. Todos são protótipos locais, ainda não liberados aos alunos.
+- As cinco ideias anteriores de mapas — perguntas por ramificação, comparação, histórico/favoritos, ligações e apresentação sequencial — foram incorporadas. A versão também inclui opções adicionais de cards, checklist e exportação.
+- **Privacidade:** informações dos cartões personalizados, mapas favoritos e experimentos são guardadas somente no dispositivo; não são sincronizadas nem publicadas para outros alunos. Exemplos programáticos não constituem correção de respostas abertas por IA.
+- As **30 áreas existentes** e a infraestrutura do Supabase permaneceram sem alterações. Novo cache offline `portal8-recursos-aprovados-v30`.
+- Verificação estática: 30 rotas de navegação, IDs únicos, referências de DOM, presença dos arquivos e sintaxe de todos os scripts atualizados. O comportamento visual e a autenticação em navegador real ainda precisam de teste após publicação.
+
 ## Publicação
 
 Publicação atual pelo GitHub Pages: https://miguelhenriquecostaaraujo13-cmd.github.io/Missao-803/
