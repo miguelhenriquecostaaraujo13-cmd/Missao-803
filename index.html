@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#10283f">
-<title>Portal 8º Ano Missão Paz | Nova versão animada</title>
+<title>Portal 8º Ano Missão Paz | Pazinho e estudos</title>
 <link rel="preload" as="image" href="./assets/estudantes-cartoon-aprovado.png?rev=portal8-visual-v12" fetchpriority="high">
 <style>
 :root{--navy:#10283f;--navy2:#173d5c;--orange:#ff9b37;--teal:#36a6a0;--paper:#f4f7fa;--ink:#172b3c;--muted:#637487;--line:#dce5ec;--white:#fff;--green:#18845d;--red:#b84642;--shadow:0 14px 34px rgba(16,40,63,.10)}
@@ -636,6 +636,7 @@ html[data-phase-motion="reduce"] .view.active.portal8-enter-active{
 </style>
  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.105.0"></script>
 <link rel="stylesheet" href="./assets/portal8-expansao.css?v=18">
+<link rel="stylesheet" href="./assets/portal8-pazinho.css?v=19">
 </head>
 <body>
 <div id="portal8RouteIndicator" class="portal8-route-indicator" aria-hidden="true"></div>
@@ -1406,6 +1407,7 @@ function portal8PlayRouteIndicator(){
 function showView(id){
  const target=document.getElementById(id);
  if(!target?.classList.contains("view"))return;
+ const previousId=document.querySelector(".view.active")?.id;
  if(portal8EntryCleanup){clearTimeout(portal8EntryCleanup);portal8EntryCleanup=null}
  const play=portal8MotionAllowed();
  document.querySelectorAll(".view").forEach(v=>v.classList.remove("portal8-enter-prepared","portal8-enter-active","portal8-fallback-enter","portal8-view-enter"));
@@ -1436,6 +1438,7 @@ function showView(id){
    portal8PlayViewEntrance(target);
   });
  });
+ if(previousId!==id)document.dispatchEvent(new CustomEvent("portal8:viewchange",{detail:{id,previousId}}));
 }
 document.querySelectorAll(".navbtn").forEach(b=>b.addEventListener("click",()=>showView(b.dataset.view)));
 const nexoNavJump=document.getElementById("nexoNavJump");
@@ -2682,7 +2685,7 @@ async function portal8UpdateSite(){
    await Promise.all(regs.map(r=>r.update().catch(()=>null)));
   }
  }catch(e){}
- location.replace(location.pathname+"?versao=recursos-aprovados-v18&atualizacao="+Date.now());
+ location.replace(location.pathname+"?versao=recursos-aprovados-v19&atualizacao="+Date.now());
 }
 function portal8EnableScrollReveal(){
  if(window.matchMedia?.("(prefers-reduced-motion: reduce)").matches||document.documentElement.dataset.phaseMotion==="reduce")return;
@@ -2711,5 +2714,6 @@ init();renderNexo();
 <script src="./assets/portal8-estudos-v18.js?v=18"></script>
 <script src="./assets/portal8-turmas-v18.js?v=18"></script>
 <script src="./assets/portal8-duvidas-v18.js?v=18"></script>
+<script src="./assets/portal8-pazinho.js?v=19"></script>
 </body>
 </html>
