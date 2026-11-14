@@ -775,7 +775,7 @@ html nav :is(summary,button,select):focus-visible{outline:3px solid #ffd781!impo
   </div>
  </div>
  <div class="mp-horizon-art" aria-hidden="true">
-  <img src="./assets/pazinho.svg?v=23" width="225" height="245" alt="" decoding="async">
+  <img src="./assets/pazinho.svg?v=36" width="225" height="245" alt="" decoding="async">
   <span class="mp-horizon-label">✦ APRENDER É EVOLUIR</span>
  </div>
  <div class="mp-horizon-overview" aria-label="Resumo do progresso salvo neste navegador">
@@ -3159,7 +3159,7 @@ async function portal8UpdateSite(){
    await Promise.all(regs.map(r=>r.update().catch(()=>null)));
   }
  }catch(e){}
- location.replace(location.pathname+"?versao=recursos-aprovados-v35&atualizacao="+Date.now());
+ location.replace(location.pathname+"?versao=recursos-aprovados-v36&atualizacao="+Date.now());
 }
 function portal8EnableScrollReveal(){
  if(window.matchMedia?.("(prefers-reduced-motion: reduce)").matches||document.documentElement.dataset.phaseMotion==="reduce")return;
@@ -3185,10 +3185,10 @@ window.addEventListener("load",()=>{
 
 init();renderNexo();
 </script>
-<script src="./assets/portal8-estudos-v18.js?v=18"></script>
+<script src="./assets/portal8-estudos-v18.js?v=36"></script>
 <script src="./assets/portal8-turmas-v18.js?v=18"></script>
 <script src="./assets/portal8-duvidas-v18.js?v=18"></script>
-<script src="./assets/portal8-pazinho.js?v=32"></script>
+<script src="./assets/portal8-pazinho.js?v=36"></script>
 <script src="./assets/portal8-horizonte.js?v=23"></script>
 <script src="./assets/portal8-calendario-final2026.js?v=25"></script>
 <script src="./assets/neo-tutor-local.js?v=26"></script>
