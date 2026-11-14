@@ -651,7 +651,7 @@ html[data-phase-motion="reduce"] .view.active.portal8-enter-active{
 <link rel="stylesheet" href="./assets/portal8-expansao.css?v=18">
 <link rel="stylesheet" href="./assets/portal8-pazinho.css?v=22">
 <link rel="stylesheet" href="./assets/portal8-perfil.css?v=21">
-<link rel="stylesheet" href="./assets/portal8-horizonte.css?v=23">
+<link rel="stylesheet" href="./assets/portal8-horizonte.css?v=24">
 </head>
 <body>
 <div id="portal8RouteIndicator" class="portal8-route-indicator" aria-hidden="true"></div>
@@ -2821,7 +2821,7 @@ async function portal8UpdateSite(){
    await Promise.all(regs.map(r=>r.update().catch(()=>null)));
   }
  }catch(e){}
- location.replace(location.pathname+"?versao=recursos-aprovados-v23&atualizacao="+Date.now());
+ location.replace(location.pathname+"?versao=recursos-aprovados-v24&atualizacao="+Date.now());
 }
 function portal8EnableScrollReveal(){
  if(window.matchMedia?.("(prefers-reduced-motion: reduce)").matches||document.documentElement.dataset.phaseMotion==="reduce")return;
