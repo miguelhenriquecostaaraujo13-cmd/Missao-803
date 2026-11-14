@@ -589,6 +589,30 @@ html[data-portal-theme="noite"] .portal8-schedule-class{background:#153d5d;color
 @keyframes portal8RouteEnter{0%{opacity:1;transform:scaleX(.02)}65%{opacity:1;transform:scaleX(.81)}90%{opacity:1;transform:scaleX(1)}100%{opacity:0;transform:scaleX(1)}}
 @media(prefers-reduced-motion:reduce){.portal8-route-indicator.portal8-route-active{animation:none!important;opacity:0!important}}
 html[data-phase-motion="reduce"] .portal8-route-indicator.portal8-route-active{animation:none!important;opacity:0!important}
+
+/* Efeito de entrada v16: CSS transition no próprio painel; não depende de WAAPI.
+   Estados preparados antes de exibir a aba e liberados após 2 quadros pintados. */
+.view.active.portal8-enter-prepared,.view.active.portal8-enter-active{
+ animation:none!important;
+ transition:opacity .84s cubic-bezier(.16,.82,.25,1),transform .84s cubic-bezier(.16,.82,.25,1),filter .84s ease!important;
+}
+.view.active.portal8-enter-prepared{
+ opacity:0!important;transform:translate3d(0,46px,0) scale(.98)!important;filter:blur(5px)!important;
+}
+.view.active.portal8-enter-active{
+ opacity:1!important;transform:translate3d(0,0,0) scale(1)!important;filter:blur(0)!important;
+}
+@media(prefers-reduced-motion:reduce){
+ html:not([data-phase-motion="reduce"]) .view.active.portal8-enter-prepared,
+ html:not([data-phase-motion="reduce"]) .view.active.portal8-enter-active{
+  /* Uma escolha explícita de 'Ativar' continua possível, mesmo com movimento reduzido no SO. */
+  transition:opacity .84s cubic-bezier(.16,.82,.25,1),transform .84s cubic-bezier(.16,.82,.25,1),filter .84s ease!important;
+ }
+}
+html[data-phase-motion="reduce"] .view.active.portal8-enter-prepared,
+html[data-phase-motion="reduce"] .view.active.portal8-enter-active{
+ animation:none!important;transition:none!important;opacity:1!important;transform:none!important;filter:none!important;
+}
 </style>
  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.105.0"></script>
 </head>
@@ -1001,6 +1025,13 @@ html[data-phase-motion="reduce"] .portal8-route-indicator.portal8-route-active{a
 <div class="card" style="max-width:760px"><label for="phaseFontSize"><b>Tamanho das letras</b></label><select id="phaseFontSize" class="study-field" onchange="phaseSaveAccess()"><option value="normal">Padrão</option><option value="large">Maior (+12%)</option><option value="larger">Muito maior (+22%)</option></select>
 <label class="row" style="margin:14px 0"><input type="checkbox" id="phaseHighContrast" onchange="phaseSaveAccess()"> <b>Alto contraste</b></label>
 <label class="row" style="margin:14px 0"><input type="checkbox" id="phaseReduceMotion" onchange="phaseSaveAccess()"> <b>Reduzir animações</b></label>
+<label for="portal8EntryMode"><b>Transição ao abrir ferramentas</b></label>
+<select id="portal8EntryMode" class="study-field" onchange="portal8SaveEntryMode(this.value)">
+ <option value="auto">Automático (respeitar configurações do dispositivo)</option>
+ <option value="on">Ativar neste navegador (entrada suave)</option>
+ <option value="off">Desativar</option>
+</select>
+<p class="small muted">Se as ferramentas ainda abrirem com corte seco, selecione <b>Ativar neste navegador</b>. O efeito dura menos de um segundo e não se repete.</p>
 <button type="button" class="btn light" onclick="phaseResetAccess()">↻ Restaurar aparência de leitura</button>
 <p class="small muted" id="phaseAccessStatus" role="status">Preferências locais. Os temas Aurora, Noite e Papel permanecem disponíveis.</p></div></section>
 <section id="professor" class="view"><h2>👩‍🏫 Espaço do professor</h2><p class="sub">Materiais e instruções para docentes e responsáveis, sem expor dados dos estudantes.</p><div class="grid"><div class="card span-6"><h3>Como aprovar materiais da biblioteca</h3><p>As publicações enviadas pelos alunos ficam pendentes até revisão no painel administrativo do Supabase. Somente responsáveis autorizados devem ter acesso ao painel.</p><p class="small muted">Esta página é informativa; não concede permissões de administrador. A aprovação precisa ser feita com acesso administrativo separado.</p></div><div class="card span-6"><h3>Atividade sugerida</h3><p>Peça que os alunos criem um resumo com suas palavras, respondam uma questão e comparem a explicação com o material da aula. Incentive a checagem de fontes.</p><button class="btn light" onclick="showView('biblioteca')">Abrir biblioteca</button></div></div></section>
@@ -1275,10 +1306,20 @@ function portalReplayMotion(){
  if(hero){hero.classList.remove("school-motion-replay");void hero.offsetWidth;hero.classList.add("school-motion-replay")}
 }
 /* A transição só começa depois que a nova aba realmente está visível. */
-let portal8ActiveViewAnimation=null;
+const PORTAL8_ENTRY_MODE_KEY="portal8-entry-mode-v1";
+let portal8EntryMode="auto";
+try{const m=localStorage.getItem(PORTAL8_ENTRY_MODE_KEY);if(["auto","on","off"].includes(m))portal8EntryMode=m}catch(e){}
+let portal8EntryCleanup=null;
 function portal8MotionAllowed(){
- return document.documentElement.dataset.phaseMotion!=="reduce"
-  && !window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
+ if(document.documentElement.dataset.phaseMotion==="reduce"||portal8EntryMode==="off")return false;
+ return portal8EntryMode==="on"||!window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
+}
+function portal8SaveEntryMode(mode){
+ if(!["auto","on","off"].includes(mode))return;
+ portal8EntryMode=mode;
+ try{localStorage.setItem(PORTAL8_ENTRY_MODE_KEY,mode)}catch(e){}
+ if(mode==="on"&&phaseAccess.motion){phaseAccess.motion=false;phaseWrite(PHASE_ACCESS_KEY,phaseAccess);phaseApplyAccess()}
+ phaseLoadAccessUI();
 }
 function portal8ScrollToView(id){
  const main=document.querySelector("main");
@@ -1294,20 +1335,15 @@ function portal8ScrollToView(id){
 }
 function portal8PlayViewEntrance(target){
  if(!target?.classList.contains("active")||!portal8MotionAllowed())return;
- if(portal8ActiveViewAnimation){try{portal8ActiveViewAnimation.cancel()}catch(e){}}
- // Web Animations API: transição curta e única, independentemente do cache de estilos CSS.
- if(typeof target.animate==="function"){
-  const anim=target.animate([
-   {opacity:0.02,transform:"translate3d(0,36px,0) scale(.982)",filter:"blur(4px)"},
-   {opacity:1,transform:"translate3d(0,0,0) scale(1)",filter:"blur(0px)"}
-  ],{duration:760,easing:"cubic-bezier(.17,.86,.24,1)",fill:"both",iterations:1});
-  portal8ActiveViewAnimation=anim;
-  anim.finished.then(()=>{if(portal8ActiveViewAnimation===anim){portal8ActiveViewAnimation=null;anim.cancel()}}).catch(()=>{});
- }else{
-  target.classList.remove("portal8-fallback-enter");
-  void target.offsetWidth;
-  target.classList.add("portal8-fallback-enter");
- }
+ if(portal8EntryCleanup)clearTimeout(portal8EntryCleanup);
+ // O elemento esteve visível com a classe "prepared" durante dois frames.
+ // A alteração da classe dispara uma transição real de opacidade e posição.
+ target.classList.remove("portal8-enter-prepared");
+ target.classList.add("portal8-enter-active");
+ portal8EntryCleanup=setTimeout(()=>{
+  target.classList.remove("portal8-enter-active","portal8-enter-prepared");
+  portal8EntryCleanup=null;
+ },1000);
 }
 function portal8PlayRouteIndicator(){
  if(!portal8MotionAllowed())return;
@@ -1317,12 +1353,13 @@ function portal8PlayRouteIndicator(){
 function showView(id){
  const target=document.getElementById(id);
  if(!target?.classList.contains("view"))return;
+ if(portal8EntryCleanup){clearTimeout(portal8EntryCleanup);portal8EntryCleanup=null}
+ const play=portal8MotionAllowed();
+ document.querySelectorAll(".view").forEach(v=>v.classList.remove("portal8-enter-prepared","portal8-enter-active","portal8-fallback-enter","portal8-view-enter"));
+ if(play)target.classList.add("portal8-enter-prepared");
+ // A próxima aba inicia parcialmente deslocada. Só então é exibida.
+ document.querySelectorAll(".view").forEach(v=>v.classList.toggle("active",v===target));
  portal8PlayRouteIndicator();
- // Primeiro atualiza a seção e o menu; depois posiciona o usuário no conteúdo.
- document.querySelectorAll(".view").forEach(v=>{
-  v.classList.toggle("active",v===target);
-  v.classList.remove("portal8-fallback-enter","portal8-view-enter");
- });
  document.querySelectorAll(".navbtn").forEach(b=>{
   const active=b.dataset.view===id;
   b.classList.toggle("active",active);
@@ -2366,16 +2403,17 @@ function phaseLoadAccessUI(){
  document.getElementById("phaseFontSize").value=phaseAccess.font||"normal";
  document.getElementById("phaseHighContrast").checked=!!phaseAccess.contrast;
  document.getElementById("phaseReduceMotion").checked=!!phaseAccess.motion;
+ document.getElementById("portal8EntryMode").value=portal8EntryMode;
  portal8ExplainMotionSetting();
 }
 function portal8ExplainMotionSetting(){
  const status=document.getElementById("phaseAccessStatus");if(!status)return;
- if(window.matchMedia?.("(prefers-reduced-motion: reduce)").matches){
-  status.textContent="⚠️ O seu dispositivo pede movimento reduzido: transições de entrada desativadas. Você pode alterar isso nas configurações de acessibilidade do sistema.";
- }else if(phaseAccess.motion){
-  status.textContent="⚠️ A opção Reduzir animações está ativada neste navegador. Desmarque-a para ver as transições curtas ao abrir cada ferramenta.";
+ if(phaseAccess.motion||portal8EntryMode==="off"){
+  status.textContent="ℹ️ Transições desativadas. Desmarque Reduzir animações e escolha Ativar neste navegador para vê-las.";
+ }else if(portal8EntryMode==="auto"&&window.matchMedia?.("(prefers-reduced-motion: reduce)").matches){
+  status.textContent="⚠️ O sistema está reduzindo movimentos. Para ver as transições, escolha Ativar neste navegador.";
  }else{
-  status.textContent="✅ Transições curtas de entrada ativadas. Elas acontecem ao abrir cada ferramenta e não se repetem continuamente.";
+  status.textContent="✅ Entradas suaves ativadas! O conteúdo surge com movimento curto ao abrir qualquer ferramenta.";
  }
 }
 function phaseSaveAccess(){
