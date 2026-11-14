@@ -17,9 +17,9 @@ const hit=(x,y,w,h,X,Y,R)=>X+R>x&&X-R<x+w&&Y+R>y&&Y-R<y+h;
 const distance=(x,y,X,Y)=>Math.hypot(x-X,y-Y);
 const PALETTE={blue:"#143d6a",sea:"#0c879e",cyan:"#95eefa",cream:"#fff8de",gold:"#ffce69",pink:"#f995a7",green:"#66d5ae",white:"#ffffff"};
 const games={
- fractions:{name:"Corrida das Frações",tag:"Matemática • Plataforma",help:"Corra, pule entre plataformas e colete SOMENTE a fração equivalente ao alvo. Frações erradas tiram um coração. Meta: 6 acertos.",keys:"← → para andar • ↑ ou Espaço para pular"},
+ fractions:{name:"Corrida das Frações",tag:"Matemática • Plataforma",help:"Corra, pule entre plataformas e colete SOMENTE a fração equivalente ao alvo. Frações erradas tiram um coração. A meta depende da fase escolhida.",keys:"← → para andar • ↑ ou Espaço para pular"},
  cell:{name:"Missão Célula",tag:"Ciências • Exploração",help:"Explore a célula, desvie dos vírus e leve cada organela ao lugar correto do laboratório. Colete uma por vez. Entregue as três.",keys:"← → ↑ ↓ para se movimentar"},
- words:{name:"Ritmo dos Conectivos",tag:"Português • Reflexos",help:"Mude de pista para pegar conectivos que combinem com a missão (oposição, adição ou conclusão). Desvie dos outros! Faça 10 acertos.",keys:"← → para mudar de pista"}
+ words:{name:"Ritmo dos Conectivos",tag:"Português • Reflexos",help:"Mude de pista para pegar conectivos que combinem com a missão (oposição, adição ou conclusão). Desvie dos outros! A meta depende da fase escolhida.",keys:"← → para mudar de pista"}
 };
 let game=null;
 const STAGES={
