@@ -127,7 +127,7 @@ function draw(){
 }
 class Fractions{
  constructor(){
-  this.goal=stage().fractions;this.score=0;this.lives=stage().lives;this.won=false;this.done=0;this.inv=0;this.p={x:65,y:404,vx:0,vy:0,w:29,h:36};
+  this.goal=stage().fractions;this.score=0;this.lives=stage().lives;this.won=false;this.done=0;this.inv=0;this.coyote=0;this.jumpBuffer=0;this.p={x:65,y:404,vx:0,vy:0,w:29,h:36};
   this.platforms=[{x:0,y:449,w:900,h:51},{x:91,y:351,w:181,h:20},{x:351,y:282,w:205,h:20},{x:634,y:351,w:178,h:20}];
   this.spots=[{x:171,y:318},{x:442,y:249},{x:717,y:318},{x:836,y:414}];this.next();
  }
@@ -148,7 +148,13 @@ class Fractions{
   const p=this.p;
   p.vx=(Number(keys.right)-Number(keys.left))*252;
   const grounded=this.platforms.some(q=>Math.abs(p.y+p.h-q.y)<3&&p.x+p.w>q.x&&p.x<q.x+q.w);
-  if(keys.jump&&grounded){p.vy=-565*((window.neoGameBrain?.multiplier()||1)<1?1.08:1);keys.jump=false}
+  this.coyote=grounded?.105:Math.max(0,this.coyote-dt);
+  if(keys.jump){this.jumpBuffer=.11;keys.jump=false}
+  else this.jumpBuffer=Math.max(0,this.jumpBuffer-dt);
+  if(this.jumpBuffer>0&&this.coyote>0){
+   p.vy=-565*((window.neoGameBrain?.multiplier()||1)<1?1.08:1);
+   this.jumpBuffer=0;this.coyote=0;
+  }
   const oldY=p.y,oldBottom=p.y+p.h;
   p.x=clamp(p.x+p.vx*dt,5,W-p.w-5);p.vy+=1450*dt;p.y+=p.vy*dt;
   for(const platform of this.platforms){
@@ -163,16 +169,20 @@ class Fractions{
     orb.used=true;this.inv=.42;
     if(orb.correct){
      this.done++;this.score+=10;window.neoGameBrain?.good();
+     window.neoArcadeArt?.pop(orb.x,orb.y,"#ffe184","+10");
      status("✅ Fração equivalente! "+this.done+" de "+this.goal+" acertos.");
      if(this.done>=this.goal){this.won=true;end(true,"Você dominou as equivalências de frações!");return}
      this.next();
-    }else{this.lives--;window.neoGameBrain?.miss();status("Essa fração não é equivalente a "+this.round.goal+". Experimente outra.");
+    }else{this.lives--;window.neoGameBrain?.miss();
+     window.neoArcadeArt?.pop(orb.x,orb.y,"#ffa1bb","-1 ❤");
+     status("Essa fração não é equivalente a "+this.round.goal+". Experimente outra.");
      if(this.lives<=0)end(false,"Revise equivalências e tente novamente.");
     }
    }
   }
  }
  draw(){
+  if(window.neoArcadeArt?.isActive()){window.neoArcadeArt.drawFractions(ctx,this);return}
   bg("#06396e","#0c81aa");
   for(let i=0;i<9;i++){ctx.fillStyle="#a6e1f019";ctx.fillRect(i*125,110+(i%2)*15,90,400)}
   ctx.fillStyle="#bce2fa";for(const p of this.platforms){round(p.x,p.y,p.w,p.h,8);ctx.fill();ctx.fillStyle="#65caab";ctx.fillRect(p.x,p.y,p.w,5);ctx.fillStyle="#bce2fa";}
@@ -218,6 +228,7 @@ class Cell{
    for(const station of this.stations)if(distance(770,station.y,this.p.x,this.p.y)<64){
     if(this.carry.role===station.role){
      this.carry.done=true;this.score+=20;this.delivered++;window.neoGameBrain?.good();
+     window.neoArcadeArt?.pop(770,station.y,"#a3ffc9","+20");
      status("✅ "+this.carry.name+" entregue! "+this.delivered+"/"+this.goal+". ");
      this.carry=null;
      if(this.delivered>=this.goal){this.won=true;end(true,"Você organizou a célula!");return}
@@ -229,6 +240,7 @@ class Cell{
   this.hintCooldown=Math.max(0,(this.hintCooldown||0)-dt);
  }
  draw(){
+  if(window.neoArcadeArt?.isActive()){window.neoArcadeArt.drawCell(ctx,this);return}
   bg("#0c465c","#207b82");
   ctx.strokeStyle="#8bdfd3";ctx.lineWidth=5;ctx.beginPath();ctx.ellipse(450,285,423,194,0,0,Math.PI*2);ctx.stroke();
   ctx.fillStyle="#14536e";for(const w of this.walls){round(w.x,w.y,w.w,w.h,11);ctx.fill()}
@@ -273,10 +285,14 @@ class Words{
    if(!o.passed&&o.y>418){o.passed=true;
     if(o.lane===this.lane){
      if(o.category===this.target.name){
-      this.score+=10;this.caught++;window.neoGameBrain?.good();status("✅ Boa combinação! "+this.caught+"/"+this.goal+" conectivos.");
+      this.score+=10;this.caught++;window.neoGameBrain?.good();
+      window.neoArcadeArt?.pop(255+this.lane*195,415,"#b6ffda","+10");
+      status("✅ Boa combinação! "+this.caught+"/"+this.goal+" conectivos.");
       if(this.caught>=this.goal){this.won=true;end(true,"Você dominou os conectivos em movimento!");return}
       this.nextTarget();
-     }else{this.lives--;window.neoGameBrain?.miss();status("O conectivo '"+o.word+"' não expressa "+this.target.name+".");
+     }else{this.lives--;window.neoGameBrain?.miss();
+      window.neoArcadeArt?.pop(255+this.lane*195,415,"#ffc3cc","-1 ❤");
+      status("O conectivo '"+o.word+"' não expressa "+this.target.name+".");
       if(this.lives<=0){end(false,"Continue treinando os tipos de conectivos.");return}}
     }else if(o.category===this.target.name&&this.caught>0){/* outros objetos não punem o jogador */ }
    }
@@ -285,6 +301,7 @@ class Words{
  }
  shift(dir){if(paused||finished)return;this.lane=clamp(this.lane+dir,0,2)}
  draw(){
+  if(window.neoArcadeArt?.isActive()){window.neoArcadeArt.drawWords(ctx,this);return}
   bg("#1b356c","#4d2785");
   for(let i=0;i<3;i++){const x=166+i*195;
    ctx.fillStyle=i%2?"#ffffff0d":"#ffffff19";round(x,108,183,372,18);ctx.fill();
@@ -322,6 +339,15 @@ function init(){
  $("neoArcadePause")?.addEventListener("click",toggle);
  $("neoArcadeRestart")?.addEventListener("click",()=>setActive(active||"fractions"));
  $("neoArcadeChallenge")?.addEventListener("change",()=>{if(active)setActive(active)});
+ const look=$("neoArcadeLook");
+ if(look){
+  try{const stored=localStorage.getItem("neo-arcade-visual-v38");look.value=stored==="classic"?"classic":"enhanced"}catch(_){look.value="enhanced"}
+  look.addEventListener("change",()=>{
+   try{localStorage.setItem("neo-arcade-visual-v38",look.value)}catch(_){}
+   status(look.value==="enhanced"?"🎨 Visual 2.0 ativado: personagens e cenários ilustrados.":"Visual clássico ativado para comparar.");
+   draw();
+  });
+ }
  const map={ArrowLeft:"left",a:"left",A:"left",ArrowRight:"right",d:"right",D:"right",ArrowUp:"up",w:"up",W:"up",ArrowDown:"down",s:"down",S:"down"," ":"jump"};
  document.addEventListener("keydown",e=>{
   if(!active||!$("arcadeNeo")?.classList.contains("active"))return;
