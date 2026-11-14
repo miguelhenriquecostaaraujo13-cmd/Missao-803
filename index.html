@@ -261,6 +261,61 @@ html[data-portal-theme="noite"][data-phase-contrast="true"]{--line:#9db9df;--mut
 html[data-phase-contrast="true"] .card,html[data-phase-contrast="true"] .phase-levels button{border:2px solid var(--line)}
 html[data-phase-motion="reduce"] *,html[data-phase-motion="reduce"] *:before,html[data-phase-motion="reduce"] *:after{scroll-behavior:auto!important;animation:none!important;transition:none!important}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;animation:none!important;transition:none!important}}
+
+/* Portal 803 · acabamento visual próprio, elegante e de baixo custo. */
+:root{--portal-ease:cubic-bezier(.2,.8,.2,1)}
+body{background-image:radial-gradient(circle at 68% 8%,rgba(114,149,250,.075),transparent 33%);background-attachment:fixed}
+header{isolation:isolate;border:1px solid #ffffff30;box-shadow:0 24px 55px rgba(24,39,86,.16)}
+header .wrap{position:relative;z-index:2}
+header::before{content:"";position:absolute;z-index:0;width:360px;height:360px;border-radius:50%;right:-105px;top:-170px;background:radial-gradient(circle,rgba(255,255,255,.21),rgba(255,255,255,.025) 65%,transparent 70%);pointer-events:none;animation:portalAura 9s ease-in-out infinite alternate}
+header h1{letter-spacing:-.045em;line-height:1.06}
+.portal-hero-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:19px;position:relative;z-index:1}
+.portal-hero-actions button{border-radius:13px;padding:12px 17px;font:inherit;font-size:.9rem;font-weight:800;cursor:pointer;transition:transform .22s var(--portal-ease),background .22s}
+.portal-hero-primary{background:#ffcd87;border:1px solid #ffe2ae;color:#172b42}
+.portal-hero-secondary{background:#ffffff22;border:1px solid #ffffff70;color:#fff}
+.portal-hero-actions button:hover{transform:translateY(-3px)}
+.portal-hero-actions button:focus-visible{outline:3px solid #fff;outline-offset:3px}
+.portal-smart{position:relative;overflow:hidden;border-radius:24px;border-color:var(--line);box-shadow:0 18px 44px rgba(21,47,89,.09)}
+.portal-smart-head{position:relative;margin-bottom:18px;padding:15px 15px 17px;border-radius:18px;isolation:isolate;background:linear-gradient(112deg,var(--portal-soft),var(--portal-panel))}
+.portal-smart-head>div:not(.portal-smart-glow){position:relative;z-index:2}
+.portal-smart-glow{position:absolute;inset:-90px -35px auto auto;width:210px;height:210px;pointer-events:none;background:radial-gradient(circle,rgba(113,116,244,.22),transparent 70%);border-radius:100%;z-index:0;animation:portalFloat 8s ease-in-out infinite alternate}
+.portal-smart-head h2{font-size:clamp(1.35rem,2.65vw,2rem);letter-spacing:-.035em;line-height:1.15;max-width:590px;color:var(--ink)}
+.portal-smart-head .small{max-width:620px}
+.portal-premium-kicker{font-size:.7rem;letter-spacing:.13em;font-weight:900;color:var(--navy)}
+.portal-heading-dot{color:var(--orange)}
+.portal-smart-head #portalContinue{position:relative;z-index:3}
+.portal-smart-line{padding-top:7px}
+.portal-tool-tile,.card,.navgroup,nav .navgroup .navbtn{transition:transform .22s var(--portal-ease),border-color .22s,box-shadow .22s,background-color .22s}
+.portal-tool-tile:hover{transform:translateY(-3px);border-color:var(--teal);box-shadow:0 10px 23px rgba(32,56,101,.1)}
+.portal-tool-open:active,.portal-tool-star:active{transform:scale(.97)}
+#inicio>.grid>.card:hover{transform:translateY(-2px)}
+#inicio>.grid>.card{transition:transform .22s var(--portal-ease),box-shadow .22s}
+.view.active{animation:portalFade .36s var(--portal-ease) both}
+.progress>i,.phase-chart-fill{transition:width .7s var(--portal-ease)}
+.navgroup[open] .navgroup-items{animation:portalDrop .2s var(--portal-ease)}
+.navgroup>summary{transition:background-color .22s}
+.navgroup>summary:hover{filter:brightness(1.12)}
+.btn{transition:filter .2s,transform .2s var(--portal-ease)}
+.btn:not(:disabled):hover{transform:translateY(-2px)}
+.btn:not(:disabled):active{transform:translateY(0) scale(.985)}
+:where(button,input,select,textarea,a,summary):focus-visible{outline:3px solid var(--teal);outline-offset:3px}
+html[data-portal-theme="noite"] .portal-smart-head{background:linear-gradient(110deg,#243251,#1a2b40)}
+html[data-portal-theme="noite"] .portal-premium-kicker{color:#a3f2e0}
+html[data-portal-theme="noite"] .portal-smart-glow{background:radial-gradient(circle,rgba(79,224,190,.16),transparent 70%)}
+html[data-portal-theme="noite"] body{background-image:radial-gradient(circle at 68% 8%,rgba(47,101,118,.13),transparent 33%)}
+html[data-portal-theme="papel"] .portal-smart-glow{background:radial-gradient(circle,rgba(42,124,98,.14),transparent 70%)}
+@keyframes portalFade{from{opacity:0;transform:translateY(9px)}to{opacity:1;transform:translateY(0)}}
+@keyframes portalDrop{from{opacity:.7;transform:translateY(-5px)}to{opacity:1;transform:translateY(0)}}
+@keyframes portalFloat{from{transform:translate(0,0) scale(1)}to{transform:translate(-15px,16px) scale(1.1)}}
+@keyframes portalAura{from{transform:scale(1)}to{transform:scale(1.13)}}
+@media(max-width:790px){body{background-attachment:scroll}header{border-radius:20px}.portal-smart{border-radius:19px}.portal-smart-head{padding:15px}.portal-smart-head #portalContinue{width:100%}.portal-hero-actions{gap:8px}.portal-hero-actions button{flex:1;min-width:140px}}
+@media(prefers-reduced-motion:reduce){
+ .view.active,.navgroup[open] .navgroup-items,header::before,.portal-smart-glow{animation:none!important}
+ .portal-tool-tile,.card,.navgroup,.btn,header,.portal-hero-actions button,.progress>i,.phase-chart-fill{transition:none!important}
+ .portal-tool-tile:hover,#inicio>.grid>.card:hover,.btn:not(:disabled):hover,.portal-hero-actions button:hover{transform:none!important}
+}
+html[data-phase-motion="reduce"] .view.active,html[data-phase-motion="reduce"] .navgroup[open] .navgroup-items,html[data-phase-motion="reduce"] header::before,html[data-phase-motion="reduce"] .portal-smart-glow{animation:none!important}
+html[data-phase-motion="reduce"] .portal-tool-tile:hover,html[data-phase-motion="reduce"] #inicio>.grid>.card:hover,html[data-phase-motion="reduce"] .btn:not(:disabled):hover,html[data-phase-motion="reduce"] .portal-hero-actions button:hover{transform:none!important}
 </style>
  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.105.0"></script>
 </head>
@@ -268,7 +323,7 @@ html[data-phase-motion="reduce"] *,html[data-phase-motion="reduce"] *:before,htm
 <header><div class="wrap">
   <div class="portal-top"><span class="portal-eyebrow">✦ PLATAFORMA DE ESTUDOS DA TURMA 803</span><label class="portal-theme-label" for="portalThemeSelect">🎨 Estilo <select id="portalThemeSelect" aria-label="Escolha a aparência do Portal 803"><option value="aurora">🌈 Aurora</option><option value="noite">🌙 Noite</option><option value="papel">🌿 Papel</option></select></label></div>
   <div class="topline"><span class="logo">803</span> Instituto Educacional Missão Paz <span>•</span> Central de Estudos</div>
-  <h1>Portal 803<br><span style="color:#ffb45f">Conecte seu conhecimento</span></h1>
+  <h1>Portal 803<br><span style="color:#ffb45f">Conecte seu conhecimento</span></h1><div class="portal-hero-actions"><button type="button" class="portal-hero-primary" onclick="showView(\'trilha\')">📚 Começar a estudar <span aria-hidden="true">↗</span></button><button type="button" class="portal-hero-secondary" onclick="showView(\'quiz\')">🧠 Fazer simulado</button></div>
   <p>Evolua a cada missão! Uma plataforma gratuita de estudos, metas, desafios e conquistas da turma 803.</p>
   <div class="exam-strip">
     <span class="exam-pill">16/11 · Matemática</span><span class="exam-pill">17/11 · Português</span>
@@ -279,8 +334,8 @@ html[data-phase-motion="reduce"] *,html[data-phase-motion="reduce"] *:before,htm
 <main>
 <section id="inicio" class="view active">
 <div class="portal-smart card" aria-label="Central de acesso e ferramentas">
- <div class="portal-smart-head">
-  <div><span class="small muted">✨ PORTAL 803 • ETAPA 1</span><h2>O que vamos estudar hoje?</h2><p class="small muted">Encontre rapidamente uma ferramenta, retome seus estudos ou abra seus favoritos.</p></div>
+ <div class="portal-smart-head"><div class="portal-smart-glow" aria-hidden="true"></div>
+  <div><span class="portal-premium-kicker">✦ SEU ESPAÇO DE APRENDIZAGEM</span><h2>Seu próximo passo começa aqui<span class="portal-heading-dot">.</span></h2><p class="small muted">Uma central de estudos para você aprender no seu ritmo, com tudo organizado em um só lugar.</p></div>
   <button class="btn light" type="button" id="portalContinue" onclick="portalContinueLearning()">▶ Continuar estudando</button>
  </div>
  <label for="portalToolSearch"><b>🔎 Encontrar ferramenta</b></label>
