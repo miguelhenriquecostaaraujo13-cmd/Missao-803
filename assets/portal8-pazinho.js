@@ -200,6 +200,9 @@
    help.textContent="O mascote mostra balões de texto. Clique nele para outra dica; sua escolha fica só neste navegador.";
    card.append(help);
    setting.addEventListener("change",()=>setEnabled(setting.checked));
+   const preview=document.createElement("button");preview.type="button";preview.className="btn light";
+   preview.textContent="▶ Testar animação do mascote";preview.style.margin="8px 0";
+   preview.addEventListener("click",()=>show(activeId,0,true));card.append(preview);
   }
   widget.hidden=!enabled;
   setMotionMode();
