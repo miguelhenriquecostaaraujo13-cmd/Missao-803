@@ -660,6 +660,7 @@ html[data-phase-motion="reduce"] .view.active.portal8-enter-active{
 <link rel="stylesheet" href="./assets/neo-mapas-mentais.css?v=32">
 <link rel="stylesheet" href="./assets/neo-ideias.css?v=30">
 <link rel="stylesheet" href="./assets/neo-arcade.css?v=31">
+<link rel="stylesheet" href="./assets/neo-inteligencia.css?v=33">
 <style id="mpMenuCalendarV25">
 /* Menu v25 — correção em TODOS os temas; carregada após todos os CSS antigos. */
 html nav{background:#103755!important;color:#effaff!important}
@@ -742,6 +743,16 @@ html nav :is(summary,button,select):focus-visible{outline:3px solid #ffd781!impo
   </div>
   <button class="btn orange" type="button" onclick="showView('arcadeNeo')">🎮 Jogar agora</button>
 </div>
+<section id="neoRoutePlanner" class="neo-smart-panel" aria-label="Roteiro inteligente e gratuito de estudos">
+ <h3>🧭 Neo recomenda: meu próximo estudo</h3>
+ <p>Escolha uma matéria para montar uma sequência de revisão baseada nos conteúdos disponíveis e nos cartões que você marcou para rever. Você decide quando estudar.</p>
+ <div class="neo-smart-options">
+  <label for="neoRouteSubject">Matéria <select id="neoRouteSubject"></select></label>
+  <button type="button" class="btn orange" id="neoRouteCreate">Gerar meu roteiro</button>
+ </div>
+ <div id="neoRouteOutput" aria-live="polite">Seu roteiro aparece aqui.</div>
+ <div class="neo-smart-options"><button type="button" class="btn light" id="neoRouteFlash">🗂️ Abrir flashcards</button><button type="button" class="btn light" id="neoRouteMap">🧠 Criar mapa mental</button></div>
+</section>
 <section class="mp-horizon" aria-label="Boas-vindas e resumo de estudos do Portal Missão Paz">
  <div class="mp-horizon-copy">
   <span class="mp-horizon-eyebrow"><i aria-hidden="true"></i> SEU CANTINHO DE APRENDIZAGEM • 8º ANO</span>
@@ -926,6 +937,28 @@ html nav :is(summary,button,select):focus-visible{outline:3px solid #ffd781!impo
     <div id="flashBack" class="feedback good" hidden></div>
     <div class="row" style="justify-content:center"><button class="btn orange" id="revealFlash" onclick="revealFlash()">Revelar resposta</button><button class="btn light" onclick="nextFlash()">Próximo cartão →</button></div>
   </div>
+<section id="neoSmartFlashcards" class="neo-smart-panel" aria-label="Flashcards com revisão inteligente">
+ <h3>🧠 Neo Flashcards Inteligentes</h3>
+ <p>Os cartões de memorização acima já existem. Esta é uma segunda maneira de estudá-los: depois de revelar a resposta, diga como foi lembrar. O motor organiza o que revisar primeiro. Nenhuma resposta é enviada à nuvem.</p>
+ <div class="neo-smart-options">
+   <label for="neoSmartSubject">Matéria <select id="neoSmartSubject"></select></label>
+   <label for="neoFlashMode">Modo <select id="neoFlashMode"><option value="devidos">Revisões previstas</option><option value="todos">Treinar todos</option></select></label>
+ </div>
+ <p class="neo-smart-stats" id="neoSmartCount">Carregando os cartões disponíveis…</p>
+ <div class="neo-smart-card" id="neoSmartFront">Pergunta do cartão</div>
+ <div class="neo-smart-answer" id="neoSmartBack" hidden>Resposta do cartão</div>
+ <div class="neo-smart-options">
+  <button class="btn orange" type="button" id="neoSmartReveal">Revelar resposta</button>
+  <div class="neo-smart-options" id="neoFlashRate" hidden>
+   <button type="button" class="btn light" data-neo-rating="again">🔄 Rever</button>
+   <button type="button" class="btn light" data-neo-rating="hard">🤔 Foi difícil</button>
+   <button type="button" class="btn light" data-neo-rating="easy">✅ Lembrei bem</button>
+  </div>
+  <button class="btn light" type="button" id="neoFlashSkip">Próximo cartão</button>
+ </div>
+ <p role="status" id="neoSmartStatus" class="small muted">O planejamento de revisões é apenas uma sugestão; você pode estudar no seu ritmo.</p>
+ <button type="button" class="btn light" id="neoFlashReset">Limpar minha revisão desta matéria</button>
+</section>
 </section>
 
 <section id="foco" class="view">
@@ -952,6 +985,17 @@ html nav :is(summary,button,select):focus-visible{outline:3px solid #ffd781!impo
    <button type="button" data-neo-game="cell" aria-pressed="false"><strong>🧬 Missão Célula</strong><small>Ciências • Exploração de labirinto, organelas e obstáculos</small></button>
    <button type="button" data-neo-game="words" aria-pressed="false"><strong>📝 Ritmo dos Conectivos</strong><small>Português • Pistas, reflexos e classificação de conectivos</small></button>
  </div>
+ <section class="neo-smart-panel" aria-label="Diretor de Desafios Neo">
+  <h3>🧠 Diretor de Desafios Neo</h3>
+  <p>Um motor de regras acompanha somente a partida atual. Ele ajusta a velocidade dos obstáculos e palavras depois de alguns acertos ou erros, e dá dicas de conteúdo quando você pedir. Não é uma IA generativa e não usa seus dados escolares.</p>
+  <div class="neo-brain-controls">
+   <label for="neoBrainMode">Adaptação</label>
+   <select id="neoBrainMode"><option value="equilibrado">Equilibrada</option><option value="leve">Leve</option><option value="desligado">Desligada</option></select>
+   <button type="button" class="btn light" id="neoBrainHintButton">💡 Pedir dica</button>
+   <span id="neoBrainState" role="status">Diretor Neo pronto</span>
+  </div>
+  <div id="neoBrainTip" role="status">Escolha um jogo e peça uma dica quando precisar.</div>
+ </section>
  <div class="neo-arcade-stage">
   <h3 id="neoArcadeTitle">Escolha um jogo para começar</h3>
   <p id="neoArcadeInstructions">Em cada jogo, o desafio faz parte da mecânica: andar, pular, transportar objetos ou mudar de pista.</p>
@@ -3084,7 +3128,7 @@ async function portal8UpdateSite(){
    await Promise.all(regs.map(r=>r.update().catch(()=>null)));
   }
  }catch(e){}
- location.replace(location.pathname+"?versao=recursos-aprovados-v32&atualizacao="+Date.now());
+ location.replace(location.pathname+"?versao=recursos-aprovados-v33&atualizacao="+Date.now());
 }
 function portal8EnableScrollReveal(){
  if(window.matchMedia?.("(prefers-reduced-motion: reduce)").matches||document.documentElement.dataset.phaseMotion==="reduce")return;
@@ -3123,7 +3167,9 @@ init();renderNexo();
 <script src="./assets/neo-prototipos-admin.js?v=29"></script>
 <script src="./assets/neo-ideias-mapas.js?v=30"></script>
 <script src="./assets/neo-estudio-inovacoes.js?v=30"></script>
-<script src="./assets/neo-arcade.js?v=31"></script>
+<script src="./assets/neo-game-brain.js?v=33"></script>
+<script src="./assets/neo-study-brain.js?v=33"></script>
+<script src="./assets/neo-arcade.js?v=33"></script>
 <script src="./assets/neo-admin-gate.js?v=29"></script>
 <script src="./assets/portal8-perfil.js?v=21"></script>
 </body>
