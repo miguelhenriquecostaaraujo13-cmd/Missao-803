@@ -550,6 +550,11 @@ html[data-phase-motion="reduce"] .view.active.portal8-view-enter > *{
 @keyframes portal8OneShotView{from{opacity:.02;transform:translate3d(0,36px,0) scale(.982);filter:blur(4px)}to{opacity:1;transform:translate3d(0,0,0) scale(1);filter:blur(0)}}
 @media(prefers-reduced-motion:reduce){.view.active.portal8-fallback-enter{animation:none!important;opacity:1;transform:none;filter:none}}
 html[data-phase-motion="reduce"] .view.active.portal8-fallback-enter{animation:none!important;opacity:1;transform:none;filter:none}
+
+/* Ícones vetoriais próprios de cada área; não dependem de imagens externas. */
+.portal8-pro-icon svg{display:block;width:29px;height:29px;color:#096ca5}
+html[data-portal-theme="noite"] .portal8-pro-icon{background:#d5f0ff}
+@media(max-width:520px){.portal8-pro-icon svg{width:24px;height:24px}}
 </style>
  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.105.0"></script>
 </head>
@@ -589,12 +594,12 @@ html[data-phase-motion="reduce"] .view.active.portal8-fallback-enter{animation:n
     <span class="portal8-pro-counter">6 turmas • 27 ferramentas</span>
   </div>
   <div class="portal8-pro-grid">
-    <button type="button" class="portal8-pro-card" onclick="showView('trilha')"><span class="portal8-pro-icon">📘</span><strong>Estudar</strong><small>Minha trilha e conteúdos</small><span class="portal8-pro-arrow">↗</span></button>
-    <button type="button" class="portal8-pro-card" onclick="showView('quiz')"><span class="portal8-pro-icon">🧠</span><strong>Praticar</strong><small>Simulados e exercícios</small><span class="portal8-pro-arrow">↗</span></button>
-    <button type="button" class="portal8-pro-card" onclick="showView('evolucao803')"><span class="portal8-pro-icon">📈</span><strong>Evoluir</strong><small>Meu desempenho e gráficos</small><span class="portal8-pro-arrow">↗</span></button>
-    <button type="button" class="portal8-pro-card" onclick="showView('calendario')"><span class="portal8-pro-icon">📅</span><strong>Organizar</strong><small>Provas e lembretes</small><span class="portal8-pro-arrow">↗</span></button>
-    <button type="button" class="portal8-pro-card" onclick="showView('biblioteca')"><span class="portal8-pro-icon">🤝</span><strong>Compartilhar</strong><small>Biblioteca por turma</small><span class="portal8-pro-arrow">↗</span></button>
-    <button type="button" class="portal8-pro-card" onclick="showView('desafio8ano')"><span class="portal8-pro-icon">🏆</span><strong>Participar</strong><small>Missões coletivas</small><span class="portal8-pro-arrow">↗</span></button>
+    <button type="button" class="portal8-pro-card" onclick="showView('trilha')"><span class="portal8-pro-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M12 5v14m-5-11h3m4 0h3"/></svg></span><strong>Estudar</strong><small>Minha trilha e conteúdos</small><span class="portal8-pro-arrow">↗</span></button>
+    <button type="button" class="portal8-pro-card" onclick="showView('quiz')"><span class="portal8-pro-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5a4 4 0 0 0-7 3 4 4 0 0 0 0 7 4 4 0 0 0 7 4m0-14a4 4 0 0 1 7 3 4 4 0 0 1 0 7 4 4 0 0 1-7 4m0-14v14m-6-8h4m4 0h4"/></svg></span><strong>Praticar</strong><small>Simulados e exercícios</small><span class="portal8-pro-arrow">↗</span></button>
+    <button type="button" class="portal8-pro-card" onclick="showView('evolucao803')"><span class="portal8-pro-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19V5M4 19h16M7 16l4-4 3 2 5-7"/><path d="M16 7h3v3"/></svg></span><strong>Evoluir</strong><small>Meu desempenho e gráficos</small><span class="portal8-pro-arrow">↗</span></button>
+    <button type="button" class="portal8-pro-card" onclick="showView('calendario')"><span class="portal8-pro-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M7 3v4m10-4v4M3 10h18m-14 4h4m-4 3h6"/></svg></span><strong>Organizar</strong><small>Provas e lembretes</small><span class="portal8-pro-arrow">↗</span></button>
+    <button type="button" class="portal8-pro-card" onclick="showView('biblioteca')"><span class="portal8-pro-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="8" r="3"/><circle cx="17" cy="8" r="3"/><path d="M2 20v-3a6 6 0 0 1 10-4m10 7v-3a6 6 0 0 0-10-4M8 20h8"/></svg></span><strong>Compartilhar</strong><small>Biblioteca por turma</small><span class="portal8-pro-arrow">↗</span></button>
+    <button type="button" class="portal8-pro-card" onclick="showView('desafio8ano')"><span class="portal8-pro-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 4h8v5a4 4 0 0 1-8 0zm0 2H4v2a4 4 0 0 0 4 4m8-6h4v2a4 4 0 0 0-4 4M12 13v5m-5 3h10m-7-3h4"/></svg></span><strong>Participar</strong><small>Missões coletivas</small><span class="portal8-pro-arrow">↗</span></button>
   </div>
 </section>
 <section class="portal8-welcome card" aria-label="Portal das turmas do oitavo ano">
