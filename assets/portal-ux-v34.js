@@ -109,6 +109,10 @@
   });
   createDialog();
   document.querySelectorAll(".view").forEach(createToolbar);
+  const requested=new URLSearchParams(location.search).get("ferramenta");
+  if(requested&&requested!=="neoLab"&&labels.has(requested)&&allowed(requested)){
+    setTimeout(()=>go(requested),0);
+  }
   document.addEventListener("keydown",event=>{
    if((event.ctrlKey||event.metaKey)&&event.key.toLowerCase()==="k"){
     event.preventDefault();if(dialog.open)dialog.close();else showSearch();
