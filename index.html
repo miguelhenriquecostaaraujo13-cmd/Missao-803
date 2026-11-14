@@ -636,7 +636,7 @@ html[data-phase-motion="reduce"] .view.active.portal8-enter-active{
 </style>
  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.105.0"></script>
 <link rel="stylesheet" href="./assets/portal8-expansao.css?v=18">
-<link rel="stylesheet" href="./assets/portal8-pazinho.css?v=20">
+<link rel="stylesheet" href="./assets/portal8-pazinho.css?v=22">
 <link rel="stylesheet" href="./assets/portal8-perfil.css?v=21">
 </head>
 <body>
@@ -747,7 +747,8 @@ html[data-phase-motion="reduce"] .view.active.portal8-enter-active{
  <div class="portal-smart-line"><h3>⚡ Atalhos de estudo</h3><span class="small muted">Um toque para começar</span></div>
  <div id="portalQuickTools" class="portal-tool-grid"></div>
  <p class="small muted" id="portalSmartStatus" role="status">Para favoritar uma ferramenta, toque na estrela ao lado dela.</p>
-</div><div id="reminderHomeBanner" aria-live="polite"></div><div class="card" style="margin-bottom:16px" id="portalPublicBulletin"><h3>📢 Avisos e provas atualizados</h3><p class="small muted">Publicações gerais e específicas da sua turma, cadastradas pelo responsável do projeto.</p><div id="portalPublicItems"><p class="small muted">Carregando avisos...</p></div></div>
+</div><div id="reminderHomeBanner" aria-live="polite"></div><div class="card" style="margin-bottom:16px" id="portalPublicBulletin"><h3>📢 Avisos e provas atualizados</h3><p class="small muted">Publicações gerais e específicas da sua turma, cadastradas pelo responsável do projeto.</p><div id="portal8AutoUpdateNews" aria-label="Atualizações importantes do próprio portal"></div>
+ <div id="portalPublicItems"><p class="small muted">Carregando avisos...</p></div></div>
   <h2>Seu painel de missão</h2><p class="sub">Seu progresso é salvo neste navegador. Marque os tópicos na trilha e veja os indicadores se atualizarem.</p>
   <div class="theme-showcase card" aria-label="Personalizar aparência"><div class="theme-showcase-head"><div><span class="theme-eyebrow">PERSONALIZE SUA EXPERIÊNCIA</span><h3>Escolha seu estilo ✨</h3><p class="small muted">Três visuais do Portal 8º Ano, com os mesmos recursos e progresso individual.</p></div><span class="theme-current" id="portalThemeCurrent">Aurora</span></div>
     <div class="theme-grid">
@@ -1086,7 +1087,17 @@ html[data-phase-motion="reduce"] .view.active.portal8-enter-active{
   <p id="portalOwnerStatus" role="status" class="small muted">Aguardando login. A conta proprietária precisa ser aprovada pelo administrador do projeto.</p>
   <div id="portalOwnerSetup" hidden><p class="small muted">Seu identificador de usuário no Supabase (não é uma senha). Apenas quem administra o banco pode liberar esse identificador:</p><code id="portalOwnerUid" style="display:block;overflow-wrap:anywhere"></code><button class="btn light" type="button" onclick="portalOwnerCopyUid()">Copiar meu identificador</button><p class="small muted">No Supabase → SQL Editor, o responsável pelo projeto deve adicionar esse identificador à tabela <code>public.portal803_admins</code>. Nenhuma conta é promovida automaticamente.</p></div>
  </div>
- <div id="portalOwnerPrivate" hidden><section class="card p8x-section" id="p8xAdminActivities">
+ <div id="portalOwnerPrivate" hidden>
+ <section class="card" style="margin:14px 0;max-width:650px" aria-label="Nome do mascote">
+  <h3>📘 Renomear o mascote do portal</h3>
+  <p class="small muted">Escolha o nome que todos os alunos verão nas dicas e transições do livrinho. Só um administrador autorizado pode salvar a alteração.</p>
+  <label for="portal8MascotNameInput"><b>Novo nome do mascote</b></label>
+  <input id="portal8MascotNameInput" class="study-field" type="text" minlength="2" maxlength="24" placeholder="Digite o novo nome" autocomplete="off">
+  <p class="small muted">Nome atual: <strong id="portal8MascotNameCurrent">Pazinho</strong></p>
+  <div class="row"><button type="button" class="btn orange" onclick="window.portal8MascotSaveName?.()">💾 Salvar nome</button></div>
+  <p id="portal8MascotNameStatus" class="small muted" role="status" aria-live="polite"></p>
+ </section>
+ <section class="card p8x-section" id="p8xAdminActivities">
  <span class="p8x-eyebrow">ADMINISTRAÇÃO · IDEIA 10</span><h3>📌 Publicar atividade ou trabalho</h3><p class="p8x-note">Escolha corretamente o público, a matéria, o prazo e as instruções.</p>
  <div class="p8x-fields">
  <label>Turma<select id="p8xActTurma"><option value="geral">Todo o 8º ano</option><option value="801">801</option><option value="802">802</option><option value="803">803</option><option value="804">804</option><option value="806">806</option><option value="807">807</option></select></label>
@@ -1486,6 +1497,7 @@ function showView(id){
   requestAnimationFrame(()=>{
    if(!target.classList.contains("active"))return;
    portal8PlayViewEntrance(target);
+   if(previousId!==id)window.portal8MascotNavigate?.(id);
   });
  });
  if(previousId!==id)document.dispatchEvent(new CustomEvent("portal8:viewchange",{detail:{id,previousId}}));
@@ -2735,7 +2747,7 @@ async function portal8UpdateSite(){
    await Promise.all(regs.map(r=>r.update().catch(()=>null)));
   }
  }catch(e){}
- location.replace(location.pathname+"?versao=recursos-aprovados-v21&atualizacao="+Date.now());
+ location.replace(location.pathname+"?versao=recursos-aprovados-v22&atualizacao="+Date.now());
 }
 function portal8EnableScrollReveal(){
  if(window.matchMedia?.("(prefers-reduced-motion: reduce)").matches||document.documentElement.dataset.phaseMotion==="reduce")return;
@@ -2764,7 +2776,7 @@ init();renderNexo();
 <script src="./assets/portal8-estudos-v18.js?v=18"></script>
 <script src="./assets/portal8-turmas-v18.js?v=18"></script>
 <script src="./assets/portal8-duvidas-v18.js?v=18"></script>
-<script src="./assets/portal8-pazinho.js?v=20"></script>
+<script src="./assets/portal8-pazinho.js?v=22"></script>
 <script src="./assets/portal8-perfil.js?v=21"></script>
 </body>
 </html>
