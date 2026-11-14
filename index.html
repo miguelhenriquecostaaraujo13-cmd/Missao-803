@@ -635,7 +635,7 @@ html[data-phase-motion="reduce"] .view.active.portal8-view-enter > *{
   <span id="portal8NewsCounter" class="small muted">Atualizações</span>
   <div class="row">
    <button class="btn light" type="button" onclick="portal8CarouselMove(-1)" aria-label="Aviso anterior">← Anterior</button>
-   <button class="btn light" type="button" onclick="portal8CarouselToggle()" id="portal8CarouselPause" aria-label="Pausar rotação dos avisos">⏸ Pausar</button>
+   
    <button class="btn light" type="button" onclick="portal8CarouselMove(1)" aria-label="Próximo aviso">Próximo →</button>
   </div>
  </div>
@@ -1877,11 +1877,7 @@ function portal8CarouselMove(delta){
  portal8CarouselRender();
 }
 function portal8CarouselToggle(){portal8CarouselPaused=!portal8CarouselPaused;portal8CarouselRender()}
-setInterval(()=>{
- if(portal8CarouselPaused||portal8Slides.length<2||document.hidden||!document.querySelector("#inicio.view.active"))return;
- if(window.matchMedia?.("(prefers-reduced-motion: reduce)").matches||document.documentElement.dataset.phaseMotion==="reduce")return;
- portal8CarouselMove(1);
-},6500);
+/* Carrossel manual: a página não avança automaticamente. */
 
 async function portalPublicRefresh(){
  const root=document.getElementById("portalPublicItems");if(!root)return;root.replaceChildren();
