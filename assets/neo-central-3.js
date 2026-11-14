@@ -55,7 +55,7 @@ $("neoCentral30").innerHTML=[
 '<div class="n3-hero"><span class="n3-kicker">✦ MISSÃO PAZ • PLATAFORMA 3.0</span>',
 '<h2>Bem-vindo ao seu universo de estudos! 🚀</h2>',
 '<p>Explore os mundos do conhecimento, organize suas revisões, enfrente um chefão educativo e faça o Neo trabalhar como seu guia de estudos.</p>',
-'<div class="n3-hero-actions"><button type="button" class="n3-button primary" data-n3="random">🎲 Estudar sem escolher</button><button type="button" class="n3-button secondary" data-n3-go="arcadeNeo">🎮 Arcade atual</button><button type="button" class="n3-button secondary" data-n3-go="neoOficina">🎨 Oficina Criativa</button></div></div>',
+'<div class="n3-hero-actions"><button type="button" class="n3-button primary" data-n3="random">🎲 Estudar sem escolher</button><button type="button" class="n3-button secondary" data-n3-go="neoGames40">🌌 Games 3D + Pixel</button><button type="button" class="n3-button secondary" data-n3-go="neoIAs40">🤖 Minhas IAs Neo</button><button type="button" class="n3-button secondary" data-n3-go="arcadeNeo">🎮 Arcade clássico</button><button type="button" class="n3-button secondary" data-n3-go="neoOficina">🎨 Oficina Criativa</button></div></div>',
 '<div class="n3-stats"><div class="n3-stat"><strong id="n3XP">0 XP</strong><small>Experiência local</small></div>',
 '<div class="n3-stat"><strong id="n3Topics">0</strong><small>Tópicos concluídos</small></div><div class="n3-stat"><strong id="n3FlashDue">0</strong><small>Cartões para revisar</small></div></div>',
 '<div id="n3Message" role="status" aria-live="polite" class="n3-info" style="margin:10px 1px 0"></div>',
