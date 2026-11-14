@@ -1,5 +1,12 @@
 [
   {
+    "id": "versao-4f324461c36a",
+    "title": "Minijogos Neo ganham Visual 2.0 com personagens, cenários e animações",
+    "body": "Modo de teste comparável ao clássico, sprites próprios desenhados em canvas e salto aprimorado. Arcade continua gratuito.",
+    "date": "2026-11-14",
+    "important": true
+  },
+  {
     "id": "versao-5ee49ed214f3",
     "title": "Menu de três pontinhos do Daniel e 3 fases nos minijogos do Neo",
     "body": "Menus compactos para o portal, homepage organizada e Arcade com missões, progressão e recordes locais separados.",
@@ -94,13 +101,6 @@
     "id": "versao-cd01ed3ed4c0",
     "title": "Nova identidade Horizonte Missão Paz com mascote de formatura",
     "body": "O portal ganhou uma página inicial original, métricas reais e visual renovado. As 28 ferramentas e todas as configurações anteriores foram preservadas.",
-    "date": "2026-11-14",
-    "important": true
-  },
-  {
-    "id": "versao-a982022848da",
-    "title": "Mascote com animação ao trocar ferramentas e nome personalizável",
-    "body": "O livro agora aparece em transição; administradores podem alterar seu nome. Novidades importantes passam a surgir no mural automaticamente.",
     "date": "2026-11-14",
     "important": true
   }
