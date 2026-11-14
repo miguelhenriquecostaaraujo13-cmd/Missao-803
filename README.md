@@ -127,6 +127,17 @@ O botão **Permitir notificações** solicita autorização expressa do navegado
 - Esta regra não consegue avaliar sozinha o significado de toda mudança; **é quem publica que marca as versões relevantes**. A publicação na web depende da conclusão do GitHub Pages.
 - Nenhum aviso é inserido automaticamente na tabela de comunicados oficiais da escola, e a alteração do nome do mascote não muda permissões dos alunos.
 
+## Identidade Horizonte Missão Paz — versão 23
+
+- **Nova apresentação original da página inicial** com azul profundo, turquesa, dourado suave, cantos alternados e padrão gráfico próprio. A referência de estudo foi apenas inspiração de usabilidade; a marca, textos, cores, composição e ilustrações são do Portal Missão Paz.
+- O bloco **Bem-vindo** apresenta o nome da conta (quando houver) e mantém dois atalhos funcionais para Trilha e Tutor.
+- Os números de trilha, questões e acertos espelham o **painel local existente**, não simulam módulos ou sincronização na nuvem; o cálculo dos acertos só aparece após responder questões.
+- O livro mascote ganhou **capelo azul e cordão dourado** sem mudar rosto, corpo, olhos, braços ou pernas. A animação anterior e o nome editável pelo Proprietário foram mantidos.
+- O cartoon aprovado permanece na capa, agora numa faixa editorial mais compacta; todo conteúdo antigo da página inicial continua abaixo do resumo.
+- As **28 ferramentas**, seis turmas, histórico, alertas, login, perfil privado, dados de Supabase, conteúdo oficial e permissões administrativas permanecem no código.
+- Arquivos dedicados: `assets/portal8-horizonte.css` e `assets/portal8-horizonte.js`. Cache offline atualizado para `portal8-recursos-aprovados-v23`; o novo painel funciona com dados locais e não exige login.
+- Testado por verificação estática das 28 rotas, IDs únicos, existência de todos os indicadores, sintaxe dos scripts e referências dos novos arquivos. A validação visual no navegador deve ser feita após GitHub Pages concluir o deploy.
+
 ## Publicação
 
 Publicação atual pelo GitHub Pages: https://miguelhenriquecostaaraujo13-cmd.github.io/Missao-803/
