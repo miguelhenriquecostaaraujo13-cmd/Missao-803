@@ -4,15 +4,16 @@
  "use strict";
  const $=id=>document.getElementById(id);
  const STORE="portal803-ux34-starred";
+ const SHARED_FAVORITES="portal803-favorite-tools-v1";
  let starred=new Set(),queryInput=null,results=null,dialog=null,lastFocus=null;
  const labels=new Map();
  function read(){
-  try{const data=JSON.parse(localStorage.getItem(STORE)||"[]");starred=new Set(Array.isArray(data)?data.filter(x=>typeof x==="string").slice(0,31):[])}catch(e){starred=new Set()}
+  try{const data=JSON.parse(localStorage.getItem(SHARED_FAVORITES)||localStorage.getItem(STORE)||"[]");starred=new Set(Array.isArray(data)?data.filter(x=>typeof x==="string").slice(0,12):[])}catch(e){starred=new Set()}
  }
- function save(){try{localStorage.setItem(STORE,JSON.stringify([...starred]))}catch(e){}}
+ function save(){try{localStorage.setItem(STORE,JSON.stringify([...starred]));localStorage.setItem(SHARED_FAVORITES,JSON.stringify([...starred]))}catch(e){}}
  function allowed(id){
   if(id==="neoLab"&&!window.neoAdminGate?.isAuthorized?.())return false;
-  const button=document.querySelector('.navbtn[data-view="'+CSS.escape(id)+'"]');
+  const button=[...document.querySelectorAll(".navbtn[data-view]")].find(b=>b.dataset.view===id);
   if(!button||button.hidden||button.closest("[hidden]"))return false;
   return true;
  }
@@ -82,7 +83,13 @@
   };
   const find=shortcut("🔎 Buscar",showSearch);
   const favorite=shortcut("☆ Favoritar",()=>{
-   if(starred.has(id))starred.delete(id);else starred.add(id);save();refreshToolbar(view);renderSearch();
+   if(typeof window.portalToggleFavorite==="function"){
+    window.portalToggleFavorite(id);read();
+   }else{
+    if(starred.has(id))starred.delete(id);else if(starred.size<12)starred.add(id);
+    save();
+   }
+   refreshToolbar(view);renderSearch();
   });favorite.classList.add("neo-fav-action");
   const copy=shortcut("🔗 Link",async()=>{
    if(!allowed(id))return;
@@ -119,10 +126,11 @@
    }
   });
   document.addEventListener("portal8:viewchange",event=>{
-   const page=$(event.detail?.id);if(page)refreshToolbar(page);
+   const page=$(event.detail?.id);read();if(page)refreshToolbar(page);
   });
   // A área de testes só pode ser aberta quando a autorização do Supabase permite.
   // Não criamos atalhos que contornem o bloqueio do menu existente.
  }
- if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",init,{once:true});else init();
+ window.neoPortalUX={openSearch:showSearch,refreshToolbar,openTool:go};
+  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",init,{once:true});else init();
 })();
