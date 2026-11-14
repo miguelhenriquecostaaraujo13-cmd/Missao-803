@@ -130,7 +130,7 @@
  }
  function markReviewed(){
   const subject=get('p8xReviewSubject')?.value;if(!subject)return;
-  const all=reviewDue(),prev=all[subject]||{step:-1},next=Math.min(3,(Number(prev.step)||-1)+1);
+  const all=reviewDue(),prev=all[subject]||{step:-1},last=Number.isInteger(prev.step)?prev.step:-1,next=Math.min(3,last+1);
   const due=new Date();due.setHours(12,0,0,0);due.setDate(due.getDate()+[1,3,7,14][next]);
   all[subject]={step:next,due:dayISO(due),last:dayISO()};
   if(!write('revisoes',all))return alert('Não foi possível salvar. Verifique o espaço do navegador.');
