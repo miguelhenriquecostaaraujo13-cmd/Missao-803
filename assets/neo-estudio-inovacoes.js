@@ -1,4 +1,4 @@
-/* Estúdio de Inovações Neo — protótipos seguros, sem nuvem, no Ateliê administrativo */
+/* Estúdio de Inovações Neo — ferramentas locais e sem nuvem da Oficina pública */
 (() => {
 "use strict";
 const $=id=>document.getElementById(id);
@@ -84,7 +84,7 @@ function bingo(root){
  btn(p,"Reiniciar cartela",()=>{checked.clear();store("bingo",[]);draw()});draw();
 }
 function cardsDesign(root){
- const p=box(root,"⭐⭐⭐ Estúdio de cards personalizados","Teste estilos de cartões com frente, verso e cores diferentes; visualize sem publicar.");
+ const p=box(root,"⭐⭐⭐ Estúdio de cards personalizados","Crie uma prévia de cartões com frente, verso e cores diferentes, sem publicar seus textos.");
  const front=inp(p,"Frente do card","Ex.: O que é democracia?");
  const back=area(p,"Verso do card","Escreva a resposta do material estudado.");
  const style=make("select",p);["azul","menta","dourado","caderno"].forEach(x=>style.append(new Option(x[0].toUpperCase()+x.slice(1),x)));
@@ -135,7 +135,7 @@ function journal(root){
 function init(){
  const root=$("neoCreativePrototypes");if(!root)return;
  make("h3",root,"🚀 Estúdio de invenções — novas experiências");
- make("p",root,"Mais 9 experiências funcionais, somente para testar no Ateliê Neo. Salvo indicação contrária, os dados ficam no navegador; os alunos não têm acesso a esta área.");
+ make("p",root,"Nove recursos educativos disponíveis para estudantes. Os registros ficam no navegador, não em um perfil público.");
  const grid=make("div",root,undefined,"neo-lab-grid");
  [timeline,kanban,wheel,connectGame,bingo,cardsDesign,questionMaker,revisionMatrix,journal].forEach(fn=>fn(grid));
 }
