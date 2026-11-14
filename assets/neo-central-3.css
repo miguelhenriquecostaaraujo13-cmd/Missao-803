@@ -1,0 +1,76 @@
+/* Central Neo 3.0 — estilo game educativo; componentes isolados. */
+#neoCentral30{--n3-night:#101d3b;--n3-blue:#263f81;--n3-cyan:#57dbe3;--n3-sun:#ffb849;--n3-paper:#f8fbff;--n3-ink:#172947;color:var(--n3-ink)}
+#neoCentral30 *{box-sizing:border-box}
+#neoCentral30 .n3-hero{position:relative;overflow:hidden;color:#fff;border-radius:27px;padding:clamp(24px,5vw,42px);background:radial-gradient(circle at 88% 20%,#36c5e155,transparent 35%),radial-gradient(circle at 8% 80%,#b789ff4b,transparent 35%),linear-gradient(132deg,#0e2045,#24458c 70%,#32669b);box-shadow:0 22px 45px #0c2b4c2b}
+#neoCentral30 .n3-kicker{display:inline-block;background:#c2fbec22;border:1px solid #c8fff855;padding:7px 11px;border-radius:99px;letter-spacing:.08em;font-weight:900;font-size:.75rem}
+#neoCentral30 .n3-hero h2{color:#fff;font-size:clamp(1.9rem,5vw,3.1rem);line-height:1.1;margin:14px 0 10px}
+#neoCentral30 .n3-hero p{max-width:650px;color:#d8ecff;margin:0 0 16px}
+#neoCentral30 .n3-hero-actions{display:flex;flex-wrap:wrap;gap:10px}
+#neoCentral30 button{cursor:pointer}
+#neoCentral30 button:focus-visible,#neoCentral30 select:focus-visible,#neoCentral30 input:focus-visible{outline:3px solid #fcae3c;outline-offset:2px}
+#neoCentral30 .n3-button{border:0;border-radius:13px;padding:11px 16px;font-weight:850;background:#263f77;color:#fff;min-height:43px;font-size:.94rem}
+#neoCentral30 .n3-button.primary{background:linear-gradient(130deg,#ffc85b,#ff9649);color:#182e50;box-shadow:0 6px 0 #b56731}
+#neoCentral30 .n3-button.light{background:#eaf2fd;color:#21426f}
+#neoCentral30 .n3-button:disabled{opacity:.48;cursor:not-allowed;box-shadow:none}
+#neoCentral30 .n3-hero .n3-button.secondary{background:#ffffff24;color:#fff;border:1px solid #ffffff70}
+#neoCentral30 .n3-stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:11px;margin:17px 0 0}
+#neoCentral30 .n3-stat{padding:15px;background:var(--n3-paper);border:1px solid #dce8f5;border-radius:16px}
+#neoCentral30 .n3-stat strong{display:block;font-size:clamp(1.3rem,4vw,1.85rem);color:#203e72}
+#neoCentral30 .n3-stat small{color:#557087;font-weight:700}
+#neoCentral30 .n3-grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:15px;margin-top:17px}
+#neoCentral30 .n3-panel{grid-column:span 6;background:#fff;border:1px solid #dce6f1;border-radius:21px;padding:clamp(16px,3vw,22px);box-shadow:0 12px 29px #102e5810;min-width:0}
+#neoCentral30 .n3-panel.full{grid-column:span 12}
+#neoCentral30 .n3-panel h3{color:#203e72;font-size:1.2rem;margin:0 0 7px}
+#neoCentral30 .n3-panel>p{color:#5b7089;margin:0 0 15px}
+#neoCentral30 .n3-panel .n3-muted{color:#5b7089;font-size:.85rem}
+#neoCentral30 .n3-progress{height:11px;background:#e6ecf6;border-radius:99px;overflow:hidden;margin:12px 0}
+#neoCentral30 .n3-progress>i{display:block;height:100%;background:linear-gradient(90deg,#47cba9,#42a5e2);border-radius:99px;transition:width .25s}
+#neoCentral30 .n3-worlds{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:13px}
+#neoCentral30 .n3-world{display:block;width:100%;text-align:left;position:relative;overflow:hidden;padding:17px 14px;border:1px solid #b8d2f2;border-radius:19px;min-height:135px;background:linear-gradient(140deg,#f2faff,#e7effd);color:#1a355c;box-shadow:inset 0 -5px 0 #cfdef1}
+#neoCentral30 .n3-world:hover{transform:translateY(-2px)}
+#neoCentral30 .n3-world:nth-child(3n+2){background:linear-gradient(140deg,#f4f0ff,#e6e9fa)}
+#neoCentral30 .n3-world:nth-child(3n+3){background:linear-gradient(140deg,#f5ffee,#e4f4e8)}
+#neoCentral30 .n3-world-icon{display:block;font-size:2.2rem;filter:drop-shadow(0 3px 2px #213f5426)}
+#neoCentral30 .n3-world strong{display:block;font-size:.93rem;margin:7px 0}
+#neoCentral30 .n3-world small{color:#526f89}
+#neoCentral30 .n3-world::after{content:"";position:absolute;width:66px;height:20px;right:-19px;bottom:-8px;transform:rotate(-25deg);background:#4ebcb444;border-radius:50%}
+#neoCentral30 .n3-lesson{border-radius:15px;padding:17px;background:linear-gradient(145deg,#eff7ff,#f7f9ff);border:1px solid #d9e8f9}
+#neoCentral30 .n3-lesson strong{display:block;margin:6px 0;color:#153d75}
+#neoCentral30 .n3-lesson p{margin:4px 0 12px;color:#536a83}
+#neoCentral30 .n3-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+#neoCentral30 .n3-task{display:flex;align-items:flex-start;gap:10px;margin:9px 0;padding:11px;background:#f6f9fe;border:1px solid #e1ebf5;border-radius:11px}
+#neoCentral30 .n3-task input{width:19px;height:19px;accent-color:#267e97;margin:2px 0 0}
+#neoCentral30 .n3-task span{flex:1}
+#neoCentral30 .n3-controls{display:flex;gap:10px;flex-wrap:wrap;align-items:end;margin:12px 0}
+#neoCentral30 .n3-controls label{font-weight:750;flex:1 1 175px}
+#neoCentral30 select,#neoCentral30 input[type=text],#neoCentral30 input[type=date]{display:block;width:100%;padding:10px;border:1px solid #bdcde0;border-radius:11px;color:#163254;background:#fff;font:inherit;margin-top:6px}
+#neoCentral30 .n3-boss-stage{position:relative;min-height:165px;display:flex;align-items:center;justify-content:center;background:radial-gradient(circle at center,#727fe4,#243a7a 68%,#122c61);border-radius:18px;overflow:hidden;border:4px solid #a9d9ff;box-shadow:inset 0 -12px 0 #10275570}
+#neoCentral30 .n3-boss-stage:after{content:"";position:absolute;inset:auto 8% 0;background:radial-gradient(ellipse,#78e6b1,#4a81a400 70%);height:56px}
+#neoCentral30 .n3-monster{position:relative;z-index:1;font-size:5.1rem;line-height:1.1;filter:drop-shadow(0 12px 0 #0c235877);animation:n3float 2.6s ease-in-out infinite}
+#neoCentral30 .n3-boss-title{color:#274478;font-weight:900;margin:11px 0 4px}
+#neoCentral30 .n3-answer{display:block;width:100%;text-align:left;border:1px solid #cedced;background:#f1f6fd;color:#1b3b6f;border-radius:11px;padding:11px 13px;font-size:.95rem;margin-top:8px}
+#neoCentral30 .n3-answer:disabled{cursor:default;opacity:.77}
+#neoCentral30 .n3-answer.correct{border-color:#299a74;background:#e3faef;color:#086544}
+#neoCentral30 .n3-answer.wrong{border-color:#d88f6d;background:#fff0e6;color:#994a2d}
+#neoCentral30 .n3-flash{width:100%;border:1px solid #abc5e9;min-height:135px;display:flex;align-items:center;justify-content:center;text-align:center;padding:21px;border-radius:17px;background:linear-gradient(140deg,#fcfdff,#e7f1ff);color:#213e79;box-shadow:0 7px 0 #ccd9ea;font-weight:800;font-size:1.09rem;white-space:pre-wrap}
+#neoCentral30 .n3-city{display:flex;flex-wrap:wrap;gap:8px;align-items:end;justify-content:center;min-height:145px;padding:17px 10px;border-radius:18px;background:linear-gradient(#bceaff,#e9f8ff 60%,#a4dfaa 61%,#73bd8e)}
+#neoCentral30 .n3-building{display:grid;place-items:center;min-width:60px;min-height:65px;font-size:2.3rem;filter:saturate(.2);opacity:.42;transform:scale(.87)}
+#neoCentral30 .n3-building.unlocked{opacity:1;filter:drop-shadow(0 5px 0 #49856a55);transform:scale(1)}
+#neoCentral30 .n3-badges{display:flex;flex-wrap:wrap;gap:8px}
+#neoCentral30 .n3-medal{border-radius:999px;padding:7px 10px;background:#f0f4fa;color:#607389;font-weight:800;font-size:.84rem}
+#neoCentral30 .n3-medal.unlocked{background:#fff1c7;color:#8a5811}
+#neoCentral30 .n3-roadmap{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+#neoCentral30 .n3-roadmap article{background:#f5f8fd;border:1px solid #dae7f3;border-radius:14px;padding:13px}
+#neoCentral30 .n3-roadmap b{display:block;color:#1a3e6f}
+#neoCentral30 .n3-roadmap small{display:block;color:#586c82;margin-top:7px}
+#neoCentral30 .n3-save-note{display:flex;gap:9px;flex-wrap:wrap}
+#neoCentral30 .n3-save-note input{flex:1 1 180px}
+#neoCentral30 .n3-note-list{padding-left:20px;margin:8px 0}
+#neoCentral30 .n3-note-list li{padding:5px 0}
+#neoCentral30 .n3-note-list button{border:0;background:#eaf1fa;border-radius:7px;margin-left:8px;padding:3px 8px}
+#neoCentral30 .n3-info{font-size:.84rem;color:#567085}
+#neoCentral30 [hidden]{display:none!important}
+@keyframes n3float{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
+@media(max-width:850px){#neoCentral30 .n3-panel{grid-column:span 12}#neoCentral30 .n3-worlds{grid-template-columns:repeat(2,minmax(0,1fr))}#neoCentral30 .n3-roadmap{grid-template-columns:1fr}}
+@media(max-width:500px){#neoCentral30 .n3-worlds{grid-template-columns:1fr 1fr}#neoCentral30 .n3-world{min-height:120px;padding:12px}#neoCentral30 .n3-stat{padding:11px}#neoCentral30 .n3-stats{gap:7px}}
+@media(prefers-reduced-motion:reduce){#neoCentral30 .n3-monster{animation:none}#neoCentral30 .n3-world:hover{transform:none}#neoCentral30 .n3-progress>i{transition:none}}
