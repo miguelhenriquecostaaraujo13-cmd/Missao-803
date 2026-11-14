@@ -178,6 +178,7 @@ function getScene(){
  try{glscene=new Scene();return glscene}catch(e){glFailed=true;$("n4NoWebGL").hidden=false;status("Este navegador não iniciou WebGL. O jogo Pixel Invaders continua disponível.");return null}
 }
 function draw3D(){
+ if(window.NeoWorldRenderer?.render?.(c3,{palette:pal(),time:game?.clock||0,lane:game?.lane??1,gate:game?.gate??-13,eco:quality()==="economy"||(quality()==="auto"&&economy),reduced:reduced(),theme:engine()?.themeFor($("n4Subject")?.value)||"neon"}))return;
  const s=getScene();if(!s)return;
  const p=pal(),time=game?.clock||0,lane=game?.lane??1,gate=game?.gate??-13;
  const eco=quality()==="economy"||(quality()==="auto"&&economy),N=eco?6:14;
@@ -337,7 +338,7 @@ document.addEventListener("portal8:viewchange",e=>{if(e.detail?.id!=="neoGames40
 document.addEventListener("visibilitychange",()=>{if(document.hidden){if(game?.running)pause(true);stopLoop();keys={left:false,right:false,fire:false}}});
 cp.addEventListener("pointerdown",e=>{if(mode!=="pixel"||!game?.running||game.paused)return;const rect=cp.getBoundingClientRect();game.player=clamp((e.clientX-rect.left)*320/rect.width,15,305);game.fire()});
 c3.addEventListener("pointerdown",e=>{if(mode!=="three"||!game?.running||game.paused)return;const rect=c3.getBoundingClientRect();game.pick(Math.floor(clamp((e.clientX-rect.left)/rect.width,0,.999)*3))});
-c3.addEventListener("webglcontextlost",e=>{e.preventDefault();if(game?.running)pause(true);stopLoop();glscene=null;glFailed=true;$("n4NoWebGL").hidden=false;status("A conexão com o renderizador 3D foi interrompida. Experimente o arcade pixelado.")});
+c3.addEventListener("webglcontextlost",e=>{e.preventDefault();if(game?.running)pause(true);stopLoop();glscene=null;glFailed=true;window.NeoWorldRenderer?.reset?.();$("n4NoWebGL").hidden=false;status("A conexão com o renderizador 3D foi interrompida. Experimente o arcade pixelado.")});
 switchMode("three");
 window.neoGames40={switchMode,stop:()=>{if(game?.running)pause(true);stopLoop()}};
 })();
