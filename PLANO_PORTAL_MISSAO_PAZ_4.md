@@ -82,3 +82,28 @@
 - [ ] Modelo de IA generativa remoto com backend de segurança.
 
 **Notas de segurança:** Sem compartilhamento de resultados por aluno, sem monetização, sem anúncios ou compras no jogo; seleções de renderização ficam no navegador. Alterar privilégios de conta requer verificação no backend. Não interpretar acertos como diagnóstico de aprendizagem.
+
+## Atualização visual v5 — 14/11/2026
+
+**Problema corrigido:** a versão anterior adicionou cards e funcionalidades, mas não alterou suficientemente a experiência global; o cenário 3D era composto principalmente de blocos básicos.
+
+### Implementado no repositório
+- **Capa inicial redesenhada:** cenário visual de ilhas e portal, chamada principal, CTAs de jogos/estudos/assistentes e quatro acessos rápidos estilizados.
+- **Navegação reorganizada:** rotas principais visíveis na barra superior, seletor rápido preservado e demais ferramentas em painel expansível. Nenhuma ferramenta foi removida.
+- **Home menos carregada:** comunicados de novidade antigos ficam disponíveis em seção expansível; o painel de progresso ganhou estilo secundário mais claro.
+- **Novo renderizador WebGL:** esferas, cones, cilindros e aros toroidais, cenário de ilhas flutuantes, vegetação, castelo, portais com partículas, personagem arredondado, shader de luz e gradação por distância. Modo econômico com menos objetos.
+- **Labirinto dos Cristais:** terceiro jogo original no Studio Neo, com exploração em mapas pixelados, coleta de cristais, enigmas e portas; três fases.
+- **Pixel Invaders original preservado**, assim como os minijogos existentes.
+
+### Validação realizada
+- Sintaxe dos JavaScripts principais aprovada por execução em V8.
+- Integração de scripts, HTML, menu e CSS conferida no repositório.
+- Renderizador WebGL simulado: 259 chamadas de desenho no modo detalhado e 169 no modo econômico, sem exceção.
+- Conectividade dos três mapas do labirinto verificada por busca de caminhos: cristais e saída acessíveis.
+
+### Pendente
+- Avaliação do resultado visual com GPU e captura real do GitHub Pages em navegador e celular.
+- Testes de jogabilidade completos com usuários reais e diferentes tamanhos de tela.
+- Mais variedade de mecânicas em 3D, além da corrida educativa.
+
+**Observação:** o Neo Render usa renderização gráfica procedural de verdade, não geração de imagens por inteligência artificial generativa.
