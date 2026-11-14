@@ -1702,6 +1702,7 @@ function phaseRenderLevels(){
  document.querySelectorAll("#topicArea .topic").forEach(topic=>{
   const input=topic.querySelector('input[type="checkbox"]');if(!input)return;
   const key=input.id;
+  topic.querySelector(".phase-levels")?.remove();
   const wrap=document.createElement("div");wrap.className="phase-levels";wrap.setAttribute("aria-label","Meu nível de compreensão");
   for(const [level,label] of [["entendi","🟢 Entendi"],["quase","🔵 Quase entendi"],["revisar","🩷 Preciso revisar"]]){
    const btn=document.createElement("button");btn.type="button";btn.textContent=label;btn.setAttribute("aria-pressed",String(phaseLevels[key]===level));
@@ -1738,7 +1739,7 @@ function phaseRenderMistakes(){
 function phaseRenderReview(){phaseRenderChecklist();phaseRenderMistakes()}
 function phaseRecordQuiz(q,right){
  if(!q)return;
- const today=new Date().toLocaleDateString("en-CA");
+ const today=remindersDay(new Date());
  phaseHistory.push({date:today,subject:String(q.s||"Matéria").slice(0,60),correct:!!right});
  phaseHistory=phaseHistory.slice(-240);phaseWrite(PHASE_HISTORY_KEY,phaseHistory);
  if(!right){
