@@ -175,6 +175,14 @@ Uma nova área **🧰 Ferramentas extras → ⭐ Ateliê Neo** foi adicionada ao
 
 Os arquivos são `assets/neo-lab.js` e `assets/neo-lab.css`; o cache offline foi atualizado para `portal8-recursos-aprovados-v27`. Não há novas tabelas, APIs pagas, exigência de login ou coleta de dados nesta versão. O histórico de outras áreas, permissões Supabase, dados escolares e o mascote Neo foram preservados.
 
+## Versão 28 — Ateliê Neo visível e favicon da marca
+
+- O Ateliê Neo já estava publicado, mas era pouco visível: estava escondido numa categoria de menu recolhida. Agora a categoria **✨ Novidade: Ateliê Neo** fica logo depois de Início, e há um cartão e botão de acesso direto na página inicial.
+- Link direto para abrir a ferramenta: `?ferramenta=neoLab&versao=28`, interpretado por `assets/neo-acesso-rapido.js`. O atalho só permite abrir a área pública `neoLab`.
+- O navegador passa a exibir o favicon `assets/icone-portal-missao-paz.svg`, inspirado na pomba azul do recurso existente `assets/missao-paz-logo-portal.svg`, no lugar do ícone genérico. Não é apresentado como logotipo oficial da escola.
+- O novo CSS `assets/neo-acesso-rapido.css` destaca o recurso sem alterar as 29 áreas, a aparência do Neo, o login, as políticas do banco ou os estudos armazenados.
+- Cache offline atualizado para `portal8-recursos-aprovados-v28`. O ícone pode demorar a mudar em navegadores que mantenham um cache separado para favicons; uma aba nova ou recarregamento completo pode ajudar.
+
 ## Publicação
 
 Publicação atual pelo GitHub Pages: https://miguelhenriquecostaaraujo13-cmd.github.io/Missao-803/
