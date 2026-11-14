@@ -2,9 +2,10 @@
 (() => {
  "use strict";
  const STORAGE_KEY="portal8-pazinho-enabled-v1";
+ const NAME_KEY="portal8-mascot-name-cache-v2";
  const SESSION_KEY="portal8-pazinho-welcome-v1";
  const TIPS={
-  inicio:["Olá! Eu sou o Pazinho. Escolha uma ferramenta e vamos aprender!","Seu próximo desafio está a um clique. Por onde começamos?"],
+  inicio:["Olá! Eu sou o {mascote}. Escolha uma ferramenta e vamos aprender!","Seu próximo desafio está a um clique. Por onde começamos?"],
   trilha:["Na Minha trilha você acompanha os assuntos já estudados!","Uma etapa de cada vez. Marque os conteúdos que concluir!"],
   videoaulas:["Uma videoaula pode ajudar a entender aquele assunto difícil!","Faça anotações enquanto assiste. Depois, tente explicar o tema!"],
   cartoes:["Leia a pergunta antes de revelar a resposta. Você consegue!","Flashcards são ótimos para treinar sua memória!"],
@@ -35,7 +36,8 @@
  };
  let widget,balao,fala,avatar,close,again,setting,hideTimer,entryTimer,wiggleTimer;
  let enabled=true,activeId=document.querySelector(".view.active")?.id||"inicio";
- let mascotName="Pazinho",transitionOverlay=null,transitionTimer=null,avatarAnimation=null;
+ let mascotName="Neo",transitionOverlay=null,transitionTimer=null,avatarAnimation=null;
+ try{const cached=localStorage.getItem(NAME_KEY);if(cached&&/^[^<>\r\n]{2,24}$/.test(cached.trim()))mascotName=cached.trim()}catch(_){}
  const indexByView=Object.create(null);
  function readEnabled(){try{return localStorage.getItem(STORAGE_KEY)!=="false"}catch(_){return true}}
  function writeEnabled(value){try{localStorage.setItem(STORAGE_KEY,String(value))}catch(_){}}
@@ -49,6 +51,8 @@
   widget?.setAttribute("aria-label",mascotName+", o livrinho mascote do Portal 8º Ano");
   const title=widget?.querySelector(".pazinho-topo span");if(title)title.textContent="💙 Dica do "+mascotName;
   if(avatar){avatar.title=mascotName+": mostrar uma dica";avatar.setAttribute("aria-label",mascotName+": mostrar dica da ferramenta")}
+  if(close)close.setAttribute("aria-label","Fechar dica do "+mascotName);
+  if(fala&&fala.textContent)fala.textContent=fala.textContent.replace(/\bPazinho\b/gi,mascotName);
   const current=document.getElementById("portal8MascotNameCurrent");
   if(current)current.textContent=mascotName;
   const input=document.getElementById("portal8MascotNameInput");
@@ -59,7 +63,7 @@
   try{
    if(typeof ensureCloudClient!=="function")return;
    const {data,error}=await ensureCloudClient().from("portal8_site_settings").select("value").eq("key","mascot_name").single();
-   if(!error&&validName(data?.value)){mascotName=data.value.trim();updateName()}
+   if(!error&&validName(data?.value)){mascotName=data.value.trim();try{localStorage.setItem(NAME_KEY,mascotName)}catch(_){}updateName()}
   }catch(e){/* Nome padrão funciona offline. */}
  }
  window.portal8MascotSaveName=async function(){
@@ -75,7 +79,7 @@
    if(userError||!userResult?.user||userResult.user.is_anonymous)throw new Error("Entre como administrador autorizado.");
    const {data,error}=await client.from("portal8_site_settings").update({value}).eq("key","mascot_name").select("value").maybeSingle();
    if(error||!data)throw new Error("Apenas contas administradoras autorizadas podem mudar o nome.");
-   mascotName=data.value;updateName();
+   mascotName=data.value;try{localStorage.setItem(NAME_KEY,mascotName)}catch(_){}updateName();
    status.textContent="✅ Nome atualizado para "+mascotName+" em todo o portal!";
    show(activeId,80,false);
   }catch(e){status.textContent=e.message||"Não foi possível salvar. Verifique sua conexão."}
@@ -145,7 +149,7 @@
   entryTimer=setTimeout(()=>{
    if(!enabled)return;
    setMotionMode();pauseClock();
-   fala.textContent=nextTip(activeId).replaceAll("Pazinho",mascotName);
+   fala.textContent=nextTip(activeId).replace(/\{mascote\}/g,mascotName).replace(/\bPazinho\b/gi,mascotName);
    balao.hidden=false;
    // Atualiza o conteúdo sem reconstruir o resto da página.
    balao.classList.remove("is-open");
@@ -174,14 +178,14 @@
   if(document.getElementById("portal8Pazinho"))return;
   enabled=readEnabled();
   widget=document.createElement("aside");
-  widget.id="portal8Pazinho";widget.setAttribute("aria-label","Pazinho, o livrinho mascote do Portal 8º Ano");
+  widget.id="portal8Pazinho";widget.setAttribute("aria-label",mascotName+", o livrinho mascote do Portal 8º Ano");
   widget.innerHTML=`
     <div class="pazinho-balao" id="portal8PazinhoBalao" hidden>
-      <div class="pazinho-topo"><span>💙 Dica do Pazinho</span><button type="button" class="pazinho-close" aria-label="Fechar dica do Pazinho" title="Fechar dica">×</button></div>
+      <div class="pazinho-topo"><span>💙 Dica do mascote</span><button type="button" class="pazinho-close" aria-label="Fechar dica" title="Fechar dica">×</button></div>
       <p class="pazinho-fala" id="portal8PazinhoFala" role="status" aria-live="polite"></p>
       <button class="pazinho-again" type="button" title="Mostrar outra dica">✨ Outra dica</button>
     </div>
-    <button type="button" class="pazinho-avatar" title="Pazinho: mostrar uma dica" aria-label="Pazinho: mostrar dica da ferramenta">
+    <button type="button" class="pazinho-avatar" title="Mascote: mostrar uma dica" aria-label="Mascote: mostrar dica da ferramenta">
       <img src="./assets/pazinho.svg?v=23" alt="" aria-hidden="true" width="98" height="98" decoding="async">
     </button>`;
   document.body.append(widget);
@@ -201,7 +205,7 @@
   if(card){
    const row=document.createElement("label");row.className="row";row.style.cssText="display:flex;align-items:center;gap:9px;margin:14px 0;";
    setting=document.createElement("input");setting.type="checkbox";setting.id="portal8PazinhoEnabled";setting.checked=enabled;
-   const words=document.createElement("span");words.textContent="Mostrar o Pazinho e suas dicas ao abrir ferramentas";
+   const words=document.createElement("span");words.textContent="Mostrar o mascote e suas dicas ao abrir ferramentas";
    row.append(setting,words);card.append(row);
    const help=document.createElement("p");help.className="small muted";
    help.textContent="O mascote mostra balões de texto. Clique nele para outra dica; sua escolha fica só neste navegador.";
