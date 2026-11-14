@@ -263,9 +263,9 @@ Os arquivos são `assets/neo-lab.js` e `assets/neo-lab.css`; o cache offline foi
 - Os nomes de arquivos antigos, classes CSS e identificadores internos permanecem inalterados para garantir compatibilidade com o site, caches e progressos já salvos. Esses identificadores técnicos não aparecem nos textos para alunos.
 - Cache offline `portal8-recursos-aprovados-v36` com nova versão de imagem e scripts para os navegadores carregarem a correção.
 
-## Versão 37 — três pontinhos do Daniel e Arcade por fases
+## Versão 37 — menu de três pontinhos e Arcade por fases
 
-- **Organização sugerida pelo Daniel:** controles repetidos das 32 ferramentas agora ficam num menu acessível de **três pontinhos (⋯)**. A barra de navegação principal também ganhou menu compacto, com busca, início, jogos, mapas, flashcards e Oficina Criativa. Mantidos atalhos `Ctrl+K`/`⌘+K`, favoritos, links e permissões administrativas.
+- **Organização com três pontinhos:** controles repetidos das 32 ferramentas agora ficam num menu acessível de **três pontinhos (⋯)**. A barra de navegação principal também ganhou menu compacto, com busca, início, jogos, mapas, flashcards e Oficina Criativa. Mantidos atalhos `Ctrl+K`/`⌘+K`, favoritos, links e permissões administrativas.
 - **Página inicial mais limpa:** os avisos antigos sobre mapas e Oficina foram agrupados num painel recolhível **Outras novidades do portal**. O Arcade e o roteiro de estudos continuam fáceis de localizar.
 - **Arcade Educativo Neo melhorado:** o catálogo dos três jogos ganhou cartões visuais originais e responsivos. Cada jogo agora possui três missões selecionáveis: **Explorador**, **Missão** e **Desafio**, com metas e vidas adequadas. Uma barra de progresso mostra a evolução de cada fase; trocar de fase reinicia a partida. Os recordes são pessoais e separados por fase, sem ranking público. O Diretor Neo adaptativo e as opções de toque permanecem ativos.
 - **Metas por jogo:** Frações com 3/6/9 coletas, Célula com 2/3/3 entregas, Conectivos com 6/10/15 acertos (Explorador/Missão/Desafio, respectivamente). Observar o desafio não muda notas nem boletins.
@@ -286,6 +286,18 @@ Os arquivos são `assets/neo-lab.js` e `assets/neo-lab.css`; o cache offline foi
 - Os jogos mantêm as três fases (Explorador, Missão, Desafio), controles de teclado e toque, progresso e recordes locais, além do Diretor Neo de ajuda. Os gráficos não afetam notas escolares ou acesso administrativo.
 - **Arquivos novos:** `assets/neo-arcade-arte-v38.js` e `assets/neo-arcade-arte-v38.css`. `assets/neo-arcade.js` ganhou integração de arte com fallback para o modo clássico. O cache foi atualizado para `portal8-recursos-aprovados-v38`.
 - **Validação:** os 18 cenários de inicialização/desenho (3 jogos × 3 fases × 2 estilos) passaram em simulação com canvas substituto; 32 áreas, navegação e IDs preservados. Teste visual e de desempenho em navegador/dispositivo real ainda necessário.
+
+## Versão 39 — três pontinhos corrigidos e melhorias transversais
+
+- **Correção funcional dos três pontinhos:** a causa do menu oculto era o uso de um menu `details` dentro de estruturas com `overflow:hidden` (inclusive a navegação móvel e os painéis). O menu novo `assets/portal-menu-v39.js` cria um **popover flutuante diretamente no `body`**, fora dos contêineres que o cortavam. O botão possui `aria-expanded`, `aria-haspopup`, retorno de foco, navegação por setas, tecla Escape e fechamento ao clicar fora. A lista pode ser rolada em telas pequenas sem fechar automaticamente.
+- **Menu nas 32 ferramentas:** Buscar, adicionar/remover favorito, copiar link, ajuda contextual, voltar ao início e entrar/sair do Modo Foco. A navegação principal oferece continuar a última ferramenta, favoritos, busca, Arcade, Mapas, Flashcards e Oficina. O Ateliê permanece invisível para quem não tem autorização.
+- **Favoritos sincronizados dentro do próprio navegador:** o menu de três pontinhos e os favoritos da página inicial agora usam a mesma chave local `portal803-favorite-tools-v1`. O atalho de busca usa a ferramenta de pesquisa já existente.
+- **Novo Modo Foco:** esconde temporariamente o cabeçalho, o menu lateral e o rodapé para concentrar a atenção na ferramenta. O botão fixo **Sair do modo foco** é sempre visível; Escape também permite sair. A escolha fica apenas na sessão do navegador.
+- **Nova Jornada Neo de três etapas**, na página inicial: o aluno seleciona uma matéria e recebe um assunto efetivamente cadastrado na Trilha, com três ações (explorar, memorizar, praticar). Há marcação manual de etapas, barra de progresso, sorteio sequencial de outro assunto e atalho para a ferramenta correspondente. A conclusão é autodeclarada e local, não equivale a notas, avaliação automática ou medição de desempenho escolar.
+- **Aprimoramento transversal nas 32 áreas:** foco de teclado mais visível, botão **Pular para o conteúdo principal**, ajuda contextual pela introdução de cada ferramenta, menus compactos, melhor ajuste de textos, formulários e elementos em telas menores, suporte a movimento reduzido. Trata-se de uma melhoria compartilhada de interface e navegação; os algoritmos individuais das 32 ferramentas **não** foram reescritos.
+- **Remoção da atribuição pessoal** dos arquivos de interface, documentação e títulos dos avisos do portal. Referências históricas do Git no passado não foram reescritas.
+- **Arquivos:** `assets/portal-menu-v39.js`, `assets/portal-menu-v39.css`, `assets/neo-jornada-v39.js`, `assets/neo-jornada-v39.css`, `assets/portal-polimento-v39.css`. O `assets/portal-ux-v34.js` foi integrado ao sistema de favoritos existente. Cache: `portal8-recursos-aprovados-v39`.
+- **Testes:** 32 destinos e IDs sem duplicação, verificação de sintaxe e simulador interativo dos três pontinhos (abrir, busca, favorito, foco, Escape, segurança do Ateliê). A Jornada também passou em simulação de seleção, salvamento, troca de assunto e abertura de ferramenta. Ainda é necessário conferir a aparência em um navegador real e testar em aparelhos móveis.
 
 ## Publicação
 
