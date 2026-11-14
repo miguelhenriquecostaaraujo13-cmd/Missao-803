@@ -64,6 +64,24 @@
     clearAvatar();avatarObjectURL=URL.createObjectURL(data);showAvatar(avatarObjectURL);
   }catch(e){if(token===refreshCount)message("Não consegui carregar a foto privada agora. Você pode enviá-la novamente.")}
  }
+ // A conta Auth e o perfil são registros separados. Um novo login cria o
+ // perfil básico da própria pessoa, respeitando a autorização RLS pelo user_id.
+ async function loadOrCreateProfile(c,uid){
+  const read=()=>c.from("portal8_profiles")
+   .select("user_id,display_name,turma,bio,avatar_path,created_at")
+   .eq("user_id",uid).maybeSingle();
+  let {data:p,error}=await read();
+  if(error)throw error;
+  if(p)return p;
+  // Nunca escreve em perfis de outras contas nem concede papel administrativo.
+  const created=await c.from("portal8_profiles").insert({user_id:uid,display_name:"Estudante"});
+  // Um segundo refresh pode ter criado a mesma linha simultaneamente.
+  if(created.error&&String(created.error.code)!=="23505")throw created.error;
+  const saved=await read();
+  if(saved.error)throw saved.error;
+  if(!saved.data)throw new Error("O perfil ainda não está disponível.");
+  return saved.data;
+ }
  async function refresh(){
   const token=++refreshCount;
   try{
@@ -78,19 +96,21 @@
     const changed=user?.id!==next.id;
     user=next;
     if(changed){profile=null;isAdmin=false;clearAvatar()}
-    const {data:p,error:loadError}=await c.from("portal8_profiles")
-      .select("user_id,display_name,turma,bio,avatar_path,created_at")
-      .eq("user_id",user.id).maybeSingle();
-    if(loadError)throw loadError;
-    if(token!==refreshCount)return;
-    profile=p||null;
+    // Mostra a conta autenticada mesmo se a busca do perfil falhar.
+    render();
+    const loaded=await loadOrCreateProfile(c,next.id);
+    if(token!==refreshCount||user?.id!==next.id)return;
+    profile=loaded;
     render();
     if(profile?.avatar_path&&(changed||!avatarObjectURL))await loadAvatar(profile.avatar_path,token);
     if(isAdmin&&!avatarObjectURL)showAdminAvatar();
     if(changed&&typeof portalOwnerCheck==="function")portalOwnerCheck().catch(()=>{});
   }catch(e){
     if(token!==refreshCount)return;
-    message("Não consegui atualizar sua conta. Verifique a conexão e tente de novo.");
+    if(validUser(user)){
+      render();
+      message("Sua conta está conectada, mas não consegui carregar ou salvar seu perfil. Confira a internet e tente Salvar perfil.");
+    }else message("Não consegui atualizar sua conta. Verifique a conexão e tente de novo.");
   }
  }
  async function signAction(mode){
@@ -117,7 +137,8 @@
       message(window.portal8AuthHelp?.confirmationMessage||"Confira seu e-mail e confirme o cadastro antes de entrar.");
     }else{
       $("p8ProfileResend").hidden=true;
-      await refresh();message("✅ Conta conectada! Agora você pode personalizar seu perfil.");
+      await refresh();
+      message(profile?"✅ Login confirmado e perfil recuperado! Você pode personalizar seu nome e turma.":"✅ Login realizado, mas ainda não foi possível recuperar o perfil. Tente Salvar perfil.");
     }
   }catch(e){
     $("p8ProfilePassword").value="";
