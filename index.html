@@ -1625,8 +1625,8 @@ html nav :is(summary,button,select):focus-visible{outline:3px solid #ffd781!impo
   <div class="p8-profile-panel" id="p8ProfileAuth">
    <h3>🔐 Entrar ou criar conta</h3><p class="small muted">Use um e-mail seu. Não compartilhe a senha. O cadastro pode precisar de confirmação por e-mail.</p>
    <label for="p8ProfileEmail">E-mail</label><input id="p8ProfileEmail" type="email" maxlength="254" autocomplete="email" placeholder="seuemail@exemplo.com">
-   <label for="p8ProfilePassword">Senha</label><input id="p8ProfilePassword" type="password" minlength="12" maxlength="128" autocomplete="current-password" placeholder="Mínimo de 12 caracteres">
-   <div class="p8-profile-action"><button class="btn orange" type="button" id="p8ProfileLogin" data-profile-action>Entrar</button><button class="btn light" type="button" id="p8ProfileSignup" data-profile-action>Criar conta</button></div>
+   <label for="p8ProfilePassword">Senha (12 caracteres para nova conta)</label><input id="p8ProfilePassword" type="password" minlength="1" maxlength="128" autocomplete="current-password" placeholder="Use sua senha; no cadastro, mínimo de 12">
+   <div class="p8-profile-action"><button class="btn orange" type="button" id="p8ProfileLogin" data-profile-action>Entrar</button><button class="btn light" type="button" id="p8ProfileSignup" data-profile-action>Criar conta</button></div><button class="btn light" type="button" id="p8ProfileResend" data-profile-action hidden>📩 Reenviar e-mail de confirmação</button>
    <small>O login é opcional. Você continua podendo estudar sem conta. O cadastro não concede acesso administrativo.</small>
   </div>
   <div class="p8-profile-panel" id="p8ProfilePrivate" hidden>
@@ -3322,7 +3322,8 @@ init();renderNexo();
 <script src="./assets/neo-arcade-arte-v38.js?v=38"></script>
 <script src="./assets/neo-arcade.js?v=38"></script>
 <script src="./assets/neo-admin-gate.js?v=29"></script>
-<script src="./assets/portal8-perfil.js?v=21"></script>
+<script src="./assets/portal8-auth-help-v1.js?v=1"></script>
+<script src="./assets/portal8-perfil.js?v=22"></script>
 <script src="./assets/neo-central-3.js?v=2"></script>
 <script src="./assets/neo-agents-4.js?v=1"></script>
 <script src="./assets/neo-world-render-5.js?v=1"></script>
@@ -3340,9 +3341,11 @@ init();renderNexo();
     <form id="p8WelcomeForm" hidden>
       <label for="p8WelcomeEmail">E-mail</label>
       <input id="p8WelcomeEmail" type="email" maxlength="254" autocomplete="email" required placeholder="seuemail@exemplo.com">
-      <label for="p8WelcomePassword">Senha (mínimo de 12 caracteres)</label>
-      <input id="p8WelcomePassword" type="password" minlength="12" maxlength="128" autocomplete="current-password" required>
+      <label for="p8WelcomePassword" id="p8WelcomePasswordLabel">Senha</label>
+      <input id="p8WelcomePassword" type="password" minlength="1" maxlength="128" autocomplete="current-password" required>
+      <small id="p8WelcomePasswordHelp">Para criar uma conta, use pelo menos 12 caracteres.</small>
       <button id="p8WelcomeSubmit" type="submit" class="p8-welcome-primary">Entrar</button>
+      <button type="button" class="p8-welcome-back" id="p8WelcomeResend" hidden>📩 Reenviar confirmação de e-mail</button>
       <button type="button" class="p8-welcome-back" id="p8WelcomeBack">← Voltar às opções</button>
     </form>
     <p role="status" aria-live="polite" id="p8WelcomeStatus"></p>
@@ -3366,10 +3369,15 @@ init();renderNexo();
     $("p8WelcomeIntro").textContent=next==="signup"?"Salve seu perfil pessoal para acessar depois.":"Bem-vindo de volta! Use seu e-mail e senha.";
     $("p8WelcomeSubmit").textContent=next==="signup"?"Criar conta":"Fazer login";
     $("p8WelcomePassword").autocomplete=next==="signup"?"new-password":"current-password";
+    $("p8WelcomePassword").minLength=next==="signup"?12:1;
+    $("p8WelcomePasswordLabel").textContent=next==="signup"?"Crie uma senha (12 caracteres ou mais)":"Senha da sua conta";
+    $("p8WelcomePasswordHelp").textContent=next==="signup"?"Use pelo menos 12 caracteres. Não compartilhe sua senha.":"Para entrar, use a senha que cadastrou. Se a conta for nova, confirme o e-mail antes.";
+    $("p8WelcomeResend").hidden=true;
     $("p8WelcomeEmail").focus();
   }
   function back(){
     form.hidden=true;choices.hidden=false;status.textContent="";
+    $("p8WelcomeResend").hidden=true;
     $("p8WelcomeTitle").textContent="Seu espaço de estudos começa aqui!";
     $("p8WelcomeIntro").textContent="Escolha como deseja acessar o portal. Você pode estudar sem criar uma conta.";
   }
@@ -3381,10 +3389,27 @@ init();renderNexo();
     setMode(action);
   });
   $("p8WelcomeBack").addEventListener("click",back);
+  $("p8WelcomeResend").addEventListener("click",async()=>{
+    if(busy)return;
+    const email=$("p8WelcomeEmail").value.trim();
+    if(!window.portal8AuthHelp?.emailValid(email)){status.textContent="Informe um e-mail válido para reenviar a confirmação.";return}
+    busy=true;$("p8WelcomeResend").disabled=true;
+    status.textContent="Solicitando novo e-mail de confirmação…";
+    try{
+      const c=client();if(!c)throw Error("Sem conexão");
+      const {error}=await window.portal8AuthHelp.resendConfirmation(c,email,location.origin+location.pathname);
+      if(error)throw error;
+      status.textContent="📩 Se houver uma conta pendente, o e-mail de confirmação será enviado. Confira também o Spam.";
+    }catch(err){
+      status.textContent=window.portal8AuthHelp?.errorMessage(err,"resend")||"Não foi possível reenviar a confirmação.";
+    }finally{busy=false;$("p8WelcomeResend").disabled=false}
+  });
   form.addEventListener("submit",async e=>{
     e.preventDefault();if(busy)return;
     const email=$("p8WelcomeEmail").value.trim(),password=$("p8WelcomePassword").value;
-    if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)||password.length<12){status.textContent="Informe um e-mail válido e uma senha de pelo menos 12 caracteres.";return}
+    if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){status.textContent="Informe um e-mail válido.";return}
+    if(!password){status.textContent="Digite sua senha.";return}
+    if(mode==="signup"&&password.length<12){status.textContent="Para criar uma conta, use uma senha de pelo menos 12 caracteres.";return}
     busy=true;$("p8WelcomeSubmit").disabled=true;
     status.textContent=mode==="signup"?"Criando sua conta…":"Verificando sua conta…";
     try{
@@ -3395,8 +3420,17 @@ init();renderNexo();
       if(result.error)throw result.error;
       $("p8WelcomePassword").value="";
       if(result.data?.session?.user?.email&&result.data.session.user.is_anonymous!==true){hide();return}
-      status.textContent="Cadastro solicitado! Confira seu e-mail para confirmar a conta. Depois, volte e faça login. Você também pode entrar como visitante.";
-    }catch(_){status.textContent="Não foi possível autenticar. Verifique o e-mail, a senha, a confirmação da conta e sua conexão."}
+      if(mode==="signup"){
+        $("p8WelcomeResend").hidden=false;
+        status.textContent=window.portal8AuthHelp?.confirmationMessage||"Confira seu e-mail e confirme o cadastro antes de entrar.";
+      }else{
+        status.textContent="Para entrar, confirme seu e-mail, caso tenha recebido uma mensagem do portal.";
+      }
+    }catch(err){
+      const code=String(err?.code||"");
+      if(code==="email_not_confirmed"||/email not confirmed/i.test(String(err?.message||"")))$("p8WelcomeResend").hidden=false;
+      status.textContent=window.portal8AuthHelp?.errorMessage(err,mode)||"Não foi possível autenticar. Verifique sua senha e a confirmação do e-mail.";
+    }
     finally{busy=false;$("p8WelcomeSubmit").disabled=false}
   });
   async function initialize(){
