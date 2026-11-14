@@ -663,6 +663,8 @@ html[data-phase-motion="reduce"] .view.active.portal8-enter-active{
 <link rel="stylesheet" href="./assets/neo-inteligencia.css?v=33">
 <link rel="stylesheet" href="./assets/portal-ux-v34.css?v=34">
 <link rel="stylesheet" href="./assets/neo-oficina-v35.css?v=35">
+<link rel="stylesheet" href="./assets/portal-tres-pontinhos-v37.css?v=37">
+<link rel="stylesheet" href="./assets/neo-arcade-missoes-v37.css?v=37">
 <style id="mpMenuCalendarV25">
 /* Menu v25 — correção em TODOS os temas; carregada após todos os CSS antigos. */
 html nav{background:#103755!important;color:#effaff!important}
@@ -729,14 +731,6 @@ html nav :is(summary,button,select):focus-visible{outline:3px solid #ffd781!impo
 <nav aria-label="Navegação principal do Portal 8º Ano"><div class="navquick"><label for="nexoNavJump">🧭 Ir para ferramenta</label><select id="nexoNavJump" aria-label="Escolher uma ferramenta por categoria"></select></div><div class="navinner"><details class="navgroup" data-category="inicio" open><summary>🏠 Início<span class="navcount">1</span></summary><div class="navgroup-items"><button type="button" class="navbtn active" data-view="inicio" aria-current="page">🏁 Meu painel</button></div></details><details class="navgroup" data-category="aprender"><summary>📚 Aprender<span class="navcount">7</span></summary><div class="navgroup-items"><button type="button" class="navbtn" data-view="trilha">✅ Minha trilha</button><button type="button" class="navbtn" data-view="videoaulas">🎬 Videoaulas</button><button type="button" class="navbtn" data-view="cartoes">🗂️ Memorização</button><button type="button" class="navbtn" data-view="metodos">📚 Métodos de estudo</button><button type="button" class="navbtn" data-view="mapasNeo">🧠 Mapas Mentais Neo</button><button type="button" class="navbtn" data-view="assistente">✨ Tutor grátis</button><button type="button" class="navbtn" data-view="revisoes">🎯 Missões e revisões</button></div></details><details class="navgroup" data-category="praticar"><summary>🧠 Praticar<span class="navcount">7</span></summary><div class="navgroup-items"><button type="button" class="navbtn" data-view="quiz">🧠 Simulados</button><button type="button" class="navbtn" data-view="gerador">⚡ Gerador de questões</button><button type="button" class="navbtn" data-view="laboratorio">🧪 Laboratório</button><button type="button" class="navbtn" data-view="arena">🎮 Arena 803</button><button type="button" class="navbtn" data-view="arcadeNeo">🕹️ Arcade Educativo Neo</button><button type="button" class="navbtn" data-view="desempenho">📊 Desempenho</button><button type="button" class="navbtn" data-view="evolucao803">📈 Minha evolução</button></div></details><details class="navgroup" data-category="organizar"><summary>🗓️ Organizar<span class="navcount">6</span></summary><div class="navgroup-items"><button type="button" class="navbtn" data-view="metas803">📈 Minhas metas</button><button type="button" class="navbtn" data-view="revisao803">🗒️ Revisão para provas</button><button type="button" class="navbtn" data-view="calendario">📅 Calendário</button><button type="button" class="navbtn" data-view="foco">⏱️ Foco</button><button type="button" class="navbtn" data-view="caderno">📝 Meu caderno</button><button type="button" class="navbtn" data-view="lembretes">🔔 Lembretes</button></div></details><details class="navgroup" data-category="turma"><summary>🤝 Turma<span class="navcount">3</span></summary><div class="navgroup-items"><button type="button" class="navbtn" data-view="turma">🌐 Painel da turma</button><button type="button" class="navbtn" data-view="desafio8ano">🏆 Missões coletivas</button><button type="button" class="navbtn" data-view="biblioteca">🤝 Biblioteca 803</button></div></details><details class="navgroup" data-category="conta"><summary>👤 Minha conta<span class="navcount">1</span></summary><div class="navgroup-items"><button type="button" class="navbtn" data-view="perfil">👤 Meu perfil</button></div></details><details class="navgroup" data-category="oficina" open><summary>🎨 Criar e explorar<span class="navcount">1</span></summary><div class="navgroup-items"><button type="button" class="navbtn" data-view="neoOficina">✨ Oficina Criativa Neo</button></div></details><details class="navgroup" data-category="administracao"><summary>⚙️ Administração e ajuda<span class="navcount">5</span></summary><div class="navgroup-items"><button type="button" class="navbtn" data-view="professor">👩‍🏫 Professor</button><button type="button" class="navbtn" data-view="criador">🔒 Modo Proprietário</button><button type="button" class="navbtn" data-view="neoLab" hidden>🧪 Ateliê Neo · testes</button><button type="button" class="navbtn" data-view="offline">📶 Modo offline</button><button type="button" class="navbtn" data-view="ajuda803">🛠️ Relatar problema</button><button type="button" class="navbtn" data-view="acessibilidade803">♿ Acessibilidade</button></div></details></div><p class="navhint">Escolha uma categoria para encontrar a ferramenta que precisa.</p></nav>
 <main>
 <section id="inicio" class="view active">
-<div class="mp-new-feature" role="region" aria-label="Novo recurso de mapas mentais">
- <div class="mp-new-feature-content">
-  <span class="mp-new-feature-pill">✨ NOVIDADE PARA TODOS OS ALUNOS</span>
-  <strong>Mapas Mentais Neo 🧠</strong>
-  <span>Escolha a matéria e o assunto para criar um mapa visual, completar as ideias e salvar seu esquema.</span>
- </div>
- <button type="button" class="btn orange" onclick="showView('mapasNeo')">Criar meu mapa mental</button>
-</div>
 <div class="mp-new-feature" role="region" aria-label="Novos minijogos educativos">
   <div class="mp-new-feature-content">
    <span class="mp-new-feature-pill">🕹️ NOVO ARCADE EDUCATIVO</span>
@@ -745,6 +739,27 @@ html nav :is(summary,button,select):focus-visible{outline:3px solid #ffd781!impo
   </div>
   <button class="btn orange" type="button" onclick="showView('arcadeNeo')">🎮 Jogar agora</button>
 </div>
+<details class="mp-home-highlights" id="neoHomeMoreNews">
+ <summary>✨ Outras novidades do portal <span class="mp-summary-ellipsis" aria-hidden="true">⋯</span></summary>
+ <div class="mp-home-highlights-content">
+ <div class="mp-new-feature" role="region" aria-label="Novo recurso de mapas mentais">
+ <div class="mp-new-feature-content">
+  <span class="mp-new-feature-pill">✨ NOVIDADE PARA TODOS OS ALUNOS</span>
+  <strong>Mapas Mentais Neo 🧠</strong>
+  <span>Escolha a matéria e o assunto para criar um mapa visual, completar as ideias e salvar seu esquema.</span>
+ </div>
+ <button type="button" class="btn orange" onclick="showView('mapasNeo')">Criar meu mapa mental</button>
+</div>
+ <div class="mp-new-feature" role="region" aria-label="Nova Oficina Criativa Neo">
+ <div class="mp-new-feature-content">
+  <span class="mp-new-feature-pill">🎨 NOVIDADE PARA TODAS AS TURMAS</span>
+  <strong>Oficina Criativa Neo — ideias aprovadas!</strong>
+  <span>Ferramentas que antes estavam no Ateliê agora estão liberadas: cards personalizados, mapas avançados, linha do tempo, jogos, planejadores e muito mais.</span>
+ </div>
+ <button type="button" class="btn orange" onclick="showView('neoOficina')">✨ Abrir a Oficina</button>
+</div>
+ </div>
+</details>
 <section id="neoRoutePlanner" class="neo-smart-panel" aria-label="Roteiro inteligente e gratuito de estudos">
  <h3>🧭 Neo recomenda: meu próximo estudo</h3>
  <p>Escolha uma matéria para montar uma sequência de revisão baseada nos conteúdos disponíveis e nos cartões que você marcou para rever. Você decide quando estudar.</p>
@@ -755,14 +770,6 @@ html nav :is(summary,button,select):focus-visible{outline:3px solid #ffd781!impo
  <div id="neoRouteOutput" aria-live="polite">Seu roteiro aparece aqui.</div>
  <div class="neo-smart-options"><button type="button" class="btn light" id="neoRouteFlash">🗂️ Abrir flashcards</button><button type="button" class="btn light" id="neoRouteMap">🧠 Criar mapa mental</button></div>
 </section>
-<div class="mp-new-feature" role="region" aria-label="Nova Oficina Criativa Neo">
- <div class="mp-new-feature-content">
-  <span class="mp-new-feature-pill">🎨 NOVIDADE PARA TODAS AS TURMAS</span>
-  <strong>Oficina Criativa Neo — ideias aprovadas!</strong>
-  <span>Ferramentas que antes estavam no Ateliê agora estão liberadas: cards personalizados, mapas avançados, linha do tempo, jogos, planejadores e muito mais.</span>
- </div>
- <button type="button" class="btn orange" onclick="showView('neoOficina')">✨ Abrir a Oficina</button>
-</div>
 <section class="mp-horizon" aria-label="Boas-vindas e resumo de estudos do Portal Missão Paz">
  <div class="mp-horizon-copy">
   <span class="mp-horizon-eyebrow"><i aria-hidden="true"></i> SEU CANTINHO DE APRENDIZAGEM • 8º ANO</span>
@@ -1006,7 +1013,16 @@ html nav :is(summary,button,select):focus-visible{outline:3px solid #ffd781!impo
   </div>
   <div id="neoBrainTip" role="status">Escolha um jogo e peça uma dica quando precisar.</div>
  </section>
- <div class="neo-arcade-stage">
+ <div class="neo-arcade-stage-picker">
+ <label for="neoArcadeChallenge">🎯 Fase da missão</label>
+ <select id="neoArcadeChallenge" aria-label="Escolher dificuldade e objetivos da missão">
+  <option value="explorador">🌱 Explorador — começar com calma</option>
+  <option value="missao" selected>⭐ Missão — desafio normal</option>
+  <option value="desafio">🚀 Desafio — missão ampliada</option>
+ </select>
+ <p>As fases alteram a quantidade de objetivos e as vidas. Trocar a fase reinicia a partida atual. Sem ranking público.</p>
+</div>
+<div class="neo-arcade-stage">
   <h3 id="neoArcadeTitle">Escolha um jogo para começar</h3>
   <p id="neoArcadeInstructions">Em cada jogo, o desafio faz parte da mecânica: andar, pular, transportar objetos ou mudar de pista.</p>
   <canvas id="neoArcadeCanvas" width="900" height="500" tabindex="0" aria-label="Tela de minijogo educativo Neo com três modos. Use controles de teclado ou os botões abaixo.">Seu navegador precisa de suporte a canvas para executar este jogo.</canvas>
@@ -1015,6 +1031,10 @@ html nav :is(summary,button,select):focus-visible{outline:3px solid #ffd781!impo
     <button class="btn light" type="button" id="neoArcadeRestart">↻ Reiniciar fase</button>
     <span id="neoArcadeBest" aria-live="polite">Pontuação pessoal, sem ranking público.</span>
   </div>
+<div class="neo-arcade-mission" aria-label="Progresso da fase">
+ <div class="neo-arcade-mission-head"><strong>🏅 Minha missão</strong><span id="neoArcadeMissionProgress" role="status" aria-live="polite">Escolha um jogo para iniciar</span></div>
+ <progress id="neoArcadeProgress" value="0" max="6" aria-label="Objetivos concluídos na missão">0</progress>
+</div>
   <div class="neo-arcade-touch" aria-label="Controles de jogo para celular">
    <div class="neo-arcade-pad" role="group" aria-label="Direções">
     <button class="neo-arcade-up" data-arcade-control="up" type="button" aria-label="Cima">↑</button>
@@ -3159,7 +3179,7 @@ async function portal8UpdateSite(){
    await Promise.all(regs.map(r=>r.update().catch(()=>null)));
   }
  }catch(e){}
- location.replace(location.pathname+"?versao=recursos-aprovados-v36&atualizacao="+Date.now());
+ location.replace(location.pathname+"?versao=recursos-aprovados-v37&atualizacao="+Date.now());
 }
 function portal8EnableScrollReveal(){
  if(window.matchMedia?.("(prefers-reduced-motion: reduce)").matches||document.documentElement.dataset.phaseMotion==="reduce")return;
@@ -3200,9 +3220,10 @@ init();renderNexo();
 <script src="./assets/neo-estudio-inovacoes.js?v=35"></script>
 <script src="./assets/neo-inovacoes-v33.js?v=35"></script>
 <script src="./assets/portal-ux-v34.js?v=34"></script>
+<script src="./assets/portal-tres-pontinhos-v37.js?v=37"></script>
 <script src="./assets/neo-game-brain.js?v=33"></script>
 <script src="./assets/neo-study-brain.js?v=33"></script>
-<script src="./assets/neo-arcade.js?v=33"></script>
+<script src="./assets/neo-arcade.js?v=37"></script>
 <script src="./assets/neo-admin-gate.js?v=29"></script>
 <script src="./assets/portal8-perfil.js?v=21"></script>
 </body>
