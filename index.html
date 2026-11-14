@@ -49,6 +49,22 @@ html.p8-entry-check body>header,html.p8-entry-check body>nav,html.p8-entry-check
 #p8ProfileAuth label{color:#eaf5ff!important;font-weight:800}
 #p8ProfileAuth>small,#p8ProfileAuth .small.muted{color:#d2e4f4!important}
 #p8ProfileResend{margin-top:11px;min-height:42px}
+#p8RecoveryOverlay[hidden],#p8RecoveryOverlay [hidden]{display:none!important}
+#p8RecoveryOverlay{position:fixed;inset:0;z-index:2147483040;display:grid;place-items:center;padding:18px;overflow:auto;background:linear-gradient(145deg,#10283fed,#163954ef)}
+#p8RecoveryOverlay *{box-sizing:border-box}
+#p8RecoveryOverlay .p8-recovery-card{background:#fff;color:#172f4a;width:min(100%,480px);padding:clamp(20px,5vw,32px);border:1px solid #d3e2ec;border-radius:24px;box-shadow:0 28px 75px #091f3470;font-family:Inter,system-ui,sans-serif}
+#p8RecoveryOverlay .p8-recovery-brand{display:inline-block;font-size:.8rem;font-weight:900;background:#e7f5ff;padding:7px 11px;border-radius:10px;color:#1c567d}
+#p8RecoveryOverlay h2{margin:17px 0 9px;font-size:clamp(1.5rem,5vw,2rem);color:#10283f}
+#p8RecoveryOverlay p{color:#52667a;line-height:1.5}
+#p8RecoveryOverlay label{display:block;font-weight:800;margin:13px 0 7px}
+#p8RecoveryOverlay input{width:100%;padding:13px 12px;border-radius:11px;border:1px solid #b9c9dd;font:inherit;color:#172b3c}
+#p8RecoveryOverlay button{display:block;margin-top:13px;width:100%;min-height:46px;padding:12px 15px;border-radius:12px;border:0;background:#eaf3fa;color:#214d6e;cursor:pointer;font:800 .92rem Inter,system-ui,sans-serif}
+#p8RecoveryOverlay button.p8-recovery-primary{background:#ffae4f;color:#1c3044}
+#p8RecoveryOverlay button:disabled{opacity:.65;cursor:wait}
+#p8RecoveryOverlay small{display:block;color:#64798e;margin-top:12px;line-height:1.5}
+#p8RecoveryOverlay [role=status]{font-weight:700;color:#345a75;min-height:20px;font-size:.91rem}
+#p8RecoveryOverlay input:focus-visible,#p8RecoveryOverlay button:focus-visible{outline:3px solid #f7b14e;outline-offset:2px}
+
 
 </style>
 <style>
