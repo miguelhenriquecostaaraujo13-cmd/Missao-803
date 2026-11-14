@@ -92,6 +92,7 @@
   const words=document.createElement("span");words.className="pazinho-scene-label";
   transitionOverlay.append(img,words);
   document.body.append(transitionOverlay);
+  setMotionMode();
   updateName();
  }
  function playTransition(){
@@ -119,11 +120,17 @@
  function pauseClock(){clearTimeout(hideTimer)}
  function scheduleClose(){clearTimeout(hideTimer);hideTimer=setTimeout(closeBubble,5000)}
  function reduced(){
-  return document.documentElement.dataset.phaseMotion==="reduce"||
-   (typeof window.portal8MotionAllowed==="function"&&!window.portal8MotionAllowed())||
-   !!window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
+  if(document.documentElement.dataset.phaseMotion==="reduce")return true;
+  // Respeita a opção "Ativar neste navegador" exatamente como a transição de telas.
+  if(typeof window.portal8MotionAllowed==="function")return !window.portal8MotionAllowed();
+  return !!window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
  }
- function setMotionMode(){widget?.classList.toggle("pazinho-sem-movimento",reduced())}
+ function setMotionMode(){
+  const off=reduced();
+  widget?.classList.toggle("pazinho-sem-movimento",off);
+  widget?.classList.toggle("pazinho-motion-override",!off);
+  transitionOverlay?.classList.toggle("pazinho-motion-override",!off);
+ }
  function closeBubble(){
   if(!balao||balao.hidden)return;
   balao.classList.remove("is-open");
