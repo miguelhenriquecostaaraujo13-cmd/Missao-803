@@ -109,3 +109,10 @@ html body nav .mp5-tools-drawer>summary{border-color:#d7e3f0;color:#264f77;backg
 @media(max-width:900px){#neoEstudio8 .mp6-controls{grid-template-columns:repeat(2,minmax(0,1fr))}#neoEstudio8 .mp6-editor-grid{grid-template-columns:1fr}#neoEstudio8 .mp6-review-items{grid-template-columns:1fr}}
 @media(max-width:650px){#neoEstudio8 .mp6-hero{grid-template-columns:1fr;gap:0}#neoEstudio8 .mp6-hero-art{display:none}#neoEstudio8 .mp6-stats{grid-template-columns:repeat(2,minmax(0,1fr))}#neoEstudio8 .mp6-stats article{padding:14px}#neoEstudio8 .mp6-panel-head{display:block}#neoEstudio8 .mp6-tag{display:inline-flex;margin-top:10px}#neoEstudio8 .mp6-options{grid-template-columns:1fr}#neoEstudio8 .mp6-controls{grid-template-columns:1fr}#neoEstudio8 .mp6-source-form{flex-direction:column;align-items:stretch}#neoEstudio8 .mp6-source-form button{width:100%}}
 @media(prefers-reduced-motion:reduce){#neoEstudio8 .mp6-progress i{transition:none}}
+
+/* Preview do jogo 3D com pessoa exploradora, em vez de mascote animal. */
+#neoGames40 .n4-human-scout{display:block;position:absolute;z-index:4;left:52%;bottom:12px;transform:rotate(-7deg);filter:drop-shadow(4px 9px 2px #071c4088)}
+#neoGames40 .n4-human-scout::before{content:"🏃";font-style:normal;font-size:3.85rem;line-height:1;display:block}
+#neoGames40 #n4Combo{background:#fff0ce;color:#805317;border:1px solid #f4cd85}
+#neoGames40 .n4-quiz-top{font-weight:850}
+@media(max-width:650px){#neoGames40 .n4-human-scout::before{font-size:3.25rem}}
