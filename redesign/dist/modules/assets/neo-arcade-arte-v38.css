@@ -1,0 +1,15 @@
+/* Arcade Neo Visual 2.0 — teste opcional, sem alterar o modo clássico */
+.neo-arcade-visual-choice{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin:12px 0 16px;padding:15px 17px;background:linear-gradient(115deg,#e8f7fb,#eef5ff);border:1px solid #9dcbdc;border-left:5px solid #2691b1;border-radius:18px 8px 18px 8px;color:#164563}
+.neo-arcade-visual-choice label{font-weight:900;font-size:.92rem;min-width:160px}
+.neo-arcade-visual-choice select{flex:0 1 320px;min-height:44px;max-width:100%;padding:10px 12px;border:1px solid #64afc3;border-radius:12px;background:#fff;color:#19435e;font:inherit;font-weight:760}
+.neo-arcade-visual-choice p{flex-basis:100%;margin:0;color:#385d70;font-size:.84rem;line-height:1.55}
+.neo-arcade-visual-compare{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;margin:11px 0 15px}
+.neo-arcade-visual-compare>div{background:var(--white);border:1px solid var(--line);border-radius:16px 7px 16px 7px;padding:13px;line-height:1.45}
+.neo-arcade-visual-compare strong{display:block;color:var(--ink);font-size:.9rem;margin-bottom:5px}
+.neo-arcade-visual-compare p{margin:0;color:var(--muted);font-size:.79rem}
+.neo-arcade-visual-compare .neo-visual-icon{font-size:1.8rem;display:block;margin-bottom:5px}
+#arcadeNeo #neoArcadeCanvas{image-rendering:auto;outline-offset:4px}
+html[data-portal-theme="noite"] .neo-arcade-visual-choice{background:linear-gradient(130deg,#183952,#243e58);border-color:#5ba5bb;color:#eef9fc}
+html[data-portal-theme="noite"] .neo-arcade-visual-choice p{color:#d4eafa}
+@media(max-width:650px){.neo-arcade-visual-choice{padding:13px}.neo-arcade-visual-choice label,.neo-arcade-visual-choice select{width:100%;flex:1 0 100%}.neo-arcade-visual-compare{grid-template-columns:1fr}.neo-arcade-visual-compare>div{display:flex;gap:12px;align-items:center}.neo-arcade-visual-compare .neo-visual-icon{margin:0;min-width:38px}.neo-arcade-visual-compare strong{margin-bottom:2px}}
+@media(prefers-reduced-motion:reduce){.neo-arcade-visual-choice *,#arcadeNeo #neoArcadeCanvas{animation:none!important;transition:none!important}}

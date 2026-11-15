@@ -1,0 +1,35 @@
+/* Portal Missão Paz — upgrade transversal v34. Escopo visual: 31 ferramentas. */
+:root{--neo-polish-focus:#f2bb68;--neo-polish-radius:15px}
+.view{min-width:0;scroll-margin-top:18px}
+.view :is(.card,.portal8-card,.neo-tool,.neo-ideas-tool,.mp-school-year){min-width:0;overflow-wrap:anywhere}
+.view :is(h2,h3,h4){text-wrap:balance}
+.view :is(p,li,.sub){overflow-wrap:anywhere}
+.view :is(input:not([type="checkbox"]):not([type="radio"]),select,textarea){max-width:100%;box-sizing:border-box}
+.view button,.neo-global-bar button{touch-action:manipulation}
+.view :is(a,button,input,select,textarea,summary):focus-visible,.neo-global-bar button:focus-visible,.neo-tool-search :is(input,button):focus-visible{outline:3px solid var(--neo-polish-focus)!important;outline-offset:3px}
+.neo-global-bar{display:flex;flex-wrap:wrap;align-items:center;gap:9px;padding:12px 14px;margin:4px 0 17px;border:1px solid var(--line);border-radius:18px 9px 18px 9px;background:var(--white);box-shadow:0 4px 14px rgba(4,57,93,.07);color:var(--ink)}
+.neo-global-bar .neo-tool-heading{flex:1;min-width:140px;font-size:.84rem;font-weight:850;color:var(--ink)}
+.neo-global-bar .neo-tool-heading strong{display:block;font-size:.94rem}
+.neo-global-bar .neo-tool-heading small{display:block;font-weight:550;color:var(--muted)}
+.neo-global-bar .neo-bar-action{border:1px solid #8ebdce;background:var(--portal-panel);color:var(--ink);border-radius:11px;padding:9px 12px;min-height:40px;font:inherit;font-weight:760;font-size:.8rem}
+.neo-global-bar .neo-bar-action:hover{border-color:#1e8fac;background:#dff4f8;color:#16415c}
+.neo-global-bar .neo-bar-action[aria-pressed="true"]{background:#fff1c5;color:#77510d;border-color:#e4b65d}
+.neo-tool-search{width:min(560px,calc(100vw - 26px));max-width:100%;border:1px solid #76afc5;border-radius:21px;background:var(--white);color:var(--ink);padding:18px;box-shadow:0 20px 70px rgba(2,36,62,.3)}
+.neo-tool-search::backdrop{background:rgba(5,32,57,.66);backdrop-filter:blur(3px)}
+.neo-tool-search h2{margin:0 0 8px;font-size:1.15rem;color:var(--ink)}
+.neo-tool-search label{display:block;margin-bottom:5px;color:var(--muted);font-size:.85rem}
+.neo-tool-search input{width:100%;padding:13px;border:1px solid #80afbf;border-radius:12px;background:var(--white);color:var(--ink);font:inherit}
+.neo-search-header{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:12px}
+.neo-search-close{border:1px solid var(--line);background:var(--portal-panel);color:var(--ink);font-size:1.1rem;border-radius:9px;min-width:38px;min-height:38px}
+.neo-search-results{display:grid;gap:6px;max-height:45vh;overflow-y:auto;margin-top:10px}
+.neo-search-results button{width:100%;background:var(--portal-panel);color:var(--ink);border:1px solid var(--line);border-radius:11px;padding:12px;text-align:left;font:inherit;display:flex;justify-content:space-between;align-items:center;gap:10px}
+.neo-search-results button:hover{background:#def3f8;color:#17445d;border-color:#6daabd}
+.neo-search-results button span{font-weight:800}
+.neo-search-results button small{color:var(--muted)}
+.neo-search-results p{padding:12px;color:var(--muted);margin:0}
+.neo-search-foot{margin-top:12px;font-size:.78rem;color:var(--muted)}
+.neo-bar-feedback{font-size:.77rem;color:var(--muted);margin-left:auto;min-height:1em}
+.view :is(table,pre,code){max-width:100%}
+.view table{max-width:100%}
+@media(max-width:720px){.neo-global-bar{padding:10px;gap:6px}.neo-global-bar .neo-tool-heading{flex-basis:100%}.neo-global-bar .neo-bar-action{flex:1;padding:9px 7px;font-size:.75rem}.neo-tool-search{padding:13px}.view :is(.card,.neo-tool){max-width:100%}}
+@media(prefers-reduced-motion:reduce){.neo-global-bar *, .neo-tool-search *{transition:none!important;animation:none!important} .view{scroll-behavior:auto}}
