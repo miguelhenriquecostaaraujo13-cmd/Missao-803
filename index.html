@@ -765,7 +765,7 @@ html nav :is(summary,button,select):focus-visible{outline:3px solid #ffd781!impo
 @media(max-width:580px){.mp-school-year{padding:14px}.mp-school-events{grid-template-columns:1fr}}
 </style>
 <link rel="stylesheet" href="./assets/portal-design-5.css?v=3">
-<link rel="stylesheet" href="./assets/estudio-estudos-8-v6.css?v=1">
+<link rel="stylesheet" href="./assets/estudio-estudos-8-v6.css?v=2">
 </head>
 <body>
 <a class="neo-skip-to-content" href="#conteudoPrincipal">Pular para o conteúdo principal</a>
@@ -3330,7 +3330,7 @@ async function portal8UpdateSite(){
    await Promise.all(regs.map(r=>r.update().catch(()=>null)));
   }
  }catch(e){}
- location.replace(location.pathname+"?versao=estudio-8-profissional-v6&atualizacao="+Date.now());
+ location.replace(location.pathname+"?versao=estudio-pro-games-v6-final&atualizacao="+Date.now());
 }
 function portal8EnableScrollReveal(){
  if(window.matchMedia?.("(prefers-reduced-motion: reduce)").matches||document.documentElement.dataset.phaseMotion==="reduce")return;
@@ -3393,8 +3393,8 @@ init();renderNexo();
 <script src="./assets/portal8-perfil.js?v=24"></script>
 <script src="./assets/neo-central-3.js?v=2"></script>
 <script src="./assets/neo-agents-4.js?v=1"></script>
-<script src="./assets/neo-world-render-5.js?v=1"></script>
-<script src="./assets/neo-games-4.js?v=3"></script>
+<script src="./assets/neo-world-render-5.js?v=2"></script>
+<script src="./assets/neo-games-4.js?v=4"></script>
 <div id="p8FirstVisit" role="dialog" aria-modal="true" aria-labelledby="p8WelcomeTitle" hidden>
   <div class="p8-welcome-card">
     <span class="p8-welcome-brand">✨ NEO · PORTAL MISSÃO PAZ</span>
@@ -3550,8 +3550,8 @@ init();renderNexo();
   initialize();
 })();
 </script>
-<script src="./assets/neo-puzzle-5.js?v=2"></script>
+<script src="./assets/neo-puzzle-5.js?v=3"></script>
 <script src="./assets/portal8-recovery-v1.js?v=2"></script>
-<script src="./assets/portal-design-5.js?v=1"></script>
+<script src="./assets/portal-design-5.js?v=2"></script>
 </body>
 </html>
