@@ -26,7 +26,7 @@ root.innerHTML=[
 '<div class="n4-game-shell"><div class="n4-game-toolbar"><div><strong id="n4GameTitle">🌌 Guardião dos Portais 3D</strong><small id="n4GameSub">WebGL • escolha a pista da resposta</small></div><div class="n4-hud"><span id="n4Level">Fase 1/5</span><span id="n4Score">⭐ 0 pontos</span><span id="n4Skill">Ritmo equilibrado</span></div></div>',
 '<div class="n4-canvas-wrap" id="n4ThreeWrap"><canvas id="n4Canvas3D" width="960" height="520" tabindex="0" aria-label="Jogo tridimensional de três pistas. Use as setas e escolha o portal correto.">Seu navegador não oferece Canvas.</canvas><div id="n4NoWebGL" class="n4-graphics-warning" hidden>O WebGL não está disponível. Tente ativar a aceleração gráfica ou jogue Pixel Invaders.</div><span class="n4-stage-stamp">3D WEBGL</span><div class="n4-lane-labels" aria-hidden="true"><span>A • ESQUERDA</span><span>B • CENTRO</span><span>C • DIREITA</span></div></div>',
 '<div class="n4-canvas-wrap" id="n4PixelWrap" hidden><canvas id="n4CanvasPixel" width="320" height="180" tabindex="0" aria-label="Jogo pixel art com nave: use esquerda, direita e atirar para escolher a resposta.">Canvas não disponível.</canvas><span class="n4-stage-stamp pixel">8-BIT PIXEL</span></div>',
-'<div class="n4-question-zone"><strong id="n4Question" aria-live="polite">Selecione uma matéria e clique em Jogar.</strong><div class="n4-answers" id="n4Answers"></div><p id="n4Feedback" class="n4-feedback" role="status" aria-live="polite">Use teclado, clique nas respostas ou toque nos controles.</p></div>',
+'<div class="n4-question-zone"><span id="n4QuestionTopic" class="n4-question-topic"></span><strong id="n4Question" aria-live="polite">Selecione uma matéria e clique em Jogar.</strong><div class="n4-answers" id="n4Answers"></div><p id="n4Feedback" class="n4-feedback" role="status" aria-live="polite">Use teclado, clique nas respostas ou toque nos controles.</p></div>',
 '<div class="n4-play-actions"><button type="button" class="n4-action primary" id="n4Start">▶ Jogar</button><button type="button" class="n4-action" id="n4Pause" disabled>⏸ Pausar</button><button type="button" class="n4-action" id="n4Hint">💡 Dica</button><button type="button" class="n4-action" id="n4Classic">🕹️ Arcade antigo</button></div>',
 '<div class="n4-touch-controls"><button type="button" id="n4Left" aria-label="Esquerda">◀</button><button type="button" id="n4Fire" aria-label="Atirar">⚡ ATIRAR</button><button type="button" id="n4Right" aria-label="Direita">▶</button></div></div>',
 '<div class="n4-info-grid"><article><h3>🎨 Neo Render</h3><p>Gera cenários e iluminação com geometria e materiais, em tempo real. O 3D usa WebGL; o retrô usa Canvas com pixels desenhados. Não é um modelo gerador de imagens.</p></article><article><h3>🧠 Neo Game Master</h3><p>Motor adaptativo local: depois de acertos ou erros ele altera o ritmo, sem comparar alunos ou publicar notas.</p></article><article><h3>♿ Acessibilidade</h3><p>Botões, teclado, seleção direta de respostas e pausa ao sair do jogo. O modo econômico ajuda computadores mais simples.</p></article></div>'
@@ -38,16 +38,19 @@ const c3=$("n4Canvas3D"),cp=$("n4CanvasPixel"),answers=$("n4Answers");
 const status=s=>{$("n4Feedback").textContent=s};
 const bank=()=>{
  const selected=$("n4Subject").value;
- const items=questions().filter(q=>q.s===selected&&Array.isArray(q.o)&&q.o.length>=3&&q.a>=0&&q.a<q.o.length);
- return items.sort(()=>Math.random()-.5).slice(0,5).map(q=>{
-  const distractors=q.o.map((v,i)=>({v,i})).filter(o=>o.i!==q.a).sort(()=>Math.random()-.5).slice(0,2);
-  const options=[{v:q.o[q.a],i:q.a},...distractors].sort(()=>Math.random()-.5);
-  return {q:q.q,opts:options.map(x=>x.v),correct:options.findIndex(x=>x.i===q.a),explain:q.e||"Revise o conteúdo da questão."};
+ const engineQ=window.portal8Q8;
+ const items=engineQ?.pick?.(selected,5)||engineQ?.shuffle?.(questions().filter(q=>q.s===selected))?.slice(0,5)||[];
+ const shuffle=arr=>engineQ?.shuffle?.(arr)||[...arr].sort(()=>Math.random()-.5);
+ return items.filter(q=>Array.isArray(q.o)&&q.o.length>=3).map(q=>{
+  const distractors=shuffle(q.o.map((v,i)=>({v,i})).filter(x=>x.i!==q.a)).slice(0,2);
+  const options=shuffle([{v:q.o[q.a],i:q.a},...distractors]);
+  return {q:q.q,opts:options.map(x=>x.v),correct:options.findIndex(x=>x.i===q.a),explain:q.e||"Revise o conteúdo da questão.",topic:q.t||"",source:q};
  });
 };
 function currentQuestion(){return game?.items[game.index]}
 function present(q){
  $("n4Question").textContent=q?.q||"Partida concluída!";
+ const topic=$("n4QuestionTopic");if(topic)topic.textContent=q?(q.topic||"Desafio misto"):"";
  answers.replaceChildren();if(!q)return;
  q.opts.forEach((opt,i)=>{
   const b=document.createElement("button");b.type="button";b.className="n4-answer";b.textContent="ABC"[i]+". "+opt;
@@ -69,7 +72,7 @@ function hud(){
 function grade(choice){
  const q=currentQuestion();if(!q)return;
  const good=choice===q.correct;
- engine()?.record(good);if(good)game.score+=20;
+ engine()?.record(good);window.portal8Q8?.record?.(q.source,good);if(good)game.score+=20;
  status((good?"✅ Correto! ":"💡 Continue aprendendo! ")+q.explain);
  mark(-1,q.correct);game.index++;hud();game.delay=2.2;
 }
