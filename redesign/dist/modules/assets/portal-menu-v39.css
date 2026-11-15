@@ -1,0 +1,28 @@
+/* Menu flutuante v39 — independente do overflow:hidden das 32 ferramentas e da barra lateral. */
+.neo-more-trigger-v39{display:inline-flex;align-items:center;justify-content:center;flex:0 0 auto;min-width:45px;min-height:45px;padding:3px 12px;border:1.5px solid #6ba6ba;border-radius:13px;background:var(--portal-panel,#eaf5fb);color:var(--ink,#183d5b);font:900 29px/1 system-ui,Arial;cursor:pointer;touch-action:manipulation}
+.neo-more-trigger-v39:hover,.neo-more-trigger-v39[aria-expanded="true"]{background:#d3f4fb;color:#123f5c;border-color:#2b95b0}
+.neo-more-trigger-v39:focus-visible,.neo-popup-v39 button:focus-visible,.neo-help-v39 button:focus-visible{outline:3px solid #f3c56d!important;outline-offset:3px}
+nav .navquick>.neo-more-trigger-v39{background:#234f70!important;color:#fff!important;border-color:#83bad1!important;margin-left:auto}
+nav .navquick>.neo-more-trigger-v39:hover,nav .navquick>.neo-more-trigger-v39[aria-expanded="true"]{background:#147c9c!important}
+.neo-global-bar{display:flex!important;align-items:center;justify-content:space-between!important;gap:12px!important;min-height:56px!important}
+.neo-global-bar>.neo-bar-action,.neo-global-bar>.neo-bar-feedback{display:none!important}
+.neo-global-bar>.neo-more-trigger-v39{margin-left:auto}
+.neo-popup-v39{position:fixed!important;z-index:2147483000!important;display:flex;flex-direction:column;gap:3px;overflow:auto;overscroll-behavior:contain;max-height:calc(100dvh - 20px);min-width:210px;padding:9px;background:var(--white,#fff)!important;color:var(--ink,#163953)!important;border:1.5px solid #7db4ca!important;border-radius:17px!important;box-shadow:0 22px 70px rgba(4,32,58,.38)!important;box-sizing:border-box}
+.neo-popup-v39[hidden]{display:none!important}
+.neo-popup-option{width:100%;min-height:43px;flex:0 0 auto;padding:10px 12px;border:0;border-radius:10px;background:transparent;color:var(--ink,#173d5c);font:740 .88rem/1.36 system-ui,Arial;text-align:left;white-space:normal;cursor:pointer;touch-action:manipulation}
+.neo-popup-option:hover,.neo-popup-option:focus-visible{background:var(--portal-panel,#ebf5fc);color:var(--ink,#173d5c)}
+.neo-popup-section{color:var(--muted,#586e82);padding:11px 11px 5px;font:820 .73rem/1.3 system-ui;letter-spacing:.03em;text-transform:uppercase;border-top:1px solid var(--line,#dce5ec)}
+.neo-popup-section:first-child{border-top:0;padding-top:5px}
+.neo-help-v39{width:min(560px,calc(100vw - 24px));max-width:100%;max-height:85dvh;overflow:auto;padding:22px;border:1.5px solid #8bb9cd;border-radius:20px;background:var(--white,#fff);color:var(--ink,#163b57);box-shadow:0 20px 70px rgba(0,30,55,.3)}
+.neo-help-v39::backdrop{background:rgba(8,30,51,.6)}
+.neo-help-v39 h2{font-size:1.17rem;margin:0 0 12px;color:var(--ink,#163b57)}
+.neo-help-v39 p{line-height:1.7;margin:0 0 16px;overflow-wrap:anywhere;color:var(--ink,#163b57)}
+.neo-help-v39 button,.neo-focus-exit-v39{padding:10px 15px;min-height:43px;border-radius:12px;border:1px solid #5ca6bf;color:#153f5d;background:#dcf3f9;font:800 .9rem/1.3 system-ui;cursor:pointer}
+.neo-focus-exit-v39{position:fixed;top:12px;right:12px;z-index:2147482800;box-shadow:0 7px 24px #0003}
+.neo-focus-exit-v39[hidden]{display:none!important}
+body.neo-portal-focus{display:block!important;min-height:100vh!important}
+body.neo-portal-focus>header,body.neo-portal-focus>nav,body.neo-portal-focus>footer{display:none!important}
+body.neo-portal-focus>main{display:block!important;position:relative!important;margin:0 auto!important;max-width:1140px!important;width:100%!important;min-width:0!important;padding:68px clamp(12px,3vw,30px) 50px!important}
+body.neo-portal-focus .neo-global-bar{margin-top:0}
+@media(max-width:790px){nav .navquick{display:flex!important;align-items:center!important;gap:7px!important}nav .navquick>select{flex:1 1 160px!important;min-width:135px!important;width:auto!important}nav .navquick>.neo-more-trigger-v39{flex:0 0 45px!important}body.neo-portal-focus>main{padding-top:66px!important}}
+@media(prefers-reduced-motion:reduce){.neo-popup-v39 *,.neo-more-trigger-v39{transition:none!important;animation:none!important}}

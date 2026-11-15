@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" role="img" aria-labelledby="t d">
+<title id="t">Emblema exclusivo de administrador do Portal 8º Ano</title>
+<desc id="d">Selo azul marinho e dourado com escudo, coroa, livro Neo e texto ADMIN</desc>
+<defs>
+ <radialGradient id="bg" cx=".42" cy=".3" r=".8"><stop stop-color="#2f9af9"/><stop offset=".38" stop-color="#0b4da1"/><stop offset="1" stop-color="#061b45"/></radialGradient>
+ <linearGradient id="gold" x1="0" y1="0" x2=".9" y2="1"><stop stop-color="#fff5bf"/><stop offset=".35" stop-color="#ffcb54"/><stop offset=".7" stop-color="#cb8518"/><stop offset="1" stop-color="#ffec92"/></linearGradient>
+ <linearGradient id="shield" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#27d5fa"/><stop offset=".6" stop-color="#086bb5"/><stop offset="1" stop-color="#003b84"/></linearGradient>
+ <filter id="sh"><feDropShadow dx="0" dy="5" stdDeviation="8" flood-color="#020d26" flood-opacity=".55"/></filter>
+</defs>
+<circle cx="200" cy="200" r="192" fill="url(#gold)" stroke="#ebd487" stroke-width="4"/>
+<circle cx="200" cy="200" r="177" fill="url(#bg)" stroke="#74d8ff" stroke-width="5"/>
+<circle cx="200" cy="200" r="155" fill="none" stroke="#f6db8e" stroke-opacity=".35" stroke-width="2" stroke-dasharray="3 10"/>
+<path d="M135 104 147 85 177 103 199 57 224 103 253 84 267 104 264 134 136 134Z" fill="url(#gold)" stroke="#ffefd2" stroke-width="4" stroke-linejoin="round" filter="url(#sh)"/>
+<circle cx="147" cy="85" r="7" fill="#fff6ce"/><circle cx="199" cy="57" r="8" fill="#fff6ce"/><circle cx="253" cy="84" r="7" fill="#fff6ce"/>
+<path d="M200 133 290 155V244Q281 305 200 344Q119 306 110 245V155Z" fill="url(#shield)" stroke="url(#gold)" stroke-width="10" stroke-linejoin="round" filter="url(#sh)"/>
+<path d="M200 151 269 169V242Q265 285 200 321Q137 286 130 241V168Z" fill="#064c96" opacity=".48"/>
+<path d="M200 191 Q170 173 147 183V255Q174 245 200 264Q227 245 253 255V183Q229 172 200 191Z" fill="#b8efff" stroke="#e9fbff" stroke-width="4" stroke-linejoin="round"/>
+<path d="M200 191V263" stroke="#016bb9" stroke-width="5"/>
+<circle cx="182" cy="218" r="3.5" fill="#044376"/><circle cx="220" cy="218" r="3.5" fill="#044376"/>
+<path d="M191 236Q200 245 211 236" fill="none" stroke="#044376" stroke-width="4" stroke-linecap="round"/>
+<path d="M144 216 135 207M257 216 264 207M182 260 178 272M220 260 224 272" stroke="#a1eaff" stroke-width="5" stroke-linecap="round"/>
+<path d="M88 278Q198 300 312 278L301 327Q199 347 99 328Z" fill="url(#gold)" stroke="#fff4cc" stroke-width="3" filter="url(#sh)"/>
+<text x="200" y="319" text-anchor="middle" font-family="Arial,sans-serif" font-weight="900" font-size="36" letter-spacing="2" fill="#072b61">ADMIN</text>
+<path d="m82 138 6 14 14 6-14 6-6 14-6-14-14-6 14-6zM314 120l5 12 12 5-12 5-5 12-5-12-12-5 12-5z" fill="#ffcf62"/>
+</svg>

@@ -1,0 +1,20 @@
+/* v28 — Descoberta do Ateliê Neo, sem alterar outras ferramentas. */
+.mp-new-feature{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;margin:4px 0 18px;padding:17px 22px;border-radius:18px 8px 18px 8px;border:1px solid #8fcedc;border-left:5px solid #0f88a8;background:linear-gradient(115deg,#e8f8fb,#fffaf0);box-shadow:0 7px 20px rgba(10,69,95,.09);color:#123957}
+.mp-new-feature-content{display:flex;flex-direction:column;gap:5px;min-width:220px;flex:1}
+.mp-new-feature-pill{font-size:.68rem;letter-spacing:.075em;font-weight:900;color:#176a83}
+.mp-new-feature strong{font-size:clamp(1.04rem,2vw,1.3rem);font-weight:900;color:#123957}
+.mp-new-feature-content>span:last-child{font-size:.87rem;line-height:1.5;color:#3b5e73}
+.mp-new-feature .btn{white-space:normal;min-height:46px;box-shadow:none}
+.mp-horizon-actions .mp-action-new{background:#fcd993!important;color:#12466e!important;border-color:#fcd993!important}
+.mp-horizon-actions .mp-action-new:hover{background:#ffe6b0!important;color:#103a5b!important}
+nav .navgroup[data-category="extras"]{border:2px solid #7bd6e5!important;box-shadow:0 4px 14px #6fdae51d!important}
+nav .navgroup[data-category="extras"]>summary{background:linear-gradient(110deg,#145c7d,#227d9c)!important;color:#fff!important}
+nav .navgroup[data-category="extras"]>summary:hover{background:linear-gradient(110deg,#166c8c,#2788a3)!important}
+nav .navgroup[data-category="extras"] .navcount{background:#c4f2f5!important;color:#0f4663!important;border-color:#c4f2f5!important}
+nav .navgroup[data-category="extras"] .navbtn{background:#ddf6f6!important;color:#114460!important;border-color:#a2dfeb!important;font-weight:900!important}
+nav .navgroup[data-category="extras"] .navbtn:hover{background:#b8ebf1!important;color:#12435e!important}
+html[data-portal-theme="noite"] .mp-new-feature{background:linear-gradient(115deg,#183f59,#263c53);border-color:#3c9cae;color:#f3fcff}
+html[data-portal-theme="noite"] .mp-new-feature strong,html[data-portal-theme="noite"] .mp-new-feature-content>span:last-child{color:#f1faff}
+html[data-portal-theme="noite"] .mp-new-feature-pill{color:#b5edf2}
+html[data-portal-theme="papel"] .mp-new-feature{background:linear-gradient(115deg,#e4f3e7,#fff8e9)}
+@media(max-width:560px){.mp-new-feature{padding:14px;gap:11px}.mp-new-feature .btn{width:100%}}

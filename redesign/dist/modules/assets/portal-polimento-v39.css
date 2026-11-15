@@ -1,0 +1,22 @@
+/* Acabamento global v39 — componentes acessíveis nas 32 áreas do Portal Missão Paz. */
+html{scroll-padding-top:75px}
+body .view{min-width:0;overflow-wrap:anywhere}
+body .view :is(img,video,canvas,svg){max-width:100%}
+body .view :is(input,select,textarea){min-width:0;box-sizing:border-box}
+body .view :is(h2,h3,h4){text-wrap:balance}
+body .view .btn,body .view button{touch-action:manipulation}
+body .view :is(input:not([type=checkbox]),select,textarea){line-height:1.45}
+body .view button:disabled{opacity:.6;cursor:not-allowed}
+body .view :is(input,select,textarea,button,a,summary):focus-visible{outline:3px solid #f1bd6a!important;outline-offset:3px}
+body .view pre{max-width:100%;overflow-x:auto}
+body .view table{max-width:100%}
+body .view .sub{line-height:1.7}
+body .view .card{min-width:0}
+body .view [role="status"]{overflow-wrap:anywhere}
+.neo-skip-to-content{position:fixed;left:15px;top:-120px;z-index:2147483001;background:#fff9e4;color:#142f49;border:2px solid #e6ad4c;border-radius:10px;padding:10px 17px;font-weight:900;text-decoration:none;box-shadow:0 7px 18px #0003}
+.neo-skip-to-content:focus{top:12px}
+body .view .neo-global-bar .neo-tool-heading strong{font-size:.96rem}
+body .view .neo-global-bar .neo-tool-heading small{color:var(--muted)}
+body .navquick>.neo-more-trigger-v39{outline-offset:3px}
+@media(max-width:790px){body .view :is(h2,h3){overflow-wrap:anywhere}body .view .neo-global-bar{min-height:54px}body .view .neo-global-bar .neo-tool-heading{min-width:0}body .view .neo-global-bar .neo-tool-heading strong{font-size:.86rem}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto!important}body .view *{scroll-behavior:auto!important}}

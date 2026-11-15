@@ -1,0 +1,70 @@
+{
+  "source": "Calendário escolar 2026 — Instituto Educacional Missão Paz (fotografia enviada pelo aluno)",
+  "from": "2026-11-16",
+  "note": "Somente marcações do calendário impresso a partir de 16/11/2026. Feriados, sábados letivos, término do ano letivo, planejamento e recesso. Datas de provas aparecem separadamente.",
+  "events": [
+    {
+      "date": "2026-11-20",
+      "type": "feriado",
+      "title": "Dia da Consciência Negra",
+      "detail": "Feriado indicado no calendário"
+    },
+    {
+      "date": "2026-11-28",
+      "type": "sabado",
+      "title": "Sábado letivo",
+      "detail": "Sábado letivo indicado em azul"
+    },
+    {
+      "date": "2026-12-07",
+      "type": "recesso",
+      "title": "Recesso",
+      "detail": "Dia marcado como recesso"
+    },
+    {
+      "date": "2026-12-08",
+      "type": "feriado",
+      "title": "Aniversário de Belo Horizonte",
+      "detail": "Feriado municipal indicado no calendário"
+    },
+    {
+      "date": "2026-12-14",
+      "type": "etapa",
+      "title": "Fim da 3ª etapa",
+      "detail": "Último dia da 3ª etapa na tabela de organização anual (21/09 a 14/12)"
+    },
+    {
+      "date": "2026-12-15",
+      "type": "termino",
+      "title": "Término do ano letivo",
+      "detail": "Dia marcado com T na legenda"
+    },
+    {
+      "date": "2026-12-16",
+      "end": "2026-12-18",
+      "type": "planejamento",
+      "title": "Planejamento escolar",
+      "detail": "16, 17 e 18/12 marcados com PL"
+    },
+    {
+      "date": "2026-12-21",
+      "end": "2026-12-23",
+      "type": "planejamento",
+      "title": "Planejamento escolar",
+      "detail": "21, 22 e 23/12 marcados com PL"
+    },
+    {
+      "date": "2026-12-25",
+      "type": "feriado",
+      "title": "Natal",
+      "detail": "Feriado nacional indicado no calendário"
+    },
+    {
+      "date": "2026-12-28",
+      "end": "2026-12-31",
+      "type": "recesso",
+      "title": "Recesso escolar",
+      "detail": "28, 29, 30 e 31/12 marcados como recesso"
+    }
+  ]
+}
