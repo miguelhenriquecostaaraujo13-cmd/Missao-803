@@ -23,7 +23,7 @@ root.innerHTML=[
 '<div class="n4-game-grid"><button type="button" class="n4-game-card selected" data-mode="three" aria-pressed="true"><span class="n4-game-picture n4-cover-3d" aria-hidden="true"><i class="n4-orb"></i><i class="n4-castle"></i><i class="n4-path"></i></span><strong>🌌 Guardião dos Portais</strong><small>3D verdadeiro • três pistas e portais de respostas</small></button>',
 '<button type="button" class="n4-game-card" data-mode="pixel" aria-pressed="false"><span class="n4-game-picture n4-cover-pixel" aria-hidden="true"><b>👾</b><i>✦ · ✦ · ✦</i><em>8-BIT ARCADE</em></span><strong>🕹️ Pixel Invaders do Saber</strong><small>Arte pixelada • naves, lasers e desafios</small></button></div>',
 '<div class="n4-game-controls"><label>📚 Matéria <select id="n4Subject"></select></label><label>🎨 Neo Render <select id="n4Theme"><option value="auto">Tema automático</option><option value="neon">🌌 Neon espacial</option><option value="forest">🌳 Floresta</option><option value="sunset">🌇 Pôr do sol</option></select></label><label>✨ Qualidade <select id="n4Quality"><option value="auto">Automática</option><option value="high">Detalhada</option><option value="economy">Econômica</option></select></label><label>🤖 Game Master <select id="n4Assist"><option value="normal">Adaptativo</option><option value="light">Suave</option><option value="off">Desligado</option></select></label></div>',
-'<div class="n4-game-shell"><div class="n4-game-toolbar"><div><strong id="n4GameTitle">🌌 Guardião dos Portais 3D</strong><small id="n4GameSub">WebGL • escolha a pista da resposta</small></div><div class="n4-hud"><span id="n4Level">Fase 1/5</span><span id="n4Score">⭐ 0 pontos</span><span id="n4Skill">Ritmo equilibrado</span></div></div>',
+'<div class="n4-game-shell"><div class="n4-game-toolbar"><div><strong id="n4GameTitle">🌌 Guardião dos Portais 3D</strong><small id="n4GameSub">WebGL • escolha a pista da resposta</small></div><div class="n4-hud"><span id="n4Level">Fase 1/5</span><span id="n4Score">⭐ 0 pontos</span><span id="n4Skill">Ritmo equilibrado</span><span id="n4Combo" hidden>✨ Combo 0</span></div></div>',
 '<div class="n4-canvas-wrap" id="n4ThreeWrap"><canvas id="n4Canvas3D" width="960" height="520" tabindex="0" aria-label="Jogo tridimensional de três pistas. Use as setas e escolha o portal correto.">Seu navegador não oferece Canvas.</canvas><div id="n4NoWebGL" class="n4-graphics-warning" hidden>O WebGL não está disponível. Tente ativar a aceleração gráfica ou jogue Pixel Invaders.</div><span class="n4-stage-stamp">3D WEBGL</span><div class="n4-lane-labels" aria-hidden="true"><span>A • ESQUERDA</span><span>B • CENTRO</span><span>C • DIREITA</span></div></div>',
 '<div class="n4-canvas-wrap" id="n4PixelWrap" hidden><canvas id="n4CanvasPixel" width="320" height="180" tabindex="0" aria-label="Jogo pixel art com nave: use esquerda, direita e atirar para escolher a resposta.">Canvas não disponível.</canvas><span class="n4-stage-stamp pixel">8-BIT PIXEL</span></div>',
 '<div class="n4-question-zone"><span id="n4QuestionTopic" class="n4-question-topic"></span><strong id="n4Question" aria-live="polite">Selecione uma matéria e clique em Jogar.</strong><div class="n4-answers" id="n4Answers"></div><p id="n4Feedback" class="n4-feedback" role="status" aria-live="polite">Use teclado, clique nas respostas ou toque nos controles.</p></div>',
@@ -68,11 +68,18 @@ function hud(){
  $("n4Level").textContent="Fase "+Math.min(5,game.index+1)+"/5";
  $("n4Score").textContent="⭐ "+game.score+" pontos";
  const d=adaptive();$("n4Skill").textContent=d<.95?"Ritmo tranquilo":d>1.05?"Desafio avançado":"Ritmo equilibrado";
+ $("n4Combo").hidden=mode!=="pixel";$("n4Combo").textContent="✨ Combo "+(game.combo||0);
 }
 function grade(choice){
  const q=currentQuestion();if(!q)return;
  const good=choice===q.correct;
- engine()?.record(good);window.portal8Q8?.record?.(q.source,good);if(good)game.score+=20;
+ engine()?.record(good);window.portal8Q8?.record?.(q.source,good);
+ if(mode==="pixel"){
+  game.combo=good?(game.combo||0)+1:0;
+  game.bestCombo=Math.max(game.bestCombo||0,game.combo);
+  game.burst?.(choice,good);
+  if(good)game.score+=20+Math.min(35,game.combo*5);
+ }else if(good)game.score+=20;
  status((good?"✅ Correto! ":"💡 Continue aprendendo! ")+q.explain);
  mark(-1,q.correct);game.index++;hud();game.delay=2.2;
 }
@@ -86,7 +93,7 @@ function pause(value){
 function finish(){
  game.running=false;game.paused=true;
  $("n4Start").textContent="↻ Jogar de novo";$("n4Pause").disabled=true;
- present(null);status("🏆 Você concluiu a partida com "+game.score+" pontos. Sua evolução não é um ranking público.");stopLoop();
+ present(null);status("🏆 Você concluiu a partida com "+game.score+" pontos."+(mode==="pixel"?" Melhor combo: "+(game.bestCombo||0)+".":"")+" Sua evolução não é um ranking público.");stopLoop();
 }
 function next(){
  if(game.index>=game.items.length){finish();return}
@@ -235,44 +242,108 @@ class Runner{
 const pcolors=()=>{const t=engine()?.themeFor($("n4Subject").value);
  return t==="forest"?{bg:"#091e29",star:"#beeea0",ship:"#adfc85",foe:"#8affdb",shot:"#fff6b9"}:t==="sunset"?{bg:"#2a173c",star:"#f0a3dc",ship:"#ffa0d9",foe:"#ffe27d",shot:"#fff6d5"}:{bg:"#11142f",star:"#b5baff",ship:"#43dfe9",foe:"#eb9cfc",shot:"#fff3a5"};
 };
-function sprite(ctx,x,y,z,color,ship=false){
- const rows=ship?["000010000","000111000","001111100","011111110","111111111","111101111","110000011","100000001"]:
- ["001111100","011111110","111111111","110110011","111111111","011001110","101001101","010000010"];
- ctx.fillStyle=color;rows.forEach((row,j)=>{for(let i=0;i<row.length;i++)if(row[i]==="1")ctx.fillRect(Math.round(x+(i-4)*z),Math.round(y+j*z),z,z)});
+function sprite(ctx,x,y,z,color,ship=false,wave=0){
+ const shapes=ship?[
+ "000010000","000111000","001111100","011111110",
+ "111111111","111101111","110000011","100000001"
+ ]:wave%3===1?[
+ "000111000","001111100","011111110","111111111",
+ "110110011","111111111","010110010","101001101"
+ ]:wave%3===2?[
+ "011000110","111111111","111111111","001111100",
+ "011111110","111001111","100110001","010000010"
+ ]:[
+ "001111100","011111110","111111111","110110011",
+ "111111111","011001110","101001101","010000010"
+ ];
+ ctx.fillStyle=color;
+ for(let j=0;j<shapes.length;j++)for(let i=0;i<shapes[j].length;i++)
+  if(shapes[j][i]==="1")ctx.fillRect(Math.round(x+(i-4)*z),Math.round(y+j*z),Math.ceil(z),Math.ceil(z));
 }
 function drawPixel(){
  const ctx=cp.getContext("2d");if(!ctx)return;
  ctx.imageSmoothingEnabled=false;
- const c=pcolors(),time=game?.clock||0,low=quality()==="economy"||(quality()==="auto"&&economy);
+ const c=pcolors(),time=game?.clock||0,wave=game?.index||0,low=quality()==="economy"||(quality()==="auto"&&economy);
  ctx.fillStyle=c.bg;ctx.fillRect(0,0,320,180);
- for(let i=0;i<(low?50:110);i++){
-  ctx.fillStyle=i%3?"#7581b2":c.star;
-  const x=(i*97+23)%320,y=((i*53+17+(reduced()?0:time*(1+i%3)*5))%178)|0;
+ // Background parallax and original pixel art planets, no third-party sprites.
+ for(let i=0;i<(low?53:126);i++){
+  const x=(i*97+23)%320;
+  const shift=reduced()?0:time*(i%3+1)*4.5;
+  const y=((i*53+17+shift)%177)|0;
+  ctx.fillStyle=i%7===0?"#e2f3ff":i%3?c.star:"#91e4ed";
   ctx.fillRect(x,y,i%8?1:2,i%8?1:2);
  }
- ctx.fillStyle="#263265";ctx.fillRect(0,154,320,26);
- for(let x=0;x<320;x+=20){ctx.fillStyle="#42508b";ctx.fillRect(x,154,15,2)}
+ const planet=wave%2===0?{x:253,y:38,r:29}:{x:72,y:35,r:22};
+ ctx.fillStyle=wave%2===0?"#2a3f77":"#72396f";
+ ctx.fillRect(planet.x-planet.r,planet.y-planet.r,planet.r*2,planet.r*2);
+ for(let rad=planet.r-3;rad>3;rad-=5){
+  ctx.fillStyle=rad%2===0?"#8e6bd2":"#617ad4";
+  ctx.fillRect(planet.x-rad,planet.y-rad,rad*2,rad*2);
+ }
+ ctx.fillStyle="#b5d0ff";
+ ctx.fillRect(planet.x-planet.r,planet.y+3,planet.r*2,3);
+ ctx.fillStyle="#0b193c";ctx.fillRect(0,148,320,32);
+ for(let i=0;i<32;i++){
+  const x=i*10,h=8+(i*13+wave*7)%21;
+  ctx.fillStyle=i%4===0?"#18355a":"#10284f";
+  ctx.fillRect(x,148-h,9,h);
+  if(!low){ctx.fillStyle="#4ad5d1";ctx.fillRect(x+3,150-h+4,1,2)}
+ }
+ ctx.fillStyle="#223b62";ctx.fillRect(0,157,320,23);
+ for(let x=0;x<320;x+=20){ctx.fillStyle=x%40===0?"#4f5aa0":"#375080";ctx.fillRect(x,158,18,2)}
+ // Three animated pixel opponents: A, B and C — no visual clue about the correct answer.
  const xs=[65,160,255];
  xs.forEach((x,i)=>{
-  const bob=reduced()?0:Math.sin(time*3+i)*2;
-  sprite(ctx,x,42+bob,3.5,c.foe);
-  ctx.fillStyle="#fff";ctx.textAlign="center";ctx.font="bold 12px monospace";ctx.fillText("ABC"[i],x,34+bob);
-  ctx.fillStyle="#52618f";ctx.fillRect(x-23,77,46,6);
+  const bob=reduced()?0:Math.sin(time*(2.3+wave*.15)+i*2.1)*3;
+  const sway=reduced()?0:Math.sin(time*.85+i*2)*2;
+  ctx.fillStyle="#15254d";ctx.fillRect(x-29,21,58,67);
+  ctx.fillStyle="#5974b7";ctx.fillRect(x-27,23,54,2);
+  ctx.fillStyle="#caefff";ctx.font="bold 13px monospace";ctx.textAlign="center";ctx.fillText("ABC"[i],x,36);
+  sprite(ctx,x+sway,44+bob,3.2,i===1?"#9fdef7":i===2?"#ffcf98":c.foe,false,wave+i);
+  ctx.fillStyle="#324d82";ctx.fillRect(x-22,78,44,6);
+  ctx.fillStyle="#73eddf";ctx.fillRect(x-19,80,38,2);
  });
- const player=game?.player||160;sprite(ctx,player,124,3,c.ship,true);
- ctx.fillStyle="#ffbe6c";ctx.fillRect(player-5,147,4,5);ctx.fillRect(player+1,147,4,5);
- for(const b of game?.bullets||[]){ctx.fillStyle=c.shot;ctx.fillRect(Math.round(b.x)-1,Math.round(b.y),3,10)}
- ctx.font="bold 9px monospace";ctx.fillStyle="#fff";ctx.textAlign="left";ctx.fillText("NEO "+(game?.score||0)+" PTS",7,10);
- ctx.textAlign="right";ctx.fillText("WAVE "+Math.min(5,(game?.index||0)+1)+"/5",313,10);
- for(let y=4;y<180;y+=4){ctx.fillStyle="#03051d14";ctx.fillRect(0,y,320,1)}
+ // Parallax ground lines and player spaceship with multiple original sprite colors.
+ const player=game?.player??160;
+ ctx.fillStyle="#082244";ctx.fillRect(player-18,147,36,4);
+ sprite(ctx,player,121,3.2,c.ship,true);
+ ctx.fillStyle="#ebfaff";ctx.fillRect(player-5,128,10,5);
+ ctx.fillStyle="#ffce67";ctx.fillRect(player-5,147,4,6);ctx.fillRect(player+2,147,4,6);
+ if(!reduced()){ctx.fillStyle="#ff916d";ctx.fillRect(player-3,153,3,3);ctx.fillRect(player+2,153,3,3)}
+ for(const b of game?.bullets||[]){
+  ctx.fillStyle="#d0faff";ctx.fillRect(Math.round(b.x)-2,Math.round(b.y),5,11);
+  ctx.fillStyle="#ffffff";ctx.fillRect(Math.round(b.x),Math.round(b.y)-5,1,6);
+ }
+ for(const part of game?.particles||[]){
+  ctx.fillStyle=part.color;
+  const size=part.life>.3?3:2;
+  ctx.fillRect(Math.round(part.x),Math.round(part.y),size,size);
+ }
+ // HUD is readable at native 320×180 resolution.
+ ctx.fillStyle="#101a3e";ctx.fillRect(0,0,320,16);
+ ctx.font="bold 9px monospace";ctx.textAlign="left";ctx.fillStyle="#d0f4ff";
+ ctx.fillText("NEO  "+String(game?.score||0).padStart(3,"0")+" PTS",7,11);
+ ctx.textAlign="center";ctx.fillStyle="#ffde9b";ctx.fillText("COMBO x"+(game?.combo||0),165,11);
+ ctx.textAlign="right";ctx.fillStyle="#e8f3ff";ctx.fillText("WAVE "+Math.min(5,wave+1)+"/5",313,11);
+ for(let y=18;y<180;y+=4){ctx.fillStyle="#03051d10";ctx.fillRect(0,y,320,1)}
 }
 class Pixel{
- constructor(items){this.items=items;this.index=0;this.score=0;this.player=160;this.bullets=[];this.clock=0;this.delay=0;this.cooldown=0;this.running=true;this.paused=false}
+ constructor(items){this.items=items;this.index=0;this.score=0;this.player=160;this.bullets=[];this.particles=[];this.combo=0;this.bestCombo=0;this.clock=0;this.delay=0;this.cooldown=0;this.running=true;this.paused=false}
+ burst(index,correct){
+  const x=[65,160,255][clamp(index,0,2)],count=reduced()?6:22;
+  for(let i=0;i<count;i++){
+   const ang=Math.PI*2*i/count;
+   this.particles.push({x,y:60,vx:Math.cos(ang)*(22+i%6*6),vy:Math.sin(ang)*(22+i%6*6),life:.5+i%3*.12,color:correct?"#b5fff1":"#ffc0b3"});
+  }
+  this.particles=this.particles.slice(-68);
+ }
  resetWave(){this.bullets=[];mark()}
  pick(i){this.player=[65,160,255][clamp(i,0,2)];mark(i)}
  fire(){if(this.cooldown||this.delay>0||this.bullets.length>=2)return;this.cooldown=.30;this.bullets.push({x:this.player,y:120})}
  step(dt){
   this.clock+=dt;this.cooldown=Math.max(0,this.cooldown-dt);
+  this.particles=this.particles.filter(part=>part.life>0);
+  for(const p of this.particles){p.x+=p.vx*dt;p.y+=p.vy*dt;p.life-=dt}
   if(this.delay>0){this.delay-=dt;if(this.delay<=0)next();return}
   if(keys.left)this.player-=155*dt;if(keys.right)this.player+=155*dt;
   this.player=clamp(this.player,15,305);if(keys.fire)this.fire();
@@ -293,7 +364,7 @@ function switchMode(nextMode){
  root.querySelectorAll("[data-mode]").forEach(b=>{b.classList.toggle("selected",b.dataset.mode===mode);b.setAttribute("aria-pressed",String(b.dataset.mode===mode))});
  $("n4GameTitle").textContent=mode==="three"?"🌌 Guardião dos Portais 3D":"🕹️ Pixel Invaders do Saber";
  $("n4GameSub").textContent=mode==="three"?"WebGL 3D • portais e três pistas":"Arte pixelada 8-bit • naves e lasers";
- $("n4Start").textContent="▶ Jogar";$("n4Pause").disabled=true;$("n4Level").textContent="Fase 1/5";$("n4Score").textContent="⭐ 0 pontos";
+ $("n4Start").textContent="▶ Jogar";$("n4Pause").disabled=true;$("n4Level").textContent="Fase 1/5";$("n4Score").textContent="⭐ 0 pontos";$("n4Combo").hidden=mode!=="pixel";$("n4Combo").textContent="✨ Combo 0";
  $("n4Question").textContent="Escolha uma matéria e clique em Jogar.";answers.replaceChildren();
  status(mode==="three"?"Use ◀ ▶ para escolher a pista do portal certo.":"Use ◀ ▶ para mover a nave e Espaço/ATIRAR para responder.");
  root.style.setProperty("--n4-accent",pal().edge);draw();
