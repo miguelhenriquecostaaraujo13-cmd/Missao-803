@@ -150,28 +150,55 @@ class World{
     d("sphere",x+Math.cos(a)*1.26,1.78+Math.sin(a)*1.43,gate+.2,.23,.23,.23,mint,0,.9);
    }
   }
-  // Cute rounded mascot/runner, face facing camera.
-  const x=(lane-1)*2.35,b=reduced?0:Math.sin(time*6)*.035;
-  d("sphere",x,-.17,3.7,1.5,.11,1.2,"#182b4c");
-  d("cylinder",x,.47+b,3.58,.9,1.19,.73,p.gem);
-  d("sphere",x,1.18+b,3.55,.96,.47,.8,"#f0a981");
-  d("sphere",x,1.75+b,3.61,1.20,1.22,1.05,bright);
-  d("sphere",x,2.1+b,3.52,1.19,.65,1.01,p.edge);
-  d("sphere",x-.34,1.73+b,4.1,.15,.2,.13,navy);
-  d("sphere",x+.34,1.73+b,4.1,.15,.2,.13,navy);
-  d("sphere",x-.38,1.80+b,4.2,.055,.055,.055,bright);
-  d("sphere",x+.30,1.8+b,4.2,.055,.055,.055,bright);
-  d("torus",x,1.41+b,4.18,.31,.15,.12,"#d58580");
-  d("sphere",x-.67,2.08+b,3.54,.36,.42,.31,p.gem);
-  d("sphere",x+.67,2.08+b,3.54,.36,.42,.31,p.gem);
+  // Exploradora ou explorador humano estilizado: proporções humanas, sem orelhas de mascote.
+  // Modelagem low-poly autoral: cabelo, rosto, pescoço, casaco, braços e pernas com animação.
+  const x=(lane-1)*2.35;
+  const bob=reduced?0:Math.sin(time*7)*.038;
+  const stride=reduced?0:Math.sin(time*7)*.16;
+  const skin="#deb08c",skinLight="#f1c6a0",hair="#433150",hairLight="#634268";
+  const jacket="#3978df",jacketLight="#55b8ec",pants="#2c395f",shoe="#f7edf2";
+  // Sombra e pernas com alternância discreta, lembrando passos de uma pessoa.
+  d("sphere",x,-.16,3.65,1.28,.11,.91,"#1b2853");
   for(const side of [-1,1]){
-   d("cylinder",x+side*.68,.8+b,3.59,.27,.91,.27,bright);
-   d("sphere",x+side*.68,.25+b,3.6,.28,.29,.28,p.edge);
-   d("cylinder",x+side*.25,-.14,3.58,.34,.52,.36,bright);
-   d("sphere",x+side*.25,-.38,3.87,.41,.2,.67,navy);
+   const legZ=3.55+side*stride*.27;
+   d("cylinder",x+side*.27,.20+b,legZ,.31,.87,.33,pants);
+   d("sphere",x+side*.27,-.25+b,legZ+.22,.45,.23,.64,shoe);
+   d("sphere",x+side*.27,-.14+b,legZ+.49,.42,.10,.35,p.edge);
   }
-  d("torus",x,1.11+b,3.56,.95,.48,.4,p.gem,0,.3);
-  d("sphere",x,3.09+b,3.55,.14,.14,.14,bright,0,.95);
+  // Corpo: torso alongado, gola e cinto tornam a silhueta claramente humana.
+  d("cylinder",x,1.10+b,3.56,1.23,1.30,.74,jacket);
+  d("sphere",x,1.73+b,3.55,1.22,.40,.78,jacketLight);
+  d("cylinder",x,.47+b,3.56,1.02,.22,.65,pants);
+  d("cylinder",x,1.85+b,3.55,.30,.33,.30,skin);
+  d("cylinder",x,1.78+b,3.55,.55,.16,.56,shoe);
+  // Braços compridos com mãos e movimento suave de caminhada.
+  for(const side of [-1,1]){
+   const armZ=3.55-side*stride*.20;
+   d("sphere",x+side*.73,1.55+b,armZ,.42,.42,.50,jacketLight);
+   d("cylinder",x+side*.79,1.02+b,armZ,.32,.83,.35,jacket);
+   d("cylinder",x+side*.78,.54+b,armZ+.04,.27,.18,.28,shoe);
+   d("sphere",x+side*.78,.38+b,armZ+.09,.28,.29,.30,skin);
+  }
+  // Cabeça humana: cabelo curto arredondado, testa, nariz e sorriso.
+  d("sphere",x,2.35+b,3.60,1.05,1.14,1.00,skin);
+  d("sphere",x,2.78+b,3.48,1.10,.48,1.03,hair);
+  d("sphere",x-.28,2.70+b,4.02,.40,.20,.21,hairLight);
+  d("sphere",x+.28,2.70+b,4.02,.40,.20,.21,hair);
+  d("sphere",x-.25,2.34+b,4.08,.13,.15,.09,"#24304d");
+  d("sphere",x+.25,2.34+b,4.08,.13,.15,.09,"#24304d");
+  d("sphere",x-.29,2.39+b,4.13,.045,.045,.04,shoe);
+  d("sphere",x+.21,2.39+b,4.13,.045,.045,.04,shoe);
+  d("sphere",x,2.15+b,4.15,.19,.18,.16,skinLight);
+  // Sorriso e detalhes de equipamento de aventureiro.
+  d("torus",x,1.93+b,4.11,.27,.10,.11,"#9e566c");
+  d("sphere",x-.32,1.98+b,4.06,.10,.07,.055,"#ec9d8d");
+  d("sphere",x+.32,1.98+b,4.06,.10,.07,.055,"#ec9d8d");
+  for(const side of [-1,1])
+   d("cylinder",x+side*.36,1.27+b,3.94,.10,.82,.10,"#b8e9ff");
+  d("sphere",x,1.14+b,4.01,.38,.34,.12,p.gem,0,.25);
+  d("torus",x,1.12+b,4.11,.35,.31,.12,shoe,0,.2);
+  // Energia do portal em torno do personagem, sem alterar o formato humano.
+  d("sphere",x,3.20+b,3.55,.14,.14,.14,bright,0,.95);
   if(!eco)for(let i=0;i<14;i++){
    const z=8-(i%7)*5,xx=((i%5)-2)*1.4,y=1.5+(i%3)*1.1+(reduced?0:Math.sin(time*.9+i)*.27);
    d("sphere",xx,y,z,.10,.10,.10,i%2?mint:p.gem,0,.9);
