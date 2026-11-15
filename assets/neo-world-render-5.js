@@ -154,6 +154,7 @@ class World{
   // Modelagem low-poly autoral: cabelo, rosto, pescoço, casaco, braços e pernas com animação.
   const x=(lane-1)*2.35;
   const bob=reduced?0:Math.sin(time*7)*.038;
+  const b=bob;
   const stride=reduced?0:Math.sin(time*7)*.16;
   const skin="#deb08c",skinLight="#f1c6a0",hair="#433150",hairLight="#634268";
   const jacket="#3978df",jacketLight="#55b8ec",pants="#2c395f",shoe="#f7edf2";
