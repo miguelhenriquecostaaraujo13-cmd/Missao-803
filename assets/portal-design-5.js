@@ -8,6 +8,7 @@ function setup(){
  if(!drawer||!routes.length)return;
  const groups={
   trilha:["trilha","revisoes","cartoes","quiz","metodos","videoaulas","assistente","mapasNeo"],
+  neoEstudio8:["neoEstudio8"],
   neoGames40:["neoGames40","arcadeNeo","arena","desafio8ano"],
   neoIAs40:["neoIAs40","neoCentral30"],
   neoOficina:["neoOficina","gerador","laboratorio","caderno","biblioteca"],
