@@ -2146,14 +2146,22 @@ function newQuestion(){
  if(!arr.length){$("questionText").textContent="Ainda não há questões cadastradas para esta matéria.";$("options").replaceChildren();$("checkAnswer").disabled=true;return}
  if(quizRoundSubject!==s||quizRoundAnswered.size>=arr.length){quizRoundSubject=s;quizRoundAnswered=new Set();quizRoundCorrect=0}
  let pool=arr.filter(q=>!quizRoundAnswered.has(q.index));
+ state.seenQuiz=Array.isArray(state.seenQuiz)?state.seenQuiz:[];
+ // Preserve questions already seen between visits and prefer unseen content.
+ const seenBefore=new Set(state.seenQuiz);
+ const unseen=pool.filter(q=>!seenBefore.has(q.index));
+ if(unseen.length)pool=unseen;
+ else if(arr.every(q=>seenBefore.has(q.index))){
+  const ids=new Set(arr.map(q=>q.index));
+  state.seenQuiz=state.seenQuiz.filter(i=>!ids.has(i));
+ }
  if(currentQuiz&&currentQuiz.s===s&&!answeredCurrent&&pool.length>1)pool=pool.filter(q=>q.index!==currentQuiz.index);
  currentQuiz=pool[Math.floor(Math.random()*pool.length)];
- state.seenQuiz=Array.isArray(state.seenQuiz)?state.seenQuiz:[];
  if(!state.seenQuiz.includes(currentQuiz.index))state.seenQuiz.push(currentQuiz.index);
  save();answeredCurrent=false;
  $("quizTag").textContent=currentQuiz.s;
  $("questionText").textContent=currentQuiz.q;
- $("questionCount").textContent=arr.length+" questões nesta matéria";
+ $("questionCount").textContent=arr.length+" questões nesta matéria · "+new Set(arr.map(q=>q.t||"Geral")).size+" temas";
  $("options").innerHTML=currentQuiz.o.map((o,i)=>'<label class="qoption"><input type="radio" name="answer" value="'+i+'"><span><b>'+String.fromCharCode(65+i)+'.</b> '+escapeHtml(o)+'</span></label>').join("");
  $("feedback").replaceChildren();$("checkAnswer").disabled=false;
  $("quizAction").textContent="↻ Sortear outra questão";
@@ -2170,6 +2178,7 @@ function checkAnswer(){
  quizRoundAnswered.add(currentQuiz.index);if(right)quizRoundCorrect++;
  save();
  phaseRecordQuiz(currentQuiz,right);
+ window.portal8Q8?.record?.(currentQuiz,right);
  $("feedback").innerHTML='<div class="feedback '+(right?'good':'bad')+'"><b>'+(right?'Muito bem! Resposta correta.':'Vamos aprender com essa!')+'</b><br>'+escapeHtml(currentQuiz.e)+'</div>';
  $("checkAnswer").disabled=true;$("quizScore").textContent=sc.c+"/"+sc.n;
  const total=quizzes.filter(q=>q.s===s).length;
