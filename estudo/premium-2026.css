@@ -231,6 +231,50 @@ body.espaco-estudo .neo-prompts button{
 body.espaco-estudo .folha-estudo .pergunta{max-width:920px;margin-inline:auto}
 body.espaco-estudo .folha-estudo .pergunta>h2{font-size:clamp(1.15rem,2.25vw,1.7rem);line-height:1.45}
 body.espaco-estudo .folha-estudo :is(.caderno,.agenda,.config){min-width:0}
+/* Apresentacao da trilha ja salva: cinco marcos visuais, nunca um carregamento falso. */
+body.espaco-estudo .neo-montagem{
+  margin:24px 0 16px;padding:18px 20px;border-radius:18px;
+  border:1px solid #a576e077;
+  background:linear-gradient(135deg,#24163b,#161023);
+  box-shadow:inset 0 1px #ffffff1a;
+}
+body.espaco-estudo .neo-montagem p{font-size:.86rem;color:#d9c1f1;margin:0 0 15px}
+body.espaco-estudo .neo-montagem ol{
+  margin:0;padding:0;list-style:none;display:grid;
+  grid-template-columns:repeat(5,minmax(0,1fr));gap:7px;counter-reset:neo-marco
+}
+body.espaco-estudo .neo-montagem li{
+  position:relative;min-width:0;overflow:hidden;counter-increment:neo-marco;
+  padding:12px 7px;text-align:center;border-radius:10px;
+  background:#41265b5c;border:1px solid #a67bdc41;
+  color:#e8d7fa;font-size:.73rem;line-height:1.4
+}
+body.espaco-estudo .neo-montagem li::before{
+  content:counter(neo-marco,"0");display:block;margin-bottom:4px;
+  font-size:.65rem;font-weight:800;color:#c798fd
+}
+body.espaco-estudo .neo-montagem li:last-child{
+  background:linear-gradient(125deg,#7f42c7,#a569ee);color:#fff
+}
+@media(prefers-reduced-motion:no-preference){
+  body.espaco-estudo:not(.quieto) .neo-montagem li{
+    animation:neo-marco-aceso .45s cubic-bezier(.18,1,.3,1) both;
+    animation-delay:calc(.1s + (var(--indice,0) * .36s))
+  }
+  body.espaco-estudo:not(.quieto) .neo-montagem li:nth-child(2){--indice:1}
+  body.espaco-estudo:not(.quieto) .neo-montagem li:nth-child(3){--indice:2}
+  body.espaco-estudo:not(.quieto) .neo-montagem li:nth-child(4){--indice:3}
+  body.espaco-estudo:not(.quieto) .neo-montagem li:nth-child(5){--indice:4}
+}
+@keyframes neo-marco-aceso{
+  from{opacity:.25;transform:translateY(12px);filter:brightness(.7)}
+  to{opacity:1;transform:none;filter:brightness(1)}
+}
+@media(max-width:540px){
+  body.espaco-estudo .neo-montagem{padding:14px 12px}
+  body.espaco-estudo .neo-montagem ol{grid-template-columns:repeat(5,minmax(0,1fr));gap:3px}
+  body.espaco-estudo .neo-montagem li{padding:9px 2px;font-size:.56rem;overflow-wrap:anywhere}
+}
 body.espaco-estudo .trilha-gerada .etapas-personais li:not(:last-child)::before{
   border:0;width:3px;
   background:linear-gradient(#dfb7ff,#8f50f3,#6fe5d0);
