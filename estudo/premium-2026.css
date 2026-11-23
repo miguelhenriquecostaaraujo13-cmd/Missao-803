@@ -1,0 +1,528 @@
+/* Neo Aurora Premium — camada incremental. Mantem os componentes e dados existentes.
+   Referencias: fundo violeta profundo, luz difusa, bento cards e tipografia de produto. */
+body.espaco-estudo:not(.quadro-aberto){
+  --neo-premium-base:#0b0718;
+  --neo-premium-panel:#171026;
+  --neo-premium-edge:#73589959;
+  --neo-premium-violet:#a979ff;
+  --neo-premium-light:#f6efff;
+  --neo-premium-muted:#c2b4d6;
+  background:
+    radial-gradient(ellipse 75% 42% at 91% 0%,#5824a83b,transparent 72%),
+    radial-gradient(ellipse 65% 46% at 0% 72%,#8a34b919,transparent 72%),
+    var(--neo-premium-base);
+  color:var(--neo-premium-light);
+  min-height:100dvh;
+}
+body.espaco-estudo:not(.quadro-aberto)::before{
+  content:"";position:fixed;z-index:0;inset:0;pointer-events:none;
+  background:radial-gradient(ellipse 28% 32% at 92% 22%,#994ff01b,transparent 82%),
+             radial-gradient(ellipse 33% 35% at 8% 80%,#712feb14,transparent 85%);
+  opacity:.82;
+}
+/* Ordem de camadas sem :is com ID (que elevava especificidade e cobria o menu). */
+body.espaco-estudo:not(.quadro-aberto) > #principal,
+body.espaco-estudo:not(.quadro-aberto) > .rodape-aurora,
+body.espaco-estudo:not(.quadro-aberto) > #persistencia {position:relative;z-index:1}
+body.espaco-estudo:not(.quadro-aberto) > header.topo{position:relative;z-index:120;overflow:visible}
+body.espaco-estudo .topo{
+  max-width:min(100% - 24px,1380px);margin:12px auto 0;
+  border:1px solid #8664b943;border-radius:20px;
+  background:linear-gradient(145deg,#211632d9,#100c1eea);
+  box-shadow:inset 0 1px #ffffff12,0 14px 40px #05020e41;
+  backdrop-filter:blur(17px);-webkit-backdrop-filter:blur(17px);
+}
+body.espaco-estudo .topo .marca{color:#f5ecff}
+body.espaco-estudo .topo .marca strong{color:#d4b5ff}
+body.espaco-estudo .topo #menu{border:1px solid #a778e469;border-radius:12px;background:#281a3c;color:#f5eaff}
+body.espaco-estudo #nav.menu-estudos .menu-grupo{
+  background:linear-gradient(148deg,#35224b75,#21172f83);
+  border:1px solid #a477d420;border-radius:15px;
+}
+body.espaco-estudo #nav.menu-estudos .menu-grupo h2{color:#ccafe9}
+body.espaco-estudo #nav.menu-estudos a{color:#e1d6f1;border:1px solid transparent;border-radius:11px}
+body.espaco-estudo #nav.menu-estudos a[aria-current="page"]{
+  background:linear-gradient(115deg,#9a5ced45,#ab6df519);
+  color:#fff;border-color:#ca9ffc65;box-shadow:inset 0 1px #ffffff16,0 0 23px #a15aed18;
+}
+body.espaco-estudo #principal.conteudo{max-width:1240px;width:100%;padding:clamp(16px,3vw,42px) clamp(16px,4vw,54px) 66px}
+body.espaco-estudo .conteudo .cab{
+  position:relative;isolation:isolate;overflow:hidden;
+  margin:8px 0 24px;padding:clamp(25px,4.8vw,54px);
+  border:1px solid #956cc151;border-radius:27px;
+  background:radial-gradient(ellipse 80% 160% at 105% 0%,#7b3fb45b,transparent 73%),
+             linear-gradient(122deg,#1d1531,#100c1e 76%);
+  box-shadow:0 22px 58px #07020e4d,inset 0 1px #ffffff16;
+}
+body.espaco-estudo .conteudo .cab::before{
+  content:"";position:absolute;inset:0;pointer-events:none;z-index:0;
+  border-radius:inherit;background:linear-gradient(115deg,transparent 28%,#c39dff14 56%,transparent 78%);
+}
+body.espaco-estudo .conteudo .cab .rotulo{
+  width:max-content;max-width:100%;padding:7px 12px;border-radius:100px;
+  border:1px solid #ba8afa58;background:#a16bea18;color:#d9b8ff;
+  font-size:.69rem;letter-spacing:.13em
+}
+body.espaco-estudo .conteudo .cab h1{
+  max-width:18ch;color:#faf5ff;
+  font:600 clamp(2rem,4.7vw,3.9rem)/1.08 Sora,Inter,sans-serif;
+  letter-spacing:-.065em;margin:15px 0;
+}
+body.espaco-estudo .conteudo .cab p:last-child{max-width:63ch;color:#d1c4e2;line-height:1.75;margin:0}
+body.espaco-estudo .conteudo .folha-estudo{min-width:0}
+body.espaco-estudo .folha-estudo :is(.papel,.atalho,.amostra,.linha,.resumo-trilha,.trilha li,.nova-trilha,.vazio-trilhas){
+  border:1px solid var(--neo-premium-edge);
+  border-radius:21px;
+  background:radial-gradient(ellipse 90% 70% at 96% 0%,#663b9b1d,transparent 70%),
+             linear-gradient(145deg,#21182f,#141022 82%);
+  color:var(--neo-premium-light);
+  box-shadow:inset 0 1px #ffffff0e,0 13px 27px #0704102b;
+}
+body.espaco-estudo .folha-estudo :is(.papel,.atalho,.amostra,.linha,.resumo-trilha,.trilha li){min-width:0}
+body.espaco-estudo .folha-estudo :is(.papel,.atalho,.amostra,.linha,.resumo-trilha) p,
+body.espaco-estudo .folha-estudo :is(.papel,.atalho,.amostra,.linha,.resumo-trilha) small,
+body.espaco-estudo .folha-estudo .trilha li small{color:var(--neo-premium-muted)}
+body.espaco-estudo .folha-estudo :is(.papel,.atalho,.amostra,.linha,.resumo-trilha) h2,
+body.espaco-estudo .folha-estudo .trilha li h2{color:#f9f3ff}
+body.espaco-estudo .folha-estudo .rotulo{color:#d0aff6}
+body.espaco-estudo .folha-estudo .missao{
+  min-height:250px;border-radius:25px;
+  border:1px solid #ac79ef5a;
+  background:radial-gradient(ellipse 90% 100% at 88% 14%,#ae61e858,transparent 71%),
+             linear-gradient(117deg,#231438,#110d1c);
+  box-shadow:inset 0 1px #ffffff19,0 20px 46px #0b061969;
+}
+body.espaco-estudo .folha-estudo .missao h2{color:white;font:550 clamp(1.7rem,3vw,2.8rem)/1.1 Sora,Inter,sans-serif;letter-spacing:-.05em}
+body.espaco-estudo .folha-estudo .missao p{color:#e7d7f5}
+body.espaco-estudo .folha-estudo .metricas{
+  display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;
+  padding:0;border:0;background:transparent;box-shadow:none
+}
+body.espaco-estudo .folha-estudo .metricas>div{
+  position:relative;overflow:hidden;padding:clamp(17px,2.5vw,27px);min-width:0;
+  border:1px solid #8b68b04d;border-radius:20px;
+  background:linear-gradient(154deg,#271b3d,#171024 72%);
+  box-shadow:inset 0 1px #ffffff12,0 14px 28px #07031235;
+  color:#c9b9dd
+}
+body.espaco-estudo .folha-estudo .metricas>div::after{
+  content:"";position:absolute;right:-27px;top:-35px;width:110px;height:110px;
+  border-radius:50%;background:#a667ec23;filter:blur(23px);pointer-events:none
+}
+body.espaco-estudo .folha-estudo .metricas b{
+  font:650 clamp(1.7rem,3.2vw,2.7rem)/1.22 Sora,Inter,sans-serif;
+  letter-spacing:-.055em;color:#fff
+}
+body.espaco-estudo .folha-estudo .grade:has(> .atalho){
+  grid-template-columns:repeat(4,minmax(0,1fr));gap:13px
+}
+body.espaco-estudo .folha-estudo .grade:has(> .atalho)>:first-child{grid-column:span 2}
+body.espaco-estudo .folha-estudo .grade:has(> .atalho) .atalho{
+  min-height:210px;margin:0;padding:clamp(19px,2.5vw,27px);
+  transition:border-color .25s,transform .25s,box-shadow .25s;
+}
+body.espaco-estudo .folha-estudo .atalho span:first-child{
+  width:48px;height:48px;background:linear-gradient(145deg,#ae80f648,#7a42b32a);
+  color:#e8d4ff;border:1px solid #c59ff25b;border-radius:15px
+}
+body.espaco-estudo .folha-estudo .atalho h2{font-size:1.18rem;letter-spacing:-.03em}
+body.espaco-estudo .folha-estudo .atalho p{font-size:.88rem;line-height:1.65}
+body.espaco-estudo .folha-estudo .atalhos-estudo{
+  padding:13px;border:1px solid #8f62bc34;border-radius:18px;
+  background:#21152b6f
+}
+body.espaco-estudo .folha-estudo :is(.principal,button.principal){
+  color:#130c20;background:linear-gradient(115deg,#e8bbff,#b17bff 53%,#8b60ee);
+  border-color:#e9c5ff;box-shadow:inset 0 1px #ffffff98,0 8px 24px #8d4ce549;
+  border-radius:13px;font-weight:730
+}
+body.espaco-estudo .folha-estudo :is(.secundario,button:not(.principal):not(.neo):not(.correta):not(.incorreta):not(.excluir-trilha)){
+  border-radius:13px;border-color:#8f6db25e;
+  background:linear-gradient(140deg,#352546,#22192f);
+  color:#f2e8ff
+}
+body.espaco-estudo .folha-estudo :is(input:not([type=checkbox],[type=radio],[type=range]),select,textarea){
+  background:#140f23;color:#f9f3ff;border:1px solid #846aa1;
+  border-radius:13px;box-shadow:inset 0 2px 10px #0002;
+}
+body.espaco-estudo .folha-estudo :is(input,textarea)::placeholder{color:#aa9abc;opacity:1}
+body.espaco-estudo .folha-estudo :is(input,select,textarea):focus-visible{
+  border-color:#c9a2ff;outline:2px solid #e7cfff;outline-offset:2px;box-shadow:0 0 0 5px #ac7af82c
+}
+body.espaco-estudo .folha-estudo .seletor{color:#d9c9e9}
+body.espaco-estudo .folha-estudo .seletor select{max-width:min(400px,100%)}
+body.espaco-estudo .folha-estudo .trilha{
+  width:100%;max-width:none;position:relative;display:grid;gap:11px
+}
+body.espaco-estudo .folha-estudo .trilha li{
+  margin:0;gap:18px;padding:19px 22px;
+  transition:border-color .25s,box-shadow .25s,transform .25s
+}
+body.espaco-estudo .folha-estudo .trilha li:nth-child(even){margin-left:clamp(0px,2vw,25px)}
+body.espaco-estudo .folha-estudo .trilha .ponto{
+  border:1px solid #ccabff64;background:#6b459e4f;color:#eee2ff;
+  min-width:46px;height:46px;border-radius:14px
+}
+body.espaco-estudo .folha-estudo .trilha li[data-concluido="true"] .ponto{background:#205c57;color:#d5fff4;border-color:#5bd4af}
+body.espaco-estudo .folha-estudo .trilha li > div{min-width:0;flex:1}
+body.espaco-estudo .folha-estudo .alternativas button{
+  min-height:56px;justify-content:flex-start;text-align:left;
+  background:#271b38;color:#f8efff;border:1px solid #8869a97a
+}
+body.espaco-estudo .folha-estudo .alternativas button:disabled{opacity:1}
+body.espaco-estudo .folha-estudo .alternativas button.correta{background:#153a34;color:#d9fff3;border-color:#5bd0b2}
+body.espaco-estudo .folha-estudo .alternativas button.incorreta{background:#3b1c31;color:#ffe1ed;border-color:#ed8fb3}
+body.espaco-estudo .folha-estudo .explicacao{border:1px solid #b39aff54;border-inline-start:3px solid #c99bff;background:#302143;color:#f8f1ff;border-radius:15px}
+body.espaco-estudo .folha-estudo .biblioteca{gap:18px}
+body.espaco-estudo .folha-estudo :is(.temas,.ramificacoes){gap:9px}
+body.espaco-estudo .folha-estudo :is(.temas,.ramificacoes) button[aria-pressed="true"]{
+  border-color:#d2abff;color:#1b1028;background:linear-gradient(130deg,#dab6ff,#a577f4)
+}
+body.espaco-estudo .folha-estudo details:not(.nova-trilha){
+  padding:14px 0;border-color:#7554905a
+}
+body.espaco-estudo .folha-estudo details summary{color:#f6eaff}
+body.espaco-estudo .folha-estudo .dias button{min-width:0;padding:5px 2px}
+body.espaco-estudo .folha-estudo .dias button[aria-current="date"]{border-color:#d5affd}
+body.espaco-estudo .folha-estudo .resumo-trilha{max-width:none}
+body.espaco-estudo .folha-estudo .nova-trilha{
+  background:linear-gradient(140deg,#22152f,#171122)!important;
+  border-color:#9f76ce69!important;padding:clamp(20px,3vw,34px)
+}
+body.espaco-estudo .folha-estudo .nova-trilha > summary{color:#f2e5ff}
+body.espaco-estudo .folha-estudo .form-trilha label{color:#e8daf8}
+body.espaco-estudo .folha-estudo .form-trilha :is(input,select,textarea){color:#f7efff;background:#100c1f;border-color:#87679d}
+body.espaco-estudo .folha-estudo :is(.nota-trilha,.estado-trilhas,.trilhas-heading span){color:#c5b3d5}
+body.espaco-estudo .folha-estudo .trilha-pessoal-card{
+  border:1px solid #ba8cec67;
+  background:radial-gradient(ellipse at 95% 6%,#9f5cd26e,transparent 67%),linear-gradient(140deg,#281b41,#141020);
+  box-shadow:inset 0 1px #ffffff22,0 18px 32px #09041450;
+}
+body.espaco-estudo .folha-estudo .trilha-pessoal-card small,
+body.espaco-estudo .folha-estudo .trilha-pessoal-card p{color:#e0cee9}
+body.espaco-estudo .folha-estudo .vazio-trilhas{color:#ddd0ed}
+body.espaco-estudo .folha-estudo .mesa-neo{
+  border-color:#9868d66d;background:#100b1e;
+  box-shadow:0 20px 48px #09041069;border-radius:23px
+}
+body.espaco-estudo .folha-estudo .estante-neo{
+  background:linear-gradient(158deg,#271b3e,#171121);
+  border-color:#a37bdb47
+}
+body.espaco-estudo .folha-estudo .estante-neo a{
+  display:flex;align-items:center;width:100%;min-height:42px;padding:10px 12px;
+  background:#7755a012;border:1px solid #a577cf28;border-radius:11px;
+  color:#ebd6ff;text-decoration:none
+}
+body.espaco-estudo .folha-estudo .consulta-neo{
+  background:radial-gradient(ellipse at 52% 0%,#6e35ac5e,transparent 54%),#100d1b
+}
+body.espaco-estudo .folha-estudo .consulta-neo #form-neo{
+  background:linear-gradient(145deg,#2a1b40,#1a1229);
+  border:1px solid #a87ad24c
+}
+body.espaco-estudo .folha-estudo .consulta-neo .resposta-neo:not(:empty){
+  background:linear-gradient(135deg,#302145,#1c122e);
+  border:1px solid #bd90f35e;box-shadow:0 0 30px #7a42a822
+}
+body.espaco-estudo .neo-prompts{margin:18px 0 8px}
+body.espaco-estudo .neo-prompts p{color:#c5b5dc;font-size:.76rem;letter-spacing:.07em;text-transform:uppercase;font-weight:700}
+body.espaco-estudo .neo-prompts div{display:flex;flex-wrap:wrap;gap:8px}
+body.espaco-estudo .neo-prompts button{
+  min-height:40px;padding:8px 13px;border-radius:99px;border:1px solid #ad8ac85c;
+  background:#412858;color:#f1e4ff;font-size:.79rem
+}
+body.espaco-estudo .folha-estudo .pergunta{max-width:920px;margin-inline:auto}
+body.espaco-estudo .folha-estudo .pergunta>h2{font-size:clamp(1.15rem,2.25vw,1.7rem);line-height:1.45}
+body.espaco-estudo .folha-estudo :is(.caderno,.agenda,.config){min-width:0}
+/* Apresentacao da trilha ja salva: cinco marcos visuais, nunca um carregamento falso. */
+body.espaco-estudo .neo-montagem{
+  margin:24px 0 16px;padding:18px 20px;border-radius:18px;
+  border:1px solid #a576e077;
+  background:linear-gradient(135deg,#24163b,#161023);
+  box-shadow:inset 0 1px #ffffff1a;
+}
+body.espaco-estudo .neo-montagem p{font-size:.86rem;color:#d9c1f1;margin:0 0 15px}
+body.espaco-estudo .neo-montagem ol{
+  margin:0;padding:0;list-style:none;display:grid;
+  grid-template-columns:repeat(5,minmax(0,1fr));gap:7px;counter-reset:neo-marco
+}
+body.espaco-estudo .neo-montagem li{
+  position:relative;min-width:0;overflow:hidden;counter-increment:neo-marco;
+  padding:12px 7px;text-align:center;border-radius:10px;
+  background:#41265b5c;border:1px solid #a67bdc41;
+  color:#e8d7fa;font-size:.73rem;line-height:1.4
+}
+body.espaco-estudo .neo-montagem li::before{
+  content:counter(neo-marco,"0");display:block;margin-bottom:4px;
+  font-size:.65rem;font-weight:800;color:#c798fd
+}
+body.espaco-estudo .neo-montagem li:last-child{
+  background:linear-gradient(125deg,#7f42c7,#a569ee);color:#fff
+}
+@media(prefers-reduced-motion:no-preference){
+  body.espaco-estudo:not(.quieto) .neo-montagem li{
+    animation:neo-marco-aceso .45s cubic-bezier(.18,1,.3,1) both;
+    animation-delay:calc(.1s + (var(--indice,0) * .36s))
+  }
+  body.espaco-estudo:not(.quieto) .neo-montagem li:nth-child(2){--indice:1}
+  body.espaco-estudo:not(.quieto) .neo-montagem li:nth-child(3){--indice:2}
+  body.espaco-estudo:not(.quieto) .neo-montagem li:nth-child(4){--indice:3}
+  body.espaco-estudo:not(.quieto) .neo-montagem li:nth-child(5){--indice:4}
+}
+@keyframes neo-marco-aceso{
+  from{opacity:.25;transform:translateY(12px);filter:brightness(.7)}
+  to{opacity:1;transform:none;filter:brightness(1)}
+}
+@media(max-width:540px){
+  body.espaco-estudo .neo-montagem{padding:14px 12px}
+  body.espaco-estudo .neo-montagem ol{grid-template-columns:repeat(5,minmax(0,1fr));gap:3px}
+  body.espaco-estudo .neo-montagem li{padding:9px 2px;font-size:.56rem;overflow-wrap:anywhere}
+}
+body.espaco-estudo .trilha-gerada .etapas-personais li:not(:last-child)::before{
+  border:0;width:3px;
+  background:linear-gradient(#dfb7ff,#8f50f3,#6fe5d0);
+  border-radius:99px;box-shadow:0 0 12px #ba73f4b0;
+  transform-origin:top
+}
+body.espaco-estudo .trilha-gerada .etapa-numero{
+  box-shadow:0 0 0 5px #914bc71a,0 0 18px #a363f25f
+}
+body.espaco-estudo .trilha-gerada .trilha-apresentacao{
+  border-color:#dbadff;box-shadow:0 20px 70px #6e2bba53,inset 0 1px #ffffff3a
+}
+body.espaco-estudo .trilha-gerada .etapa-conteudo{
+  border-color:#c092f57a;background:linear-gradient(135deg,#2c1d42,#1a132b)
+}
+@media(prefers-reduced-motion:no-preference){
+  body.espaco-estudo:not(.quieto):not(.neo-aba-oculta)::before{
+    animation:neo-premium-ambiente 21s ease-in-out infinite alternate
+  }
+  body.espaco-estudo:not(.quieto) .folha-estudo .trilha-pessoal-card{
+    background-size:145% 145%,100% 100%;
+    animation:neo-premium-card 18s ease-in-out infinite alternate
+  }
+  body.espaco-estudo:not(.quieto) .trilha-gerada .etapas-personais li{
+    animation:neo-premium-passo .52s cubic-bezier(.18,1,.3,1) both;
+    animation-delay:calc(.22s + var(--ordem)*.14s)
+  }
+  body.espaco-estudo:not(.quieto) .trilha-gerada .etapas-personais li:not(:last-child)::before{
+    animation:neo-premium-linha .55s cubic-bezier(.18,1,.3,1) both;
+    animation-delay:calc(.52s + var(--ordem)*.14s)
+  }
+  body.espaco-estudo:not(.quieto) .trilha-gerada .trilha-apresentacao{
+    animation:neo-premium-nascer .7s cubic-bezier(.18,1,.3,1) both
+  }
+}
+@keyframes neo-premium-ambiente{from{transform:translate3d(-2%,0,0) scale(1)}to{transform:translate3d(2%,2%,0) scale(1.08)}}
+@keyframes neo-premium-card{from{background-position:0 0,center}to{background-position:95% 85%,center}}
+@keyframes neo-premium-passo{from{opacity:0;transform:translate3d(0,24px,0) scale(.965)}to{opacity:1;transform:none}}
+@keyframes neo-premium-linha{from{transform:scaleY(0)}to{transform:scaleY(1)}}
+@keyframes neo-premium-nascer{from{opacity:.4;transform:translateY(14px) scale(.982)}to{opacity:1;transform:none}}
+@media(hover:hover) and (pointer:fine){
+  body.espaco-estudo .folha-estudo :is(.atalho,.trilha li,.trilha-pessoal-card):hover{
+    transform:translateY(-3px);border-color:#d0a1ff;
+    box-shadow:0 19px 35px #09031575,0 0 27px #9850f026
+  }
+}
+@media(max-width:980px){
+  body.espaco-estudo .folha-estudo .grade:has(> .atalho){grid-template-columns:repeat(2,minmax(0,1fr))}
+  body.espaco-estudo .folha-estudo .grade:has(> .atalho)>:first-child{grid-column:auto}
+}
+@media(max-width:680px){
+  body.espaco-estudo .topo{max-width:calc(100% - 16px);margin-top:8px;border-radius:16px;padding:12px}
+  body.espaco-estudo #principal.conteudo{padding:16px 13px 58px}
+  body.espaco-estudo .conteudo .cab{padding:27px 21px;margin:2px 0 18px;border-radius:21px}
+  body.espaco-estudo .conteudo .cab h1{font-size:clamp(1.95rem,8vw,2.75rem)}
+  body.espaco-estudo .folha-estudo .metricas{grid-template-columns:repeat(3,minmax(0,1fr));gap:7px}
+  body.espaco-estudo .folha-estudo .metricas>div{padding:13px 9px;border-radius:15px;font-size:.72rem;line-height:1.4}
+  body.espaco-estudo .folha-estudo .metricas b{font-size:clamp(1.35rem,5.2vw,2rem)}
+  body.espaco-estudo .folha-estudo .grade:has(> .atalho){grid-template-columns:1fr}
+  body.espaco-estudo .folha-estudo .grade:has(> .atalho) .atalho{min-height:160px}
+  body.espaco-estudo .folha-estudo .biblioteca{grid-template-columns:1fr}
+  body.espaco-estudo .folha-estudo .trilha li{gap:10px;padding:14px}
+  body.espaco-estudo .folha-estudo .trilha .ponto{min-width:36px;height:36px;border-radius:10px}
+  body.espaco-estudo .folha-estudo .trilha li:nth-child(even){margin-left:0}
+  body.espaco-estudo .folha-estudo .trilha li button{max-width:100%}
+  body.espaco-estudo .folha-estudo .missao{border-radius:19px}
+  body.espaco-estudo .folha-estudo .resumo-trilha{flex-wrap:wrap}
+  body.espaco-estudo .folha-estudo .resumo-trilha>div{padding:12px 15px}
+  body.espaco-estudo .folha-estudo .mesa-neo{border-radius:19px}
+  body.espaco-estudo .folha-estudo .estante-neo{border-right:0;border-top:1px solid #815bb366}
+  body.espaco-estudo .folha-estudo .etapas-personais li{gap:9px}
+}
+@media(max-width:420px){
+  body.espaco-estudo .folha-estudo .metricas{grid-template-columns:repeat(2,minmax(0,1fr))}
+  body.espaco-estudo .folha-estudo .metricas>div:last-child{grid-column:1/-1}
+}
+@media(prefers-reduced-motion:reduce){
+  body.espaco-estudo::before,body.espaco-estudo .trilha-gerada *{animation:none!important}
+}
+body.quieto.espaco-estudo::before,body.quieto.espaco-estudo .trilha-gerada *{animation:none!important}
+html.alto-contraste body.espaco-estudo .folha-estudo :is(.papel,.atalho,.amostra,.linha,.trilha li){
+  background:#0b0715;border-color:#dfc7ff;box-shadow:none
+}
+
+/* Estado visivel enquanto a inicializacao real do app acontece; sem tela vazia. */
+.neo-carregamento{
+  width:min(100% - 30px,760px);margin:clamp(44px,11vh,110px) auto;
+  padding:clamp(28px,5vw,60px);border:1px solid #9b75c264;
+  border-radius:25px;background:radial-gradient(ellipse at 85% 12%,#7847bc52,transparent 65%),#151025;
+  box-shadow:0 20px 70px #08031483;color:#f5edff;text-align:center;
+}
+.neo-carregamento .rotulo{color:#caa6ff;justify-content:center}
+.neo-carregamento h1{font:600 clamp(1.6rem,4vw,2.6rem)/1.13 Sora,Inter,sans-serif;letter-spacing:-.055em;color:#fff}
+.neo-carregamento p{color:#cbbbe0}
+.neo-carregamento a{margin-top:18px;display:inline-flex}
+
+/* Ajustes UX 23/11: camada superior, selecao visivel e conteudo sempre legivel. */
+body.espaco-estudo:not(.quadro-aberto) > header.topo{
+  z-index:80;position:relative;overflow:visible;
+}
+body.espaco-estudo:not(.quadro-aberto) > #principal{z-index:1}
+body.espaco-estudo:not(.quadro-aberto) #nav.menu-estudos{
+  z-index:90;isolation:isolate;
+  box-shadow:0 24px 70px #080315dd,0 0 0 1px #bd8bef39;
+}
+body.espaco-estudo:not(.quadro-aberto) #menu[aria-expanded="true"]{
+  border-color:#dab2ff;background:#5c357d;color:#fff;
+}
+body.espaco-estudo .conteudo .cab > *{
+  position:relative;z-index:2;
+}
+body.espaco-estudo .conteudo .cab::before,
+body.espaco-estudo .conteudo .cab::after{
+  pointer-events:none;
+}
+body.espaco-estudo .folha-estudo .wizard button[data-campo][aria-pressed="true"],
+body.espaco-estudo .folha-estudo .wizard .choices [aria-pressed="true"],
+body.espaco-estudo .folha-estudo [data-campo][aria-pressed="true"]{
+  border:2px solid #d7aeff!important;
+  outline:2px solid #b47aff!important;outline-offset:1px!important;
+  background:linear-gradient(140deg,#64418d,#482c70)!important;
+  color:#fff!important;
+  box-shadow:inset 0 1px 0 #ffffff42,0 0 0 4px #aa6aea27,0 0 22px #bb7dff4d!important;
+}
+body.espaco-estudo .folha-estudo .wizard [data-campo][aria-pressed="true"] :is(span,strong,small){
+  color:inherit!important;
+}
+body.espaco-estudo .folha-estudo .wizard [data-campo]{
+  transition:background-color .18s,border-color .18s,box-shadow .18s;
+}
+@media(prefers-reduced-motion:reduce){
+  body.espaco-estudo .folha-estudo .wizard [data-campo]{transition:none!important}
+}
+body.quieto.espaco-estudo .folha-estudo .wizard [data-campo]{transition:none!important}
+
+
+/* Menu acima do palco em computador e celular */
+body.espaco-estudo:not(.quadro-aberto) > header.topo{z-index:120;overflow:visible}
+body.espaco-estudo:not(.quadro-aberto) #nav.menu-estudos{
+ z-index:121;opacity:1;
+ top:calc(100% + 8px);
+ background:linear-gradient(150deg,#29193eeF,#100a20f8);
+ border:1px solid #b88af077;box-shadow:0 24px 58px #090313d9,inset 0 1px #fff2;
+ backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+ max-height:min(72dvh,660px);overscroll-behavior:contain;
+}
+body.espaco-estudo:not(.quadro-aberto) #nav.menu-estudos[hidden]{display:none!important}
+body.espaco-estudo #nav.menu-estudos a[aria-current=page]{
+ background:linear-gradient(118deg,#a978ed50,#57358e45);border-color:#bb94f35a
+}
+@media(max-width:740px){
+ body.espaco-estudo #nav.menu-estudos{
+  right:0;left:auto;
+  width:min(calc(100vw - 20px),465px);
+  max-width:100%;grid-template-columns:1fr;
+  padding:12px;top:calc(100% + 5px);
+ }
+ body.espaco-estudo #nav.menu-estudos .menu-grupo>div{
+  grid-template-columns:repeat(2,minmax(0,1fr));gap:5px
+ }
+ body.espaco-estudo #nav.menu-estudos .menu-grupo a{min-width:0;overflow-wrap:anywhere;font-size:.82rem}
+}
+
+
+/* Animações premium combinadas, de baixo custo e sem bloquear leitura ou toque.
+   Cada área recebe movimento próprio. Substitui efeitos de hover como única animação. */
+.neo-ajuda-acesso{
+  margin:13px 0 16px!important;padding:14px 17px;
+  font-size:.84rem;line-height:1.65;
+  border-radius:14px;border:1px solid #b58ad65c;
+  background:linear-gradient(135deg,#342248,#1c172c);
+  color:#ded0f0!important;
+}
+body.espaco-estudo .folha-estudo :is(.papel,.atalho,.trilha li,.linha,.trilha-pessoal-card){position:relative}
+body.espaco-estudo .folha-estudo .metricas>div{isolation:isolate}
+body.espaco-estudo .folha-estudo .metricas>div::after{z-index:-1}
+body.espaco-estudo .folha-estudo .cab{overflow:visible}
+body.espaco-estudo .folha-estudo .trilha > li[data-concluido="true"]{
+  border-color:#6fd8bd69;box-shadow:inset 3px 0 #75ddc4,0 8px 28px #061e1b25
+}
+body.espaco-estudo .folha-estudo .papel:focus-within,
+body.espaco-estudo .folha-estudo .pergunta:focus-within{
+  border-color:#bd94e8;box-shadow:inset 0 1px #ffffff22,0 0 0 3px #ac7bf322
+}
+@media (prefers-reduced-motion:no-preference){
+  body.espaco-estudo:not(.quieto):not(.quadro-aberto) .conteudo .cab::before{
+    background:linear-gradient(115deg,transparent 25%,#d6a8ff18 45%,transparent 68%);
+    background-size:230% 100%;
+    animation:neo-halo-varrer 14s ease-in-out infinite alternate
+  }
+  body.espaco-estudo:not(.quieto):not(.quadro-aberto) .conteudo .cab .rotulo{
+    animation:neo-badge-luz 6.5s ease-in-out infinite alternate
+  }
+  body.espaco-estudo:not(.quieto) .folha-estudo .metricas>div:nth-child(1)::after{animation:neo-valor-luz 9s ease-in-out infinite alternate}
+  body.espaco-estudo:not(.quieto) .folha-estudo .metricas>div:nth-child(2)::after{animation:neo-valor-luz 11s ease-in-out -2s infinite alternate}
+  body.espaco-estudo:not(.quieto) .folha-estudo .metricas>div:nth-child(3)::after{animation:neo-valor-luz 13s ease-in-out -4s infinite alternate}
+  body.espaco-estudo:not(.quieto) .folha-estudo .missao{
+    background-size:140% 140%,100% 100%;
+    animation:neo-cartao-colorido 20s ease-in-out infinite alternate
+  }
+  body.espaco-estudo:not(.quieto) .folha-estudo .agenda .mes h2,
+  body.espaco-estudo:not(.quieto) .folha-estudo .mes h2{
+    animation:neo-texto-subir .56s cubic-bezier(.16,1,.3,1) both
+  }
+  body.espaco-estudo:not(.quieto) .folha-estudo .selo-trilha{
+    animation:neo-selo-brilhar 5s ease-in-out infinite alternate
+  }
+  body.espaco-estudo:not(.quieto) .folha-estudo .nucleo-neo{
+    animation:neo-orbita-respirar 9s ease-in-out infinite alternate
+  }
+  body.espaco-estudo:not(.quieto) .folha-estudo .alternativas .correta{
+    animation:neo-acerto-entrar .46s cubic-bezier(.16,1,.3,1) both
+  }
+  body.espaco-estudo:not(.quieto) .folha-estudo .alternativas .incorreta{
+    animation:neo-incorreto-entrar .36s ease both
+  }
+  body.espaco-estudo:not(.quieto) .folha-estudo progress{
+    transform-origin:left;
+    animation:neo-progresso-preencher .7s cubic-bezier(.16,1,.3,1) both
+  }
+}
+@keyframes neo-halo-varrer{0%{background-position:100% 0}100%{background-position:0 0}}
+@keyframes neo-badge-luz{from{box-shadow:inset 0 1px #ffffff10,0 0 0 #9c56e000}to{box-shadow:inset 0 1px #ffffff25,0 0 18px #9c56e034}}
+@keyframes neo-valor-luz{from{transform:translate3d(-15px,6px,0) scale(.9);opacity:.45}to{transform:translate3d(8px,-9px,0) scale(1.13);opacity:.95}}
+@keyframes neo-cartao-colorido{from{background-position:0 15%,center}to{background-position:98% 75%,center}}
+@keyframes neo-texto-subir{from{opacity:.45;transform:translateY(9px)}to{opacity:1;transform:none}}
+@keyframes neo-selo-brilhar{from{box-shadow:0 0 0 #d1abff00}to{box-shadow:0 0 18px #d1abff45}}
+@keyframes neo-orbita-respirar{from{filter:drop-shadow(0 0 0 #c591ff00)}to{filter:drop-shadow(0 0 18px #b57df53b)}}
+@keyframes neo-acerto-entrar{from{filter:brightness(1.35);transform:scale(.985)}to{filter:brightness(1);transform:scale(1)}}
+@keyframes neo-incorreto-entrar{0%{transform:translateX(0)}35%{transform:translateX(-3px)}75%{transform:translateX(2px)}100%{transform:none}}
+@keyframes neo-progresso-preencher{from{clip-path:inset(0 100% 0 0)}to{clip-path:inset(0)}}
+@media (max-width:680px){
+  body.espaco-estudo .folha-estudo :is(.papel,.atalho,.linha){border-radius:17px}
+}
+@media (prefers-reduced-motion:reduce){
+  body.espaco-estudo .folha-estudo progress{animation:none!important;transform:none}
+}
+
+
+/* PWA e Chrome: cabeçalho clicável acima do conteúdo mesmo com CSS antigo em cache. */
+body.espaco-estudo:not(.quadro-aberto) > header.topo{
+ position:sticky!important;top:max(8px,env(safe-area-inset-top));
+ z-index:120!important;overflow:visible!important;
+}
+body.espaco-estudo:not(.quadro-aberto) #nav.menu-estudos{
+ z-index:121!important;pointer-events:auto;
+}
