@@ -450,3 +450,78 @@ body.espaco-estudo #nav.menu-estudos a[aria-current=page]{
  }
  body.espaco-estudo #nav.menu-estudos .menu-grupo a{min-width:0;overflow-wrap:anywhere;font-size:.82rem}
 }
+
+
+/* Animações premium combinadas, de baixo custo e sem bloquear leitura ou toque.
+   Cada área recebe movimento próprio. Substitui efeitos de hover como única animação. */
+.neo-ajuda-acesso{
+  margin:13px 0 16px!important;padding:14px 17px;
+  font-size:.84rem;line-height:1.65;
+  border-radius:14px;border:1px solid #b58ad65c;
+  background:linear-gradient(135deg,#342248,#1c172c);
+  color:#ded0f0!important;
+}
+body.espaco-estudo .folha-estudo :is(.papel,.atalho,.trilha li,.linha,.trilha-pessoal-card){position:relative}
+body.espaco-estudo .folha-estudo .metricas>div{isolation:isolate}
+body.espaco-estudo .folha-estudo .metricas>div::after{z-index:-1}
+body.espaco-estudo .folha-estudo .cab{overflow:visible}
+body.espaco-estudo .folha-estudo .trilha > li[data-concluido="true"]{
+  border-color:#6fd8bd69;box-shadow:inset 3px 0 #75ddc4,0 8px 28px #061e1b25
+}
+body.espaco-estudo .folha-estudo .papel:focus-within,
+body.espaco-estudo .folha-estudo .pergunta:focus-within{
+  border-color:#bd94e8;box-shadow:inset 0 1px #ffffff22,0 0 0 3px #ac7bf322
+}
+@media (prefers-reduced-motion:no-preference){
+  body.espaco-estudo:not(.quieto):not(.quadro-aberto) .conteudo .cab::before{
+    background:linear-gradient(115deg,transparent 25%,#d6a8ff18 45%,transparent 68%);
+    background-size:230% 100%;
+    animation:neo-halo-varrer 14s ease-in-out infinite alternate
+  }
+  body.espaco-estudo:not(.quieto):not(.quadro-aberto) .conteudo .cab .rotulo{
+    animation:neo-badge-luz 6.5s ease-in-out infinite alternate
+  }
+  body.espaco-estudo:not(.quieto) .folha-estudo .metricas>div:nth-child(1)::after{animation:neo-valor-luz 9s ease-in-out infinite alternate}
+  body.espaco-estudo:not(.quieto) .folha-estudo .metricas>div:nth-child(2)::after{animation:neo-valor-luz 11s ease-in-out -2s infinite alternate}
+  body.espaco-estudo:not(.quieto) .folha-estudo .metricas>div:nth-child(3)::after{animation:neo-valor-luz 13s ease-in-out -4s infinite alternate}
+  body.espaco-estudo:not(.quieto) .folha-estudo .missao{
+    background-size:140% 140%,100% 100%;
+    animation:neo-cartao-colorido 20s ease-in-out infinite alternate
+  }
+  body.espaco-estudo:not(.quieto) .folha-estudo .agenda .mes h2,
+  body.espaco-estudo:not(.quieto) .folha-estudo .mes h2{
+    animation:neo-texto-subir .56s cubic-bezier(.16,1,.3,1) both
+  }
+  body.espaco-estudo:not(.quieto) .folha-estudo .selo-trilha{
+    animation:neo-selo-brilhar 5s ease-in-out infinite alternate
+  }
+  body.espaco-estudo:not(.quieto) .folha-estudo .nucleo-neo{
+    animation:neo-orbita-respirar 9s ease-in-out infinite alternate
+  }
+  body.espaco-estudo:not(.quieto) .folha-estudo .alternativas .correta{
+    animation:neo-acerto-entrar .46s cubic-bezier(.16,1,.3,1) both
+  }
+  body.espaco-estudo:not(.quieto) .folha-estudo .alternativas .incorreta{
+    animation:neo-incorreto-entrar .36s ease both
+  }
+  body.espaco-estudo:not(.quieto) .folha-estudo progress{
+    transform-origin:left;
+    animation:neo-progresso-preencher .7s cubic-bezier(.16,1,.3,1) both
+  }
+}
+@keyframes neo-halo-varrer{0%{background-position:100% 0}100%{background-position:0 0}}
+@keyframes neo-badge-luz{from{box-shadow:inset 0 1px #ffffff10,0 0 0 #9c56e000}to{box-shadow:inset 0 1px #ffffff25,0 0 18px #9c56e034}}
+@keyframes neo-valor-luz{from{transform:translate3d(-15px,6px,0) scale(.9);opacity:.45}to{transform:translate3d(8px,-9px,0) scale(1.13);opacity:.95}}
+@keyframes neo-cartao-colorido{from{background-position:0 15%,center}to{background-position:98% 75%,center}}
+@keyframes neo-texto-subir{from{opacity:.45;transform:translateY(9px)}to{opacity:1;transform:none}}
+@keyframes neo-selo-brilhar{from{box-shadow:0 0 0 #d1abff00}to{box-shadow:0 0 18px #d1abff45}}
+@keyframes neo-orbita-respirar{from{filter:drop-shadow(0 0 0 #c591ff00)}to{filter:drop-shadow(0 0 18px #b57df53b)}}
+@keyframes neo-acerto-entrar{from{filter:brightness(1.35);transform:scale(.985)}to{filter:brightness(1);transform:scale(1)}}
+@keyframes neo-incorreto-entrar{0%{transform:translateX(0)}35%{transform:translateX(-3px)}75%{transform:translateX(2px)}100%{transform:none}}
+@keyframes neo-progresso-preencher{from{clip-path:inset(0 100% 0 0)}to{clip-path:inset(0)}}
+@media (max-width:680px){
+  body.espaco-estudo .folha-estudo :is(.papel,.atalho,.linha){border-radius:17px}
+}
+@media (prefers-reduced-motion:reduce){
+  body.espaco-estudo .folha-estudo progress{animation:none!important;transform:none}
+}
