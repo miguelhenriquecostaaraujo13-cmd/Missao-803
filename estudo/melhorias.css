@@ -127,3 +127,45 @@ body.quadro-aberto #desenho{position:absolute;display:block;inset:0;width:100%!i
 .resposta-neo:not(:empty){margin:12px 0 20px;padding:20px;border:1px solid #ae86e07a;border-radius:18px;background:linear-gradient(120deg,#2c2042,#21172f);color:#f6edff;line-height:1.7;white-space:pre-wrap;overflow-wrap:anywhere}
 .resposta-neo h2{font:600 1.18rem Sora,Inter,system-ui;margin:0 0 12px;color:#fff}.resposta-neo p{margin:0 0 10px}.resposta-neo small{color:#d9c6ea}
 .aviso-ia{font-size:.79rem;color:#766985;line-height:1.5;margin:12px 0 0}
+
+/* Quadro branco do Neo: animação desenhada automaticamente e aula narrada. */
+body.quadro-aberto .quadro-aula{background:#171223}
+body.quadro-aberto .quadro-aula .aula-barra{gap:10px;min-height:72px;background:#20172d}
+body.quadro-aberto .quadro-aula .aula-assunto{display:flex;align-items:center;gap:8px;color:#ead5fc;font-size:.78rem;min-width:180px}
+body.quadro-aberto .quadro-aula #aula-assunto{width:clamp(170px,24vw,310px);max-width:100%;min-height:40px;margin:0!important;padding:7px 10px;background:#302143;border:1px solid #a78cca;border-radius:10px;color:white;font-size:.83rem}
+body.quadro-aberto .quadro-aula .aula-origem{font-size:.78rem;color:#e4ccff;padding:8px 10px;border:1px solid #815dab;border-radius:12px}
+body.quadro-aberto .quadro-aula .aula-botoes{display:flex;flex-wrap:wrap;gap:6px}
+body.quadro-aberto .quadro-aula .aula-botoes button{min-height:42px;padding:8px 11px;color:white;border:1px solid #8c6dad;border-radius:10px;background:#48315c;font:600 .78rem Inter,system-ui;cursor:pointer;white-space:nowrap}
+body.quadro-aberto .quadro-aula .aula-botoes button:disabled{opacity:.42;cursor:not-allowed}
+body.quadro-aberto .quadro-aula .aula-botoes #aula-play{background:#8f58dc;border-color:#c6a2f7}
+body.quadro-aberto .quadro-aula .palco-automatico{background:#fffefa;background-image:none;min-height:0;position:relative;overflow:hidden}
+body.quadro-aberto .quadro-aula #desenho{width:100%!important;height:100%!important;inset:0!important;touch-action:auto!important;cursor:default!important;background:transparent!important}
+body.quadro-aberto .quadro-aula .indicador-neo-aula{position:absolute;right:16px;bottom:14px;padding:7px 12px;border-radius:999px;background:#483060f0;border:1px solid #b48adc;color:white;font:700 .72rem Inter,system-ui;letter-spacing:.1em;pointer-events:none}
+body.quadro-aberto .quadro-aula .indicador-neo-aula span{color:#dcbbff;font-size:1.1rem}
+body.quadro-aberto .quadro-aula .aula-rodape{display:grid;grid-template-columns:minmax(150px,220px) minmax(0,1fr);gap:9px 18px;align-items:center;min-height:105px;padding:10px 18px max(10px,env(safe-area-inset-bottom));background:#20172d;border-top:1px solid #76509c;color:#f5e9ff}
+body.quadro-aberto .quadro-aula .aula-andamento{display:grid;gap:6px;color:#e2d2f4;font-size:.79rem}
+body.quadro-aberto .quadro-aula .aula-andamento progress{accent-color:#bd93f5;width:100%}
+body.quadro-aberto .quadro-aula .aula-legenda{min-width:0;max-height:15dvh;overflow:auto}
+body.quadro-aberto .quadro-aula .aula-legenda strong{display:block;color:white;font-size:.98rem}
+body.quadro-aberto .quadro-aula .aula-legenda p{margin:3px 0 0;color:#e2d0f0;font-size:.8rem;line-height:1.5;overflow-wrap:anywhere}
+body.quadro-aberto .quadro-aula .aula-aviso{grid-column:1/-1;font-size:.73rem;color:#d4bce9;margin:0}
+@media(max-width:850px){
+body.quadro-aberto .quadro-aula .aula-barra{gap:6px;padding:7px 9px}
+body.quadro-aberto .quadro-aula .aula-botoes{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));width:100%;gap:5px}
+body.quadro-aberto .quadro-aula .aula-botoes button{min-height:40px;font-size:.7rem;padding:6px 4px;white-space:normal}
+body.quadro-aberto .quadro-aula .aula-assunto{flex:1;min-width:110px}
+body.quadro-aberto .quadro-aula #aula-assunto{width:100%;min-width:0}
+body.quadro-aberto .quadro-aula .aula-rodape{grid-template-columns:1fr;gap:5px;min-height:116px;padding:8px 12px max(8px,env(safe-area-inset-bottom))}
+body.quadro-aberto .quadro-aula .aula-andamento{display:flex;align-items:center;gap:12px}
+body.quadro-aberto .quadro-aula .aula-andamento progress{flex:1}
+body.quadro-aberto .quadro-aula .aula-legenda{max-height:10dvh}
+body.quadro-aberto .quadro-aula .aula-legenda strong{font-size:.83rem}
+body.quadro-aberto .quadro-aula .aula-legenda p{font-size:.73rem}
+body.quadro-aberto .quadro-aula .aula-aviso{font-size:.69rem}
+}
+@media(max-width:390px){
+body.quadro-aberto .quadro-aula .quadro-identidade{min-width:70px}
+body.quadro-aberto .quadro-aula .aula-assunto{font-size:0;min-width:90px}
+body.quadro-aberto .quadro-aula .aula-botoes button{font-size:.64rem}
+}
+@media(prefers-reduced-motion:reduce){body.quadro-aberto .quadro-aula *{animation:none!important;transition:none!important}}

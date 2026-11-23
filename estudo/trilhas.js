@@ -156,7 +156,7 @@ const trilhasPersonalizadas=(()=>{
       const feito=t.concluidas.includes(i);
       return '<li style="--ordem:'+i+'" class="'+(feito?'etapa-feita':'')+'"><span class="etapa-numero">'+(feito?'✓':i+1)+'</span><div class="etapa-conteudo"><h2>'+esc(e.titulo)+'</h2><p>'+esc(e.texto)+'</p>'+
       '<button class="'+(feito?'secundario':'principal')+'" type="button" data-trilha-act="passo" data-id="'+esc(id)+'" data-passo="'+i+'">'+(feito?'Reabrir etapa':'Concluir esta etapa')+'</button></div></li>';
-     }).join('')+'</ol><div class="acoes-trilha"><a class="secundario" href="#caderno">Abrir caderno</a><a class="secundario" href="#revisao">Revisar flashcards</a>'+
+     }).join('')+'</ol><div class="acoes-trilha"><a class="principal" href="#quadro/'+esc(t.id)+'">Assistir aula no quadro ✦</a><a class="secundario" href="#caderno">Abrir caderno</a><a class="secundario" href="#revisao">Revisar flashcards</a>'+
      '<button type="button" data-trilha-act="excluir" data-id="'+esc(id)+'" class="excluir-trilha">Excluir trilha</button></div></section>';
  }
  return {preparar,criar,alternar,excluir,lerArquivo,telaLista,telaDetalhe,get lista(){return organizadas();},get mensagem(){return mensagem;}};
