@@ -21,3 +21,8 @@
 .mesa-neo .papel{background:#191528;color:#f7f5ff;border-color:#3a3153}.consulta-neo .papel p,.consulta-neo .papel label{color:#d6cfe5}.consulta-neo .papel h2{color:#f7f5ff}
 
 .personalizar .wizard{align-self:center;min-width:0;margin:12px;padding:clamp(12px,3vw,32px)}.personalizar .portal-luz{min-height:400px}@media(max-width:680px){.personalizar .portal-luz{min-height:0}.personalizar .portal-luz h2,.personalizar .portal-sinal{display:none}}
+
+#acessos-admin{flex-shrink:0;padding:9px 11px;border-radius:11px;background:#2e2149;color:#f6f0ff;text-decoration:none;font:600 .78rem Inter,system-ui,sans-serif;white-space:nowrap}
+#acessos-admin:is(:hover,:focus-visible){background:#563782}
+@media(max-width:680px){#acessos-admin{padding:7px 9px}}
+.aviso-privacidade-acessos{font-size:.8rem;color:#c8bed9;line-height:1.5;margin-top:12px}

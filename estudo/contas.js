@@ -4,8 +4,8 @@ const configuracao = Object.freeze({ url: 'https://mbltrucgwqozrujxifcx.supabase
 const contas = (() => {
   const sdk=new URL('vendor/supabase.js',document.currentScript.src).href;
   const paginaInicial=new URL('../index.html',document.currentScript.src);
-  let cliente, usuario, preferencias, provedores = {}, cadastro = false, recuperando = false;
-  let recado = 'O acesso por conta aguarda um ambiente de homologação. Você já pode estudar como visitante.';
+  let cliente, usuario, preferencias, provedores = {}, cadastro = false, recuperando = false, administrador = false;
+  let recado = 'Entre com sua conta ou continue como visitante.';
   const callback = tipo => {
     const url = new URL(paginaInicial);
     url.searchParams.set('acesso', tipo);
@@ -60,6 +60,13 @@ const contas = (() => {
           else recuperando=location.hash==='#conta/nova-senha'&&sessionStorage.getItem('missao803.redefinir')===usuario;
         } catch {}
       }
+      if(usuario){
+        try{
+          const {data:permissao,error:erroPermissao}=await cliente.from('portal803_admins')
+            .select('user_id').eq('user_id',usuario).maybeSingle();
+          administrador=Boolean(permissao)&&!erroPermissao;
+        }catch{administrador=false;}
+      }
       provedores=config.external||{};cadastro=!config.disable_signup;
       recado=retornoInvalido?'Este link não é mais válido. Solicite outro neste navegador.':'O progresso da conta fica nesta aba até você sair ou fechá-la.';
       if(usuario && !location.pathname.endsWith('QUADRO-NEO-AURORA.html') && (recuperando||!location.hash||location.hash.startsWith('#conta')))history.replaceState(null,'',location.pathname+(recuperando?'#conta/nova-senha':'#painel'));
@@ -103,11 +110,29 @@ const contas = (() => {
       sessionStorage.removeItem('missao803.redefinir');
     } catch {}
   }
+
+  // Conta apenas um navegador por dia; sem IP, localização ou identidade do visitante.
+  async function registrarVisita(){
+    if(!cliente || !globalThis.crypto?.randomUUID)return;
+    const dia=new Intl.DateTimeFormat('sv-SE',{timeZone:'America/Sao_Paulo',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date());
+    let anterior;
+    try{anterior=JSON.parse(localStorage.getItem('missao803.contagem.dia')||'null');}catch{}
+    let token=anterior?.dia===dia && /^[a-f0-9-]{36}$/i.test(anterior?.token||'') ? anterior.token : crypto.randomUUID();
+    try{localStorage.setItem('missao803.contagem.dia',JSON.stringify({dia,token}));}catch{}
+    const {error}=await cliente.rpc('neo_aurora_registrar_visita',{p_token:token});
+    if(error)throw error;
+  }
+  async function relatorioAcessos(){
+    if(!cliente||!usuario||!administrador)throw new Error('Apenas o administrador pode acessar os dados.');
+    const {data,error}=await cliente.rpc('neo_aurora_relatorio_admin');
+    if(error)throw error;
+    return data;
+  }
   async function salvarPreferencias(perfil){
     if(!usuario)return;
     const {error}=await cliente.auth.updateUser({data:{missao_preferencias:perfil}});
     if(error)throw error;
   }
   async function sair(){const {error}=await cliente.auth.signOut({scope:'local'});if(error)throw error;}
-  return {preparar,enviar,social,sair,salvarPreferencias,mensagem,carregar,get preferencias(){return preferencias;},get armazenamento(){return usuario?sessionStorage:localStorage;},get usuario(){return usuario;},get recado(){return recado;},get provedores(){return provedores;},get cadastro(){return cadastro;},get recuperando(){return recuperando;},chave:nome=>usuario?nome+'.conta.'+usuario:nome};
+  return {preparar,enviar,social,sair,salvarPreferencias,registrarVisita,relatorioAcessos,mensagem,carregar,get administrador(){return administrador;},get preferencias(){return preferencias;},get armazenamento(){return usuario?sessionStorage:localStorage;},get usuario(){return usuario;},get recado(){return recado;},get provedores(){return provedores;},get cadastro(){return cadastro;},get recuperando(){return recuperando;},chave:nome=>usuario?nome+'.conta.'+usuario:nome};
 })();

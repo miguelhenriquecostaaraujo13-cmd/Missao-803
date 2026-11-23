@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#35254d">
+<title>Visitas · Administração Missão 8º Ano</title>
+<link rel="icon" type="image/png" href="icons/neo-192.png">
+<link rel="stylesheet" href="estudo/painel-acessos.css">
+<script defer src="estudo/contas.js"></script>
+<script defer src="estudo/painel-acessos.js"></script>
+</head>
+<body>
+<a class="pular" href="#principal">Ir para as estatísticas</a>
+<header class="cabecalho-admin"><a class="voltar" href="./index.html#painel">← Voltar ao Missão 8º Ano</a><span class="identidade-admin">NEO AURORA · ADMINISTRAÇÃO</span></header>
+<main id="principal">
+<section class="apresentacao-admin"><p class="etiqueta">Área restrita</p><h1>Painel de acessos</h1><p>Acompanhe a utilização da plataforma, sem identificar visitantes anônimos.</p></section>
+<p id="estado-admin" class="estado-admin" role="status">Verificando seu acesso de administrador…</p>
+<div id="dados-admin" hidden>
+ <section class="cards-admin" aria-label="Resumo de acessos">
+  <article><span>Visitas hoje</span><strong id="visitas-hoje">—</strong></article>
+  <article><span>Visitas nos últimos 30 dias</span><strong id="visitas-30">—</strong></article>
+  <article><span>Contas que já acessaram</span><strong id="contas-total">—</strong></article>
+  <article><span>Contas ativas nos últimos 30 dias</span><strong id="contas-ativas">—</strong></article>
+ </section>
+ <section class="painel-bloco" aria-labelledby="titulo-grafico"><div class="titulo-bloco"><h2 id="titulo-grafico">Visitas nos últimos 14 dias</h2><button id="atualizar-admin" type="button">Atualizar dados</button></div><div class="grafico-admin" id="grafico-admin" role="img" aria-label="Gráfico de barras com visitas por dia"></div><p class="nota">Um mesmo navegador é contado aproximadamente uma vez por dia. Os números são indicativos, não uma medição exata de pessoas.</p></section>
+ <section class="painel-bloco" aria-labelledby="titulo-usuarios"><h2 id="titulo-usuarios">Últimos acessos de contas</h2><div class="tabela-rolagem"><table><thead><tr><th scope="col">Conta</th><th scope="col">Último acesso</th><th scope="col">Dias ativos</th></tr></thead><tbody id="corpo-contas"></tbody></table></div><p id="sem-contas" class="nota" hidden>Nenhuma conta acessou após a ativação das estatísticas.</p></section>
+ <p class="privacidade-admin">Estatísticas desde a ativação deste painel. Os dados de contas são restritos ao administrador; não armazenamos IP ou localização de visitantes. Não compartilhe capturas contendo e-mails de alunos.</p>
+</div>
+</main>
+</body>
+</html>

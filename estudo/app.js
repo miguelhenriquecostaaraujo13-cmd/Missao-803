@@ -83,7 +83,7 @@
       ${modo==='nova-senha'?'':'<label>E-mail<input type="email" name="email" autocomplete="email" required></label>'}
       ${modo==='recuperar'?'':'<label>Senha<input type="password" name="senha" autocomplete="'+(modo==='entrar'?'current-password':'new-password')+'" required '+(modo==='entrar'?'':'minlength="8"')+'></label>'}
       <button class="principal" ${habilitado?'':'disabled'}>${modo==='recuperar'?'Enviar link de recuperação':nome}</button></fieldset></form>
-      <p id="status-conta" role="status">${esc(contas.recado)}</p>
+      <p id="status-conta" role="status">${esc(contas.recado)}</p><p class="aviso-privacidade-acessos">Acessos de contas podem aparecer no painel privado do administrador. Visitantes sem login são contados anonimamente, sem identificação pessoal.</p>
       ${modo==='nova-senha'?'':`<div class="provedores">${['Google','Apple'].filter(p=>contas.provedores[p.toLowerCase()]).map(p=>{const id=p.toLowerCase();return '<button type="button" data-act="provedor" data-value="'+id+'" '+(contas.provedores[id]?'':'disabled')+'>Continuar com '+p+(contas.provedores[id]?'':' · Indisponível')+'</button>';}).join('')}</div>
       ${perfil()?link('Voltar ao meu painel','painel'):'<button class="visitante-discreto" data-act="começar">Continuar como visitante</button>'}`}`}</div></section>`;
   }

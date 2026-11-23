@@ -30,6 +30,7 @@
     <a class="marca" href="#painel" aria-label="Missão 8º Ano, início"><span class="marca-icone" aria-hidden="true">✦</span>Missão <strong>8º Ano</strong></a>
     <button id="menu" aria-controls="nav" aria-expanded="false" hidden>Menu</button>
     <nav id="nav" aria-label="Navegação principal"></nav>
+    <a id="acessos-admin" href="admin.html" hidden>Painel de acessos</a>
     <button id="ver-atlas" hidden>Explorar estações</button>
   </header>
   <main id="principal" tabindex="-1"></main>
@@ -41,6 +42,8 @@
   <script>
     (async () => {
       await contas.preparar();
+      if(contas.administrador)document.querySelector('#acessos-admin').hidden=false;
+      void contas.registrarVisita().catch(()=>{});
       for (const fonte of ['conteudos/banco.js','propostas/visitante.js','estudo/dados.js','estudo/tutor.js','estudo/quadro.js','estudo/atlas.js','estudo/apresentacao.js','estudo/celebracoes.js','estudo/ilustracoes.js','estudo/app.js','estudo/conexao.js']) await contas.carregar(fonte);
     })().catch(()=>{document.querySelector('#persistencia').textContent='Uma parte do site não carregou. Confira a conexão e recarregue a página.';});
   </script>
