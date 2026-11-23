@@ -73,9 +73,13 @@ const contas = (() => {
   function mensagem(erro) {
     const codigo=erro?.code;
     if(codigo==='invalid_credentials')return 'Confira seu e-mail e sua senha.';
-    if(codigo==='email_not_confirmed')return 'Confirme o endereço pelo link enviado ao seu e-mail.';
+    if(codigo==='email_not_confirmed')return 'Sua conta precisa da confirmação enviada por e-mail. Confira também a caixa de spam.';
+    if(codigo==='email_address_not_authorized')return 'O serviço de e-mails ainda não aceita este destinatário. É necessário configurar SMTP no Supabase para liberar cadastros da turma.';
+    if(codigo==='over_email_send_rate_limit')return 'O servidor bloqueou temporariamente novos e-mails. Evite pedir vários links seguidos e tente mais tarde. Se persistir, será necessário configurar o envio SMTP no Supabase.';
+    if(codigo==='over_request_rate_limit')return 'Muitas solicitações de login. Aguarde antes de tentar novamente.';
+    if(codigo==='signup_disabled')return 'O cadastro de novas contas está desativado no servidor.';
     if(codigo==='weak_password')return 'Escolha uma senha mais forte e tente outra vez.';
-    if(erro?.status===429)return 'Houve muitas tentativas. Aguarde alguns minutos.';
+    if(erro?.status===429)return 'Limite temporário de tentativas atingido. Aguarde antes de tentar novamente.';
     if(erro?.message?.startsWith('Seu progresso ainda não foi sincronizado.'))return erro.message;
     return 'A solicitação não foi concluída. Verifique a conexão e tente novamente.';
   }
