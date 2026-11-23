@@ -20,7 +20,11 @@ body.espaco-estudo:not(.quadro-aberto)::before{
              radial-gradient(ellipse 33% 35% at 8% 80%,#712feb14,transparent 85%);
   opacity:.82;
 }
-body.espaco-estudo:not(.quadro-aberto) > :is(.topo,#principal,.rodape-aurora,#persistencia){position:relative;z-index:1}
+/* Ordem de camadas sem :is com ID (que elevava especificidade e cobria o menu). */
+body.espaco-estudo:not(.quadro-aberto) > #principal,
+body.espaco-estudo:not(.quadro-aberto) > .rodape-aurora,
+body.espaco-estudo:not(.quadro-aberto) > #persistencia {position:relative;z-index:1}
+body.espaco-estudo:not(.quadro-aberto) > header.topo{position:relative;z-index:120;overflow:visible}
 body.espaco-estudo .topo{
   max-width:min(100% - 24px,1380px);margin:12px auto 0;
   border:1px solid #8664b943;border-radius:20px;
@@ -418,3 +422,31 @@ body.quieto.espaco-estudo .folha-estudo .wizard [data-campo]{transition:none!imp
   font:700 .56rem/1.2 Inter,system-ui,sans-serif;letter-spacing:.08em
 }
 @media(max-width:420px){.topo .marca::after{font-size:.47rem;margin-left:2px;padding:2px 5px}}
+
+
+/* Menu acima do palco em computador e celular */
+body.espaco-estudo:not(.quadro-aberto) > header.topo{z-index:120;overflow:visible}
+body.espaco-estudo:not(.quadro-aberto) #nav.menu-estudos{
+ z-index:121;opacity:1;
+ top:calc(100% + 8px);
+ background:linear-gradient(150deg,#29193eeF,#100a20f8);
+ border:1px solid #b88af077;box-shadow:0 24px 58px #090313d9,inset 0 1px #fff2;
+ backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+ max-height:min(72dvh,660px);overscroll-behavior:contain;
+}
+body.espaco-estudo:not(.quadro-aberto) #nav.menu-estudos[hidden]{display:none!important}
+body.espaco-estudo #nav.menu-estudos a[aria-current=page]{
+ background:linear-gradient(118deg,#a978ed50,#57358e45);border-color:#bb94f35a
+}
+@media(max-width:740px){
+ body.espaco-estudo #nav.menu-estudos{
+  right:0;left:auto;
+  width:min(calc(100vw - 20px),465px);
+  max-width:100%;grid-template-columns:1fr;
+  padding:12px;top:calc(100% + 5px);
+ }
+ body.espaco-estudo #nav.menu-estudos .menu-grupo>div{
+  grid-template-columns:repeat(2,minmax(0,1fr));gap:5px
+ }
+ body.espaco-estudo #nav.menu-estudos .menu-grupo a{min-width:0;overflow-wrap:anywhere;font-size:.82rem}
+}
