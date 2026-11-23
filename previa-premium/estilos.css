@@ -358,3 +358,15 @@ body.quieto.espaco-estudo::before,body.quieto.espaco-estudo .trilha-gerada *{ani
 html.alto-contraste body.espaco-estudo .folha-estudo :is(.papel,.atalho,.amostra,.linha,.trilha li){
   background:#0b0715;border-color:#dfc7ff;box-shadow:none
 }
+
+/* Estado visivel enquanto a inicializacao real do app acontece; sem tela vazia. */
+.neo-carregamento{
+  width:min(100% - 30px,760px);margin:clamp(44px,11vh,110px) auto;
+  padding:clamp(28px,5vw,60px);border:1px solid #9b75c264;
+  border-radius:25px;background:radial-gradient(ellipse at 85% 12%,#7847bc52,transparent 65%),#151025;
+  box-shadow:0 20px 70px #08031483;color:#f5edff;text-align:center;
+}
+.neo-carregamento .rotulo{color:#caa6ff;justify-content:center}
+.neo-carregamento h1{font:600 clamp(1.6rem,4vw,2.6rem)/1.13 Sora,Inter,sans-serif;letter-spacing:-.055em;color:#fff}
+.neo-carregamento p{color:#cbbbe0}
+.neo-carregamento a{margin-top:18px;display:inline-flex}
