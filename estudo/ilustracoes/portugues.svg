@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 152" width="320" height="152" role="img">
+  <title>O pronome ela retoma o nome Lia em duas frases.</title>
+  <defs>
+    <radialGradient id="f" cx=".28" cy=".15" r=".96"><stop stop-color="#F08EA0" stop-opacity=".23"/><stop offset="1" stop-color="#151225" stop-opacity="0"/></radialGradient>
+    <linearGradient id="t" x2="1" y2="1" gradientUnits="objectBoundingBox"><stop stop-color="#F08EA0" stop-opacity=".31"/><stop offset="1" stop-color="#F08EA0" stop-opacity=".06"/></linearGradient>
+    <radialGradient id="p" cx=".28" cy=".24" r=".83"><stop stop-color="#CAE4FF"/><stop offset=".45" stop-color="#558ECF"/><stop offset="1" stop-color="#25305A"/></radialGradient>
+    <pattern id="g" width="16" height="16" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r=".7" fill="#BDB6D4" opacity=".3"/></pattern>
+  </defs>
+  <rect width="320" height="152" fill="#151225"/><rect width="320" height="152" fill="url(#f)"/><rect width="320" height="152" fill="url(#g)"/>
+  <g font-family="system-ui,sans-serif"><g font-size="20" fill="#F7F5FF"><text x="37" y="63">Lia chegou.</text><text x="132" y="109">Ela leu o conto.</text></g><path d="M37 72h29c28 0 21 43 58 43h18" stroke="#F08EA0" fill="none" stroke-width="2"/><path d="m135 111 8 4-8 5" fill="none" stroke="#F08EA0"/><circle cx="37" cy="72" r="3" fill="#F08EA0"/></g>
+</svg>

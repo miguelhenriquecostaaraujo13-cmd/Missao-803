@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 152" width="320" height="152" role="img">
+  <title>Trajetória de uma bola em um arremesso até a cesta.</title>
+  <defs>
+    <radialGradient id="f" cx=".28" cy=".15" r=".96"><stop stop-color="#6EDAC4" stop-opacity=".23"/><stop offset="1" stop-color="#151225" stop-opacity="0"/></radialGradient>
+    <linearGradient id="t" x2="1" y2="1" gradientUnits="objectBoundingBox"><stop stop-color="#6EDAC4" stop-opacity=".31"/><stop offset="1" stop-color="#6EDAC4" stop-opacity=".06"/></linearGradient>
+    <radialGradient id="p" cx=".28" cy=".24" r=".83"><stop stop-color="#CAE4FF"/><stop offset=".45" stop-color="#558ECF"/><stop offset="1" stop-color="#25305A"/></radialGradient>
+    <pattern id="g" width="16" height="16" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r=".7" fill="#BDB6D4" opacity=".3"/></pattern>
+  </defs>
+  <rect width="320" height="152" fill="#151225"/><rect width="320" height="152" fill="url(#f)"/><rect width="320" height="152" fill="url(#g)"/>
+  <g font-family="system-ui,sans-serif"><path d="M40 120Q132 -38 249 77" stroke="#6EDAC4" stroke-width="2" fill="none" stroke-dasharray="4 5"/><g fill="#6EDAC4" opacity=".5"><circle cx="61" cy="91" r="4"/><circle cx="106" cy="51" r="5"/></g><g transform="translate(166 39)"><circle r="13" fill="#F2C777"/><path d="M-13 0h26M0-13v26m-9-22q13 9 0 19m17-20q-10 11 0 20" fill="none" stroke="#704719"/></g><path d="M269 44v40h-34m4 0 4 19h15l6-19m6-9h-35" fill="none" stroke="#DAD2F2" stroke-width="2"/></g>
+</svg>
