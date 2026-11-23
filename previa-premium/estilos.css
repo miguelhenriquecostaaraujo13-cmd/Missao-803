@@ -370,3 +370,42 @@ html.alto-contraste body.espaco-estudo .folha-estudo :is(.papel,.atalho,.amostra
 .neo-carregamento h1{font:600 clamp(1.6rem,4vw,2.6rem)/1.13 Sora,Inter,sans-serif;letter-spacing:-.055em;color:#fff}
 .neo-carregamento p{color:#cbbbe0}
 .neo-carregamento a{margin-top:18px;display:inline-flex}
+
+/* Ajustes UX 23/11: camada superior, selecao visivel e conteudo sempre legivel. */
+body.espaco-estudo:not(.quadro-aberto) > header.topo{
+  z-index:80;position:relative;overflow:visible;
+}
+body.espaco-estudo:not(.quadro-aberto) > #principal{z-index:1}
+body.espaco-estudo:not(.quadro-aberto) #nav.menu-estudos{
+  z-index:90;isolation:isolate;
+  box-shadow:0 24px 70px #080315dd,0 0 0 1px #bd8bef39;
+}
+body.espaco-estudo:not(.quadro-aberto) #menu[aria-expanded="true"]{
+  border-color:#dab2ff;background:#5c357d;color:#fff;
+}
+body.espaco-estudo .conteudo .cab > *{
+  position:relative;z-index:2;
+}
+body.espaco-estudo .conteudo .cab::before,
+body.espaco-estudo .conteudo .cab::after{
+  pointer-events:none;
+}
+body.espaco-estudo .folha-estudo .wizard button[data-campo][aria-pressed="true"],
+body.espaco-estudo .folha-estudo .wizard .choices [aria-pressed="true"],
+body.espaco-estudo .folha-estudo [data-campo][aria-pressed="true"]{
+  border:2px solid #d7aeff!important;
+  outline:2px solid #b47aff!important;outline-offset:1px!important;
+  background:linear-gradient(140deg,#64418d,#482c70)!important;
+  color:#fff!important;
+  box-shadow:inset 0 1px 0 #ffffff42,0 0 0 4px #aa6aea27,0 0 22px #bb7dff4d!important;
+}
+body.espaco-estudo .folha-estudo .wizard [data-campo][aria-pressed="true"] :is(span,strong,small){
+  color:inherit!important;
+}
+body.espaco-estudo .folha-estudo .wizard [data-campo]{
+  transition:background-color .18s,border-color .18s,box-shadow .18s;
+}
+@media(prefers-reduced-motion:reduce){
+  body.espaco-estudo .folha-estudo .wizard [data-campo]{transition:none!important}
+}
+body.quieto.espaco-estudo .folha-estudo .wizard [data-campo]{transition:none!important}
