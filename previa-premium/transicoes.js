@@ -98,7 +98,7 @@ const movimentoNeo = (() => {
       limparObservador();
       atualizar();
       if(mudou)scrollInicio();
-      if(ativo()&&rotasEstudo.has(proxima))animarEntrada(principal(),entradaPermitida);
+      if(ativo()&&rotasEstudo.has(proxima))animarEntrada(principal(),entradaPermitida||anterior===null);
     };
     if(!incluirAnimacao||typeof document.startViewTransition!=='function'){
       atualizarTela();
