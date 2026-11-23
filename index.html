@@ -37,7 +37,7 @@
     <a id="acessos-admin" href="admin.html" hidden>Painel de acessos</a>
     <button id="ver-atlas" hidden>Explorar estações</button>
   </header>
-  <main id="principal" tabindex="-1"></main>
+  <main id="principal" tabindex="-1"><section class="neo-carregamento" role="status" aria-live="polite"><p class="rotulo">Neo Aurora</p><h1>Preparando seu espaço de estudos…</h1><p>Carregando suas ferramentas e preferências.</p></section></main>
   <p id="persistencia" class="avisos" role="status"></p>
   <footer class="rodape-aurora" data-inicio="#aurora" aria-label="Rodapé"></footer>
   <script src="estudo/identidade.js"></script>
@@ -50,7 +50,7 @@
       if(contas.administrador)document.querySelector('#acessos-admin').hidden=false;
       void contas.registrarVisita().catch(()=>{});
       for (const fonte of ['conteudos/banco.js','propostas/visitante.js','estudo/dados.js','estudo/trilhas.js','estudo/tutor.js','estudo/quadro.js','estudo/atlas.js','estudo/apresentacao.js','estudo/celebracoes.js','estudo/ilustracoes.js','estudo/transicoes.js','estudo/app.js','estudo/conexao.js']) {await contas.carregar(fonte);if(fonte==='estudo/trilhas.js')await trilhasPersonalizadas.preparar();}
-    })().catch(()=>{document.querySelector('#persistencia').textContent='Uma parte do site não carregou. Confira a conexão e recarregue a página.';});
+    })().catch(()=>{document.querySelector('#persistencia').textContent='Não foi possível carregar todas as ferramentas.'; const area=document.querySelector('#principal');if(area && area.querySelector('.neo-carregamento')){area.innerHTML='<section class="neo-carregamento" role="alert"><p class="rotulo">Falha no carregamento</p><h1>O painel não carregou por completo.</h1><p>Confira a conexão e tente novamente. Seus dados não foram apagados.</p><a class="principal" href="?recarregar=1">Tentar novamente</a></section>';}});
   </script>
 </body>
 </html>
