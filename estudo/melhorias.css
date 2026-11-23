@@ -169,3 +169,83 @@ body.quadro-aberto .quadro-aula .aula-assunto{font-size:0;min-width:90px}
 body.quadro-aberto .quadro-aula .aula-botoes button{font-size:.64rem}
 }
 @media(prefers-reduced-motion:reduce){body.quadro-aberto .quadro-aula *{animation:none!important;transition:none!important}}
+
+/* Quadro Vivo v2 — papel pontilhado contínuo, escrita progressiva, foco e voz.
+   Visuais originais do Neo Aurora; não inclui assets do Knowunity. */
+body.quadro-aberto .quadro-vivo{position:relative;isolation:isolate;height:100dvh;width:100%;display:grid;grid-template-rows:auto minmax(0,1fr) auto;min-height:0;overflow:hidden;background:#fdfbff;color:#2f213d;font-family:Inter,system-ui,sans-serif}
+body.quadro-aberto .quadro-vivo-topo{position:relative;z-index:6;display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:9px clamp(10px,2vw,22px);background:linear-gradient(120deg,#fffffff2,#f8f2fff0);border-bottom:1px solid #ccb6e0;box-shadow:0 3px 12px #27113810;backdrop-filter:blur(15px)}
+body.quadro-aberto .quadro-vivo-sair{flex:none;display:grid;place-items:center;min-height:40px;min-width:40px;background:#221932;color:white!important;border-radius:999px;text-decoration:none;font-size:1.15rem;border:1px solid #6b4d91}
+body.quadro-aberto .quadro-vivo-marca{display:flex;align-items:center;gap:8px;min-width:132px;margin-right:auto}
+body.quadro-aberto .quadro-vivo-mascote{display:grid;place-items:center;width:36px;height:36px;background:#673da5;color:#ffeaff;border-radius:14px;font-size:1.35rem;box-shadow:0 2px 14px #8f5bca40}
+body.quadro-aberto .quadro-vivo-marca small{display:block;font-size:.58rem;line-height:1.2;letter-spacing:.13em;color:#8b65a9;font-weight:750}
+body.quadro-aberto .quadro-vivo-marca strong{display:block;font:650 .93rem/1.3 Inter,system-ui;color:#2c1e3a}
+body.quadro-aberto .quadro-vivo-controles{display:flex;align-items:center;flex-wrap:wrap;gap:6px}
+body.quadro-aberto .quadro-vivo-controles button{display:inline-flex;justify-content:center;align-items:center;min-height:42px;padding:8px 11px;border-radius:14px;border:1px solid #bca4d3;background:#fff;color:#392549;font:650 .78rem/1.2 Inter,system-ui;white-space:nowrap;cursor:pointer;transition:background .2s,border-color .2s}
+body.quadro-aberto .quadro-vivo-controles button[aria-pressed=true]{border-color:#a078d0;background:#eee2fc;color:#552984}
+body.quadro-aberto .quadro-vivo-controles button:hover{background:#f0e7fb}
+body.quadro-aberto .quadro-vivo-area{position:relative;min-height:0;min-width:0;overflow-y:auto;overflow-x:auto;overscroll-behavior:contain;scrollbar-color:#cab0e1 transparent;background:#fcfbff;background-image:radial-gradient(circle,#e2dbea 1px,transparent 1px);background-size:24px 24px}
+body.quadro-aberto .quadro-vivo-folha{position:relative;width:100%;min-height:100%;padding:18px clamp(10px,4vw,50px) 50px;display:flex;flex-direction:column;align-items:stretch;gap:6px}
+body.quadro-aberto .vivo-parte{position:relative;flex:none;min-width:0;height:clamp(290px,45dvh,370px);overflow:visible;border-bottom:1px dashed #d4c5e15c}
+body.quadro-aberto .vivo-parte:last-child{border-bottom-color:transparent}
+body.quadro-aberto .vivo-canvas{display:block;width:100%;height:100%;max-width:none!important;max-height:none!important;touch-action:pan-y;pointer-events:none;background:transparent!important;border:none!important;border-radius:0!important;box-shadow:none!important}
+body.quadro-aberto .quadro-vivo-rodape{position:relative;z-index:6;display:grid;grid-template-columns:1fr;gap:6px;min-height:0;padding:7px clamp(10px,2vw,22px) max(10px,env(safe-area-inset-bottom));background:#fefcff;box-shadow:0 -4px 28px #38214a1e;border-top:1px solid #d5c4e2}
+body.quadro-aberto .quadro-vivo-andamento{display:flex;align-items:center;gap:7px;flex-wrap:wrap;min-height:38px}
+body.quadro-aberto .quadro-vivo-andamento>span{font-size:.78rem;color:#6a487e;font-weight:700;white-space:nowrap}
+body.quadro-aberto .quadro-vivo-andamento progress{flex:1;min-width:80px;max-width:400px;height:7px;accent-color:#9160cf;margin:0}
+body.quadro-aberto .quadro-vivo-andamento button{display:grid;place-items:center;width:37px;height:37px;min-height:37px;min-width:37px;border-radius:10px;background:#efe5fc;color:#573077;border:1px solid #bea5d9;padding:0;font:700 1.18rem Inter,system-ui;cursor:pointer}
+body.quadro-aberto .quadro-vivo-andamento button:disabled{opacity:.35;cursor:default}
+body.quadro-aberto .quadro-vivo-velocidade{font-size:.7rem;display:flex;align-items:center;gap:5px;color:#776083}
+body.quadro-aberto .quadro-vivo-velocidade select{padding:6px;width:74px;min-height:36px;margin:0!important;border-radius:9px;border:1px solid #c4abd7;background:white;color:#4c345f;font-size:.75rem}
+body.quadro-aberto .quadro-vivo-legenda{display:flex;align-items:flex-start;gap:9px;overflow:hidden;min-height:22px;max-height:70px}
+body.quadro-aberto .quadro-vivo-legenda strong{flex:none;max-width:30%;font-size:.79rem;color:#4b2570;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+body.quadro-aberto .quadro-vivo-legenda p{min-width:0;font-size:.75rem;color:#665873;line-height:1.45;margin:0;overflow:hidden;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2}
+body.quadro-aberto .quadro-vivo-pergunta{display:flex;align-items:center;gap:5px;min-height:49px;margin:0!important;padding:4px 5px 4px 14px;border-radius:18px;background:#21172f;border:1px solid #4a315e;box-shadow:0 5px 18px #39224e24}
+body.quadro-aberto .quadro-vivo-pergunta input{flex:1;min-width:0;min-height:37px;width:auto!important;margin:0!important;padding:4px 8px!important;border:0!important;outline-offset:2px;color:#fff!important;background:transparent!important;box-shadow:none!important;font:450 .88rem Inter,system-ui}
+body.quadro-aberto .quadro-vivo-pergunta input::placeholder{color:#c4b5d5!important;opacity:1}
+body.quadro-aberto .quadro-vivo-pergunta button{flex:none;display:grid;place-items:center;min-width:40px;min-height:40px;padding:4px;border-radius:13px;border:1px solid #8162a9;background:#4c3667;color:#fff;font-size:1.05rem;cursor:pointer}
+body.quadro-aberto .quadro-vivo-pergunta #vivo-enviar{background:linear-gradient(135deg,#a469ec,#7b42d0);border-color:#ad80e9}
+body.quadro-aberto .quadro-vivo-pergunta button[hidden]{display:none}
+body.quadro-aberto .quadro-vivo-extra{display:flex;align-items:center;justify-content:space-between;gap:9px;min-height:20px}
+body.quadro-aberto .quadro-vivo-extra #vivo-aviso{font-size:.7rem;line-height:1.35;color:#755f87;flex:1}
+body.quadro-aberto .quadro-vivo-extra #vivo-historico{max-width:180px;min-width:105px;width:auto;margin:0!important;padding:3px 7px;border-radius:9px;border:1px solid #d2bce3;background:white;color:#5a4071;font-size:.69rem;min-height:26px}
+body.quadro-aberto .quadro-vivo :is(button,a,input,select):focus-visible{outline:3px solid #ba79f5;outline-offset:2px}
+@media(max-width:680px){
+ body.quadro-aberto .quadro-vivo-topo{padding:6px 9px;gap:6px}
+ body.quadro-aberto .quadro-vivo-marca{min-width:100px}
+ body.quadro-aberto .quadro-vivo-marca strong{font-size:.79rem}
+ body.quadro-aberto .quadro-vivo-mascote{width:30px;height:30px;font-size:1.05rem}
+ body.quadro-aberto .quadro-vivo-sair{min-width:38px;min-height:38px}
+ body.quadro-aberto .quadro-vivo-controles{flex:1;justify-content:flex-end;gap:4px}
+ body.quadro-aberto .quadro-vivo-controles button{padding:6px 7px;min-height:38px;font-size:.67rem;white-space:normal}
+ body.quadro-aberto .quadro-vivo-folha{padding:7px 9px 36px}
+ body.quadro-aberto .vivo-parte{height:clamp(360px,53dvh,410px)}
+ body.quadro-aberto .quadro-vivo-rodape{padding:6px 8px max(8px,env(safe-area-inset-bottom));gap:5px}
+ body.quadro-aberto .quadro-vivo-andamento{gap:5px}
+ body.quadro-aberto .quadro-vivo-andamento>span{font-size:.7rem}
+ body.quadro-aberto .quadro-vivo-andamento progress{min-width:42px;max-width:none}
+ body.quadro-aberto .quadro-vivo-andamento button{width:32px;min-width:32px;height:32px;min-height:32px;font-size:1rem}
+ body.quadro-aberto .quadro-vivo-velocidade{font-size:.62rem}
+ body.quadro-aberto .quadro-vivo-velocidade select{width:60px;min-height:32px;font-size:.69rem}
+ body.quadro-aberto .quadro-vivo-legenda{max-height:48px}
+ body.quadro-aberto .quadro-vivo-legenda strong{max-width:32%;font-size:.73rem}
+ body.quadro-aberto .quadro-vivo-legenda p{font-size:.68rem}
+ body.quadro-aberto .quadro-vivo-pergunta{min-height:44px;padding:3px 4px 3px 8px;border-radius:14px}
+ body.quadro-aberto .quadro-vivo-pergunta input{font-size:.78rem;min-height:32px}
+ body.quadro-aberto .quadro-vivo-pergunta button{min-height:36px;min-width:36px;font-size:.9rem}
+ body.quadro-aberto .quadro-vivo-extra #vivo-aviso{font-size:.64rem}
+ body.quadro-aberto .quadro-vivo-extra #vivo-historico{max-width:112px;min-width:90px;font-size:.65rem}
+}
+@media(max-height:520px){
+ body.quadro-aberto .quadro-vivo-topo{padding-block:2px}
+ body.quadro-aberto .quadro-vivo-marca small{display:none}
+ body.quadro-aberto .quadro-vivo-marca strong{font-size:.72rem}
+ body.quadro-aberto .quadro-vivo-controles button{min-height:30px}
+ body.quadro-aberto .quadro-vivo-rodape{padding-block:3px;gap:2px}
+ body.quadro-aberto .quadro-vivo-legenda,.quadro-vivo-extra{display:none!important}
+ body.quadro-aberto .quadro-vivo-andamento{min-height:32px}
+ body.quadro-aberto .quadro-vivo-pergunta{min-height:39px}
+ body.quadro-aberto .vivo-parte{height:360px}
+}
+@media(prefers-reduced-motion:reduce){
+ body.quadro-aberto .quadro-vivo *{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+}
