@@ -1,0 +1,73 @@
+/* Os estados de interação são compartilhados entre a plataforma e o quadro guiado. */
+:where(button, .principal, .secundario, .actions a, nav a) {
+  transition: background-color var(--tempo-controle), border-color var(--tempo-controle), box-shadow var(--tempo-controle), transform var(--tempo-controle) var(--curva-controle);
+}
+.chamadas .acao-aurora, .chamadas .acao-vidro {
+  min-height: 50px;
+  padding: 6px 7px 6px 19px;
+  gap: 15px;
+  border-radius: 15px;
+  font-weight: 650;
+  letter-spacing: .005em;
+}
+.chamadas .acao-aurora {
+  background: linear-gradient(140deg,#8546e7 0%,#7135db 50%,#5825bd 100%);
+  border: 1px solid #c4a0ffbc;
+  box-shadow: inset 0 1px 0 #ffffff45, inset 0 -2px 5px #48228b77, 0 5px 18px #15092766;
+}
+.chamadas .acao-vidro {
+  background: linear-gradient(145deg,#443856df,#211b32ec);
+  border-color: #c1b1cf80;
+  box-shadow: inset 0 1px 0 #ffffff24, 0 5px 16px #10092344;
+  backdrop-filter: blur(7px);
+}
+.chamadas b {
+  display: inline-grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 10px;
+  background: #ffffff19;
+  border: 1px solid #ffffff29;
+  font-size: 1.05em;
+}
+.conteudo .principal, .conteudo .secundario, .controls button, .actions a {
+  border-radius: 11px;
+  box-shadow: inset 0 1px 0 #ffffff30, 0 2px 5px #251b3912;
+}
+.topo #nav a[aria-current=page] {box-shadow: inset 0 -2px 0 #9372c3}
+input:not([type=checkbox],[type=radio],[type=range]),select,textarea {
+  transition: box-shadow .18s, border-color .18s;
+}
+:is(input,select,textarea):focus-visible {border-color: #75509d;box-shadow: 0 0 0 3px var(--halo-controle)}
+:is(button,a,select,input,textarea,summary):focus-visible {outline: 3px solid #9d5a00;outline-offset: 3px}
+.cinema :focus-visible,.apresentando .topo :focus-visible {outline-color: #ffe2a4}
+button:disabled:not(.correta) {cursor: not-allowed;box-shadow: none;filter: saturate(.45)}
+button[aria-busy=true] {cursor: progress}
+button[aria-busy=true]::after {
+  content: "";display: inline-block;width: .8em;height: .8em;margin-inline-start: .5em;border: 2px solid currentColor;border-right-color: transparent;border-radius: 50%;
+  animation: aguardando .75s linear infinite;
+}
+.materiais input:checked + span {text-decoration: line-through}
+@media(hover:hover) and (pointer:fine) {
+  .chamadas .acao-aurora:hover {box-shadow: inset 0 1px 0 #ffffff65,0 5px 23px #a470f15c;transform: translateY(-2px)}
+  .chamadas .acao-vidro:hover {border-color: #d9c7f3b0;box-shadow: inset 0 1px 0 #ffffff30,0 5px 17px #17102780}
+  .conteudo :is(.secundario,.principal):hover,.controls button:enabled:hover {box-shadow: 0 3px 11px #36204c24}
+  .ramificacoes button:hover,.alternativas button:enabled:hover {border-color: #9175aa}
+}
+.chamadas :is(button,a):active,.conteudo button:enabled:active,.controls button:enabled:active {transform: translateY(1px) scale(.985)}
+@keyframes aguardando {to {transform: rotate(1turn)}}
+@keyframes surgir-controle {from {opacity: .48;transform: translateY(4px)}to {opacity: 1;transform: none}}
+@keyframes acender-progresso {from {clip-path: inset(0 100% 0 0)}to {clip-path: inset(0)}}
+@media(prefers-reduced-motion:no-preference) {
+  .conteudo :is(.metricas div,.mes h2,.pergunta .correta,.wizard [aria-pressed=true],.neo-ajuda .figura,.ramificacoes [aria-pressed=true]) {animation: surgir-controle .28s var(--curva-controle) both}
+  .conteudo .metricas div:nth-child(2) {animation-delay: 35ms}
+  .conteudo .metricas div:nth-child(3) {animation-delay: 70ms}
+  .conteudo progress {animation: acender-progresso .45s var(--curva-controle) both}
+}
+@media(pointer:coarse) {
+  .recolher-neo,.passo-hero,.reiniciar-hero,.opcoes-hero button,.controls button,#nav a {min-height:44px}
+}
+@media(max-width:400px) {.chamadas .acao-aurora,.chamadas .acao-vidro {min-height:46px;padding:5px 6px 5px 14px}.chamadas b{width:28px;height:28px}}
+@media(prefers-reduced-motion:reduce) {*,*::before,*::after {animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+.quieto,.quieto *,.quieto *::after,.quieto *::before {animation:none!important;transition:none!important;scroll-behavior:auto!important}

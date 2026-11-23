@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 152" width="320" height="152" role="img">
+  <title>Curvas de nível fechadas com cotas de 100, 200 e 300 metros.</title>
+  <defs>
+    <radialGradient id="f" cx=".28" cy=".15" r=".96"><stop stop-color="#6EDAC4" stop-opacity=".23"/><stop offset="1" stop-color="#151225" stop-opacity="0"/></radialGradient>
+    <linearGradient id="t" x2="1" y2="1" gradientUnits="objectBoundingBox"><stop stop-color="#6EDAC4" stop-opacity=".31"/><stop offset="1" stop-color="#6EDAC4" stop-opacity=".06"/></linearGradient>
+    <radialGradient id="p" cx=".28" cy=".24" r=".83"><stop stop-color="#CAE4FF"/><stop offset=".45" stop-color="#558ECF"/><stop offset="1" stop-color="#25305A"/></radialGradient>
+    <pattern id="g" width="16" height="16" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r=".7" fill="#BDB6D4" opacity=".3"/></pattern>
+  </defs>
+  <rect width="320" height="152" fill="#151225"/><rect width="320" height="152" fill="url(#f)"/><rect width="320" height="152" fill="url(#g)"/>
+  <g font-family="system-ui,sans-serif"><g stroke="#6EDAC4" fill="url(#t)"><path d="M38 98Q48 52 113 45T197 27Q245 18 288 56T274 109Q247 134 190 125T101 131Q43 144 38 98Z"/><path d="M67 97Q70 66 122 60T197 42Q236 32 263 61T247 99Q225 112 183 108T110 114Q69 120 67 97Z"/><path d="M104 92Q106 78 140 73T202 55Q229 51 238 69T217 87Q200 97 178 91T135 98Q111 105 104 92Z"/></g><g fill="#F7F5FF" font-size="11" stroke="#151225" stroke-width="3" paint-order="stroke"><text x="53" y="116">100 m</text><text x="163" y="113">200 m</text><text x="188" y="83">300 m</text></g></g>
+</svg>

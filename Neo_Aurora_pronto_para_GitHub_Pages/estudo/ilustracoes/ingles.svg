@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 152" width="320" height="152" role="img">
+  <title>Since indica o início de um intervalo que chega ao presente.</title>
+  <defs>
+    <radialGradient id="f" cx=".28" cy=".15" r=".96"><stop stop-color="#81B7FF" stop-opacity=".23"/><stop offset="1" stop-color="#151225" stop-opacity="0"/></radialGradient>
+    <linearGradient id="t" x2="1" y2="1" gradientUnits="objectBoundingBox"><stop stop-color="#81B7FF" stop-opacity=".31"/><stop offset="1" stop-color="#81B7FF" stop-opacity=".06"/></linearGradient>
+    <radialGradient id="p" cx=".28" cy=".24" r=".83"><stop stop-color="#CAE4FF"/><stop offset=".45" stop-color="#558ECF"/><stop offset="1" stop-color="#25305A"/></radialGradient>
+    <pattern id="g" width="16" height="16" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r=".7" fill="#BDB6D4" opacity=".3"/></pattern>
+  </defs>
+  <rect width="320" height="152" fill="#151225"/><rect width="320" height="152" fill="url(#f)"/><rect width="320" height="152" fill="url(#g)"/>
+  <g font-family="system-ui,sans-serif"><path d="M45 85h232l-8-6m8 6-8 6" fill="none" stroke="#81B7FF" stroke-width="2"/><path d="M86 85h155" stroke="#A78BFA" stroke-width="7"/><g fill="#F7F5FF"><circle cx="86" cy="85" r="6"/><circle cx="241" cy="85" r="6"/><text x="60" y="64" font-size="19">since</text><text x="220" y="64" font-size="19">now</text></g><g fill="#BDB6D4" font-size="12"><text x="65" y="113">início</text><text x="215" y="113">presente</text></g></g>
+</svg>

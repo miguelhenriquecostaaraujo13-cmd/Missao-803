@@ -1,0 +1,152 @@
+/* Vocabulário comum da abertura, das ferramentas e da aula em documento separado. */
+:root {
+  --aurora-noite:#181321; --aurora-profundo:#2b2344; --aurora-sinal:#7b39fc;
+  --aurora-papel:#f5f1f7; --aurora-cartao:#fffcff; --aurora-tinta:#2b2237;
+  --aurora-secundaria:#63566d; --aurora-contorno:#d9cfe1; --aurora-acao-forte:#6432b7;
+  --aurora-claro:#e5cdff; --aurora-linha-vidro:#e3cffa36;
+  --aurora-titulo:"Instrument Serif",Georgia,serif; --aurora-texto:Manrope,Inter,"Segoe UI",sans-serif;
+  --aurora-gutter:clamp(18px,4.2vw,58px); --aurora-passo:8px;
+  --aurora-curva-painel:22px; --aurora-curva-botao:12px;
+  --aurora-elevacao:0 8px 28px -20px #28133d67, inset 0 1px #fff;
+  --aurora-tempo:180ms; --aurora-entrada-suave:360ms; --aurora-curva-gesto:cubic-bezier(.18,.78,.22,1);
+  --aurora-assinatura:var(--aurora-sinal); --aurora-display:var(--aurora-titulo); --aurora-ui:var(--aurora-texto);
+  --aurora-acao:Cabin,Inter,"Segoe UI",sans-serif; --aurora-vidro:#302946b8; --aurora-borda:#e1d7fa55;
+  --aurora-raio:20px; --aurora-espaco:var(--aurora-passo); --aurora-sombra:0 22px 60px #100b2580;
+  --aurora-curta:var(--aurora-tempo); --aurora-entrada:520ms; --aurora-curva:var(--aurora-curva-gesto);
+  --aurora-mola:cubic-bezier(.22,.96,.35,1.14); --tempo-controle:var(--aurora-tempo); --curva-controle:var(--aurora-curva-gesto); --halo-controle:#ac85ee55;
+  --ink:var(--aurora-tinta); --muted:var(--aurora-secundaria); --line:var(--aurora-contorno);
+  --roxo:var(--aurora-acao-forte); --bg:var(--aurora-papel); --lilas:#eee4f8;
+}
+body {font-family:var(--aurora-texto)}
+.icone-aurora {display:block;width:22px;height:22px;flex:none}
+.rodape-aurora {
+  display:flex;align-items:center;justify-content:space-between;gap:16px;padding:24px max(var(--aurora-gutter),calc((100% - 1140px)/2));
+  border-top:1px solid var(--aurora-linha-vidro);background:var(--aurora-noite);color:#f8f1ff;
+}
+.rodape-aurora button,.aula-aurora header a {color:#e9def3;border:1px solid var(--aurora-linha-vidro);background:#ffffff0c;border-radius:var(--aurora-curva-botao);padding:8px 13px}
+.assinatura {display:inline-flex;align-items:center;gap:5px;color:inherit;font-weight:650;text-decoration:none;letter-spacing:-.04em}
+.assinatura strong {color:var(--aurora-claro)}
+.assinatura .marca-icone,.espaco-estudo .marca-icone {display:grid;place-items:center;width:31px;height:31px;border-radius:10px 5px;background:linear-gradient(140deg,#e4d1ff,#aa85e5);color:#332147;margin-right:5px}
+.apresentando #persistencia:empty,.espaco-estudo #persistencia:empty,.no-atlas #persistencia:empty {display:none}
+.apresentando .topo {position:fixed}
+.apresentando.com-rolagem .topo {background:#21192ef5;border:1px solid var(--aurora-linha-vidro);border-radius:16px;padding-inline:12px;box-shadow:0 8px 28px #110c2438}
+.apresentando .ficha-ativa {scroll-margin-top:88px}
+.limite-cabecalho {position:absolute;inset:45px auto auto 0;width:1px;height:1px;pointer-events:none}
+.apresentando .cinema::after {
+  background:linear-gradient(0deg,#181321 0%,#18132133 8%,transparent 18%),
+    radial-gradient(ellipse at center,#100e2190,transparent 64%),linear-gradient(180deg,#07061577,transparent 26%);
+}
+.apresentando .palco {background:radial-gradient(ellipse at 72% 89%,#563b6d66,transparent 49%),var(--aurora-noite)}
+.pratica-aurora {color:#f9f4ff;padding-block:clamp(56px,9vw,138px);padding-inline:var(--aurora-gutter)}
+.pratica-aurora .rotulo {color:#dec3ff}
+.pratica-aurora .intro-pratica p:last-child {color:#d4c8df}
+.pratica-aurora .intro-pratica h2,.explorar-interno h2 {font-family:var(--aurora-titulo);font-weight:400;letter-spacing:-.05em}
+.pratica-aurora .ficha-ativa {color:var(--aurora-tinta);background:linear-gradient(150deg,#fffaff,#f5eef8);border:1px solid #f5e8ff;box-shadow:0 15px 40px #120b2180}
+.pratica-aurora .folha-tras {background:#5b4272;border-color:#bda0d278}
+.pratica-aurora .f2 {background:#8e74a1}
+.continuar-aurora {display:block;color:#f9f5ff;background:linear-gradient(150deg,#231a30,#1b1525 75%);padding:0 var(--aurora-gutter) clamp(44px,6vw,80px)}
+.explorar-interno {max-width:1090px;margin:auto;border-top:1px solid var(--aurora-linha-vidro);padding-top:32px}
+.continuar-aurora h2 {text-align:left;font:400 clamp(2rem,4vw,3.3rem)/1.08 var(--aurora-titulo);margin-bottom:24px}
+.colecao-recursos {display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.colecao-recursos a {display:flex;align-items:center;gap:16px;text-align:left;padding:20px;border:1px solid var(--aurora-linha-vidro);border-radius:18px;color:#fcf6ff;background:linear-gradient(125deg,#ffffff0e,#ffffff04)}
+.colecao-recursos a h3 {font:400 1.6rem/1.1 var(--aurora-titulo);margin:0}
+.colecao-recursos a p {color:#d7cbdf;font-size:.91rem;margin:5px 0 0}
+.colecao-recursos a .selo-recurso,.atalho>span {
+  display:grid;place-items:center;width:44px;height:44px;flex:none;margin:0;background:#c5a4ef1e;color:#dfc2ff;border:1px solid var(--aurora-linha-vidro);border-radius:14px;
+}
+.marcador-aurora:not([hidden]) {display:inline-flex;align-items:center;gap:8px;min-height:40px;border-radius:var(--aurora-curva-botao);background:#ffffff0e;color:#f4ebfb;border:1px solid #d6bce060;font-size:.84rem;padding:7px 13px}
+.cab .marcador-aurora {margin-top:14px}.marcador-aurora svg {width:17px;height:17px}
+.marcador-aurora[aria-pressed=true] {background:#ead7fb;color:#3b2452}
+.caminhos-salvos ul {list-style:none;padding:0}.caminhos-salvos li {display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-top:8px}
+.caminhos-salvos h3 {margin:20px 0 0}
+.colecao-recursos b {margin-left:auto;font-weight:500}
+.espaco-estudo,.no-atlas,.aula-aurora {background:linear-gradient(155deg,#21192e,var(--aurora-noite) 62%);color:var(--aurora-tinta)}
+.espaco-estudo .topo {
+  z-index:9;position:relative;max-width:1240px;width:calc(100% - 2 * var(--aurora-gutter));margin:auto;
+  padding:14px 0;flex-wrap:nowrap;border-bottom:1px solid var(--aurora-linha-vidro);color:#fbf7ff;
+}
+.espaco-estudo .marca,.espaco-estudo #movimento {color:#f2eaf9}
+.espaco-estudo .marca strong {color:var(--aurora-claro)}
+.espaco-estudo .topo #menu {margin-left:auto;background:#ffffff12;color:#f7f1ff;border:1px solid #c8b1d957}
+.espaco-estudo #movimento[aria-pressed=true],.espaco-estudo #movimento:hover {background:#eee2ff1c}
+.espaco-estudo #nav.menu-estudos {
+  position:absolute;right:0;top:calc(100% - 3px);width:min(100%,560px);max-height:66vh;overflow:auto;
+  display:grid;grid-template-columns:repeat(3,minmax(0,1fr));padding:10px;gap:3px;background:#2b2239f7;
+  color:#f7f1ff;border:1px solid #705983;border-radius:16px;box-shadow:0 18px 35px #120e2166;
+}
+#nav.menu-estudos a {display:flex;align-items:center;gap:9px;color:inherit;padding:9px;border-radius:10px}
+#nav.menu-estudos svg {width:18px;height:18px;color:var(--aurora-claro)}
+#nav.menu-estudos a:is(:hover,[aria-current]) {background:#ead4ff20}
+.espaco-estudo .conteudo {
+  position:relative;max-width:1216px;min-height:66vh;margin:0 auto;padding:0 var(--aurora-gutter) clamp(26px,5vw,70px);
+}
+.conteudo .cab,.aula-aurora .hero {
+  isolation:isolate;position:relative;overflow:hidden;background:var(--aurora-noite);
+  color:#fcf6ff;border:1px solid var(--aurora-linha-vidro);
+}
+.conteudo .cab {margin:26px 0 0;padding:clamp(24px,4vw,52px);border-radius:var(--aurora-curva-painel) var(--aurora-curva-painel) 0 0}
+.conteudo .cab::before,.aula-aurora .hero::before {
+  content:"";position:absolute;inset:0;z-index:-1;
+  background:linear-gradient(90deg,#20182b 20%,#241a2fe8 47%,#21182e65 100%),url("midia/aurora.webp") right 58%/cover;
+}
+.conteudo .cab .rotulo,.conteudo .cab p.rotulo:last-child {color:#ddc6f6}
+.conteudo .cab h1,.aula-aurora .hero h1 {font:400 clamp(2.65rem,5.6vw,5.25rem)/1.02 var(--aurora-titulo);letter-spacing:-.055em;margin:0}
+.conteudo .cab p:not(.rotulo) {color:#ede2f4;max-width:65ch;margin:12px 0 0}
+.folha-estudo,.aula-aurora main {
+  color:var(--aurora-tinta);background:var(--aurora-papel);border:1px solid var(--aurora-contorno);
+  border-radius:0 0 var(--aurora-curva-painel) var(--aurora-curva-painel);padding:clamp(16px,3.2vw,40px);
+}
+.folha-estudo .config {max-width:760px}
+.folha-estudo>:first-child,.folha-estudo .config>:first-child {margin-top:0}
+.folha-estudo>:last-child {margin-bottom:0}
+.folha-estudo :is(.papel,.atalho,.amostra,.metricas,.linha,.trilha li),.aula-aurora :is(#quadro,.practice) {
+  border:1px solid var(--aurora-contorno);background:var(--aurora-cartao);border-radius:18px;box-shadow:var(--aurora-elevacao);
+}
+.folha-estudo .missao {background:linear-gradient(105deg,#282036 10%,#453352 70%,#6d5683);border-radius:18px}
+.folha-estudo .atalho>span {color:#61349a;background:#eee4f8;border-color:#d7c9e5;margin-bottom:14px}
+.folha-estudo :is(.papel,.atalho,.amostra) h2,.aula-aurora main h2 {font:400 clamp(1.55rem,2.6vw,2.15rem)/1.12 var(--aurora-titulo);letter-spacing:-.04em}
+.folha-estudo .metricas b {font:500 2.2rem/1.2 var(--aurora-titulo);letter-spacing:-.045em}
+.folha-estudo :is(.principal,.passo-hero),.aula-aurora #play,.aula-aurora .actions a:first-child {
+  color:white;border:1px solid #af86e3;border-radius:var(--aurora-curva-botao);
+  background:linear-gradient(145deg,#7944cd,#5626a4);box-shadow:inset 0 1px #ffffff38,0 3px 10px #371d531f;
+}
+.folha-estudo .missao .principal {color:#32223f;background:#eddaff;border-color:#f0dfff}
+.folha-estudo :is(select,textarea,input:not([type=checkbox],[type=radio],[type=range])),.aula-aurora select {border-color:#af9fba;border-radius:10px;background-color:#fffcff}
+.folha-estudo .papel.flash {border-top:3px solid #9668bd}
+.folha-estudo .trilha .ponto {border:1px solid #d7c5e5;color:#5a337a}
+.no-atlas .atlas-hero {border:1px solid var(--aurora-linha-vidro)}
+.aula-aurora {margin:0;font-family:var(--aurora-texto)}
+.aula-aurora .hero {border:0;padding:20px max(var(--aurora-gutter),calc((100% - 1060px)/2)) 44px}
+.aula-aurora .hero:after {display:none}
+.aula-aurora .hero header {padding-bottom:14px;margin-bottom:32px;border-bottom:1px solid var(--aurora-linha-vidro)}
+.aula-aurora .hero p {margin-block:12px 20px;color:#efe1fa}
+.aula-aurora main {width:calc(100% - 2 * var(--aurora-gutter));max-width:1130px;margin:0 auto 40px;box-sizing:border-box}
+.aula-aurora :is(#quadro,.practice) {padding:clamp(14px,3vw,32px)}
+.aula-aurora .board {background-color:white}
+.apresentando :is(.continuar-aurora,.rodape-aurora) :focus-visible,.espaco-estudo .topo :focus-visible,.rodape-aurora :focus-visible {outline:3px solid #ffe2a4;outline-offset:3px}
+@media(hover:hover){.colecao-recursos a:hover {background-color:#c5a4ef16;border-color:#bfa3d88c}}
+@media(max-width:680px){
+  .colecao-recursos {grid-template-columns:minmax(0,1fr)}
+  .continuar-aurora>.explorar-interno {text-align:left}
+  .colecao-recursos a {padding:16px}
+  .espaco-estudo .topo {width:calc(100% - 24px);display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:5px;padding:10px 0}
+  .espaco-estudo .topo #menu {grid-column:2;justify-self:end;min-width:48px}
+  .espaco-estudo .topo #movimento {grid-column:3;grid-row:1}
+  .espaco-estudo .menu-extenso {display:none}
+  .espaco-estudo #menu,.espaco-estudo #movimento {font-size:.78rem;padding:7px}
+  .espaco-estudo .topo .marca {font-size:1rem}
+  .espaco-estudo .conteudo {padding:0 10px 24px}
+  .espaco-estudo .cab {margin-top:12px;padding:22px 16px}
+  .espaco-estudo #nav.menu-estudos {grid-template-columns:repeat(2,minmax(0,1fr))}
+  .folha-estudo {padding:12px}
+  .aula-aurora main {width:calc(100% - 20px);padding:12px}
+}
+@media(prefers-reduced-motion:no-preference){
+  .cab h1,.colecao-recursos a {animation:abrir-aurora var(--aurora-entrada-suave) var(--aurora-curva-gesto) both}
+  @supports(animation-timeline:view()) {
+    .pratica-aurora .intro-pratica,.colecao-recursos a {animation:revelar-etapa linear both;animation-timeline:view();animation-range:entry 0% entry 75%}
+  }
+}
+@keyframes revelar-etapa {from {transform:translateY(14px)}to {transform:none}}
+.alto-contraste .folha-estudo,.alto-contraste .folha-estudo :is(.papel,.linha,.atalho,.metricas) {background:white;border-color:#574764;color:#1c1424}
+.alto-contraste .cab::before {background:#21182c}
