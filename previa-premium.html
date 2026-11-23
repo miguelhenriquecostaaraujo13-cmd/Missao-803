@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#0C0A17">
   <title>Prévia Premium · Missão 8º Ano · Neo Aurora</title>
+  <meta name="description" content="Prévia de testes do Neo Aurora. Esta página não substitui a versão oficial.">
 <meta name="robots" content="noindex, nofollow">
 <meta name="application-name" content="Missão 8º Ano · Neo Aurora">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -50,7 +51,7 @@
       await contas.carregarEstudos();
       if(contas.administrador)document.querySelector('#acessos-admin').hidden=false;
       void contas.registrarVisita().catch(()=>{});
-      for (const fonte of ['conteudos/banco.js','propostas/visitante.js','estudo/dados.js','estudo/trilhas.js','estudo/tutor.js','estudo/quadro.js','estudo/atlas.js','estudo/apresentacao.js','estudo/celebracoes.js','estudo/ilustracoes.js','estudo/transicoes.js','estudo/app.js','estudo/conexao.js']) {await contas.carregar(fonte);if(fonte==='estudo/trilhas.js')await trilhasPersonalizadas.preparar();}
+      for (const fonte of ['conteudos/banco.js','propostas/visitante.js','estudo/dados.js','estudo/trilhas.js','estudo/tutor.js','estudo/quadro.js','estudo/atlas.js','estudo/apresentacao.js','estudo/celebracoes.js','estudo/ilustracoes.js','previa-premium/transicoes.js','estudo/app.js','estudo/conexao.js']) {await contas.carregar(fonte);if(fonte==='estudo/trilhas.js')await trilhasPersonalizadas.preparar();}
     })().catch(()=>{document.querySelector('#persistencia').textContent='Não foi possível carregar todas as ferramentas.'; const area=document.querySelector('#principal');if(area && area.querySelector('.neo-carregamento')){area.innerHTML='<section class="neo-carregamento" role="alert"><p class="rotulo">Falha no carregamento</p><h1>O painel não carregou por completo.</h1><p>Confira a conexão e tente novamente. Seus dados não foram apagados.</p><a class="principal" href="?recarregar=1">Tentar novamente</a></section>';}});
   </script>
 </body>
