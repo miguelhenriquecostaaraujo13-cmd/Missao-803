@@ -1,6 +1,6 @@
 'use strict';
-// Configuração pública exclusiva de homologação. Preencher após autorização do responsável.
-const homologacao = Object.freeze({ url: '', chavePublica: '' });
+// Configuração pública do Missão 803; nunca incluir chaves secretas ou service_role.
+const configuracao = Object.freeze({ url: 'https://mbltrucgwqozrujxifcx.supabase.co', chavePublica: 'sb_publishable_kLsE6obFofxRlM6R5ozVrA_TtGowU32' });
 const contas = (() => {
   const sdk=new URL('vendor/supabase.js',document.currentScript.src).href;
   const paginaInicial=new URL('../index.html',document.currentScript.src);
@@ -26,16 +26,16 @@ const contas = (() => {
     return 'A solicitação não foi concluída. Verifique a conexão e tente novamente.';
   }
   async function preparar(){
-    if(!homologacao.url||!homologacao.chavePublica||location.protocol==='file:')return;
+    if(!configuracao.url||!configuracao.chavePublica||location.protocol==='file:')return;
     try {
-      const url=new URL(homologacao.url);
+      const url=new URL(configuracao.url);
       if(!(url.protocol==='https:'&&/^[a-z0-9]+\.supabase\.co$/.test(url.hostname)) && !(url.protocol==='http:'&&['localhost','127.0.0.1'].includes(url.hostname)))throw Error();
-      if(url.hostname==='mbltrucgwqozrujxifcx.supabase.co'||!homologacao.chavePublica.startsWith('sb_publishable_'))throw Error();
-      const settings=await fetch(url.origin+'/auth/v1/settings',{headers:{apikey:homologacao.chavePublica},cache:'no-store',signal:AbortSignal.timeout(6500)});
+      if(!configuracao.chavePublica.startsWith('sb_publishable_'))throw Error();
+      const settings=await fetch(url.origin+'/auth/v1/settings',{headers:{apikey:configuracao.chavePublica},cache:'no-store',signal:AbortSignal.timeout(6500)});
       if(!settings.ok)throw Error();
       const config=await settings.json();
       await carregar(sdk);
-      cliente=window.supabase.createClient(url.origin,homologacao.chavePublica,{auth:{flowType:'pkce',detectSessionInUrl:false,storageKey:'missao803.auth.'+url.host}});
+      cliente=window.supabase.createClient(url.origin,configuracao.chavePublica,{auth:{flowType:'pkce',detectSessionInUrl:false,storage:sessionStorage,storageKey:'missao803.auth.'+url.host}});
       const retorno=new URL(location.href);
       let retornoInvalido=false;
       if(retorno.searchParams.has('acesso')){

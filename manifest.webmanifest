@@ -1,0 +1,26 @@
+{
+  "id": "./",
+  "name": "Missão 8º Ano · Neo Aurora",
+  "short_name": "Missão 8º Ano",
+  "description": "Seu espaço de estudos do 8º ano com o mascote Neo.",
+  "lang": "pt-BR",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#20152f",
+  "theme_color": "#35254d",
+  "icons": [
+    {
+      "src": "icons/neo-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icons/neo-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

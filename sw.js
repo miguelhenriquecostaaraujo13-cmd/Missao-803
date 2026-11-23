@@ -1,8 +1,8 @@
 'use strict';
 const escopo=self.registration.scope;
 const prefixo='missao8-publico-'+new URL(escopo).pathname+'-';
-const versao=prefixo+'20261122-pages-1';
-const arquivos=['index.html','offline.html','conteudos/banco.js','propostas/visitante.js','propostas/QUADRO-NEO-AURORA.html',
+const versao=prefixo+'20261122-pages-2';
+const arquivos=['index.html','offline.html','manifest.webmanifest','icons/neo-192.png','icons/neo-512.png','estudo/instalacao.js','estudo/instalacao.css','conteudos/banco.js','propostas/visitante.js','propostas/QUADRO-NEO-AURORA.html',
  ...['app','identidade','contas','dados','aula-escalas','apresentacao','atlas','celebracoes','tutor','quadro','ilustracoes','conexao'].map(n=>'estudo/'+n+'.js'),
  ...['apresentacao','atlas','aurora','controles','identidade','manual','entrada'].map(n=>'estudo/'+n+'.css'),
  'estudo/midia/aurora.webp',
