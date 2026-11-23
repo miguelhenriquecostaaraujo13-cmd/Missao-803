@@ -277,7 +277,7 @@
     if(location.hash==='#'+proxima) render(true);
     else location.hash=proxima;
   }
-  function render(focar=false) {
+  function renderConteudo(focar=false) {
     const [solicitada,id]=location.hash.slice(1).split('/');
     atlasAurora.fechar();apresentacaoAurora.fechar();
     rota=['aurora','atlas','conta','preferencias'].includes(solicitada)?solicitada:!perfil()?'inicio':visitante.editando?'ajustes':(Object.hasOwn(paginas,solicitada)||['pratica','sessao','trilha-personalizada'].includes(solicitada)?solicitada:'painel');
@@ -329,6 +329,9 @@
     celebracoes.posicionar();
     if(focar)principal.focus();
   }
+  function render(focar=false){
+    movimentoNeo.trocar(()=>renderConteudo(focar),location.hash);
+  }
   function situacaoMovimento(){
     if(identidadeAurora.preferencia==='sistema'&&identidadeAurora.sistemaMovimento.matches)return 'O navegador informa que o sistema prefere movimento reduzido. O fundo fica parado e as conquistas aparecem em texto.';
     return identidadeAurora.reduzir()?'O movimento foi reduzido neste navegador.':'O fundo está animado. O confete acompanha conquistas, como três acertos seguidos.';
@@ -346,7 +349,7 @@
   window.addEventListener('preferencia-movimento',movimento);
   document.querySelector('#pular').onclick=e=>{e.preventDefault();principal.focus();};
   window.addEventListener('hashchange',async()=>{
-    tutorNeo.parar();aviso='';revelado='';notaId='';render(true);window.scrollTo(0,0);
+    tutorNeo.parar();aviso='';revelado='';notaId='';render(true);
     const destino=location.hash.slice(1);
     if(perfil()&&Object.hasOwn(estudos.destinos,destino)){
       await estudos.lembrarArea(destino);
