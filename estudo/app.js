@@ -77,7 +77,7 @@
     const escolhas=['criar','entrar','recuperar'].map(id=>`<a href="#conta/${id}" ${id===modo?'aria-current="page"':''}>${titulos[id]}</a>`).join('');
     return `<section class="portal-conta">
       ${passosEntrada(1)}
-      <div class="portal-form"><h1>${nome}</h1>${contas.usuario&&!contas.recuperando?'<p>Você está conectado. Seu progresso fica nesta aba até você sair ou fechá-la.</p><a class="principal" href="#painel">Voltar ao painel</a><button type="button" data-act="sair-conta">Sair da conta</button>':`
+      <div class="portal-form"><h1>${nome}</h1>${contas.usuario&&!contas.recuperando?'<p>Você está conectado. Sua sessão continuará ativa e seu progresso será salvo neste dispositivo e sincronizado com a conta.</p><a class="principal" href="#painel">Voltar ao painel</a><button type="button" data-act="sair-conta">Sair da conta</button>':`
       ${modo==='nova-senha'?'':'<nav aria-label="Opções de conta">'+escolhas+'</nav>'}
       <form id="form-conta" data-modo="${modo}"><fieldset ${habilitado?'':'disabled'}>
       ${modo==='nova-senha'?'':'<label>E-mail<input type="email" name="email" autocomplete="email" required></label>'}
@@ -404,7 +404,7 @@
             if(visitante.avancar()){
               await estudos.alterar(d=>{if(perfil().materias.length&&!perfil().materias.includes(d.materia))d.materia=perfil().materias[0];});
               if(contas.usuario){
-                try {await contas.salvarPreferencias(perfil());}catch{visitante.informar('As preferências ficaram nesta aba. A conta não confirmou a sincronização.');}
+                try {await contas.salvarPreferencias(perfil());}catch{visitante.informar('As preferências ficaram salvas neste navegador. A conta ainda não confirmou a sincronização.');}
               }
               navegar(destinoEntrada||'painel');destinoEntrada='';return;
             }
