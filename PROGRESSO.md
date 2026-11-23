@@ -43,3 +43,13 @@
 - https://gsap.com/
 
 Esta etapa é uma melhoria real e incremental, não uma certificação de conclusão de toda a atualização.
+
+## Correção de regressões da prévia (23/11/2026)
+- Recuperado o contorno roxo e o fundo ativo das escolhas de turma, matéria e preferências; o estilo premium antes podia neutralizar o estado `aria-pressed`.
+- Corrigida a hierarquia de camadas para manter o menu acima dos cards e dos efeitos ambientais.
+- Eliminada a animação de montagem de página causada por pequenos rerenders (escolha de turma, alternativa, preferências); transição completa agora ocorre apenas com troca de rota.
+- Scroll reveal reapresenta os cartões quando saem e voltam à área visível (em ambos os sentidos), sem deixar conteúdos invisíveis permanentemente.
+- Observadores são restaurados quando o app retorna à tela ou a preferência de animação volta a ser permitida.
+- A prévia em `/previa-premium.html` usa agora `previa-premium/transicoes.js` isolado, sem editar o motor de animações publicado em `main`.
+- A marca "PRÉVIA" identifica a versão experimental. O `index.html` da versão oficial em `main` continua no SHA `b3b9a853634511611ed863916dfa9bf688f0abc2`.
+- Verificações estáticas: JS compila, CSS com chaves equilibradas, regras de acessibilidade e de seleção presentes. Testes visuais reais em dispositivo Android ainda necessários.
