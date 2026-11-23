@@ -130,6 +130,7 @@ const movimentoNeo = (() => {
   document.addEventListener('visibilitychange',()=>{
     document.body.classList.toggle('neo-aba-oculta',document.hidden);
     if(document.hidden)limparObservador();
+    else if(ativo()&&rotasEstudo.has(rotaDe(location.hash)))animarEntrada(principal(),false);
   });
   window.addEventListener('preferencia-movimento',()=>{
     if(!ativo()){
@@ -137,6 +138,8 @@ const movimentoNeo = (() => {
       principal()?.querySelectorAll('.neo-aguardando').forEach(el=>el.classList.remove('neo-aguardando'));
       limparAnimacoes();
       try{transicaoAtiva?.skipTransition();}catch{}
+    }else if(rotasEstudo.has(rotaDe(location.hash))){
+      animarEntrada(principal(),false);
     }
   });
   return {trocar};
