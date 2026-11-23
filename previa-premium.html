@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0C0A17">
+  <title>Prévia Premium · Missão 8º Ano · Neo Aurora</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="application-name" content="Missão 8º Ano · Neo Aurora">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" type="image/png" sizes="192x192" href="icons/neo-192.png">
+<link rel="apple-touch-icon" href="icons/neo-192.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Sora:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="estudo/aurora.css">
+  <link rel="stylesheet" href="estudo/atlas.css">
+  <link rel="stylesheet" href="estudo/apresentacao.css">
+  <link rel="stylesheet" href="estudo/controles.css">
+  <link rel="stylesheet" href="estudo/identidade.css">
+  <link rel="stylesheet" href="estudo/manual.css">
+  <link rel="stylesheet" href="estudo/melhorias.css">
+  <link rel="stylesheet" href="estudo/transicoes.css">
+  <link rel="stylesheet" href="estudo/entrada.css">
+<link rel="stylesheet" href="estudo/instalacao.css">
+  <link rel="stylesheet" href="previa-premium/estilos.css">
+  <script defer src="previa-premium/movimentos.js"></script>
+<script defer src="estudo/instalacao.js"></script>
+</head>
+<body>
+  <a class="skip" href="#principal" id="pular">Ir ao conteúdo</a>
+  <header class="topo">
+    <a class="marca" href="#painel" aria-label="Missão 8º Ano, início"><span class="marca-icone" aria-hidden="true">✦</span>Missão <strong>8º Ano</strong></a>
+    <button id="menu" aria-controls="nav" aria-expanded="false" hidden>Menu</button>
+    <nav id="nav" aria-label="Navegação principal"></nav>
+    <a id="acessos-admin" href="admin.html" hidden>Painel de acessos</a>
+    <button id="ver-atlas" hidden>Explorar estações</button>
+  </header>
+  <main id="principal" tabindex="-1"></main>
+  <p id="persistencia" class="avisos" role="status"></p>
+  <footer class="rodape-aurora" data-inicio="#aurora" aria-label="Rodapé"></footer>
+  <script src="estudo/identidade.js"></script>
+  <noscript>Ative o JavaScript para estudar e salvar seu progresso neste navegador.</noscript>
+  <script src="estudo/contas.js"></script>
+  <script>
+    (async () => {
+      await contas.preparar();
+      await contas.carregarEstudos();
+      if(contas.administrador)document.querySelector('#acessos-admin').hidden=false;
+      void contas.registrarVisita().catch(()=>{});
+      for (const fonte of ['conteudos/banco.js','propostas/visitante.js','estudo/dados.js','estudo/trilhas.js','estudo/tutor.js','estudo/quadro.js','estudo/atlas.js','estudo/apresentacao.js','estudo/celebracoes.js','estudo/ilustracoes.js','estudo/transicoes.js','estudo/app.js','estudo/conexao.js']) {await contas.carregar(fonte);if(fonte==='estudo/trilhas.js')await trilhasPersonalizadas.preparar();}
+    })().catch(()=>{document.querySelector('#persistencia').textContent='Uma parte do site não carregou. Confira a conexão e recarregue a página.';});
+  </script>
+</body>
+</html>
