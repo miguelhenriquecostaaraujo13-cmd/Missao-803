@@ -76,7 +76,44 @@
       etapas.before(painel);
     }
 
+
+    /* Não remontar todas as ferramentas ao clicar em uma preferência:
+       preserva foco, rolagem e animações de transição somente para mudança de rota. */
+    principal.addEventListener('click',(evento)=>{
+      const botao=evento.target.closest?.('.wizard button[data-campo][data-valor]');
+      if(!botao || !principal.contains(botao) || typeof visitante==='undefined' || !visitante.editando)return;
+      evento.stopImmediatePropagation();
+      evento.preventDefault();
+      const campo=botao.dataset.campo;
+      const valor=botao.dataset.valor;
+      const antes=botao.getAttribute('aria-pressed')==='true';
+      visitante.mudar(campo,valor);
+      const opcoes=principal.querySelectorAll('.wizard button[data-campo="'+CSS.escape(campo)+'"]');
+      if(campo==='turma'||campo==='formato'){
+        opcoes.forEach(item=>item.setAttribute('aria-pressed',String(item.dataset.valor===valor)));
+      }else{
+        botao.setAttribute('aria-pressed',String(!antes));
+      }
+      const avancar=principal.querySelector('.wizard [data-acao="avancar"]');
+      if(campo==='turma' && avancar)avancar.disabled=false;
+      botao.focus({preventScroll:true});
+    },true);
+
+    function ajudarAcesso(){
+      const formulario=principal.querySelector('#form-conta');
+      if(!formulario || principal.querySelector('.neo-ajuda-acesso'))return;
+      const aviso=document.createElement('p');
+      aviso.className='neo-ajuda-acesso';
+      aviso.setAttribute('role','note');
+      const google=typeof contas!=='undefined'&&contas.provedores?.google===true;
+      aviso.textContent=google
+        ? 'Você também pode usar o Google. Para entrar com e-mail, use a senha da sua conta já confirmada.'
+        : 'Entrar com Gmail não é o mesmo que entrar com Google: use seu endereço Gmail e a senha cadastrada. O botão Google só aparece quando essa opção está habilitada no servidor. Se o e-mail de confirmação não chegar, verifique spam e evite solicitar vários links seguidos.';
+      formulario.insertAdjacentElement('afterend',aviso);
+    }
+
     function atualizar(){
+      ajudarAcesso();
       if(!estudo())return;
       sugestoesTutor();
       montagemTrilha();
