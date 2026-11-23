@@ -15,63 +15,73 @@ const movimentoNeo = (() => {
     document.documentElement.classList.remove('neo-transitando');
     principal()?.classList.remove('neo-transicao-fallback');
   }
-  function animarEntrada(conteudo){
+  /* Reanima quando volta a entrar na tela. Não esconde conteúdos à espera do scroll. */
+  function animarEntrada(conteudo,entradaNova=true){
     limparObservador();
     if(!ativo()||!conteudo?.isConnected||conteudo.className!=='conteudo'||document.body.classList.contains('quadro-aberto'))return;
-    const alvos=[
-      ...conteudo.querySelectorAll([
-        ':scope > .cab',
-        ':scope > .folha-estudo > .papel',
-        ':scope > .folha-estudo > .resumo-trilha',
-        ':scope > .folha-estudo > .atalhos-estudo',
-        ':scope > .folha-estudo > .trilhas-pessoais',
-        ':scope > .folha-estudo > .metricas',
-        ':scope > .folha-estudo > .biblioteca',
-        ':scope > .folha-estudo > .estante-neo',
-        ':scope > .folha-estudo > .mesa-neo',
-        ':scope > .folha-estudo > .agenda',
-        ':scope > .folha-estudo > .config',
-        ':scope > .folha-estudo > .trilha',
-        ':scope > .folha-estudo > .cartoes',
-        ':scope > .folha-estudo > .resposta-neo',
-        '.trilha > li',
-        '.trilhas-pessoais-grade > .trilha-pessoal-card',
-        '.etapas-personais > li',
-        '.guias-grade > *',
-        '.biblioteca-grade > *',
-        '.colecao-recursos > *'
-      ].join(','))].filter((item,i,todos)=>todos.indexOf(item)===i).slice(0,48);
-    if(!alvos.length)return;
-    const animaveis=alvos.filter(el=>el.getBoundingClientRect().width>0 &&el.getBoundingClientRect().height>0);
-    const atualizar=(el,delay)=>{
-      el.style.setProperty('--neo-demora',delay+'ms');
-      el.classList.remove('neo-aguardando');
-      el.classList.add('neo-revelado');
-      el.addEventListener('animationend',evento=>{
-        if(evento.target!==el)return;
-        el.classList.remove('neo-revelado');
-        el.style.removeProperty('--neo-demora');
-      },{once:true});
+    const seletores=[
+      ':scope > .cab',
+      '.folha-estudo > .papel',
+      '.folha-estudo > .resumo-trilha',
+      '.folha-estudo > .atalhos-estudo',
+      '.folha-estudo > .metricas > div',
+      '.folha-estudo > .grade > .atalho',
+      '.folha-estudo > .trilhas-pessoais',
+      '.folha-estudo > .biblioteca > section',
+      '.folha-estudo > .mesa-neo',
+      '.folha-estudo > .amostra',
+      '.folha-estudo > .linha',
+      '.folha-estudo .trilha > li',
+      '.folha-estudo .trilhas-pessoais-grade > .trilha-pessoal-card',
+      '.folha-estudo .estante-neo',
+      '.folha-estudo .cartoes > *',
+      '.folha-estudo .guias-grade > *',
+      '.folha-estudo .colecao-recursos > *'
+    ];
+    const alvos=[...new Set(conteudo.querySelectorAll(seletores.join(',')))].filter(
+      el=>el.getBoundingClientRect().height>0&&!el.closest('.trilha-gerada')
+    ).slice(0,85);
+    const animar=(el,delay)=>{
+      if(!ativo()||!el.isConnected||typeof el.animate!=='function')return;
+      try{
+        el.animate(
+          [{opacity:.65,transform:'translate3d(0,16px,0)'},
+           {opacity:1,transform:'translate3d(0,0,0)'}],
+          {duration:520,delay,easing:'cubic-bezier(.16,1,.3,1)',fill:'none'}
+        );
+      }catch{/* Navegadores antigos mantém os elementos visíveis. */}
     };
-    const disponivel='IntersectionObserver' in window;
-    if(disponivel){
-      observador=new IntersectionObserver(entradas=>{
-        for(const entrada of entradas)if(entrada.isIntersecting){
-          observador?.unobserve(entrada.target);
-          atualizar(entrada.target,0);
-        }
-      },{root:null,rootMargin:'0px 0px -16px 0px',threshold:0.035});
+    if(!('IntersectionObserver' in window)){
+      if(entradaNova)alvos.slice(0,16).forEach((el,i)=>animar(el,Math.min(i*40,260)));
+      return;
     }
+    const estados=new WeakMap();
     let sequencia=0;
-    for(const el of animaveis){
-      const limite=el.getBoundingClientRect().top;
-      if(limite<window.innerHeight*.92||!disponivel){
-        atualizar(el,Math.min(sequencia++*65,390));
-      }else{
-        el.classList.add('neo-aguardando');
-        observador.observe(el);
-      }
+    for(const el of alvos){
+      const r=el.getBoundingClientRect();
+      const jaVisivel=r.top<innerHeight*.93&&r.bottom>0;
+      estados.set(el,{visivel:!entradaNova&&jaVisivel,ultima:0});
     }
+    observador=new IntersectionObserver(entradas=>{
+      if(!ativo())return;
+      for(const entrada of entradas){
+        const el=entrada.target,estado=estados.get(el);
+        if(!estado)continue;
+        if(entrada.isIntersecting){
+          if(estado.visivel)continue;
+          estado.visivel=true;
+          const agora=performance.now();
+          if(agora-estado.ultima>750){
+            estado.ultima=agora;
+            const delay=entradaNova?Math.min(sequencia++*55,300):0;
+            animar(el,delay);
+          }
+        }else{
+          estado.visivel=false;
+        }
+      }
+    },{root:null,rootMargin:'0px 0px -20px 0px',threshold:[0,.12]});
+    alvos.forEach(el=>observador.observe(el));
   }
   function scrollInicio(){
     try{window.scrollTo({top:0,left:0,behavior:'instant'});}catch{window.scrollTo(0,0);}
@@ -88,7 +98,7 @@ const movimentoNeo = (() => {
       limparObservador();
       atualizar();
       if(mudou)scrollInicio();
-      if(entradaPermitida)animarEntrada(principal());
+      if(ativo()&&rotasEstudo.has(proxima))animarEntrada(principal(),entradaPermitida);
     };
     if(!incluirAnimacao||typeof document.startViewTransition!=='function'){
       atualizarTela();
