@@ -101,9 +101,31 @@
       form.before(area);
     }
 
+    function montagemTrilha() {
+      // Efeito de apresentacao somente apos criar e salvar uma trilha.
+      const trilha = principal.querySelector('.trilha-gerada');
+      if (!trilha || trilha.querySelector('.neo-montagem')) return;
+      const etapas = trilha.querySelector('.etapas-personais');
+      if (!etapas) return;
+      const painel = document.createElement('div');
+      painel.className = 'neo-montagem';
+      painel.setAttribute('aria-label','Trilha criada e disponível para estudo');
+      const legenda = document.createElement('p');
+      legenda.textContent = 'Seu percurso foi criado. Veja como ele se conecta.';
+      const passos = document.createElement('ol');
+      for (const nome of ['Preparar','Traçar caminho','Montar etapas','Conectar','Pronto!']) {
+        const item = document.createElement('li');
+        item.textContent = nome;
+        passos.appendChild(item);
+      }
+      painel.append(legenda,passos);
+      etapas.before(painel);
+    }
+
     function atualizar() {
       if (!pronto()) return;
       sugestoesTutor();
+      montagemTrilha();
       const alvos = principal.querySelectorAll([
         '.folha-estudo .metricas > div',
         '.folha-estudo .grade > .atalho',
