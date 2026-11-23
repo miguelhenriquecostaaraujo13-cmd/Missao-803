@@ -16,7 +16,9 @@ const quadroLivre = (function() {
   function redesenhar() {
     if(!canvasAtivo?.isConnected)return;
     const c=canvasAtivo.getContext('2d');
-    c.clearRect(0,0,W,H);
+    c.setTransform(1,0,0,1,0,0);
+    c.clearRect(0,0,canvasAtivo.width,canvasAtivo.height);
+    c.setTransform(canvasAtivo.width/W,0,0,canvasAtivo.height/H,0,0);
     c.lineWidth=4;c.lineCap='round';c.lineJoin='round';
     function linha(pontos,cores) {
       if(!pontos?.length)return;
@@ -62,16 +64,32 @@ const quadroLivre = (function() {
   }
   function tela(esc) {
     const q=estado(),nos=blocos();
-    const opcoes=nos.map(n=>`<option value="${esc(n.id)}">${esc(n.texto)}</option>`).join('');
+    const opcoes=nos.map(n=>'<option value="'+esc(n.id)+'">'+esc(n.texto)+'</option>').join('');
     const resumo=q.elementos.filter(e=>e.tipo==='bloco'||e.tipo==='seta').map(e=>{
-      if(e.tipo==='bloco')return `<li>Bloco · ${esc(e.texto)}</li>`;
+      if(e.tipo==='bloco')return '<li>Bloco · '+esc(e.texto)+'</li>';
       const nome=id=>esc(nos.find(n=>n.id===id)?.texto||'');
-      return `<li>${nome(e.de)} → ${nome(e.para)}</li>`;
+      return '<li>'+nome(e.de)+' → '+nome(e.para)+'</li>';
     }).join('');
-    return `<section class="papel oficina-quadro"><div class="barra-desenho" role="group" aria-label="Ferramentas de desenho"><label>Cor do traço <select id="pincel">${[['#52387b','Violeta'],['#195b57','Verde'],['#993a26','Terracota']].map(([c,n])=>`<option value="${c}" ${c===pincel?'selected':''}>${n}</option>`).join('')}</select></label><button data-quadro="desfazer" ${q.elementos.length?'':'disabled'}>Desfazer</button><button data-quadro="refazer" ${q.refazer.length?'':'disabled'}>Refazer</button><button id="exportar-quadro" ${q.elementos.length?'':'disabled'}>Baixar quadro em HTML</button></div>
-      <div class="folha-desenho">${q.elementos.length?'':'<p class="dica-quadro">Desenhe com o dedo ou o mouse. Para montar um fluxograma, adicione a primeira ideia abaixo.</p>'}<canvas id="desenho" width="${W}" height="${H}" aria-label="Área de desenho livre. Os formulários abaixo permitem criar fluxogramas pelo teclado."></canvas></div><p id="aviso-desenho" role="status"></p></section>
-      <div class="grade"><form id="bloco" class="papel"><h2>Blocos</h2><label>Ideia ou etapa<input name="nome" maxlength="36" required></label><button>Adicionar bloco</button></form><form id="seta" class="papel"><h2>Conectar ideias</h2><label>De<select name="de">${opcoes}</select></label><label>Para<select name="para">${opcoes}</select></label><button ${nos.length<2?'disabled':''}>Conectar</button></form></div>
-      <details id="leitura-quadro"><summary>Ler elementos do quadro</summary><p>${q.elementos.filter(e=>e.tipo==='traco').length} traços livres</p><ol>${resumo}</ol></details>`;
+    return '<div class="quadro-fullscreen">'+
+      '<header class="quadro-barra"><a class="quadro-sair" href="#painel">← Sair</a><div class="quadro-identidade"><small>NEO AURORA</small><h1>Quadro branco</h1></div>'+
+      '<div class="quadro-ferramentas" role="group" aria-label="Ferramentas do quadro">'+
+        '<label class="quadro-cor">Caneta<select id="pincel" aria-label="Cor da caneta">'+[['#52387b','Violeta'],['#195b57','Verde'],['#993a26','Terracota']].map(([c,n])=>'<option value="'+c+'" '+(c===pincel?'selected':'')+'>'+n+'</option>').join('')+'</select></label>'+
+        '<button type="button" data-quadro="desfazer" '+(q.elementos.length?'':'disabled')+'>↶ Desfazer</button>'+
+        '<button type="button" data-quadro="refazer" '+(q.refazer.length?'':'disabled')+'>↷ Refazer</button>'+
+        '<button type="button" id="exportar-quadro" '+(q.elementos.length?'':'disabled')+'>↓ Salvar</button>'+
+      '</div></header>'+
+      '<section class="quadro-palco" aria-label="Área de desenho em tela cheia">'+
+        '<canvas id="desenho" width="'+W+'" height="'+H+'" aria-label="Desenhe com o dedo, caneta ou mouse. Use o fluxograma para criar blocos pelo teclado."></canvas>'+
+        (q.elementos.length?'':'<p class="dica-quadro">Comece desenhando com o dedo ou o mouse ✦</p>')+
+      '</section>'+
+      '<div class="quadro-rodape">'+
+        '<details class="quadro-fluxograma"><summary>＋ Criar fluxograma</summary><div class="quadro-formularios">'+
+          '<form id="bloco"><label>Nome do bloco<input name="nome" maxlength="36" required></label><button>Adicionar bloco</button></form>'+
+          '<form id="seta"><label>De<select name="de">'+opcoes+'</select></label><label>Para<select name="para">'+opcoes+'</select></label><button '+(nos.length<2?'disabled':'')+'>Conectar</button></form></div></details>'+
+        '<p id="aviso-desenho" role="status"></p>'+
+      '</div>'+
+      '<details id="leitura-quadro" class="quadro-leitura"><summary>Ler elementos do quadro</summary><p>'+q.elementos.filter(e=>e.tipo==='traco').length+' traços desenhados</p><ol>'+resumo+'</ol></details>'+
+     '</div>';
   }
   function exportarLeitura(){
     const doc=document.implementation.createHTMLDocument('Meu quadro de estudos');
@@ -98,6 +116,14 @@ const quadroLivre = (function() {
   function montar(recarregar) {
     aoSalvar=recarregar;canvasAtivo=document.querySelector('#desenho');pontos=null;identificador=null;
     const canvas=canvasAtivo;
+    const ajustar=()=>{
+      if(!canvas.isConnected)return;
+      const r=canvas.getBoundingClientRect(),dpr=Math.min(window.devicePixelRatio||1,2);
+      const w=Math.max(1,Math.round(r.width*dpr)),h=Math.max(1,Math.round(r.height*dpr));
+      if(canvas.width!==w||canvas.height!==h){canvas.width=w;canvas.height=h;}
+      redesenhar();
+    };
+    const obs=new ResizeObserver(ajustar);obs.observe(canvas);ajustar();
     const pos=e=>{const r=canvas.getBoundingClientRect();return [Math.round(Math.max(0,Math.min(W,(e.clientX-r.left)*W/r.width))),Math.round(Math.max(0,Math.min(H,(e.clientY-r.top)*H/r.height)))];};
     canvas.onpointerdown=e=>{if(identificador!=null||e.button!==0)return;identificador=e.pointerId;canvas.setPointerCapture(e.pointerId);pontos=[pos(e)];redesenhar();};
     canvas.onpointermove=e=>{if(e.pointerId!==identificador||!pontos)return;const p=pos(e),ultima=pontos.at(-1);if(Math.hypot(p[0]-ultima[0],p[1]-ultima[1])<3)return;if(pontos.length>=640)pontos=pontos.filter((_,i)=>i%2===0);pontos.push(p);redesenhar();};

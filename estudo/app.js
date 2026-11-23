@@ -8,7 +8,7 @@
   const perfil = () => visitante.perfil;
   const materia = () => estudos.materias.includes(estudos.dados.materia) ? estudos.dados.materia : perfil()?.materias[0] || 'Matemática';
   const dataCurta = ms => new Date(ms).toLocaleDateString('pt-BR', {day:'numeric',month:'short'});
-  const paginas = {painel:'Meu painel',trilha:'Trilha',simulados:'Simulados',revisao:'Flashcards',biblioteca:'Biblioteca',tutor:'Tutor Neo',quadro:'Quadro livre',busca:'Busca',caderno:'Caderno',agenda:'Agenda e foco',ajustes:'Ajustes'};
+  const paginas = {painel:'Meu painel',trilha:'Trilhas da escola','minhas-trilhas':'Minhas trilhas',simulados:'Simulados',revisao:'Flashcards',biblioteca:'Biblioteca',tutor:'Tutor Neo',quadro:'Quadro branco',busca:'Busca',caderno:'Caderno',agenda:'Agenda e foco',ajustes:'Ajustes'};
   const {icone,organizarArea}=identidadeAurora;
   const menu = document.querySelector('#menu');
   const pequeno = matchMedia('(max-width: 1100px)');
@@ -42,7 +42,7 @@
   let fonteId = '', filtroNotas = '';
   let errosPendentes=false;
   let aviso = '';
-  let buscaNeo = '', consultaGeral = '';
+  let buscaNeo = '', consultaGeral = '', respostaNeoIA = '', erroNeoIA = '';
   let assuntoAberto = '';
   let zoomMapa = 100;
   let ocupado = false;
@@ -55,7 +55,7 @@
     tutor:'Escolha uma matéria e busque um assunto, como escalas ou potência. Você pode abrir uma questão a partir da explicação.',
     inicio:'Você pode começar como visitante. Eu guardo sua turma e suas escolhas neste navegador.',
     painel:'Comece por uma pergunta. Depois da resposta, leia a explicação e tente dizer o raciocínio com suas palavras.',
-    trilha:'Escolha um assunto. Um erro entra nos flashcards para você praticar de novo.',
+    trilha:'Escolha uma trilha da escola ou crie uma personalizada com seus materiais.',
     simulados:'Faça uma estimativa antes de olhar as alternativas. Você pode sair e retomar o simulado.',
     revisao:'Tente lembrar antes de virar o cartão. Escolha “Lembrei” quando conseguir explicar a resposta.',
     caderno:'Anote o que você entendeu e uma pergunta que ainda quer responder.',
@@ -108,7 +108,7 @@
     const resultados = itens.map(q=>`<article class="papel"><p class="rotulo">${esc(q.assunto)}</p><h2>${esc(q.pergunta)}</h2><p>${esc(q.explicacao)}</p><div class="acoes">${botao('Praticar assunto','iniciar',q.assunto)}${tutorNeo.voz()?botao('Ouvir explicação','ouvir',q.id):''}</div></article>`).join('');
     const recentes=estudos.dados.sessoes.slice(-3).reverse();
     return titulo('Neo Aurora','Estude com o Neo')+`<section class="mesa-neo"><aside class="estante-neo"><h2>Estudar com Neo</h2>${[['revisao','Revisar flashcards'],['simulados','Encontrar questões'],['caderno','Criar cartões no caderno']].map(([id,nome])=>link(nome,id)).join('')}<a href="${hrefDestino('escalas')}">Abrir quadro narrado</a><h3>Atividades recentes</h3>${recentes.length?recentes.map(s=>link(esc(s.assunto||s.materia),'sessao/'+s.id)).join(''):'<p>Suas atividades aparecem aqui depois da primeira prática.</p>'}</aside><div class="consulta-neo"><div class="nucleo-neo" data-estado="${itens.length?'explicando':'pronto'}">${tutor()}</div><p>Busque um conceito nas explicações da sua matéria.</p>${listaMateria()}`+
-      `<form class="papel" id="form-neo"><label for="consulta">O que você quer entender?</label><input type="search" id="consulta" maxlength="180" required value="${esc(buscaNeo)}" placeholder="Digite um conceito ou uma dúvida"><button class="principal">Buscar explicação</button></form>
+      `<form class="papel" id="form-neo"><label for="consulta">O que você quer entender?</label><input type="search" id="consulta" maxlength="180" required value="${esc(buscaNeo)}" placeholder="Digite um conceito ou uma dúvida"><div class="acoes"><button class="principal" type="submit" name="modo" value="local">Buscar no conteúdo</button><button class="secundario" type="submit" name="modo" value="ia">Perguntar ao Neo IA ✦</button></div><p class="aviso-ia">O modo IA exige login e uma chave gratuita ativada no servidor. Não envie dados pessoais; a pergunta será processada pelo provedor externo quando disponível.</p></form><section class="resposta-neo" aria-live="polite">${respostaNeoIA?`<h2>Resposta do Neo IA</h2><p>${esc(respostaNeoIA)}</p><small>Resposta gerada por modelo externo. Confira informações importantes.</small>`:erroNeoIA?`<p>${esc(erroNeoIA)}</p>`:''}</section>
       <section aria-label="Explicações encontradas">${buscaNeo&&!itens.length?'<p>Nenhuma explicação encontrada. Tente uma palavra do assunto ou escolha outra matéria.</p>':resultados}</section></div></section>`;
   }
   const hrefDestino=id=>id==='escalas'?'propostas/QUADRO-NEO-AURORA.html?origem=estudo':'#'+id;
@@ -127,18 +127,18 @@
     const respondidas=estudos.respostas(), acertos=respondidas.filter(i=>i.escolha===porId.get(i.id).correta).length;
     const proximas = {'Questões':['simulados','Começar um simulado'],'Resumos':['biblioteca','Ler por assunto'],'Mapas mentais':['biblioteca/mapa','Explorar o mapa']};
     const [destino, convite] = proximas[perfil().formato] || ['trilha','Abrir minha trilha'];
-    const cards=[['trilha','Trilha por assunto','Escolha um tema para praticar.'],['revisao','Revisar flashcards',`${vencidos().length} para revisar agora.`],['caderno','Caderno de estudos','Guarde suas explicações e dúvidas.'],['agenda','Agenda e foco','Organize provas e tempo de estudo.']];
+    const cards=[['minhas-trilhas','Minhas trilhas','Crie percursos com seus próprios assuntos e materiais.'],['revisao','Revisar flashcards',`${vencidos().length} para revisar agora.`],['caderno','Caderno de estudos','Guarde suas explicações e dúvidas.'],['agenda','Agenda e foco','Organize provas e tempo de estudo.']];
     return `${titulo('Turma '+perfil().turma,'Seu painel',perfil().objetivos.join(' · '))}
     <section class="missao"><div><p class="rotulo">${atual?'Atividade em andamento':'Sua próxima atividade'}</p><h2>${esc(atual?.assunto || atual?.materia || materia())}</h2><p>${atual?`Você está na questão ${atual.passo+1} de ${atual.itens.length}.`:esc(perfil().formato || 'Trilha por assunto')}</p>${atual?link('Continuar atividade →','sessao/'+atual.id,'principal'):link(convite+' →',destino,'principal')}</div>${tutor()}</section>
     <div class="metricas"><div><b>${respondidas.length}</b> questões respondidas</div><div><b>${acertos}</b> respostas corretas</div><div><b>${d.sessoes.filter(s=>s.fim).length+Number(Boolean(d.aulas?.escalas))}</b> atividades concluídas</div></div>
-    <div class="atalhos-estudo"><a class="principal" href="#simulados">Responder questões</a><a class="secundario" href="#atlas">Abrir Atlas interativo</a><a class="secundario" href="#revisao">Revisar cartões</a></div><p class="persistencia-local">${contas.usuario?'O progresso desta conta fica nesta aba até você sair ou fechá-la.':'Seu progresso fica salvo neste navegador.'}</p>${lembretes()}${caminhosSalvos()}${ilustracoes.galeria([...new Set([...perfil().materias,...estudos.materias])])}${d.primeiraRevisao?'<section class="papel selo-revisao"><h2>Primeira revisão lembrada</h2><p>Você recuperou uma resposta de memória. O cartão voltará na próxima revisão.</p></section>':''}${meta()}<section class="grade">${cards.map(([r,t,c])=>`<a class="atalho" href="#${r}"><span aria-hidden="true">${icone(r)}</span><h2>${t}</h2><p>${c}</p></a>`).join('')}</section>
+    <div class="atalhos-estudo"><a class="principal" href="#simulados">Responder questões</a><a class="secundario" href="#atlas">Abrir Atlas interativo</a><a class="secundario" href="#revisao">Revisar cartões</a></div><p class="persistencia-local">${contas.usuario?'Progresso sincronizado com sua conta quando houver conexão. '+(contas.estadoSincronizacao||''):'Seu progresso fica salvo neste navegador.'}</p>${lembretes()}${caminhosSalvos()}${ilustracoes.galeria([...new Set([...perfil().materias,...estudos.materias])])}${d.primeiraRevisao?'<section class="papel selo-revisao"><h2>Primeira revisão lembrada</h2><p>Você recuperou uma resposta de memória. O cartão voltará na próxima revisão.</p></section>':''}${meta()}<section class="grade">${cards.map(([r,t,c])=>`<a class="atalho" href="#${r}"><span aria-hidden="true">${icone(r)}</span><h2>${t}</h2><p>${c}</p></a>`).join('')}</section>
     <section class="amostra"><div><p class="rotulo">Matemática · Quadro do Neo</p><h2>Da planta ao pátio</h2>${d.aulas?.escalas?'<p>Aula concluída</p>':''}</div><a class="secundario" href="propostas/QUADRO-NEO-AURORA.html?origem=estudo">Abrir aula de escalas ↗</a></section>`;
   }
   function trilha() {
     const assuntos=[...new Set(estudos.lista(materia()).map(q=>q.assunto))];
     const concluidos=estudos.assuntosConcluidos(estudos.dados,materia()).size;
     const progresso='<section class="resumo-trilha">'+ilustracoes.imagem(materia())+'<div><h2>Seu percurso</h2><p>'+concluidos+' de '+assuntos.length+' assuntos concluídos</p><progress aria-label="Assuntos concluídos" max="'+assuntos.length+'" value="'+concluidos+'"></progress></div></section>';
-    return titulo(materia(),'Trilha de aprendizagem','Acerte todas as questões de uma rodada para concluir o assunto. Os erros ficam disponíveis para revisão.')+listaMateria()+progresso+'<div class="atalhos-estudo"><a class="secundario" href="#atlas">Explorar o Atlas</a>'+(materia()==='Matemática'?'<a class="secundario" href="#pratica">Potenciação guiada</a>':'')+'</div>'+`<ol class="trilha">${assuntos.map((a,i)=>{
+    return titulo(materia(),'Trilha de aprendizagem','Acerte todas as questões de uma rodada para concluir o assunto. Os erros ficam disponíveis para revisão.')+listaMateria()+progresso+'<div class="atalhos-estudo"><a class="principal" href="#minhas-trilhas">＋ Criar minha trilha</a><a class="secundario" href="#atlas">Explorar o Atlas</a>'+(materia()==='Matemática'?'<a class="secundario" href="#pratica">Potenciação guiada</a>':'')+'</div>'+`<ol class="trilha">${assuntos.map((a,i)=>{
       const sessoes=estudos.dados.sessoes.filter(s=>s.materia===materia()&&s.assunto===a);
       const aberta=sessoes.find(s=>!s.fim);
       const completa=sessoes.some(s=>s.fim&&s.itens.every(it=>it.escolha===porId.get(it.id).correta));
@@ -280,11 +280,11 @@
   function render(focar=false) {
     const [solicitada,id]=location.hash.slice(1).split('/');
     atlasAurora.fechar();apresentacaoAurora.fechar();
-    rota=['aurora','atlas','conta','preferencias'].includes(solicitada)?solicitada:!perfil()?'inicio':visitante.editando?'ajustes':(Object.hasOwn(paginas,solicitada)||['pratica','sessao'].includes(solicitada)?solicitada:'painel');
+    rota=['aurora','atlas','conta','preferencias'].includes(solicitada)?solicitada:!perfil()?'inicio':visitante.editando?'ajustes':(Object.hasOwn(paginas,solicitada)||['pratica','sessao','trilha-personalizada'].includes(solicitada)?solicitada:'painel');
     sessaoId=id||'';
     if(rota==='ajustes'&&!visitante.editando) visitante.comecar();
     const abas=perfil()&&!visitante.editando&&rota!=='aurora'?Object.entries(paginas):[];
-    nav.innerHTML=abas.map(([r,n])=>`<a href="#${r}" ${r===rota?'aria-current="page"':''}>${icone(r)}${n}</a>`).join('');
+    nav.innerHTML=abas.length?[['Estudar',['painel','trilha','minhas-trilhas','simulados','revisao']],['Criar e explorar',['tutor','quadro','biblioteca','caderno']],['Organizar',['agenda','busca','ajustes']]].map(([grupo,itens])=>`<section class="menu-grupo"><h2>${grupo}</h2><div>${itens.map(r=>`<a href="#${r}" ${r===rota?'aria-current="page"':''}>${icone(r)}${paginas[r]}</a>`).join('')}</div></section>`).join(''):'';
     const naEntrada=rota==='aurora'||(rota==='inicio'&&!visitante.editando);
     if(naEntrada)nav.innerHTML=perfil()?'<a href="#painel">Meu painel ↗</a>':'<a id="estudar-nav" href="#conta/entrar">Acesso do estudante</a>';
     if(rota==='atlas')nav.innerHTML=perfil()?'<a href="#trilha">Voltar à trilha</a>':'<a href="#inicio">Início</a>';
@@ -295,7 +295,7 @@
     mostrarMenu();
     document.documentElement.classList.toggle('letra-ampliada',estudos.dados.aparencia?.letra===true);
     document.documentElement.classList.toggle('alto-contraste',estudos.dados.aparencia?.contraste===true);
-    const views={preferencias:()=>titulo('Preferências','Movimento e animações')+'<section class="papel">'+painelMovimento()+'<a class="secundario" href="#aurora">Voltar ao início</a></section>',conta,pratica:()=>titulo('Trilha de matemática','Potenciação guiada')+apresentacaoAurora.pratica(robo)+link('Voltar à trilha','trilha'),aurora:()=>apresentacaoAurora.tela(robo,Boolean(perfil())),atlas:()=>atlasAurora.tela(robo,Boolean(perfil())),inicio,painel,trilha,simulados,biblioteca,busca,tutor:tutorEstudos,quadro:()=>titulo('Estúdio de estudos','Quadro livre','Desenhe com o dedo ou o mouse. Para um fluxograma, adicione e conecte os blocos pelo nome.')+quadroLivre.tela(esc),revisao,sessao,caderno,agenda,ajustes:()=>`<section class="config">${titulo('Perfil local','Ajustes')}<div class="papel wizard">${visitante.conteudo('Quais matérias você quer priorizar?')}</div>${preferenciasLocais()}</section>`};
+    const views={preferencias:()=>titulo('Preferências','Movimento e animações')+'<section class="papel">'+painelMovimento()+'<a class="secundario" href="#aurora">Voltar ao início</a></section>',conta,pratica:()=>titulo('Trilha de matemática','Potenciação guiada')+apresentacaoAurora.pratica(robo)+link('Voltar à trilha','trilha'),aurora:()=>apresentacaoAurora.tela(robo,Boolean(perfil())),atlas:()=>atlasAurora.tela(robo,Boolean(perfil())),inicio,painel,trilha,'minhas-trilhas':()=>trilhasPersonalizadas.telaLista(),'trilha-personalizada':()=>trilhasPersonalizadas.telaDetalhe(sessaoId),simulados,biblioteca,busca,tutor:tutorEstudos,quadro:()=>quadroLivre.tela(esc),revisao,sessao,caderno,agenda,ajustes:()=>`<section class="config">${titulo('Perfil local','Ajustes')}<div class="papel wizard">${visitante.conteudo('Quais matérias você quer priorizar?')}</div>${preferenciasLocais()}</section>`};
     principal.className=['atlas','aurora'].includes(rota)||(rota==='inicio'&&!visitante.editando)?'entrada':'conteudo';
     principal.innerHTML=views[rota]();
     if(principal.className==='conteudo'){
@@ -304,6 +304,7 @@
       if(perfil()&&Object.hasOwn(estudos.destinos,destino))principal.querySelector('.cab')?.insertAdjacentHTML('beforeend',marcarDestino(destino));
     }
     document.body.classList.toggle('espaco-estudo',principal.className==='conteudo');
+    document.body.classList.toggle('quadro-aberto',rota==='quadro');
     const comAtlas=Boolean(principal.querySelector('.atlas-hero'));
     document.body.classList.toggle('no-atlas',comAtlas);
     document.querySelector('#ver-atlas').hidden=!comAtlas;
@@ -321,7 +322,7 @@
     if(rota==='inicio'||rota==='ajustes')visitante.prepararVoz();
     document.querySelector('#persistencia').textContent=[aviso,visitante.aviso,estudos.mensagem].filter(Boolean).join(' ');
     document.body.classList.toggle('neo-minimo',apresentacaoAurora.neoMinimo());
-    document.title=(paginas[rota]|| (rota==='sessao'?'Atividade':'Boas-vindas'))+' · Missão 8º Ano';
+    document.title=(paginas[rota]|| (rota==='sessao'?'Atividade':rota==='trilha-personalizada'?'Trilha personalizada':'Boas-vindas'))+' · Missão 8º Ano';
     if(['conta','pratica','preferencias'].includes(rota))document.title=principal.querySelector('h1').textContent+' · Missão 8º Ano';
     relogio();
     celebracoes.posicionar();
@@ -364,6 +365,16 @@
   principal.addEventListener('click',async e=>{
     const atalho=e.target.closest('[data-destino]');if(atalho&&!perfil())destinoEntrada=atalho.dataset.destino;
     const b=e.target.closest('button');if(!b||ocupado)return;
+    if(b.dataset.trilhaAct){
+      const id=b.dataset.id;
+      if(b.dataset.trilhaAct==='excluir'){
+        if(!confirm('Deseja excluir esta trilha? Esta ação não pode ser desfeita.'))return;
+        ocupado=true;try{await trilhasPersonalizadas.excluir(id);navegar('minhas-trilhas');}finally{ocupado=false;}return;
+      }
+      if(b.dataset.trilhaAct==='passo'){
+        ocupado=true;try{await trilhasPersonalizadas.alternar(id,Number(b.dataset.passo));render(true);}finally{ocupado=false;}return;
+      }
+    }
     if(b.id==='neo'){
       const dica=document.querySelector('#dica');
       dica.hidden=!dica.hidden;
@@ -491,6 +502,26 @@
   principal.addEventListener('submit',async e=>{
     e.preventDefault();if(ocupado)return;
     const form=e.target;
+    if(form.id==='form-nova-trilha'){
+      if(ocupado)return;
+      ocupado=true;
+      const enviar=form.querySelector('button[type=submit]');
+      enviar.disabled=true;enviar.setAttribute('aria-busy','true');
+      try{
+        const arquivo=form.elements.arquivo.files[0];
+        const textoImportado=await trilhasPersonalizadas.lerArquivo(arquivo);
+        const trilhaNova=await trilhasPersonalizadas.criar({
+          titulo:form.elements.titulo.value,
+          materia:form.elements.materia.value,
+          assunto:form.elements.assunto.value,
+          texto:[form.elements.texto.value, textoImportado].filter(Boolean).join('\n\n'),
+          arquivo:arquivo?.name||''
+        });
+        navegar('trilha-personalizada/'+trilhaNova.id);
+      }catch(erro){const local=principal.querySelector('#erro-trilha');if(local)local.textContent=erro.message||'Não foi possível criar a trilha.';}
+      finally{ocupado=false;enviar.disabled=false;enviar.removeAttribute('aria-busy');}
+      return;
+    }
     if(form.id==='form-conta'){
       const status=principal.querySelector('#status-conta');ocupado=true;const enviar=form.querySelector('button');enviar.disabled=true;enviar.setAttribute('aria-busy','true');
       try {status.textContent=await contas.enviar(form.dataset.modo,form);form.reset();} catch(erro){status.textContent=contas.mensagem(erro);} finally{ocupado=false;enviar.disabled=false;enviar.removeAttribute('aria-busy');}return;
@@ -521,7 +552,15 @@
         const id=estudos.uid(), fonte=fonteId;
         await estudos.alterar(d=>{d.cartoes ||= {};d.cartoes[id]={frente,verso,fonte};d.revisoes[id]={nivel:0,quando:Date.now()};});
         fonteId='';aviso='Flashcard guardado para revisão.';
-      }else if(form.id==='form-neo'){ buscaNeo=form.querySelector('#consulta').value.trim(); tutorNeo.parar(); }
+      }else if(form.id==='form-neo'){
+         buscaNeo=form.querySelector('#consulta').value.trim();
+         tutorNeo.parar();
+         respostaNeoIA='';erroNeoIA='';
+         if(e.submitter?.value==='ia'){
+           try{respostaNeoIA=await tutorNeo.perguntarIA(buscaNeo,materia());}
+           catch(erro){erroNeoIA=erro.message||'O Neo IA não está disponível.';}
+         }
+       }
       else if(form.id==='form-meta'){ const valor=Number(form.querySelector('#alvo').value); if(Number.isInteger(valor)&&valor>=1&&valor<=50){await estudos.alterar(d=>{d.meta=valor;});aviso='Meta da semana salva.';} }
       else if(form.id==='form-nota'){
         const texto=form.querySelector('textarea').value.trim();if(!texto)return;

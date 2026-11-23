@@ -128,11 +128,70 @@ const contas = (() => {
     if(error)throw error;
     return data;
   }
+
+  // Sincronização privada do progresso, com cópia local para uso offline.
+  let envioEstado=null, gravandoEstado=false,temporizadorEstado=null, statusEstado='';
+  const chaveEstudos=()=>chave('missao803.estudos.v1');
+  const chaveData=()=>chaveEstudos()+'.modificado';
+  async function carregarEstudos(){
+    if(!cliente||!usuario)return;
+    try {
+      const requisicao=cliente.from('neo_aurora_estado_estudos').select('conteudo,atualizado_em').eq('usuario_id',usuario).maybeSingle();
+      const resultado=await Promise.race([requisicao,new Promise((_,reject)=>setTimeout(()=>reject(Error('timeout')),6500))]);
+      if(resultado.error)throw resultado.error;
+      const remoto=resultado.data;
+      const local=sessionStorage.getItem(chaveEstudos());
+      const momento=Number(sessionStorage.getItem(chaveData()))||0;
+      const atualizado=remoto?new Date(remoto.atualizado_em).getTime():0;
+      if(remoto?.conteudo && (!local || atualizado>=momento)){
+        sessionStorage.setItem(chaveEstudos(),JSON.stringify(remoto.conteudo));
+        sessionStorage.setItem(chaveData(),String(atualizado));
+        statusEstado='Sincronizado com a sua conta.';
+      }else if(local && (!remoto || momento>atualizado)){
+        sincronizarEstudos(local);
+      }else statusEstado='Seu progresso será sincronizado com a sua conta.';
+    }catch{statusEstado='Sem sincronização no momento. O progresso continua nesta aba.';}
+  }
+  function sincronizarEstudos(conteudo){
+    if(!cliente||!usuario)return;
+    envioEstado=conteudo;
+    clearTimeout(temporizadorEstado);
+    try{sessionStorage.setItem(chaveData(),String(Date.now()));}catch{}
+    statusEstado='Salvando alterações na sua conta…';
+    temporizadorEstado=setTimeout(()=>{void gravarEstudos();},650);
+  }
+  async function gravarEstudos(){
+    if(!cliente||!usuario||gravandoEstado||!envioEstado)return;
+    const atual=envioEstado;
+    gravandoEstado=true;
+    try {
+      const {error}=await cliente.from('neo_aurora_estado_estudos').upsert({
+        usuario_id:usuario,conteudo:JSON.parse(atual),atualizado_em:new Date().toISOString()
+      },{onConflict:'usuario_id'});
+      if(error)throw error;
+      statusEstado='Progresso sincronizado.';
+      if(envioEstado===atual)envioEstado=null;
+    }catch{
+      statusEstado='Sem conexão com a nuvem. Dados mantidos nesta aba.';
+    }finally{
+      gravandoEstado=false;
+      if(envioEstado&&envioEstado!==atual)temporizadorEstado=setTimeout(()=>{void gravarEstudos();},300);
+    }
+  }
+  async function removerEstudos(){
+    envioEstado=null;clearTimeout(temporizadorEstado);
+    if(!cliente||!usuario)return;
+    const {error}=await cliente.from('neo_aurora_estado_estudos').delete().eq('usuario_id',usuario);
+    if(error)throw error;
+    try{sessionStorage.removeItem(chaveData());}catch{}
+  }
+  window.addEventListener('online',()=>{if(envioEstado)void gravarEstudos();});
+  document.addEventListener('visibilitychange',()=>{if(document.hidden&&envioEstado)void gravarEstudos();});
   async function salvarPreferencias(perfil){
     if(!usuario)return;
     const {error}=await cliente.auth.updateUser({data:{missao_preferencias:perfil}});
     if(error)throw error;
   }
   async function sair(){const {error}=await cliente.auth.signOut({scope:'local'});if(error)throw error;}
-  return {preparar,enviar,social,sair,salvarPreferencias,registrarVisita,relatorioAcessos,mensagem,carregar,get administrador(){return administrador;},get preferencias(){return preferencias;},get armazenamento(){return usuario?sessionStorage:localStorage;},get usuario(){return usuario;},get recado(){return recado;},get provedores(){return provedores;},get cadastro(){return cadastro;},get recuperando(){return recuperando;},chave:nome=>usuario?nome+'.conta.'+usuario:nome};
+  return {preparar,enviar,social,sair,salvarPreferencias,registrarVisita,relatorioAcessos,carregarEstudos,sincronizarEstudos,removerEstudos,mensagem,carregar,get cliente(){return cliente;},get estadoSincronizacao(){return statusEstado;},get administrador(){return administrador;},get preferencias(){return preferencias;},get armazenamento(){return usuario?sessionStorage:localStorage;},get usuario(){return usuario;},get recado(){return recado;},get provedores(){return provedores;},get cadastro(){return cadastro;},get recuperando(){return recuperando;},chave:nome=>usuario?nome+'.conta.'+usuario:nome};
 })();

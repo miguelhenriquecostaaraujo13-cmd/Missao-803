@@ -24,6 +24,18 @@ const tutorNeo = (() => {
       return { q:i.q, peso };
     }).filter(r => r.peso > 0).sort((a,b) => b.peso - a.peso).slice(0,3).map(r => r.q);
   }
+  async function perguntarIA(pergunta,materia){
+    if(!contas.usuario||!contas.cliente)throw new Error('Entre na sua conta para usar o Neo IA. A busca local funciona como visitante.');
+    if(!pergunta||pergunta.length<4)throw new Error('Escreva uma pergunta um pouco mais detalhada.');
+    const {data,error}=await contas.cliente.functions.invoke('neo-ia-gratis',{body:{pergunta,materia}});
+    if(error){
+      let aviso='O Neo IA generativo não está disponível. Use a busca local de explicações.';
+      try{const detalhe=await error.context?.json();if(detalhe?.erro)aviso=detalhe.erro;}catch{}
+      throw new Error(aviso);
+    }
+    if(!data||typeof data.resposta!=='string')throw new Error('O Neo IA não conseguiu responder. Tente outra pergunta.');
+    return data.resposta.slice(0,3000);
+  }
   let fala;
   function parar() {
     if (fala) window.speechSynthesis?.cancel();
@@ -46,5 +58,5 @@ const tutorNeo = (() => {
     try { window.speechSynthesis.speak(atual); } catch { fala=null; erro(); }
   }
   window.addEventListener('pagehide',parar);
-  return { procurar, voz, ouvir, parar };
+  return { procurar, voz, ouvir, parar, perguntarIA };
 })();

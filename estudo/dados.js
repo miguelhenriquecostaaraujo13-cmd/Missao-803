@@ -50,7 +50,7 @@ const estudos = (() => {
       ler();
       const valor = fn(dados);
       if (!apenasMemoria) {
-        try { (typeof contas==='undefined'?localStorage:contas.armazenamento).setItem(chave, JSON.stringify(dados)); }
+        try { const salvo=JSON.stringify(dados);(typeof contas==='undefined'?localStorage:contas.armazenamento).setItem(chave,salvo);if(typeof contas!=='undefined')contas.sincronizarEstudos(salvo); }
         catch {
           apenasMemoria = true;
           mensagem = 'O navegador não conseguiu salvar. Suas mudanças ficam disponíveis enquanto esta página estiver aberta.';
@@ -180,7 +180,7 @@ const estudos = (() => {
   }
   const destinos=Object.freeze({
     trilha:'Trilha',simulados:'Simulados',revisao:'Flashcards',biblioteca:'Biblioteca',
-    'biblioteca/mapa':'Mapa de assuntos',quadro:'Quadro livre',caderno:'Caderno',
+    'biblioteca/mapa':'Mapa de assuntos','minhas-trilhas':'Minhas trilhas',quadro:'Quadro branco',caderno:'Caderno',
     'caderno/erros':'Caderno de erros',tutor:'Tutor Neo',agenda:'Agenda e foco',escalas:'Da planta ao pátio'
   });
   function favoritos(){
@@ -210,7 +210,7 @@ const estudos = (() => {
   });
   async function apagar(){
     const remover=()=>{(typeof contas==='undefined'?localStorage:contas.armazenamento).removeItem(chave);dados=novo();mensagem='';};
-    if(navigator.locks)await navigator.locks.request(chave,remover);else remover();
+    if(navigator.locks)await navigator.locks.request(chave,remover);else remover();if(typeof contas!=='undefined')try{await contas.removerEstudos();}catch{mensagem='Progresso apagado nesta aba, mas a exclusão na nuvem não foi confirmada.';}
   }
   return { assuntosConcluidos, semana, concluirEscalas, destinos, favoritos, salvarDestino, lembrarArea, porId, materias, uid, alterar, apagar, respostas, lista, iniciar, responder, avancar, revisar, guardarCard,
     get dados() { return dados; }, get mensagem() { return mensagem; } };

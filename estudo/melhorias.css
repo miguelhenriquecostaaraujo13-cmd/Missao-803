@@ -1,0 +1,129 @@
+/* Neo Aurora — trilhas próprias, navegação organizada e quadro branco em tela cheia. */
+#nav.menu-estudos{display:flex;flex-direction:column;gap:10px;grid-template-columns:none;align-items:stretch;max-height:min(78dvh,680px)}
+#nav.menu-estudos .menu-grupo{display:block;padding:8px;border-radius:12px;background:#ffffff07}
+#nav.menu-estudos .menu-grupo h2{margin:0 0 8px;padding:2px 7px;font-size:.68rem;letter-spacing:.11em;text-transform:uppercase;color:#c9ace9}
+#nav.menu-estudos .menu-grupo>div{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:4px}
+#nav.menu-estudos .menu-grupo a{min-height:44px;display:flex;align-items:center;gap:10px;font-size:.85rem;line-height:1.2}
+#nav.menu-estudos .menu-grupo a[aria-current]{background:#c396ff27;border:1px solid #cf9afa60}
+.atalhos-estudo{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-block:16px}
+.atalhos-estudo a{display:inline-flex;align-items:center;justify-content:center;min-height:44px;text-align:center}
+.folha-estudo .acoes{display:flex;flex-wrap:wrap;align-items:center;gap:10px}
+.folha-estudo .acoes>*{min-height:40px}
+.trilhas-pessoais{display:grid;gap:22px;min-width:0}
+.nova-trilha{border:1px solid #ddc9f0!important;background:linear-gradient(150deg,#fffaff,#f1e9ff)!important}
+.nova-trilha>summary{display:flex;align-items:center;gap:8px;font:600 1.2rem/1.3 Sora,Inter,system-ui;cursor:pointer;list-style:none;padding:4px 0;color:#432465}
+.nova-trilha>summary::-webkit-details-marker{display:none}
+.form-trilha{display:grid;gap:13px;padding-top:18px}
+.form-trilha label{display:grid;gap:5px;font-size:.88rem;font-weight:650;color:#443654}
+.form-trilha :is(input,select,textarea){width:100%;min-width:0;margin:0!important;border:1px solid #b5a1c6;border-radius:12px;padding:12px;background:#fff;color:#292035;font:400 1rem/1.45 Inter,system-ui}
+.form-trilha textarea{resize:vertical;min-height:120px}
+.form-trilha input[type=file]{font-size:.83rem;min-height:50px}
+.campos-trilha{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.7fr);gap:12px}
+.form-trilha button{width:max-content;max-width:100%;min-height:46px;padding:12px 20px}
+.nota-trilha{margin:0;font-size:.79rem;color:#736781;line-height:1.55}
+#erro-trilha:not(:empty){padding:10px 12px;color:#912f45;background:#ffecef;border-radius:10px}
+.trilhas-heading{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:12px}
+.trilhas-heading h2{margin:0;font:500 1.8rem Sora,Inter,system-ui}
+.trilhas-heading span,.estado-trilhas{font-size:.8rem;color:#766985}
+.trilhas-pessoais-grade{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(260px,100%),1fr));gap:14px}
+.trilha-pessoal-card{display:flex;flex-direction:column;min-height:235px;gap:10px;padding:22px;text-decoration:none;color:#f9f4ff;background:radial-gradient(ellipse at 88% 2%,#ac70ed65,transparent 50%),linear-gradient(145deg,#221833,#36204d);border:1px solid #af86db88;border-radius:20px;box-shadow:0 14px 35px #160e2628;transition:transform .25s,box-shadow .25s,border-color .25s}
+.trilha-pessoal-card h3{font:500 1.45rem/1.2 Sora,Inter,sans-serif;letter-spacing:-.045em;margin:0}
+.trilha-pessoal-card p{font-size:.9rem;color:#d9cbe5;margin:0}
+.trilha-pessoal-card progress{margin-top:auto;height:8px;accent-color:#cc9dff}
+.trilha-pessoal-card small{color:#cdbfe0}
+.trilha-materia{align-self:flex-start;font-size:.74rem;letter-spacing:.07em;text-transform:uppercase;color:#ecd9ff}
+.abrir-trilha{font-weight:650;font-size:.87rem;color:#e8ccff;margin-top:2px}
+.vazio-trilhas{border:1px dashed #bda1d5;border-radius:17px;padding:25px;color:#5b4d68}
+.vazio-trilhas p{margin:8px 0}
+@media(hover:hover) and (pointer:fine){.trilha-pessoal-card:hover{transform:translateY(-4px);border-color:#dcbcff;box-shadow:0 20px 42px #26113b44}}
+.trilha-pessoal-card:active{transform:scale(.987)}
+.trilha-pessoal-detalhe{width:min(100%,1050px);margin:20px auto 0;padding:0 0 30px;color:#f4eaff}
+.trilha-detalhe-topo{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:5px 0 15px}
+.trilha-detalhe-topo a{color:#ead4ff;text-decoration:none;font-weight:650}
+.trilha-detalhe-topo span{color:#cdb5e3;font-size:.82rem}
+.trilha-apresentacao{overflow:hidden;position:relative;isolation:isolate;padding:clamp(25px,5vw,52px);background:radial-gradient(ellipse at 78% 15%,#b167e066,transparent 55%),linear-gradient(120deg,#251a3d,#3e2660);border:1px solid #ba97ee88;border-radius:22px;box-shadow:0 18px 55px #0c061b66}
+.trilha-apresentacao h1{font:500 clamp(2rem,5vw,3.5rem)/1.08 Sora,Inter,sans-serif;letter-spacing:-.055em;margin:8px 0 12px;color:white}
+.trilha-apresentacao p{color:#e4d6f3;margin:8px 0}
+.trilha-apresentacao progress{margin:18px 0 0;max-width:600px;accent-color:#c8a6fc}
+.selo-trilha{display:inline-flex;align-items:center;border:1px solid #e1c0fc88;background:#d7b1ff25;color:#f7e8ff;border-radius:999px;padding:7px 12px;font-size:.78rem;font-weight:650}
+.etapas-personais{list-style:none;margin:20px 0;padding:0 0 0 20px;display:grid;gap:16px;counter-reset:step}
+.etapas-personais li{display:grid;grid-template-columns:48px minmax(0,1fr);position:relative;gap:18px;align-items:start}
+.etapas-personais li:not(:last-child)::before{content:'';position:absolute;left:23px;top:52px;bottom:-21px;border-left:2px solid #a881db6b}
+.etapa-numero{width:48px;height:48px;display:grid;place-items:center;z-index:1;border:1px solid #d0a9ff;border-radius:50%;background:#4b2b73;color:#fff;font-weight:700}
+.etapa-feita .etapa-numero{background:#2d806a;border-color:#8de0c4}
+.etapa-conteudo{min-width:0;padding:22px;border:1px solid #ac8bd488;border-radius:17px;background:#20182fe8}
+.etapa-conteudo h2{margin:0 0 12px;color:#fff;font:500 1.4rem/1.2 Sora,Inter,sans-serif}
+.etapa-conteudo p{white-space:pre-line;overflow-wrap:anywhere;line-height:1.7;color:#e5d9ef}
+.etapa-conteudo button{min-height:44px}
+.acoes-trilha{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:24px 0 0 65px}
+.acoes-trilha a{display:inline-flex;align-items:center;min-height:44px}
+.excluir-trilha{margin-left:auto;border:1px solid #e3abb0;background:#441e39;color:#ffe1e7;padding:10px 15px;border-radius:12px}
+@media(prefers-reduced-motion:no-preference){
+  .trilha-gerada .trilha-apresentacao{animation:trilha-acender .9s cubic-bezier(.2,.8,.2,1) both}
+  .trilha-gerada .etapas-personais li{animation:trilha-surgir .55s cubic-bezier(.2,.8,.2,1) both;animation-delay:calc(.1s + var(--ordem) * .09s)}
+  .trilha-gerada .trilha-apresentacao::after{content:'';position:absolute;z-index:-1;inset:-45%;pointer-events:none;background:linear-gradient(110deg,transparent 30%,#f3bafc40 50%,transparent 65%);transform:translateX(-80%) rotate(-6deg);animation:trilha-luz 1.6s ease-out forwards}
+}
+@keyframes trilha-acender{from{opacity:.55;transform:translateY(14px) scale(.985)}to{opacity:1;transform:none}}
+@keyframes trilha-surgir{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+@keyframes trilha-luz{from{transform:translateX(-80%) rotate(-6deg)}to{transform:translateX(80%) rotate(-6deg)}}
+
+/* Quadro branco ocupa a tela inteira: sem menu do site, cartão ou margens da versão antiga. */
+body.quadro-aberto{overflow:hidden!important}
+body.quadro-aberto>.topo,body.quadro-aberto>.rodape-aurora,body.quadro-aberto>#persistencia,body.quadro-aberto>.estado-rede{display:none!important}
+body.quadro-aberto #principal{position:fixed!important;z-index:5000;inset:0!important;width:100vw!important;max-width:none!important;height:100dvh!important;min-height:0!important;margin:0!important;padding:0!important;overflow:hidden!important;background:#171223!important}
+.quadro-fullscreen{display:grid;grid-template-rows:auto minmax(0,1fr) auto;width:100%;height:100dvh;min-height:0;color:#fbf6ff;background:#171223;font-family:Inter,system-ui,sans-serif}
+.quadro-barra{z-index:2;position:relative;display:flex;align-items:center;gap:14px;flex-wrap:wrap;padding:10px max(13px,env(safe-area-inset-left)) 10px max(13px,env(safe-area-inset-right));background:#20172d;border-bottom:1px solid #6c548e6e;box-shadow:0 2px 12px #0004}
+.quadro-sair{display:flex;align-items:center;justify-content:center;min-height:44px;padding:7px 14px;color:#f8f0ff!important;text-decoration:none;border:1px solid #a78bc4;border-radius:12px;white-space:nowrap}
+.quadro-identidade{margin-right:auto;min-width:120px}
+.quadro-identidade small{display:block;font-size:.6rem;letter-spacing:.13em;color:#bf9de6}
+.quadro-identidade h1{font:600 clamp(1rem,2.3vw,1.3rem) Sora,Inter,system-ui;margin:0;color:white}
+.quadro-ferramentas{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.quadro-ferramentas button,.quadro-ferramentas select,.quadro-formularios button{min-height:44px;padding:9px 12px;border:1px solid #9674b1;border-radius:10px;color:#fff;background:#3c2a53;font:600 .84rem Inter,system-ui;white-space:nowrap}
+.quadro-ferramentas button:disabled{opacity:.46}
+.quadro-ferramentas #exportar-quadro{background:linear-gradient(120deg,#8b59de,#6434b2)}
+.quadro-cor{display:flex;align-items:center;gap:6px;font-size:.77rem;color:#d5c6e3}
+.quadro-cor select{width:auto!important;min-height:42px!important;margin:0!important;max-width:95px}
+.quadro-palco{position:relative;min-height:0;overflow:hidden;background-color:#fffefa;background-image:radial-gradient(#d9ccdf 1px,transparent 1px);background-size:20px 20px;cursor:crosshair}
+body.quadro-aberto #desenho{position:absolute;display:block;inset:0;width:100%!important;height:100%!important;max-width:none!important;max-height:none!important;touch-action:none;background:none!important;border:0!important;border-radius:0!important;object-fit:fill}
+.quadro-palco .dica-quadro{position:absolute;inset:45% 14px auto;text-align:center;font-size:clamp(.78rem,3vw,.95rem);color:#887797;pointer-events:none;opacity:.8}
+.quadro-palco:has(canvas:active) .dica-quadro{display:none}
+.quadro-rodape{position:relative;z-index:2;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:8px max(14px,env(safe-area-inset-left)) max(8px,env(safe-area-inset-bottom));border-top:1px solid #6c548e70;background:#211a2f;min-height:55px}
+.quadro-rodape #aviso-desenho{font-size:.76rem;max-width:75%;color:#d9c7e9;margin:0}
+.quadro-fluxograma{position:relative}
+.quadro-fluxograma>summary{min-height:40px;display:flex;align-items:center;padding:8px 12px;border:1px solid #6c548e;border-radius:10px;cursor:pointer;list-style:none;font-size:.86rem;font-weight:600}
+.quadro-fluxograma>summary::-webkit-details-marker{display:none}
+.quadro-fluxograma[open]{z-index:3}
+.quadro-formularios{position:absolute;left:0;bottom:calc(100% + 9px);display:flex;align-items:end;gap:16px;min-width:min(560px,calc(100vw - 28px));max-width:calc(100vw - 24px);max-height:60dvh;overflow:auto;padding:18px;border-radius:16px;border:1px solid #7d619e;background:#23182feF;box-shadow:0 14px 40px #070410aa}
+.quadro-formularios form{display:flex;flex-wrap:wrap;align-items:end;gap:8px;flex:1}
+.quadro-formularios label{font-size:.8rem;display:grid;gap:6px;color:#e6d7f6;flex:1;min-width:100px}
+.quadro-formularios :is(select,input){min-height:42px;width:100%;margin:0!important;padding:8px!important;font-size:.84rem}
+.quadro-leitura{position:absolute;bottom:0;right:0;opacity:0;pointer-events:none;width:1px;height:1px;overflow:hidden}
+@media(max-width:740px){
+ #nav.menu-estudos .menu-grupo>div{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .campos-trilha{grid-template-columns:1fr}
+ .trilha-pessoal-detalhe{padding:8px 8px 35px;margin:5px auto}
+ .trilha-apresentacao{padding:26px 20px}
+ .etapas-personais{padding-left:0}
+ .etapas-personais li{gap:10px;grid-template-columns:38px minmax(0,1fr)}
+ .etapa-numero{width:38px;height:38px}
+ .etapas-personais li:not(:last-child)::before{left:18px;top:44px}
+ .etapa-conteudo{padding:16px}
+ .acoes-trilha{margin-left:0}
+ .excluir-trilha{margin-left:0}
+ .quadro-barra{padding:6px 8px;gap:6px}
+ .quadro-sair{min-height:38px;padding:6px 10px;font-size:.8rem}
+ .quadro-identidade{min-width:95px}
+ .quadro-identidade h1{font-size:.91rem}
+ .quadro-ferramentas{width:100%;justify-content:space-between;gap:5px}
+ .quadro-ferramentas button{font-size:.75rem;flex:1;padding:7px 6px;min-height:40px}
+ .quadro-cor{font-size:.69rem}
+ .quadro-cor select{font-size:.76rem;min-height:40px!important}
+ .quadro-formularios{flex-direction:column;align-items:stretch;width:min(350px,calc(100vw - 20px))}
+ .quadro-rodape{min-height:47px;padding:5px 9px max(5px,env(safe-area-inset-bottom))}
+}
+@media(prefers-reduced-motion:reduce){.trilha-gerada *{animation:none!important}.trilha-pessoal-card{transition:none!important}}
+
+/* Tutor Neo: IA opcional transparente, sem depender de chamadas remotas. */
+.resposta-neo:not(:empty){margin:12px 0 20px;padding:20px;border:1px solid #ae86e07a;border-radius:18px;background:linear-gradient(120deg,#2c2042,#21172f);color:#f6edff;line-height:1.7;white-space:pre-wrap;overflow-wrap:anywhere}
+.resposta-neo h2{font:600 1.18rem Sora,Inter,system-ui;margin:0 0 12px;color:#fff}.resposta-neo p{margin:0 0 10px}.resposta-neo small{color:#d9c6ea}
+.aviso-ia{font-size:.79rem;color:#766985;line-height:1.5;margin:12px 0 0}
