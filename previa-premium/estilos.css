@@ -525,3 +525,13 @@ body.espaco-estudo .folha-estudo .pergunta:focus-within{
 @media (prefers-reduced-motion:reduce){
   body.espaco-estudo .folha-estudo progress{animation:none!important;transform:none}
 }
+
+
+/* PWA e Chrome: cabeçalho clicável acima do conteúdo mesmo com CSS antigo em cache. */
+body.espaco-estudo:not(.quadro-aberto) > header.topo{
+ position:sticky!important;top:max(8px,env(safe-area-inset-top));
+ z-index:120!important;overflow:visible!important;
+}
+body.espaco-estudo:not(.quadro-aberto) #nav.menu-estudos{
+ z-index:121!important;pointer-events:auto;
+}
