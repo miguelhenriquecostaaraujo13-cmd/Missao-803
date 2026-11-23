@@ -409,3 +409,12 @@ body.espaco-estudo .folha-estudo .wizard [data-campo]{
   body.espaco-estudo .folha-estudo .wizard [data-campo]{transition:none!important}
 }
 body.quieto.espaco-estudo .folha-estudo .wizard [data-campo]{transition:none!important}
+
+/* Identifica claramente a versao de testes, especialmente no aplicativo instalado. */
+.topo .marca::after{
+  content:"PRÉVIA";display:inline-flex;align-items:center;justify-content:center;
+  margin-left:6px;padding:3px 7px;border:1px solid #ca9df67e;
+  border-radius:999px;background:#9b62e72b;color:#d6b5ff;
+  font:700 .56rem/1.2 Inter,system-ui,sans-serif;letter-spacing:.08em
+}
+@media(max-width:420px){.topo .marca::after{font-size:.47rem;margin-left:2px;padding:2px 5px}}
