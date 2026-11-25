@@ -1,0 +1,32 @@
+
+/* Neo Lab: nine independent, local-only study utilities. */
+#neoLab .neo-lab-intro{border-radius:19px 9px 19px 9px;background:linear-gradient(115deg,#0c456f,#147fa0);color:white;padding:20px 24px;margin-bottom:18px}
+#neoLab .neo-lab-intro h3{color:#fff;margin:0 0 6px}
+#neoLab .neo-lab-intro p{margin:0;color:#e8f8ff;line-height:1.6}
+.neo-lab-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.neo-tool{border-radius:17px 9px 17px 9px;background:var(--white);border:1px solid var(--line);padding:17px;min-width:0;box-shadow:0 4px 13px #07385e12}
+.neo-tool h3{font-size:1.08rem;margin:0 0 5px}
+.neo-tool p,.neo-tool small{font-size:.86rem;color:var(--muted);line-height:1.55}
+.neo-tool label{display:block;font-weight:750;margin:11px 0 5px;color:var(--ink)}
+.neo-tool :is(input,textarea,select){width:100%;min-width:0;border:1px solid #9cbfd1;border-radius:11px;padding:10px 12px;background:var(--white);color:var(--ink);font:inherit}
+.neo-tool textarea{min-height:74px;resize:vertical}
+.neo-tool :is(input,textarea,select):focus-visible,.neo-tool button:focus-visible{outline:3px solid #efbd72;outline-offset:2px}
+.neo-tool button{margin:10px 7px 0 0}
+.neo-output{white-space:pre-wrap;overflow-wrap:anywhere;line-height:1.55;border-radius:12px;background:var(--portal-panel);padding:10px 12px;margin-top:10px;min-height:38px;color:var(--ink);font-size:.87rem}
+.neo-week-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
+.neo-week-grid label{font-size:.8rem;margin:2px 0}
+.neo-check-row{display:flex!important;gap:9px;align-items:center;padding:7px 0;margin:0!important;font-weight:600!important}
+.neo-check-row input{width:18px!important;height:18px;flex:0 0 18px;accent-color:#187ca0}
+.neo-small-list{display:grid;gap:6px;max-height:185px;overflow-y:auto;margin-top:8px}
+.neo-small-list button{display:block;text-align:left;background:var(--portal-panel);color:var(--ink);border:1px solid var(--line);border-radius:11px;padding:10px;margin:0}
+.neo-small-list button:hover{border-color:#2793ae}
+.neo-priority-board{margin-top:20px;background:var(--white);border-radius:18px;border:1px solid var(--line);padding:20px}
+.neo-priority-board .neo-priority-item{display:flex;align-items:flex-start;gap:10px;padding:10px;border-bottom:1px solid var(--line);font-size:.9rem}
+.neo-priority-board .neo-priority-item:last-child{border-bottom:0}
+.neo-priority-board .neo-priority-item input{flex:0 0 18px;width:18px;height:18px;accent-color:#187ba0}
+.neo-priority-board .neo-priority-item strong{display:block;font-size:.9rem;color:var(--ink)}
+.neo-priority-board .neo-priority-item small{color:var(--muted)}
+.neo-priority-stars{color:#a16a00;font-weight:900;white-space:nowrap}
+.neo-link-chip{display:inline-flex;align-items:center;gap:5px;padding:5px 8px;border-radius:99px;background:#dff2f9;color:#134f72;font-weight:800;font-size:.75rem}
+@media(max-width:750px){.neo-lab-grid{grid-template-columns:1fr}.neo-week-grid{grid-template-columns:1fr}.neo-tool{padding:14px}.neo-priority-board{padding:14px}}
+@media(prefers-reduced-motion:reduce){#neoLab *,#neoLab *::before,#neoLab *::after{transition:none!important;animation:none!important}}

@@ -1,0 +1,25 @@
+html.modern-embedded{--ink:#253831;--muted:#6d7d76;--line:#e3eae4;--white:#fff;--portal-panel:#fff;--portal-page:#f7f8fa;--blue:#345c50;--navy:#29453b;--orange:#78956d;background:#f7f8fa!important;color-scheme:light}
+html.modern-embedded body{background:#f7f8fa!important;background-image:none!important;color:#253831!important;font-family:'DM Sans',Arial,sans-serif!important;min-height:100vh;padding:0!important}
+html.modern-embedded body>header,html.modern-embedded body>nav,html.modern-embedded body>footer,html.modern-embedded #portal8Cover,html.modern-embedded #p8FirstVisit,html.modern-embedded .neo-skip-to-content,html.modern-embedded #portal8RouteIndicator{display:none!important}
+html.modern-embedded main{margin:0!important;padding:18px!important;max-width:none!important;width:100%!important;min-height:0!important}
+html.modern-embedded .view:not(.active){display:none!important}
+html.modern-embedded .view.active{display:block!important;animation:none!important;transform:none!important;opacity:1!important}
+html.modern-embedded .card,html.modern-embedded .mp6-panel{background:#fff!important;border:1px solid #e3eae4!important;border-radius:14px!important;box-shadow:none!important;color:#253831!important}
+html.modern-embedded .btn,html.modern-embedded .mp6-primary{border-radius:8px!important;box-shadow:none!important}
+html.modern-embedded .btn.orange,html.modern-embedded .mp6-primary{background:#345c50!important;color:#fff!important}
+html.modern-embedded .section-title{color:#29453b!important;font-size:24px!important;letter-spacing:-.5px!important}
+html.modern-embedded .section-sub{color:#6d7d76!important}
+html.modern-embedded input,html.modern-embedded select,html.modern-embedded textarea{border-radius:8px!important;border-color:#d7e2d9!important;max-width:100%;color:#253831;background:#fff}
+html.modern-embedded .mp6-hero{background:#eaf0e6!important;color:#29453b!important;box-shadow:none!important;border-radius:14px!important;min-height:0!important}
+html.modern-embedded .mp6-hero h2,html.modern-embedded .mp6-hero p,html.modern-embedded .mp6-kicker{color:#29453b!important}
+html.modern-embedded .mp6-hero-art{display:none!important}
+html.modern-embedded .mp6-hero h2{font-size:26px!important}
+html.modern-embedded.modern-dark{--ink:#e6eee8;--muted:#acc0b3;--line:#384e40;--white:#202e28;--portal-panel:#202e28;--portal-page:#17221c;background:#17221c!important;color-scheme:dark}
+html.modern-dark body{background:#17221c!important;color:#e6eee8!important}
+html.modern-dark .card,html.modern-dark .mp6-panel{background:#202e28!important;color:#e6eee8!important;border-color:#384e40!important}
+html.modern-dark input,html.modern-dark select,html.modern-dark textarea{background:#263b2d!important;color:#e6eee8!important;border-color:#425d48!important}
+html.modern-dark .section-title{color:#d9ecda!important}html.modern-dark .section-sub{color:#a2b8a7!important}
+@media(max-width:600px){html.modern-embedded main{padding:10px!important}html.modern-embedded .grid{display:grid!important;grid-template-columns:1fr!important}html.modern-embedded .grid>[class*=span-]{grid-column:auto!important}html.modern-embedded canvas{max-width:100%;height:auto}html.modern-embedded .section-title{font-size:20px!important}}
+html.modern-embedded body{display:block!important;grid-template-columns:none!important;margin:0!important;width:100%!important;max-width:none!important}
+html.modern-embedded main{grid-column:auto!important;grid-row:auto!important;margin-left:0!important}
+html.modern-embedded #portal8Pazinho{display:none!important}

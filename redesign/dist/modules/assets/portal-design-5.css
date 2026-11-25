@@ -1,0 +1,191 @@
+/* Portal Missão Paz v5 — redesenho real da home, header e navegação.
+   Carregar por último no HEAD, após todas as regras antigas. */
+:root{--mp5-ink:#142d54;--mp5-muted:#5c7192;--mp5-line:#dce8f9;--mp5-soft:#f4f7ff;--mp5-deep:#132a53}
+html body{background:radial-gradient(circle at 5% 3%,#d9f7f1 0,transparent 29%),radial-gradient(circle at 96% 22%,#e7e1ff 0,transparent 38%),#f5f8ff!important;color:var(--mp5-ink)}
+html body main{max-width:1240px;padding:0 clamp(12px,3vw,28px);margin:28px auto 65px}
+html body .view :is(.card,.mission,.neo-smart-panel){border-radius:20px}
+html body .view .card{box-shadow:0 10px 32px #263e6510}
+html body .view :is(.btn,.navbtn,.mp-action){transition:transform .15s ease,background .16s ease,box-shadow .16s ease}
+html body .view .btn:hover{transform:translateY(-2px)}
+/* Cabeçalho panorâmico compacto: marca e identidade escolar ainda visíveis. */
+html body header.school-hero{background:radial-gradient(ellipse at 89% 8%,#6380d4aa 0,transparent 30%),radial-gradient(ellipse at 64% 88%,#24b1b46b 0,transparent 42%),linear-gradient(115deg,#122747 0%,#172f61 52%,#135d7c 100%)!important;padding:20px 0 23px!important;border-bottom:0!important;box-shadow:0 17px 40px #19396a25!important}
+header.school-hero:after{content:"✦";right:10%;top:30%;font-size:160px;color:#ffffff0c;transform:rotate(-15deg)}
+html body header.school-hero>.wrap{max-width:1240px;padding:0 clamp(15px,3vw,28px)}
+html body header.school-hero h1{font-size:clamp(1.6rem,3.6vw,2.8rem)!important;line-height:1.08!important;letter-spacing:-.045em!important;margin:13px 0!important;max-width:none!important}
+html body header.school-hero h1 .school-hero-number{color:#c7eaff!important}
+html body header.school-hero h1 .school-hero-slogan{background:linear-gradient(100deg,#fbe29b,#faaf83);background-clip:text;-webkit-background-clip:text;color:transparent!important}
+html body header.school-hero .school-identity{margin-top:10px!important}
+html body header.school-hero .school-logo-mark img{max-height:60px;width:auto}
+html body header.school-hero .portal-eyebrow{color:#d2ebff;letter-spacing:.13em;font-size:.7rem}
+html body header.school-hero .portal-hero-actions{margin-top:11px!important}
+html body header.school-hero .exam-strip{margin-top:11px!important;max-width:850px;background:#fff0!important;border:0;padding:0!important;opacity:.8}
+html body header.school-hero .exam-strip .exam-pill{font-size:.72rem;padding:5px 8px;background:#ffffff17}
+html body header.school-hero .portal8-toolbar{margin:9px 0!important}
+html body header.school-hero .portal8-toolbar select{border-color:#9fc8db;border-radius:10px}
+html body header.school-hero>div.wrap>p{font-size:.85rem;max-width:550px;opacity:.77}
+html body header.school-hero .p8-profile-shortcut{box-shadow:0 7px 19px #0002}
+/* NAV: barra principal moderna com rotas grandes e ferramentas num painel opcional. */
+html body nav{position:sticky!important;top:0!important;z-index:150!important;background:#ffffffed!important;backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid #d6e4f3!important;box-shadow:0 8px 26px #223d6a16!important;padding:7px 0 8px}
+html body nav .mp5-main-nav{max-width:1240px;margin:auto;padding:0 clamp(12px,3vw,28px);display:flex;align-items:center;gap:10px}
+html body nav .mp5-mark{display:inline-flex;align-items:center;gap:8px;border:0;background:#163563;color:#fff;border-radius:15px;padding:11px 13px;font-weight:950;font-size:.88rem;white-space:nowrap;cursor:pointer;box-shadow:0 5px 12px #12335b30}
+html body nav .mp5-mark span{font-size:1.22rem}
+html body nav .mp5-primary-routes{display:flex;gap:6px;align-items:center;overflow-x:auto;scrollbar-width:thin;flex:1;min-width:0}
+html body nav .mp5-primary-routes button{border:1px solid transparent;background:transparent;color:#385774;border-radius:12px;white-space:nowrap;padding:10px 12px;cursor:pointer;font:800 .88rem/1.15 Inter,system-ui,sans-serif;min-height:44px}
+html body nav .mp5-primary-routes button:hover{background:#e8f3fe;color:#123f72}
+html body nav .mp5-primary-routes button.is-active{background:#dbebff;border-color:#bed7fc;color:#1a4b81;box-shadow:inset 0 -3px #4f95d8}
+html body nav .navquick{max-width:1240px;padding:4px clamp(12px,3vw,28px) 0!important;justify-content:flex-end!important;margin:auto;min-height:0!important;gap:7px}
+html body nav .navquick label{color:#456483!important;font-size:.78rem}
+html body nav .navquick select{background:#f3f8ff!important;color:#224267!important;border:1px solid #c7d9ef!important;border-radius:11px!important;padding:8px 10px!important;max-width:290px;font-size:.84rem!important}
+html body nav .navquick>.neo-more-trigger-v39{background:#e6f3ff!important;color:#19426b!important;border:1px solid #bed7ea!important;min-height:37px;min-width:43px}
+html body nav .mp5-tools-drawer{max-width:1240px;margin:2px auto 0;padding:0 clamp(12px,3vw,28px)}
+html body nav .mp5-tools-drawer>summary{display:inline-flex;gap:8px;align-items:center;cursor:pointer;padding:7px 12px;margin:1px 0;border-radius:11px;border:1px solid #d1e3f4;background:#edf4fc;color:#224875;font-weight:850;font-size:.83rem;list-style:none}
+html body nav .mp5-tools-drawer>summary::-webkit-details-marker{display:none}
+html body nav .mp5-tools-drawer[open]>summary{background:#dbeafe;color:#173e7d}
+html body nav .mp5-tools-drawer .navinner{display:flex!important;align-items:start;flex-wrap:wrap!important;gap:8px!important;max-width:100%;padding:13px 0!important;overflow-x:visible!important}
+html body nav .mp5-tools-drawer .navgroup{min-width:140px;flex:1 1 152px;background:#f7faff!important;border:1px solid #d9e7f4!important;border-radius:13px!important}
+html body nav .mp5-tools-drawer .navgroup>summary{background:#e9f2ff!important;color:#244a7a!important;border-radius:12px!important;text-shadow:none!important;padding:11px 12px!important}
+html body nav .mp5-tools-drawer .navgroup[open]>summary{background:#d5e7fc!important;color:#174677!important}
+html body nav .mp5-tools-drawer .navgroup .navcount{border:1px solid #bcd3eb!important;background:#fff!important;color:#33516d!important}
+html body nav .mp5-tools-drawer .navgroup-items{background:#fff!important;padding:7px!important;border-radius:12px}
+html body nav .mp5-tools-drawer .navgroup-items .navbtn{background:#f5f8ff!important;color:#20436e!important;border:1px solid #e2eaf8!important;border-radius:10px!important;box-shadow:none!important;padding:10px 12px!important;white-space:normal}
+html body nav .mp5-tools-drawer .navgroup-items .navbtn:hover{background:#e4f0ff!important;color:#194579!important;border-color:#b3d2ef!important}
+html body nav .mp5-tools-drawer .navgroup-items .navbtn.active{background:#d7ecff!important;color:#163a67!important;border-color:#8bc1eb!important;box-shadow:inset 3px 0 #4d9bcf!important}
+html body nav .navhint{display:none!important}
+/* NOVA CAPA INICIAL — não apenas mais um card padrão. */
+#inicio .mp5-home-showcase{position:relative;isolation:isolate;overflow:hidden;display:grid;grid-template-columns:minmax(0,1.12fr) minmax(250px,.88fr);align-items:center;min-height:360px;border-radius:30px;padding:clamp(24px,4.6vw,52px);margin:0 0 17px;background:radial-gradient(circle at 80% 0%,#6865d1b8 0,transparent 39%),radial-gradient(circle at 22% 105%,#1aaec46b 0,transparent 44%),linear-gradient(128deg,#102346 0%,#28336d 52%,#3e387f 100%);border:1px solid #9ca7ed4d;box-shadow:0 28px 60px #1429573b}
+#inicio .mp5-home-showcase::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 82% 26%,#ffffff0a 0 1.6px,transparent 2px) 0 0/39px 33px;opacity:.45;pointer-events:none}
+#inicio .mp5-home-copy{position:relative;z-index:3;max-width:590px}
+#inicio .mp5-home-kicker{display:inline-flex;gap:8px;align-items:center;border:1px solid #c5f7ea80;border-radius:99px;background:#ffffff1d;color:#d3fff2;padding:8px 12px;font-size:.78rem;font-weight:900;letter-spacing:.07em}
+#inicio .mp5-home-copy h2{font-size:clamp(2rem,4.4vw,3.45rem);line-height:1.09;letter-spacing:-.06em;color:#fff!important;margin:18px 0 13px;max-width:630px}
+#inicio .mp5-home-copy h2 em{font-style:normal;color:#ffc98a}
+#inicio .mp5-home-copy p{color:#dce7ff;font-size:clamp(.96rem,1.35vw,1.09rem);line-height:1.72;margin:0;max-width:550px}
+#inicio .mp5-home-ctas{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}
+#inicio .mp5-home-ctas button{border:1px solid #c9d8f578;color:#fff;background:#ffffff1b;border-radius:13px;min-height:48px;padding:12px 19px;font:850 .93rem Inter,system-ui,sans-serif;cursor:pointer}
+#inicio .mp5-home-ctas button:first-child{background:linear-gradient(120deg,#ffda84,#ffae6e);color:#263454;border:0;box-shadow:0 7px 0 #ac6b47}
+#inicio .mp5-home-ctas button:hover{transform:translateY(-2px)}
+#inicio .mp5-home-visual{position:relative;isolation:isolate;height:310px;perspective:700px;min-width:0}
+#inicio .mp5-glow{position:absolute;inset:15% 7% 2%;background:radial-gradient(ellipse,#59dcff4d,transparent 66%);filter:blur(10px)}
+#inicio .mp5-orbit{position:absolute;inset:13% 2% 16%;border:1px solid #a8d5ff50;border-radius:50%;transform:rotate(-16deg)}
+#inicio .mp5-orbit:before,#inicio .mp5-orbit:after{content:"";position:absolute;width:12px;height:12px;background:#fff0b5;box-shadow:0 0 14px #fff0b5;border-radius:50%}
+#inicio .mp5-orbit:before{left:6%;top:28%}#inicio .mp5-orbit:after{right:11%;bottom:24%}
+#inicio .mp5-world-island{position:absolute;width:250px;height:145px;left:50%;top:45%;transform:translate(-50%,-15%) rotate(-8deg);background:linear-gradient(#70ddba 0 39%,#42659a 40% 53%,#262e69 54% 100%);border-radius:54% 50% 47% 53%;box-shadow:inset 0 16px 0 #9dffe2,inset 0 -17px 17px #1b265a,0 28px 35px #060e2b82}
+#inicio .mp5-world-island:after{content:"";position:absolute;width:70%;height:44%;bottom:-23%;left:15%;background:#28326a;clip-path:polygon(0 0,100% 0,50% 100%);border-radius:50%}
+#inicio .mp5-world-gate{position:absolute;width:125px;height:154px;left:50%;top:5%;transform:translateX(-50%) rotate(-7deg);border:21px solid #b0d8ff;border-radius:50% 50% 44% 44%;box-shadow:inset 0 0 20px #58e6ec,0 0 0 7px #6275c6,0 0 35px #7feeffb0;background:radial-gradient(circle,#ffe19da6,#8479ee80,transparent);animation:mp5float 4s ease-in-out infinite}
+#inicio .mp5-world-gate:after{content:"✦";display:block;text-align:center;padding-top:32px;color:#ffe49d;font-size:38px;text-shadow:0 0 20px #fff4cc}
+#inicio .mp5-world-robot{position:absolute;left:19%;top:34%;width:85px;height:96px;transform:rotate(8deg);filter:drop-shadow(0 10px 7px #16184369)}
+#inicio .mp5-world-robot:before{content:"●  ●";white-space:pre;font-size:20px;letter-spacing:5px;display:grid;place-items:center;position:absolute;width:84px;height:74px;top:0;background:linear-gradient(140deg,#fff,#b9f7ff);border:7px solid #52cbd5;border-radius:28px 28px 25px 25px;color:#203a65;box-shadow:inset 0 -8px #b0d9e9,0 5px 0 #394c8c}
+#inicio .mp5-world-robot:after{content:"";position:absolute;left:17px;top:75px;background:linear-gradient(#fbba7e,#ef8a75);border-radius:13px;width:51px;height:31px}
+#inicio .mp5-world-card{position:absolute;right:-1%;bottom:5%;padding:10px 13px;background:#fffef6;border:1px solid #f1f5ff;border-radius:14px;box-shadow:0 14px 26px #020c3159;transform:rotate(6deg);color:#2a4570;font-weight:850;font-size:.77rem}
+#inicio .mp5-world-card strong{display:block;font-size:1.06rem;color:#138783}
+#inicio .mp5-world-star{position:absolute;color:#ffecb5;text-shadow:0 0 10px #ffca62;font-size:2rem;left:8%;top:14%}
+#inicio #n4QuickBar{margin:0 0 18px;grid-template-columns:repeat(4,minmax(0,1fr));gap:13px}
+#inicio #n4QuickBar button{min-height:104px;border-radius:19px;padding:18px 17px;background:linear-gradient(130deg,#fff,#f2f8ff);border:1px solid #d9e5fb;box-shadow:0 12px 25px #18356312}
+#inicio #n4QuickBar button:nth-child(2){background:linear-gradient(140deg,#eaf3ff,#e8e9ff);border-color:#b4c8f3}
+#inicio #n4QuickBar button:nth-child(3){background:linear-gradient(140deg,#fef5ff,#f1ebff);border-color:#e0d2f2}
+#inicio #n4QuickBar button:nth-child(4){background:linear-gradient(140deg,#edfff7,#e5faf6);border-color:#b5e7dc}
+#inicio #n4QuickBar button>span{display:grid;place-items:center;min-width:54px;height:54px;font-size:1.7rem;border-radius:15px;background:#ffffffb8;box-shadow:0 6px 12px #123e6b10}
+#inicio #n4QuickBar button div{font-size:1rem;line-height:1.3}
+#inicio #n4QuickBar button small{margin-top:4px;font-size:.74rem}
+/* Reduzir poluição visual: banners antigos ficam acessíveis dentro de uma expansão. */
+#inicio .mp5-updates{padding:0 0 1px;margin-bottom:19px;border:1px solid #dbe6f6;border-radius:17px;background:#fff;box-shadow:0 8px 20px #13396c0c}
+#inicio .mp5-updates>summary{list-style:none;padding:14px 17px;cursor:pointer;color:#294c77;font-weight:880;display:flex;align-items:center;justify-content:space-between}
+#inicio .mp5-updates>summary::-webkit-details-marker{display:none}
+#inicio .mp5-updates>summary:after{content:"＋";font-size:22px;color:#4286b0}
+#inicio .mp5-updates[open]>summary:after{content:"−"}
+#inicio .mp5-updates-content{padding:0 15px 13px}
+#inicio .mp5-updates-content .mp-new-feature{box-shadow:none;border-radius:14px;margin-bottom:10px}
+#inicio .mp5-updates-content .mp-home-highlights{margin:0}
+/* Jornada agora funciona como painel secundário claro, não um segundo banner competindo com a home. */
+html #inicio .mp-horizon{background:linear-gradient(130deg,#e6f6ff,#eff1ff 56%,#e5fff4)!important;color:#24466d!important;box-shadow:0 15px 36px #1c4a7320!important;border:1px solid #cfdef3!important;border-radius:26px!important;padding:clamp(21px,3vw,32px)!important;grid-template-columns:minmax(0,1.2fr) minmax(170px,.45fr)!important;margin-top:19px}
+html #inicio .mp-horizon h2{color:#183c6c!important;font-size:clamp(1.8rem,3.9vw,2.6rem)!important}
+html #inicio .mp-horizon h2 em{color:#3b7297!important}
+html #inicio .mp-horizon .mp-horizon-eyebrow{color:#276081!important;border-color:#afd6ee!important;background:#eaf7ff!important}
+html #inicio .mp-horizon .mp-horizon-description{color:#526f8c!important}
+html #inicio .mp-horizon .mp-horizon-art{min-height:160px}
+html #inicio .mp-horizon .mp-horizon-art img{max-height:170px;max-width:160px}
+html #inicio .mp-horizon .mp-horizon-overview{margin:0}
+html #inicio .mp-horizon .mp-stat{background:#ffffffaf;border:1px solid #d8e3fa;box-shadow:0 7px 17px #1f45680d}
+html #inicio .mp-horizon .mp-stat-label,html #inicio .mp-horizon .mp-stat-note{color:#54718b}
+html #inicio .mp-horizon .mp-stat strong{color:#1a4772}
+html #inicio .mp-horizon .mp-horizon-actions .mp-action{background:#fff;color:#194b79;border-color:#bcd7f0}
+html #inicio .mp-horizon .mp-horizon-actions .mp-action:first-child{background:#174f8c;color:#fff;border-color:#174f8c}
+html #inicio .mp-overview-cards .mp-overview-card{border-radius:17px!important;border-color:#d9e7f5!important;background:#fff!important;box-shadow:0 7px 21px #22456d12}
+html #inicio .portal8-pro-home{border-radius:25px;background:#ffffffdd;padding:22px;border:1px solid #dae7f7;box-shadow:0 15px 34px #14376210}
+html #inicio .portal8-pro-card{background:linear-gradient(160deg,#fff,#f5f8ff);border:1px solid #dce7f4;border-radius:17px;box-shadow:0 8px 15px #0e345c0b;transition:transform .2s ease,box-shadow .2s ease}
+html #inicio .portal8-pro-card:hover{transform:translateY(-3px);box-shadow:0 12px 25px #12385b22}
+html #inicio .mp-school-year{border-radius:22px!important;box-shadow:0 9px 24px #133b7012!important}
+html #inicio .portal8-welcome{border-radius:24px}
+@keyframes mp5float{0%,100%{transform:translateX(-50%) rotate(-7deg) translateY(0)}50%{transform:translateX(-50%) rotate(-7deg) translateY(-7px)}}
+/* Game: maior protagonismo para o novo mundo 3D. */
+html #neoGames40 .n4-game-header{background:radial-gradient(circle at 74% 6%,#8a72dca8,transparent 36%),linear-gradient(125deg,#19234c,#453b86 65%,#276a9a);border-radius:28px}
+html #neoGames40 .n4-game-shell{border-radius:25px;box-shadow:0 25px 50px #122f5f2c}
+html #neoGames40 .n4-canvas-wrap{background:radial-gradient(ellipse at 65% 20%,#5777bc,#162f5b)}
+html #neoGames40 #n4Canvas3D{filter:saturate(1.15) contrast(1.04)}
+html #neoGames40 .n4-stage-stamp{background:#1b3769bc}
+html #neoGames40 .n4-game-card.selected{border-color:#5d86df}
+html #neoGames40 .n4-game-controls{background:#eef3fe;border-color:#cfddf3}
+html #neoGames40 .n4-game-picture{height:185px}
+@media(max-width:980px){
+ html #inicio .mp5-home-showcase{grid-template-columns:1fr .68fr}
+ html #inicio .mp5-home-visual{height:250px;transform:scale(.84);transform-origin:center}
+ html body nav .mp5-mark{display:none}
+}
+@media(max-width:700px){
+ html body header.school-hero{padding:13px 0 17px!important}
+ html body header.school-hero h1{font-size:clamp(1.55rem,5.5vw,2.35rem)!important}
+ html body nav .mp5-main-nav{padding:0 9px}
+ html body nav .mp5-primary-routes{gap:3px}
+ html body nav .mp5-primary-routes button{padding:10px 9px;font-size:.80rem}
+ html body nav .navquick{padding:4px 10px 0!important}
+ html body nav .navquick label{display:none}
+ html body nav .navquick select{max-width:min(75vw,330px)}
+ html #inicio .mp5-home-showcase{grid-template-columns:1fr;min-height:auto;padding:23px;border-radius:23px}
+ html #inicio .mp5-home-copy h2{font-size:2.25rem}
+ html #inicio .mp5-home-visual{height:190px;max-width:440px;width:100%;transform:scale(.74);transform-origin:center;justify-self:center;margin:-25px 0 -25px}
+ html #inicio #n4QuickBar{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+ html #inicio #n4QuickBar button{min-height:84px;padding:13px 11px;gap:8px}
+ html #inicio #n4QuickBar button>span{min-width:45px;height:45px}
+ html #inicio .mp-horizon{grid-template-columns:1fr!important}
+ html #inicio .mp-horizon .mp-horizon-art{display:none}
+ html #inicio .mp-horizon .mp-horizon-overview{grid-template-columns:repeat(3,minmax(0,1fr))}
+ html #inicio .mp-horizon .mp-stat{padding:10px!important}
+}
+@media(max-width:420px){
+ html body nav .mp5-primary-routes button{font-size:.72rem;padding:8px 7px}
+ html #inicio .mp5-home-copy h2{font-size:1.9rem}
+ html #inicio .mp5-home-ctas button{flex:1;min-width:135px}
+ html #inicio .mp-horizon .mp-horizon-overview{grid-template-columns:1fr}
+ html #inicio #n4QuickBar button{flex-direction:column;align-items:start}
+}
+@media(prefers-reduced-motion:reduce){#inicio .mp5-world-gate{animation:none!important}#inicio .mp5-home-ctas button:hover,#inicio .portal8-pro-card:hover{transform:none}}
+
+/* Labirinto dos Cristais — terceira mecânica do Studio: explorar em vez de correr ou atirar */
+html #neoGames40 .mp5-puzzle{margin:24px 0 5px;overflow:hidden;border-radius:24px;border:1px solid #cfdcf3;background:linear-gradient(140deg,#f2f5ff,#f0fbff);box-shadow:0 20px 45px #10294a22}
+html #neoGames40 .mp5-puzzle-header{padding:24px;display:flex;justify-content:space-between;align-items:center;gap:20px;background:radial-gradient(circle at 96% 0,#9177e74d,transparent 40%),linear-gradient(130deg,#1a2b57,#2b4a79);color:#fff}
+html #neoGames40 .mp5-puzzle-header h3{margin:9px 0 7px;font-size:clamp(1.35rem,3vw,1.8rem);color:#fff!important}
+html #neoGames40 .mp5-puzzle-header p{color:#dce9ff;font-size:.93rem;max-width:690px;line-height:1.6;margin:0}
+html #neoGames40 .mp5-puzzle-tag{font-size:.73rem;color:#ffedae;letter-spacing:.09em;font-weight:900}
+html #neoGames40 .mp5-puzzle-main{border:0;background:linear-gradient(120deg,#ffce6f,#ffaa64);color:#25365b;border-radius:13px;font:900 .93rem Inter,system-ui,sans-serif;padding:13px 19px;min-height:48px;white-space:nowrap;box-shadow:0 5px 0 #ac7540;cursor:pointer}
+html #neoGames40 .mp5-puzzle-shell{padding:18px;max-width:750px;margin:auto}
+html #neoGames40 .mp5-puzzle-hud{display:flex;flex-wrap:wrap;justify-content:space-between;gap:9px;margin-bottom:9px;align-items:center}
+html #neoGames40 .mp5-puzzle-hud>*{background:#e1e9fa;color:#244b78;font-weight:850;padding:7px 10px;border-radius:9px;font-size:.82rem}
+html #neoGames40 #mp5PuzzleCanvas{width:100%;height:auto;aspect-ratio:16 / 10;display:block;border:7px solid #1e3258;border-radius:12px;background:#153359;image-rendering:pixelated;image-rendering:crisp-edges;box-shadow:0 14px 25px #09254f34;touch-action:manipulation}
+html #neoGames40 .mp5-puzzle-question{border:1px solid #aed9e8;background:#eaf9ff;padding:17px;margin-top:13px;border-radius:15px}
+html #neoGames40 .mp5-puzzle-question strong{display:block;margin:0 0 12px;color:#1b4777}
+html #neoGames40 .mp5-puzzle-answers{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+html #neoGames40 .mp5-puzzle-answers button{border:1px solid #c4d8ef;background:#fff;color:#23476c;padding:12px;border-radius:10px;min-height:43px;font:750 .88rem Inter,system-ui,sans-serif;cursor:pointer;text-align:left}
+html #neoGames40 .mp5-puzzle-answers button:hover{background:#dbf7ff;border-color:#58a9ba}
+html #neoGames40 .mp5-puzzle-message{border:1px solid #dce7f4;background:#fff;border-radius:11px;min-height:46px;padding:12px 14px;margin-top:11px;color:#355f80;font-size:.89rem;line-height:1.5}
+html #neoGames40 .mp5-puzzle-controls{display:grid;justify-content:center;gap:3px;margin:12px 0}
+html #neoGames40 .mp5-puzzle-controls>div{display:flex;justify-content:center;gap:6px}
+html #neoGames40 .mp5-puzzle-controls button{min-height:45px;min-width:55px;border:1px solid #9ec1e6;background:#dbe9ff;color:#19436f;border-radius:11px;cursor:pointer;font:900 1.1rem system-ui;box-shadow:0 4px 0 #a6bde0}
+html #neoGames40 .mp5-puzzle-shell>small{display:block;margin:13px 0 3px;color:#617d95;font-size:.79rem;line-height:1.6}
+@media(max-width:600px){
+ html #neoGames40 .mp5-puzzle-header{flex-direction:column;align-items:start;padding:18px}
+ html #neoGames40 .mp5-puzzle-main{width:100%}
+ html #neoGames40 .mp5-puzzle-shell{padding:10px}
+ html #neoGames40 .mp5-puzzle-answers{grid-template-columns:1fr}
+}
+
+/* O painel de ferramentas não pode cobrir a tela inteira ao ser aberto. */
+html body nav .mp5-tools-drawer .navinner{max-height:min(58vh,440px)!important;overflow-y:auto!important;overscroll-behavior:contain;scrollbar-width:thin}

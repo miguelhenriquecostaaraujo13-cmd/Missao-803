@@ -1,0 +1,23 @@
+/* Oficina Criativa Neo v35: biblioteca pública de ferramentas aprovadas */
+#neoOficina .neo-workshop-hero{margin-bottom:14px;padding:23px 24px;border-radius:22px 10px 22px 10px;background:linear-gradient(125deg,#11527e,#118fa1);color:#fff;box-shadow:0 10px 24px #0d5b801e}
+#neoOficina .neo-workshop-hero strong{display:block;color:#fff;font-size:clamp(1.22rem,2.7vw,1.6rem);font-weight:900}
+#neoOficina .neo-workshop-hero p{color:#eaf9ff;font-size:.92rem;max-width:770px;line-height:1.65;margin:8px 0 15px}
+#neoOficina .neo-workshop-jumps{display:flex;flex-wrap:wrap;gap:9px}
+#neoOficina .neo-workshop-jumps a{display:inline-flex;justify-content:center;align-items:center;min-height:42px;border:1px solid #b7edfc;color:#0f3d61;background:#eafaff;border-radius:13px;padding:9px 13px;font-weight:850;font-size:.82rem;text-decoration:none}
+#neoOficina .neo-workshop-jumps a:hover{background:#fff7db;border-color:#f6d387}
+#neoOficina .neo-workshop-jumps a:focus-visible{outline:3px solid #ffcf79;outline-offset:3px}
+#neoOficina .neo-workshop-disclosure{border-left:4px solid #3389a0;padding:12px 15px;border-radius:0 12px 12px 0;background:var(--portal-panel);margin:10px 0 22px;color:var(--ink)}
+#neoOficina .neo-workshop-disclosure p{font-size:.86rem;margin:0;line-height:1.6;color:var(--ink)}
+#neoOficina .neo-workshop-section{color:var(--ink);font-size:1.14rem;margin:23px 0 10px;scroll-margin-top:90px}
+#neoOficina :is(.neo-tool,.neo-ideas-panel,.neo-priority-board){scroll-margin-top:84px}
+#neoOficina .neo-lab-grid{margin-bottom:20px}
+#neoOficina .neo-priority-board{margin-top:12px}
+#neoOficina .neo-ideas-panel{margin-top:20px}
+#neoOficina .neo-workshop-hero+section{margin-bottom:18px}
+#neoOficina #neoExperimentPrototypes:empty,#neoOficina #neoCreativePrototypes:empty,#neoOficina #neoNewExperiments:empty{min-height:75px}
+#neoOficina .neo-ideas-tool{min-width:0}
+nav .navgroup[data-category="oficina"]{border:2px solid #77cbd9!important}
+nav .navgroup[data-category="oficina"]>summary{background:#20658c!important;color:#fff!important}
+nav .navgroup[data-category="oficina"] .navbtn{font-weight:900!important}
+@media(max-width:600px){#neoOficina .neo-workshop-hero{padding:16px}#neoOficina .neo-workshop-jumps a{flex:1;white-space:normal;min-width:135px}#neoOficina .neo-workshop-disclosure{padding:10px}}
+@media(prefers-reduced-motion:reduce){#neoOficina *{scroll-behavior:auto!important}}

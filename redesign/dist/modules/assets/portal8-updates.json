@@ -1,0 +1,107 @@
+[
+  {
+    "id": "versao-ac9ac975cf29",
+    "title": "Menu de três pontinhos corrigido e nova Jornada Neo de estudos",
+    "body": "Popover funcional no celular e desktop, favoritos unificados, Modo Foco, acessibilidade e melhorias gerais nas 32 ferramentas.",
+    "date": "2026-11-14",
+    "important": true
+  },
+  {
+    "id": "versao-4f324461c36a",
+    "title": "Minijogos Neo ganham Visual 2.0 com personagens, cenários e animações",
+    "body": "Modo de teste comparável ao clássico, sprites próprios desenhados em canvas e salto aprimorado. Arcade continua gratuito.",
+    "date": "2026-11-14",
+    "important": true
+  },
+  {
+    "id": "versao-5ee49ed214f3",
+    "title": "Menu de três pontinhos e 3 fases nos minijogos do Neo",
+    "body": "Menus compactos para o portal, homepage organizada e Arcade com missões, progressão e recordes locais separados.",
+    "date": "2026-11-14",
+    "important": true
+  },
+  {
+    "id": "versao-8b8733740f39",
+    "title": "Todas as apresentações visíveis do mascote usam Neo",
+    "body": "Corrigidos texto antigo do estudo, título das imagens e documentação; cache atualizado para v36.",
+    "date": "2026-11-14",
+    "important": true
+  },
+  {
+    "id": "versao-a7bbbf7d4106",
+    "title": "Oficina Criativa Neo libera ideias aprovadas para todas as turmas",
+    "body": "42 experiências reunidas em área pública, com Ateliê reservado ao administrador e backup de preferências local corrigido.",
+    "date": "2026-11-14",
+    "important": true
+  },
+  {
+    "id": "versao-50344a6903cf",
+    "title": "Ateliê Neo separado dos mapas e melhorias em todas as 31 ferramentas",
+    "body": "Busca rápida Ctrl+K, atalhos, favoritos e visual responsivo; testes de mapas agora somente no painel do administrador.",
+    "date": "2026-11-14",
+    "important": true
+  },
+  {
+    "id": "versao-f3a8c790d9c9",
+    "title": "Diretor Neo adapta minijogos e flashcards ganham revisão inteligente",
+    "body": "Nova IA de regras gratuita acompanha partidas, sugere dicas e roteiros, enquanto Ateliê recebe 4 experimentos educacionais.",
+    "date": "2026-11-14",
+    "important": true
+  },
+  {
+    "id": "versao-1f7c6ed47ae9",
+    "title": "Neo fala seu nome atual e Mapas Mentais ficam organizados",
+    "body": "Corrige apresentação antiga do mascote, recria mapas inteligentes com quatro estilos e evita sobreposição de ramificações.",
+    "date": "2026-11-14",
+    "important": true
+  },
+  {
+    "id": "versao-68a46537a4d3",
+    "title": "Portal ganha três minijogos reais no Arcade Educativo Neo",
+    "body": "Plataformas de frações, exploração da célula e reflexos com conectivos; controle por teclado ou toque, pontos e vidas, grátis e offline.",
+    "date": "2026-11-14",
+    "important": true
+  },
+  {
+    "id": "versao-53a45411cfae",
+    "title": "Neo ganha cards em 4 estilos, mapas avançados e 9 invenções no Ateliê",
+    "body": "Os alunos podem revisar mapas com cards, favoritos e desafios. Administradores testam novos jogos e ferramentas sem afetar as 30 áreas existentes.",
+    "date": "2026-11-14",
+    "important": true
+  },
+  {
+    "id": "versao-25e4fe88d7e0",
+    "title": "Mapas Mentais Neo para alunos e Ateliê privado do administrador",
+    "body": "Nova aba de mapas com SVG e 12 protótipos de teste. O Ateliê exige conta administrativa; 29 ferramentas antigas preservadas.",
+    "date": "2026-11-14",
+    "important": true
+  },
+  {
+    "id": "versao-a1eda6bd56ca",
+    "title": "Ateliê Neo agora aparece em destaque e portal ganha logo na aba",
+    "body": "O acesso às 9 novas ferramentas ficou visível na página inicial e no topo do menu. A aba do navegador exibe o ícone Missão Paz.",
+    "date": "2026-11-14",
+    "important": true
+  },
+  {
+    "id": "versao-219a0bbbbc3e",
+    "title": "Ateliê Neo adiciona 9 recursos locais e quadro de prioridades",
+    "body": "Nove novas melhorias de estudo e doze sugestões com estrelas; todas as 28 ferramentas anteriores foram preservadas.",
+    "date": "2026-11-14",
+    "important": true
+  },
+  {
+    "id": "versao-132d5ab154f9",
+    "title": "Neo Tutor local e gratuito ganhou conversa guiada e matemática",
+    "body": "O chat do Neo agora tem contexto, exercícios, resumos e contas passo a passo sem API paga. As 28 ferramentas permanecem intactas.",
+    "date": "2026-11-14",
+    "important": true
+  },
+  {
+    "id": "versao-6f12c778be15",
+    "title": "Calendário escolar restante de 2026 e correção definitiva das cores do menu",
+    "body": "Novo calendário da escola a partir de 16/11 e paleta azul/turquesa unificada em todos os temas, sem mexer nas 28 ferramentas.",
+    "date": "2026-11-14",
+    "important": true
+  }
+]

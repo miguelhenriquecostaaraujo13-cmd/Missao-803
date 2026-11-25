@@ -1,0 +1,91 @@
+/* Portal Missão Paz 4.0 — design responsivo e acessível, mundos 3D e arcade pixel */
+#neoGames40,#neoIAs40{--n4-text:#1b3359;--n4-dark:#112849;--n4-accent:#5ee5df;--n4-game-dark:#102443;font-family:Inter,system-ui,sans-serif;color:var(--n4-text)}
+#neoGames40 *,#neoIAs40 *{box-sizing:border-box}
+#neoGames40 h2,#neoIAs40 h2{font-size:clamp(1.8rem,4vw,2.5rem);line-height:1.12}
+#neoGames40 h3,#neoIAs40 h3{color:#204775}
+#neoGames40 [hidden],#neoIAs40 [hidden]{display:none!important}
+#neoGames40 .n4-label,#neoIAs40 .n4-label{font-weight:900;letter-spacing:.10em;font-size:.75rem;color:#b5fff1;display:inline-flex;border-radius:99px;padding:7px 12px;background:#ffffff19;border:1px solid #fff5}
+#neoGames40 .n4-game-header,#neoIAs40 .n4-ai-hero{position:relative;padding:clamp(24px,5vw,42px);color:#fff;overflow:hidden;border:1px solid #70c9e43d;border-radius:25px;background:radial-gradient(circle at 75% -10%,#6d79e97a,transparent 42%),radial-gradient(circle at 20% 100%,#1fbfa055,transparent 40%),linear-gradient(130deg,#112b58,#223d7c 72%,#244c83);box-shadow:0 24px 48px #15386d32}
+#neoGames40 .n4-game-header:after,#neoIAs40 .n4-ai-hero:after{content:"✦";position:absolute;right:6%;top:0;font-size:130px;color:#ffffff15;pointer-events:none}
+#neoGames40 .n4-game-header h2,#neoIAs40 .n4-ai-hero h2{color:white;margin:18px 0 12px;position:relative}
+#neoGames40 .n4-game-header p,#neoIAs40 .n4-ai-hero p{color:#d9ebff;max-width:720px;margin:0;position:relative}
+#neoGames40 .n4-game-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:17px;margin:20px 0}
+#neoGames40 .n4-game-card{padding:0;overflow:hidden;background:#fff;border:2px solid #d6e4f6;border-radius:22px;text-align:left;box-shadow:0 13px 27px #112e5b14;color:#1b3561;transition:transform .17s ease,box-shadow .17s ease,border-color .17s ease}
+#neoGames40 .n4-game-card:hover{transform:translateY(-3px);box-shadow:0 17px 33px #112e5b2a}
+#neoGames40 .n4-game-card.selected{border:3px solid #287ca8;box-shadow:0 0 0 3px #7cdced38,0 16px 29px #112e5b30}
+#neoGames40 .n4-game-card strong{display:block;padding:16px 18px 3px;font-size:1.05rem}
+#neoGames40 .n4-game-card small{display:block;color:#5c7087;font-weight:650;padding:0 18px 17px}
+#neoGames40 .n4-game-picture{height:160px;display:block;position:relative;overflow:hidden}
+#neoGames40 .n4-cover-3d{background:radial-gradient(circle at 73% 17%,#c2fbfa,transparent 19%),linear-gradient(162deg,#3c4592,#3653a4 56%,#2b7584 57%,#203c7c)}
+#neoGames40 .n4-cover-3d:before{content:"";position:absolute;left:-20%;right:-20%;bottom:-25%;height:77%;background:linear-gradient(135deg,#34427a,#8193d0);clip-path:polygon(20% 0,80% 0,100% 100%,0 100%);filter:drop-shadow(0 10px 5px #122c49)}
+#neoGames40 .n4-orb{position:absolute;width:80px;height:80px;border-radius:50%;right:18%;top:5%;background:radial-gradient(circle at 35% 30%,#fff9df,#ffc46c 67%,#ed7d74);box-shadow:0 0 36px #fff2b894}
+#neoGames40 .n4-castle{position:absolute;left:20%;bottom:27%;width:90px;height:85px;background:linear-gradient(90deg,#8ba0eb,#3e548e);clip-path:polygon(0 35%,23% 35%,23% 0,40% 0,40% 35%,60% 35%,60% 9%,80% 9%,80% 35%,100% 35%,100% 100%,0 100%);filter:drop-shadow(8px 10px 0 #263d6f)}
+#neoGames40 .n4-path{position:absolute;left:45%;bottom:-28%;width:45%;height:70%;transform:perspective(90px) rotateX(23deg);background:repeating-linear-gradient(90deg,#2b3670 0 36%,#72e9d7 38% 41%,#323e82 43% 100%);border:3px solid #b4f6d9}
+#neoGames40 .n4-cover-pixel{background:repeating-linear-gradient(0deg,transparent 0 5px,#00000020 6px 7px),radial-gradient(circle at center,#30246d,#121438 78%);color:#ffdc76;font-family:monospace}
+#neoGames40 .n4-cover-pixel b{position:absolute;font-size:65px;top:19%;left:44%;image-rendering:pixelated;filter:drop-shadow(8px 6px 0 #c147a1)}
+#neoGames40 .n4-cover-pixel i{position:absolute;left:8%;top:15%;color:#8cffff;letter-spacing:30px;font-size:20px;font-style:normal}
+#neoGames40 .n4-cover-pixel em{position:absolute;bottom:14px;left:15px;background:#141b46;border:2px solid #e1b1fc;padding:6px 9px;color:#ffe899;letter-spacing:.08em;font-size:.75rem;font-style:normal}
+#neoGames40 .n4-game-controls{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:11px;margin-bottom:15px;padding:16px;border:1px solid #d7e6f6;border-radius:18px;background:#f1f7ff}
+#neoGames40 .n4-game-controls label{font-size:.85rem;font-weight:850;color:#21436c;min-width:0}
+#neoGames40 select{width:100%;margin-top:5px;font:inherit;min-width:0;background:#fff;border:1px solid #bad0e9;border-radius:11px;padding:10px 6px;color:#1b3459}
+#neoGames40 .n4-game-shell{background:#fff;border:1px solid #d8e6f3;border-radius:23px;overflow:hidden;box-shadow:0 18px 40px #0c2c5a20}
+#neoGames40 .n4-game-toolbar{padding:15px 18px;display:flex;gap:12px;flex-wrap:wrap;align-items:center;justify-content:space-between}
+#neoGames40 .n4-game-toolbar strong{font-weight:900;color:#193c70;display:block}
+#neoGames40 .n4-game-toolbar small{display:block;color:#697e96}
+#neoGames40 .n4-hud{display:flex;gap:7px;flex-wrap:wrap}
+#neoGames40 .n4-hud span{display:inline-block;border-radius:99px;background:#eaf3ff;color:#264777;padding:7px 10px;font-weight:800;font-size:.76rem}
+#neoGames40 .n4-canvas-wrap{position:relative;background:var(--n4-game-dark);overflow:hidden}
+#neoGames40 canvas{display:block;width:100%;height:auto;max-height:min(64vh,560px);object-fit:contain;outline-offset:4px;aspect-ratio:960 / 520;touch-action:manipulation}
+#neoGames40 #n4CanvasPixel{image-rendering:pixelated;image-rendering:crisp-edges;aspect-ratio:16 / 9}
+#neoGames40 .n4-stage-stamp{position:absolute;top:11px;right:11px;border:1px solid #b4fff2a0;border-radius:7px;padding:5px 7px;background:#11284fba;color:#e2fff9;font-size:.72rem;font-weight:900;letter-spacing:.1em;pointer-events:none}
+#neoGames40 .n4-stage-stamp.pixel{border-color:#ffc9f3;color:#ffef7b;font-family:monospace;letter-spacing:.06em}
+#neoGames40 .n4-graphics-warning{padding:17px;background:#fff1dd;color:#744421;font-weight:750}
+#neoGames40 .n4-question-zone{padding:19px 20px 10px}
+#neoGames40 #n4Question{display:block;font-size:1.13rem;line-height:1.5;color:#193966}
+#neoGames40 .n4-answers{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;margin-top:14px}
+#neoGames40 .n4-answer{border:1px solid #b6cfe9;background:#f3f8ff;padding:12px 10px;text-align:left;border-radius:13px;color:#254670;font:inherit;font-weight:780;min-width:0;min-height:48px}
+#neoGames40 .n4-answer:hover,#neoGames40 .n4-answer.active{background:#ddfaff;border-color:#1e94b0}
+#neoGames40 .n4-answer.correct{background:#d8f9e6;border-color:#318b6a;color:#116047}
+#neoGames40 .n4-feedback{min-height:24px;margin:13px 0 0;color:#5b6984}
+#neoGames40 .n4-play-actions{padding:9px 20px 16px;display:flex;gap:9px;flex-wrap:wrap}
+#neoGames40 .n4-action,#neoIAs40 .n4-action{background:#eaf2fd;border:1px solid #bed2ec;color:#22446e;border-radius:11px;padding:11px 15px;font:inherit;font-weight:800;cursor:pointer;min-height:44px}
+#neoGames40 .n4-action.primary,#neoIAs40 .n4-action.primary{color:#172d47;background:linear-gradient(135deg,#ffcb68,#ff9d52);border-color:#e7a44e;box-shadow:0 4px 0 #c97d3f}
+#neoGames40 .n4-action:disabled{opacity:.45;cursor:not-allowed;box-shadow:none}
+#neoGames40 .n4-touch-controls{display:flex;justify-content:center;gap:13px;padding:5px 20px 23px}
+#neoGames40 .n4-touch-controls button{min-width:80px;min-height:51px;border-radius:13px;border:2px solid #335aa0;background:#234779;color:#fff;box-shadow:0 5px 0 #112a52;font-weight:900;font-size:1.08rem;touch-action:none}
+#neoGames40 .n4-touch-controls #n4Fire{background:#e58d40;color:#162e56;border-color:#f3c26f}
+#neoGames40 .n4-info-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:13px;margin:18px 0}
+#neoGames40 .n4-info-grid article{padding:19px;border-radius:18px;border:1px solid #dfebf5;background:#fff}
+#neoGames40 .n4-info-grid h3{font-size:1rem;margin:0 0 8px}
+#neoGames40 .n4-info-grid p{font-size:.88rem;margin:0;color:#5b7288;line-height:1.62}
+#neoIAs40 .n4-agents-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:11px;margin:19px 0}
+#neoIAs40 .n4-agent{background:#fff;border:1px solid #dbe7f5;border-radius:16px;padding:16px 12px;min-height:137px;display:flex;flex-direction:column;align-items:flex-start;gap:8px;text-align:left;color:#29446c;box-shadow:0 8px 18px #122f5812}
+#neoIAs40 .n4-agent[aria-pressed=true]{border:2px solid #2b88b0;background:#edf9ff;box-shadow:0 0 0 2px #75ddf64b}
+#neoIAs40 .n4-agent-icon{font-size:1.9rem}
+#neoIAs40 .n4-agent strong{font-size:.95rem}
+#neoIAs40 .n4-agent small{color:#6a7e92;font-size:.8rem}
+#neoIAs40 .n4-ai-detail{background:#fff;padding:24px;border:1px solid #d5e5f4;border-radius:20px;box-shadow:0 12px 26px #1836561a}
+#neoIAs40 .n4-ai-detail h3{margin:0 0 9px}
+#neoIAs40 .n4-ai-detail p{color:#48607b}
+#neoIAs40 .n4-ai-actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:18px}
+#neoIAs40 .n4-ai-disclaimer{margin:18px 3px;color:#62748c;font-size:.87rem;line-height:1.6}
+#n4QuickBar{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:11px;margin:14px 0 20px}
+#n4QuickBar button{border:1px solid #c9dff0;background:linear-gradient(160deg,#f6fdff,#e9f1ff);color:#17416b;border-radius:16px;padding:16px 12px;display:flex;align-items:center;gap:10px;text-align:left;font:inherit;font-weight:850;min-height:64px;box-shadow:0 8px 20px #1a4c7c10;cursor:pointer}
+#n4QuickBar button:hover{border-color:#47a9c4;box-shadow:0 10px 22px #1a4c7c23}
+#n4QuickBar span{font-size:1.45rem}
+#n4QuickBar small{font-size:.77rem;color:#647c92;display:block;font-weight:650}
+#neoGames40 button:focus-visible,#neoIAs40 button:focus-visible,#n4QuickBar button:focus-visible,#neoGames40 select:focus-visible{outline:3px solid #f7ab49;outline-offset:3px}
+@media(max-width:950px){#neoGames40 .n4-game-controls{grid-template-columns:repeat(2,minmax(0,1fr))}#neoIAs40 .n4-agents-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:650px){#neoGames40 .n4-game-grid{grid-template-columns:1fr}#neoGames40 .n4-answers{grid-template-columns:1fr}#neoGames40 .n4-info-grid{grid-template-columns:1fr}#neoIAs40 .n4-agents-grid{grid-template-columns:repeat(2,minmax(0,1fr))}#n4QuickBar{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:440px){#neoGames40 .n4-game-controls{grid-template-columns:1fr}#neoGames40 .n4-hud span{font-size:.69rem}#neoGames40 .n4-play-actions{display:grid;grid-template-columns:1fr 1fr}#neoIAs40 .n4-agent{min-height:122px;padding:11px}}
+@media(prefers-reduced-motion:reduce){#neoGames40 .n4-game-card{transition:none}#neoGames40 .n4-game-card:hover{transform:none}}
+/* Polimento discreto do portal existente, sem interferir nas mecânicas ou esconder ferramentas. */
+html body{font-feature-settings:"kern";-webkit-font-smoothing:antialiased}
+html .view.active{scroll-margin-top:135px}
+html .navgroup>summary{cursor:pointer}
+html .btn:focus-visible,html .navbtn:focus-visible{outline:3px solid #f4aa42;outline-offset:2px}
+
+/* Indicação de pistas na cena 3D, visível sem depender apenas da cor. */
+#neoGames40 .n4-lane-labels{position:absolute;left:12%;right:12%;bottom:10%;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px;pointer-events:none}
+#neoGames40 .n4-lane-labels span{text-align:center;display:block;padding:7px 3px;background:#112a57cb;border:1px solid #b3eeff7d;color:#f0fdff;border-radius:8px;box-shadow:0 5px 14px #0004;font-size:clamp(.55rem,1.6vw,.83rem);font-weight:950;letter-spacing:.04em}
+@media(max-width:500px){#neoGames40 .n4-lane-labels{left:5%;right:5%;bottom:5%;gap:3px}#neoGames40 .n4-lane-labels span{padding:3px 1px;font-size:.52rem}}
